@@ -1,27 +1,24 @@
 plugins {
-    id("com.android.application")
-    kotlin("android")
-}
-
-android {
-    compileSdk = 32
-    defaultConfig {
-        applicationId = "com.a_blekot.shlokas.android"
-        minSdk = 24
-        targetSdk = 32
-        versionCode = 1
-        versionName = "1.0"
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-        }
-    }
+    id("android-application-convention")
+    id("kotlin-parcelize")
 }
 
 dependencies {
-    implementation(project(":common"))
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
+    implementation(projects.common.root)
+    implementation(projects.common.data)
+
+    implementation(libs.accompanist.insets)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.lifecycle.process)
+    implementation(libs.androidx.lifecycle.runtime)
+    implementation(libs.bundles.androidx.compose)
+    implementation(libs.bundles.mvikotlin.bndl)
+    implementation(libs.decompose.decompose)
+    implementation(libs.decompose.extCompose)
+    implementation(libs.exoplayer.core)
+    implementation(libs.exoplayer.ui)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.napier.android)
 }

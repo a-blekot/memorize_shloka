@@ -1,20 +1,16 @@
 plugins {
     kotlin("multiplatform")
-    id("com.android.library")
+    id("kotlin-base-convention")
 }
 
 kotlin {
     android()
-    
+
     listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
-            baseName = "common"
-        }
-    }
+    )
 
     sourceSets {
         val commonMain by getting
@@ -43,14 +39,5 @@ kotlin {
             iosArm64Test.dependsOn(this)
             iosSimulatorArm64Test.dependsOn(this)
         }
-    }
-}
-
-android {
-    compileSdk = 32
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdk = 24
-        targetSdk = 32
     }
 }
