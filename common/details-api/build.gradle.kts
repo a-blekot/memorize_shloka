@@ -6,6 +6,10 @@ plugins {
 kotlin {
     sourceSets {
         commonMain {
+            dependencies {
+                implementation(projects.common.data)
+                implementation(libs.decompose.decompose)
+            }
         }
     }
 }

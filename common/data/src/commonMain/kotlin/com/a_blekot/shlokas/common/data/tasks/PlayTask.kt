@@ -6,7 +6,7 @@ import com.a_blekot.shlokas.common.data.Shloka
 data class PlayTask(
     val shlokaId: Long,
     val title: String,
-    val fileName: String,
+    val filePath: String,
     val description: String,
     val startMs: Long,
     val endMs: Long,
@@ -19,7 +19,7 @@ data class PlayTask(
     ) : this(
         shlokaId = shloka.id,
         title = shloka.title,
-        fileName = shloka.fileName,
+        filePath = shloka.filePath,
         description = shloka.description,
         startMs = chunk.startMs,
         endMs = chunk.endMs,
