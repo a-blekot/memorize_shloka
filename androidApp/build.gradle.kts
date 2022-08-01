@@ -4,8 +4,15 @@ plugins {
 }
 
 dependencies {
-    implementation(projects.common.root)
     implementation(projects.common.data)
+    implementation(projects.common.detailsApi)
+    implementation(projects.common.detailsImpl)
+    implementation(projects.common.listApi)
+    implementation(projects.common.listImpl)
+    implementation(projects.common.playerApi)
+    implementation(projects.common.playerImpl)
+    implementation(projects.common.root)
+    implementation(projects.common.utils)
 
     implementation(libs.accompanist.insets)
     implementation(libs.androidx.activity.compose)

@@ -1,47 +1,73 @@
 package com.a_blekot.shlokas.common.data
 
+import com.a_blekot.shlokas.common.data.tasks.PauseTask
 import com.a_blekot.shlokas.common.data.tasks.PlayTask
+import com.a_blekot.shlokas.common.data.tasks.SetTrackTask
+import com.a_blekot.shlokas.common.data.tasks.Task
+import com.arkivanov.essenty.parcelable.Parcelable
+import com.arkivanov.essenty.parcelable.Parcelize
+import kotlinx.serialization.Serializable
 
 private const val CHUNKS_SIZE = 4
 private const val DEFAULT_PAUSE = 150L
 
+@Parcelize
+@Serializable
 data class ShlokaConfig(
-    val shloka: Shloka,
-    val chunks: List<Chunk>,
+    val shloka: Shloka = Shloka(),
+    val chunks: List<Chunk> = defaultChunks,
     val pauseAfterEach: Long = DEFAULT_PAUSE,
-)
+): Parcelable
+
+val defaultChunks
+    get() = MutableList(CHUNKS_SIZE) { Chunk() }
 
 val ShlokaConfig.durationMs
     get() = chunks.sumOf { it.durationMs + pauseAfterEach }
 
-fun ShlokaConfig.createTasks(week: Week, repeats: Int): List<PlayTask> {
+fun ShlokaConfig.createTasks(week: Week, repeats: Int, startMs: Long): List<Task> {
     check(chunks.size == CHUNKS_SIZE) {
         "Shloka should consist of four padas!"
     }
 
-    val tasks = mutableListOf<PlayTask>()
+    val tasks = mutableListOf<Task>()
+
+    var absoluteStartMs = startMs
+
+    tasks.add(SetTrackTask(shloka))
 
     when (week) {
         Week.FIRST -> {
             chunks.forEach { chunk ->
                 repeat(repeats) {
-                    tasks.add(PlayTask(shloka, chunk, pauseAfterEach))
+                    tasks.add(PlayTask(chunk, absoluteStartMs))
+                    tasks.add(PauseTask(pauseAfterEach))
+                    absoluteStartMs += (chunk.durationMs + pauseAfterEach)
                 }
             }
         }
 
         Week.SECOND -> {
             repeat(repeats) {
-                tasks.add(PlayTask(shloka, chunks[0] + chunks[1], pauseAfterEach))
+                val chunk = chunks[0] + chunks[1]
+                tasks.add(PlayTask(chunk, absoluteStartMs))
+                tasks.add(PauseTask(pauseAfterEach))
+                absoluteStartMs += (chunk.durationMs + pauseAfterEach)
             }
             repeat(repeats) {
-                tasks.add(PlayTask(shloka, chunks[2] + chunks[3], pauseAfterEach))
+                val chunk = chunks[2] + chunks[3]
+                tasks.add(PlayTask(chunk, absoluteStartMs))
+                tasks.add(PauseTask(pauseAfterEach))
+                absoluteStartMs += (chunk.durationMs + pauseAfterEach)
             }
         }
 
         Week.THIRD -> {
             repeat(repeats) {
-                tasks.add(PlayTask(shloka, chunks[0] + chunks[3], pauseAfterEach))
+                val chunk = chunks[0] + chunks[3]
+                tasks.add(PlayTask(chunk, absoluteStartMs))
+                tasks.add(PauseTask(pauseAfterEach))
+                absoluteStartMs += (chunk.durationMs + pauseAfterEach)
             }
         }
     }

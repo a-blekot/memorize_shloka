@@ -1,17 +1,19 @@
 package com.a_blekot.shlokas.common.data
 
 import com.a_blekot.shlokas.common.data.tasks.PauseTask
+import com.a_blekot.shlokas.common.data.tasks.StopTask
 import com.a_blekot.shlokas.common.data.tasks.Task
+import com.arkivanov.essenty.parcelable.Parcelable
+import com.arkivanov.essenty.parcelable.Parcelize
 
-private const val DEFAULT_REPEATS = 10
-private const val DEFAULT_PAUSE = 500L
 
+@Parcelize
 data class PlayConfig(
     val week: Week,
     val shlokas: List<ShlokaConfig>,
-    val repeats: Int = DEFAULT_REPEATS,
-    val pauseAfterEach: Long = DEFAULT_PAUSE
-)
+    val repeats: Int,
+    val pauseAfterEach: Long
+): Parcelable
 
 val PlayConfig.durationMs
     get() = (shlokas.sumOf { it.durationMs + pauseAfterEach } ) * repeats
@@ -19,10 +21,16 @@ val PlayConfig.durationMs
 fun PlayConfig.createTasks(): List<Task> {
     val tasks = mutableListOf<Task>()
 
+    var absoluteStartMs = 0L
     shlokas.forEach { shlokaConfig ->
-        tasks.addAll(shlokaConfig.createTasks(week, repeats))
+        val list = shlokaConfig.createTasks(week, repeats, absoluteStartMs)
+        tasks.addAll(list)
         tasks.add(PauseTask(pauseAfterEach))
+
+        absoluteStartMs += list.sumOf { it.duration } + pauseAfterEach
     }
+
+    tasks.add(StopTask)
 
     return tasks
 }

@@ -21,6 +21,10 @@ include(
     ":common:data",
     ":common:details-api",
     ":common:details-impl",
+    ":common:list-api",
+    ":common:list-impl",
+    ":common:player-api",
+    ":common:player-impl",
     ":common:utils",
 )
 

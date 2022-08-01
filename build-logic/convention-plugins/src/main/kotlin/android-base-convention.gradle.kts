@@ -6,6 +6,8 @@ import ApkConfig.VERSION_NAME
 import ApkConfig.JAVA_VERSION
 import com.android.build.gradle.BaseExtension
 
+//val libs = the<org.gradle.accessors.dm.LibrariesForLibs>()
+
 configure<BaseExtension> {
     compileSdkVersion(COMPILE_SDK_VERSION)
     defaultConfig {

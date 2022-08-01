@@ -19,8 +19,14 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-//                implementation(projects.common.utils)
                 implementation(projects.common.data)
+                implementation(projects.common.detailsApi)
+                implementation(projects.common.detailsImpl)
+                implementation(projects.common.listApi)
+                implementation(projects.common.listImpl)
+                implementation(projects.common.playerApi)
+                implementation(projects.common.playerImpl)
+                implementation(projects.common.utils)
                 implementation(libs.mvikotlin.mvikotlin)
                 implementation(libs.decompose.decompose)
             }

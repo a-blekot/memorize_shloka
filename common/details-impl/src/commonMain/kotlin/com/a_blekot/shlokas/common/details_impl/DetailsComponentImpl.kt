@@ -7,10 +7,16 @@ import com.a_blekot.shlokas.common.utils.getStore
 import com.a_blekot.shlokas.common.details_api.DetailsComponent
 import com.a_blekot.shlokas.common.details_api.DetailsOutput
 import com.a_blekot.shlokas.common.details_api.DetailsState
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.Title
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.FilePath
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.Description
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.ChunkStart
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.ChunkEnd
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.Pause
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.listentoprabhupada.common.favorites_impl.store.DetailsStoreFactory
+import com.a_blekot.shlokas.common.details_impl.store.DetailsStoreFactory
 
 class DetailsComponentImpl(
     componentContext: ComponentContext,
@@ -29,11 +35,11 @@ class DetailsComponentImpl(
 
     override val flow: Value<DetailsState> = store.asValue()
 
-    override fun saveChanges() = output(DetailsOutput.SaveChanges)
-    override fun setTitle(title: String)
-    override fun setFilePath(filePath: String)
-    override fun setDescription(description: String)
-    override fun setChunkStart(index: Int, startMs: Long)
-    override fun setChunkEnd(index: Int, endMs: Long)
-    override fun setPause(pause: Long) = store.accept(CurrentLecture(id, isPlaying))
+    override fun saveChanges() = output(DetailsOutput.SaveConfig(store.state.config))
+    override fun setTitle(title: String) = store.accept(Title(title))
+    override fun setFilePath(filePath: String) = store.accept(FilePath(filePath))
+    override fun setDescription(description: String) = store.accept(Description(description))
+    override fun setChunkStart(index: Int, startMs: Long) = store.accept(ChunkStart(index, startMs))
+    override fun setChunkEnd(index: Int, endMs: Long) = store.accept(ChunkEnd(index, endMs))
+    override fun setPause(pause: Long) = store.accept(Pause(pause))
 }

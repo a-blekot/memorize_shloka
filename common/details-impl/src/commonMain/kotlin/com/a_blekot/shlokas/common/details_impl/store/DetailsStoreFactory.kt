@@ -1,156 +1,79 @@
-package com.listentoprabhupada.common.favorites_impl.store
+package com.a_blekot.shlokas.common.details_impl.store
 
-import com.a_blekot.shlokas.common.details_impl.store.DetailsStore
-import com.a_blekot.shlokas.common.details_impl.store.FavoritesIntent
+import com.a_blekot.shlokas.common.data.Chunk
+import com.a_blekot.shlokas.common.data.Shloka
+import com.a_blekot.shlokas.common.data.ShlokaConfig
+import com.a_blekot.shlokas.common.details_api.DetailsState
+import com.a_blekot.shlokas.common.details_impl.DetailsDeps
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.Title
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.FilePath
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.Description
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.ChunkStart
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.ChunkEnd
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.Pause
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineBootstrapper
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
-import com.listentoprabhupada.common.favorites_impl.FavoritesDeps
-import com.listentoprabhupada.common.favorites_api.FavoritesState
-import com.listentoprabhupada.common.utils.dbEntity
-import com.listentoprabhupada.common.utils.mapped
-import com.a_blekot.shlokas.common.details_impl.store.FavoritesIntent.CurrentLecture
-import com.a_blekot.shlokas.common.details_impl.store.FavoritesIntent.Favorite
-import com.listentoprabhupada.common.favorites_impl.store.DetailsStoreFactory.Action.InitialLoad
-import com.listentoprabhupada.common.favorites_impl.store.DetailsStoreFactory.Action.UpdateFromDB
-import com.listentoprabhupada.common.utils.Lecture
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 internal class DetailsStoreFactory(
     private val storeFactory: StoreFactory,
-    private val deps: FavoritesDeps
+    private val deps: DetailsDeps
 ) {
 
     fun create(): DetailsStore =
-        object : DetailsStore, Store<FavoritesIntent, FavoritesState, DetailsLabel> by storeFactory.create(
-            name = "FavoritesStore",
-            autoInit = false,
-            initialState = FavoritesState(),
-            bootstrapper = BootstrapperImpl(),
+        object : DetailsStore, Store<DetailsIntent, DetailsState, Nothing> by storeFactory.create(
+            name = "DetailsStore",
+            initialState = DetailsState(deps.config),
             executorFactory = { ExecutorImpl() },
-            reducer = ReducerImpl
+            reducer = ReducerImpl()
         ) {}
 
-    private sealed interface Action {
-        object InitialLoad : Action
-        object UpdateFromDB : Action
+
+    sealed interface Msg {
+        data class TitleChanged(val value: String) : Msg
+        data class FilePathChanged(val value: String) : Msg
+        data class DescriptionChanged(val value: String) : Msg
+        data class ChunkStartChanged(val index: Int, val value: Long) : Msg
+        data class ChunkEndChanged(val index: Int, val value: Long) : Msg
+        data class PauseChanged(val value: Long) : Msg
     }
 
-    private sealed interface Msg {
-        data class UpdateFromDB(val lectures: List<Lecture>) : Msg
-        data class LoadingComplete(val state: FavoritesState = FavoritesState()) : Msg
-        data class FavoriteChanged(val id: Long, val isFavorite: Boolean) : Msg
-        data class CurrentChanged(val id: Long, val isPlaying: Boolean) : Msg
-    }
-
-    private inner class BootstrapperImpl : CoroutineBootstrapper<Action>() {
-        override fun invoke() {
-            scope.launch {
-                dispatch(InitialLoad)
-            }
-
-            deps.db.observeCompleted()
-                .onEach { dispatch(UpdateFromDB) }
-                .launchIn(scope)
-
-            deps.db.observeAllFavorites()
-                .onEach { dispatch(UpdateFromDB) }
-                .launchIn(scope)
-
-            deps.db.observeAllDownloads()
-                .onEach { dispatch(UpdateFromDB) }
-                .launchIn(scope)
-        }
-    }
-
-    private inner class ExecutorImpl : CoroutineExecutor<FavoritesIntent, Action, FavoritesState, Msg, DetailsLabel>() {
-        override fun executeAction(action: Action, getState: () -> FavoritesState) {
-            when (action) {
-                is UpdateFromDB -> {
-                    updateFromDB(getState())
-                }
-                is InitialLoad -> {
-                    val lectures = deps.db.selectAllFavorites().mapped()
-                    dispatch(Msg.LoadingComplete(FavoritesState(lectures)))
-
-                    scope.launch {
-                        publish(DetailsLabel.LecturesLoaded(lectures))
-                    }
-                }
-            }
-        }
-
-        override fun executeIntent(intent: FavoritesIntent, getState: () -> FavoritesState) {
+    private inner class ExecutorImpl : CoroutineExecutor<DetailsIntent, Nothing, DetailsState, Msg, Nothing>() {
+        override fun executeIntent(intent: DetailsIntent, getState: () -> DetailsState) {
             when (intent) {
-                is CurrentLecture -> setCurrent(intent.id, intent.isPlaying, getState())
-                is Favorite -> setFavorite(intent.id, intent.isFavorite, getState())
-            }
-        }
-
-        private fun updateFromDB(state: FavoritesState) =
-            scope.launch {
-                dispatch(Msg.UpdateFromDB(lectures = state.lectures.updateFromDB()))
-            }
-
-        private fun List<Lecture>.updateFromDB() =
-            map { lecture ->
-                val lectureEntity = deps.db.selectLecture(lecture.id)
-                lecture.copy(
-                    fileUrl = lectureEntity?.fileUrl ?: lecture.fileUrl,
-                    isFavorite = lectureEntity?.isFavorite ?: lecture.isFavorite,
-                    isCompleted = lectureEntity?.isCompleted ?: lecture.isCompleted,
-                    downloadProgress = lectureEntity?.downloadProgress?.toInt() ?: lecture.downloadProgress
-                )
-            }
-
-        private fun setCurrent(id: Long, isPlaying: Boolean, state: FavoritesState) {
-            state.lectures
-                .firstOrNull { it.id == id }
-                ?.run {
-                    if (this.isPlaying != isPlaying) {
-                        scope.launch {
-                            dispatch(Msg.CurrentChanged(id = id, isPlaying = isPlaying))
-                        }
-                    }
-                }
-        }
-
-        private fun setFavorite(id: Long, isFavorite: Boolean, state: FavoritesState) {
-            scope.launch {
-                withContext(deps.dispatchers.io) {
-                    state.lectures.find { it.id == id }?.let {
-                        deps.db.insertLecture(it.copy(isFavorite = isFavorite).dbEntity())
-                    }
-                }
-                dispatch(Msg.FavoriteChanged(id = id, isFavorite = isFavorite))
+                is Title -> dispatch(Msg.TitleChanged(intent.value))
+                is FilePath -> dispatch(Msg.FilePathChanged(intent.value))
+                is Description -> dispatch(Msg.DescriptionChanged(intent.value))
+                is ChunkStart -> dispatch(Msg.ChunkStartChanged(intent.index, intent.value))
+                is ChunkEnd -> dispatch(Msg.ChunkEndChanged(intent.index, intent.value))
+                is Pause -> dispatch(Msg.PauseChanged(intent.value))
             }
         }
     }
 
-    private object ReducerImpl : Reducer<FavoritesState, Msg> {
-        override fun FavoritesState.reduce(msg: Msg): FavoritesState =
+    private inner class ReducerImpl : Reducer<DetailsState, Msg> {
+        override fun DetailsState.reduce(msg: Msg): DetailsState =
             when (msg) {
-                is Msg.FavoriteChanged -> update(id = msg.id) { copy(isFavorite = msg.isFavorite) }
-                is Msg.UpdateFromDB -> copy(lectures = msg.lectures)
-                is Msg.CurrentChanged -> copy(lectures = lectures.map { it.copy(isPlaying = it.id == msg.id && msg.isPlaying) })
-                is Msg.LoadingComplete -> msg.state
+                is Msg.TitleChanged -> update(newConfig = config.update { copy(title = msg.value) })
+                is Msg.FilePathChanged -> update(newConfig = config.update { copy(filePath = msg.value) })
+                is Msg.DescriptionChanged -> update(newConfig = config.update { copy(description = msg.value) })
+                is Msg.ChunkStartChanged -> update(newConfig = config.update(msg.index) { copy(startMs = msg.value) })
+                is Msg.ChunkEndChanged -> update(newConfig = config.update(msg.index) { copy(endMs = msg.value) })
+                is Msg.PauseChanged -> update(newConfig = config.copy(pauseAfterEach = msg.value))
             }
 
-        private inline fun FavoritesState.update(id: Long, func: Lecture.() -> Lecture): FavoritesState {
-            val lecture = lectures.find { it.id == id } ?: return this
-            return put(lecture.func())
-        }
+        private fun update(newConfig: ShlokaConfig): DetailsState =
+            DetailsState(newConfig, hasChanges = newConfig != deps.config)
 
-        private fun FavoritesState.put(lecture: Lecture): FavoritesState {
-            val oldItems = lectures.associateByTo(mutableMapOf(), Lecture::id)
-            oldItems[lecture.id] = lecture
+        private fun ShlokaConfig.update(update: Shloka.() -> Shloka) =
+            copy(shloka = shloka.update())
 
-            return copy(lectures = oldItems.values.toList())
+        private fun ShlokaConfig.update(index: Int, update: Chunk.() -> Chunk): ShlokaConfig {
+            val newChunks = chunks.toMutableList()
+            newChunks[index] = newChunks[index].update()
+
+            return copy(chunks = newChunks)
         }
     }
 }

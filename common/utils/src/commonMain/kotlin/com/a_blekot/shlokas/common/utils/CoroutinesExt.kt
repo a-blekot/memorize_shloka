@@ -5,6 +5,7 @@ import com.arkivanov.essenty.lifecycle.doOnDestroy
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.isActive
 import kotlin.coroutines.CoroutineContext
 
 fun LifecycleOwner.lifecycleCoroutineScope(coroutineContext: CoroutineContext = Dispatchers.Main): CoroutineScope {
@@ -12,4 +13,14 @@ fun LifecycleOwner.lifecycleCoroutineScope(coroutineContext: CoroutineContext = 
     lifecycle.doOnDestroy(scope::cancel)
 
     return scope
+}
+
+fun CoroutineScope.cancelSafely(msg: String) {
+    try {
+        if (isActive) {
+            cancel(msg)
+        }
+    } catch (e: IllegalStateException) {
+
+    }
 }
