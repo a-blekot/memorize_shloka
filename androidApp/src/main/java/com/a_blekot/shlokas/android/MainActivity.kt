@@ -32,10 +32,26 @@ import io.github.aakira.napier.Napier
 import kotlinx.coroutines.delay
 
 
-class MainActivity : ComponentActivity(), ServiceConnection {
-    private var playbackService: PlaybackService? = null
+class MainActivity : ComponentActivity() {
+
+    private val serviceConnection = object : ServiceConnection {
+        override fun onServiceConnected(name: ComponentName?, binder: IBinder?) {
+            playbackService = (binder as? PlaybackService.PlaybackBinder)?.service
+            Napier.d( "ACTIVITY onServiceConnected", tag = "PlaybackService")
+            Napier.d( "ACTIVITY boundService = $playbackService", tag = "PlaybackService")
+        }
+
+        override fun onServiceDisconnected(name: ComponentName?) {
+            playbackService = null
+            Napier.d( "ACTIVITY onServiceDisconnected", tag = "PlaybackService")
+            Napier.d( "ACTIVITY boundService = $playbackService", tag = "PlaybackService")
+        }
+    }
     private val playbackServiceIntent
         get() = Intent(this, PlaybackService::class.java)
+
+    private var isBound = false
+    private var playbackService: PlaybackService? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,35 +63,37 @@ class MainActivity : ComponentActivity(), ServiceConnection {
                 MainContent(root)
             }
         }
+
+        Napier.d( "ACTIVITY startService", tag = "PlaybackService")
+        startService(playbackServiceIntent)
+        lifecycleScope.launchWhenCreated {
+            delay(500L)
+            if (applicationContext.bindService(playbackServiceIntent, serviceConnection, Context.BIND_IMPORTANT)) {
+                isBound = true
+            }
+        }
     }
 
     override fun onStart() {
+        playbackService?.onActivityStarted()
         super.onStart()
-        Napier.d( "ACTIVITY startService", tag = "PlaybackService")
-        startService(playbackServiceIntent)
-        lifecycleScope.launchWhenStarted {
-            delay(500L)
-            applicationContext.bindService(playbackServiceIntent, this@MainActivity, Context.BIND_IMPORTANT)
-        }
     }
 
     override fun onStop() {
         playbackService?.onActivityStopped()
-        applicationContext.unbindService(this)
         super.onStop()
     }
 
-    override fun onServiceConnected(name: ComponentName?, binder: IBinder?) {
-        playbackService = (binder as? PlaybackService.PlaybackBinder)?.service
-        playbackService?.onActivityStarted()
-        Napier.d( "ACTIVITY onServiceConnected", tag = "PlaybackService")
-        Napier.d( "ACTIVITY boundService = $playbackService", tag = "PlaybackService")
+    override fun onDestroy() {
+        super.onDestroy()
+        unbindService()
     }
 
-    override fun onServiceDisconnected(name: ComponentName?) {
-        playbackService = null
-        Napier.d( "ACTIVITY onServiceDisconnected", tag = "PlaybackService")
-        Napier.d( "ACTIVITY boundService = $playbackService", tag = "PlaybackService")
+    private fun unbindService() {
+        if (isBound) {
+            applicationContext.unbindService(serviceConnection)
+            isBound = false
+        }
     }
 
     private fun root(componentContext: ComponentContext): RootComponent =

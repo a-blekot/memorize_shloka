@@ -149,7 +149,7 @@ internal class ListStoreFactory(
         private fun ListConfig.select(id: Int, isSelected: Boolean): ListConfig =
             copy(list = list.toMutableList().apply {
                 val index = indexOfFirst { it.shloka.id == id }
-                if (index > 0) {
+                if (index >= 0) {
                     val shloka = get(index)
                     set(index, shloka.copy(isSelected = isSelected))
                 }

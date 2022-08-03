@@ -200,11 +200,13 @@ private fun ButtonsRow(listHasChanges: Boolean, component: ListComponent, modifi
             modifier = modifier.padding(bottom = 4.dp)
         ) {
             val repeats = remember { mutableStateOf(TextFieldValue(text = getRepeats().toString())) }
-            val hasChanges = repeats.value.text != getRepeats().toString()
 
             OutlinedTextField(
                 value = repeats.value,
-                onValueChange = { repeats.value = it },
+                onValueChange = {
+                    repeats.value = it
+                    saveRepeats(it.text.toIntOrNull() ?: 1)
+                },
                 textStyle = MaterialTheme.typography.titleLarge,
                 maxLines = 1,
 //                label = { Text(text = "repeats") },
@@ -218,29 +220,18 @@ private fun ButtonsRow(listHasChanges: Boolean, component: ListComponent, modifi
                         contentDescription = "Repeat"
                     )
                 },
-                trailingIcon = {
-                    Icon(
-                        imageVector = if (hasChanges)
-                            Icons.Rounded.CheckBoxOutlineBlank
-                        else
-                            Icons.Rounded.CheckBox,
-                        contentDescription = "check icon",
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = modifier.clickable {
-                            saveRepeats(repeats.value.text.toInt())
-                        }
-                    )
-                },
                 modifier = modifier
-                    .weight(2.0f)
+                    .weight(1f)
             )
 
             val weeks = remember { mutableStateOf(TextFieldValue(text = getCurrentWeek().ordinal.toString())) }
-            val weeksHasChanges = weeks.value.text != getCurrentWeek().toString()
 
             OutlinedTextField(
                 value = weeks.value,
-                onValueChange = { weeks.value = it },
+                onValueChange = {
+                    weeks.value = it
+                    saveCurrentWeek(weekFromOrdinal(it.text.toIntOrNull() ?: 0))
+                },
                 textStyle = MaterialTheme.typography.titleLarge,
                 maxLines = 1,
 //                label = { Text(text = "week") },
@@ -254,21 +245,8 @@ private fun ButtonsRow(listHasChanges: Boolean, component: ListComponent, modifi
                         contentDescription = "Week"
                     )
                 },
-                trailingIcon = {
-                    Icon(
-                        imageVector = if (weeksHasChanges)
-                            Icons.Rounded.CheckBoxOutlineBlank
-                        else
-                            Icons.Rounded.CheckBox,
-                        contentDescription = "check icon",
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = modifier.clickable {
-                            saveCurrentWeek(weekFromOrdinal(weeks.value.text.toInt()))
-                        }
-                    )
-                },
                 modifier = modifier
-                    .weight(1.5f)
+                    .weight(1f)
             )
         }
     }

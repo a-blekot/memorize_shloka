@@ -60,11 +60,13 @@ fun ChunkView(index: Int, chunk: Chunk, component: DetailsComponent, modifier: M
         modifier = modifier.fillMaxWidth().padding(4.dp)
     ) {
         val startState = remember { mutableStateOf(TextFieldValue(text = chunk.startMs.toString())) }
-        val startHasChanges = startState.value.text != chunk.startMs.toString()
 
         OutlinedTextField(
             value = startState.value,
-            onValueChange = { startState.value = it },
+            onValueChange = {
+                startState.value = it
+                component.setChunkStart(index, it.text.toLong())
+            },
             textStyle = MaterialTheme.typography.titleMedium,
             label = { Text(text = "start, ms") },
             colors = textFieldColors(),
@@ -77,31 +79,18 @@ fun ChunkView(index: Int, chunk: Chunk, component: DetailsComponent, modifier: M
                     contentDescription = "timer icon"
                 )
             },
-            trailingIcon = {
-                Icon(
-                    imageVector = if (startHasChanges)
-                        Icons.Rounded.CheckBoxOutlineBlank
-                    else
-                        Icons.Rounded.CheckBox,
-                    tint = MaterialTheme.colorScheme.primary,
-                    contentDescription = "check icon",
-                    modifier = modifier.clickable {
-                        if (startHasChanges) {
-                            component.setChunkStart(index, startState.value.text.toLong())
-                        }
-                    }
-                )
-            },
             modifier = modifier.onFocusChanged { focused.value = it.hasFocus }
         )
 
 
         val endState = remember { mutableStateOf(TextFieldValue(text = chunk.endMs.toString())) }
-        val endHasChanges = endState.value.text != chunk.endMs.toString()
 
         OutlinedTextField(
             value = endState.value,
-            onValueChange = { endState.value = it },
+            onValueChange = {
+                endState.value = it
+                component.setChunkEnd(index, it.text.toLong())
+            },
             textStyle = MaterialTheme.typography.titleMedium,
             maxLines = 1,
             label = { Text(text = "end, ms") },
@@ -113,21 +102,6 @@ fun ChunkView(index: Int, chunk: Chunk, component: DetailsComponent, modifier: M
                     imageVector = Icons.Rounded.Timer,
                     tint = MaterialTheme.colorScheme.primary,
                     contentDescription = "timer icon"
-                )
-            },
-            trailingIcon = {
-                Icon(
-                    imageVector = if (endHasChanges)
-                        Icons.Rounded.CheckBoxOutlineBlank
-                    else
-                        Icons.Rounded.CheckBox,
-                    contentDescription = "check icon",
-                    tint = MaterialTheme.colorScheme.primary,
-                    modifier = modifier.clickable {
-                        if (endHasChanges) {
-                            component.setChunkEnd(index, endState.value.text.toLong())
-                        }
-                    }
                 )
             },
             modifier = modifier.onFocusChanged { focused.value = it.hasFocus }

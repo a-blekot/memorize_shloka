@@ -22,12 +22,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.*
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -46,6 +41,7 @@ import com.a_blekot.shlokas.common.details_api.DetailsComponent
 import com.a_blekot.shlokas.common.details_api.DetailsState
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.arkivanov.decompose.value.MutableValue
+import io.github.aakira.napier.Napier
 
 @Composable
 fun DetailsView(component: DetailsComponent) {
@@ -104,11 +100,13 @@ private fun ShlokaSelected(isSelected: Boolean, component: DetailsComponent, mod
 @Composable
 private fun ShlokaTitle(originalTitle: String, component: DetailsComponent, modifier: Modifier = Modifier) {
     val title = remember { mutableStateOf(TextFieldValue(text = originalTitle)) }
-    val hasChanges = title.value.text != originalTitle
 
     OutlinedTextField(
         value = title.value,
-        onValueChange = { title.value = it },
+        onValueChange = {
+            title.value = it
+            component.setTitle(it.text)
+        },
         textStyle = MaterialTheme.typography.headlineLarge,
         label = { Text(text = "Title") },
         maxLines = 1,
@@ -121,21 +119,6 @@ private fun ShlokaTitle(originalTitle: String, component: DetailsComponent, modi
                 tint = MaterialTheme.colorScheme.primary,
                 contentDescription = "title"
             )
-        },
-        trailingIcon = {
-            Icon(
-                imageVector = if (hasChanges)
-                    Icons.Rounded.CheckBoxOutlineBlank
-                else
-                    Icons.Rounded.CheckBox,
-                contentDescription = "check icon",
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = modifier.clickable {
-                    if (hasChanges) {
-                        component.setTitle(title.value.text)
-                    }
-                }
-            )
         }
     )
 }
@@ -144,11 +127,13 @@ private fun ShlokaTitle(originalTitle: String, component: DetailsComponent, modi
 @Composable
 private fun ShlokaSanskrit(originalSanskrit: String, component: DetailsComponent, modifier: Modifier = Modifier) {
     val sanskrit = remember { mutableStateOf(TextFieldValue(text = originalSanskrit)) }
-    val hasChanges = sanskrit.value.text != originalSanskrit
 
     OutlinedTextField(
         value = sanskrit.value,
-        onValueChange = { sanskrit.value = it },
+        onValueChange = {
+            sanskrit.value = it
+            component.setSanskrit(it.text)
+        },
         textStyle = MaterialTheme.typography.bodyLarge,
         label = { Text(text = "Sanskrit") },
         colors = textFieldColors(),
@@ -161,21 +146,6 @@ private fun ShlokaSanskrit(originalSanskrit: String, component: DetailsComponent
                 contentDescription = "Sanskrit"
             )
         },
-        trailingIcon = {
-            Icon(
-                imageVector = if (hasChanges)
-                    Icons.Rounded.CheckBoxOutlineBlank
-                else
-                    Icons.Rounded.CheckBox,
-                contentDescription = "check icon",
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = modifier.clickable {
-                    if (hasChanges) {
-                        component.setSanskrit(sanskrit.value.text)
-                    }
-                }
-            )
-        },
         modifier = modifier.fillMaxWidth().padding(horizontal = 4.dp)
     )
 }
@@ -184,11 +154,13 @@ private fun ShlokaSanskrit(originalSanskrit: String, component: DetailsComponent
 @Composable
 private fun ShlokaWordsTranslation(originalWords: String, component: DetailsComponent, modifier: Modifier = Modifier) {
     val words = remember { mutableStateOf(TextFieldValue(text = originalWords)) }
-    val hasChanges = words.value.text != originalWords
 
     OutlinedTextField(
         value = words.value,
-        onValueChange = { words.value = it },
+        onValueChange = {
+            words.value = it
+            component.setWordsTranslation(it.text)
+        },
         textStyle = MaterialTheme.typography.bodyLarge,
         label = { Text(text = "Words") },
         colors = textFieldColors(),
@@ -201,21 +173,6 @@ private fun ShlokaWordsTranslation(originalWords: String, component: DetailsComp
                 contentDescription = "Words"
             )
         },
-        trailingIcon = {
-            Icon(
-                imageVector = if (hasChanges)
-                    Icons.Rounded.CheckBoxOutlineBlank
-                else
-                    Icons.Rounded.CheckBox,
-                contentDescription = "check icon",
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = modifier.clickable {
-                    if (hasChanges) {
-                        component.setWordsTranslation(words.value.text)
-                    }
-                }
-            )
-        },
         modifier = modifier.fillMaxWidth().padding(horizontal = 4.dp)
     )
 }
@@ -224,11 +181,13 @@ private fun ShlokaWordsTranslation(originalWords: String, component: DetailsComp
 @Composable
 private fun ShlokaTranslation(originalTranslation: String, component: DetailsComponent, modifier: Modifier = Modifier) {
     val translation = remember { mutableStateOf(TextFieldValue(text = originalTranslation)) }
-    val hasChanges = translation.value.text != originalTranslation
 
     OutlinedTextField(
         value = translation.value,
-        onValueChange = { translation.value = it },
+        onValueChange = {
+            translation.value = it
+            component.setTranslation(it.text)
+        },
         textStyle = MaterialTheme.typography.bodyLarge,
         label = { Text(text = "Translation") },
         colors = textFieldColors(),
@@ -239,21 +198,6 @@ private fun ShlokaTranslation(originalTranslation: String, component: DetailsCom
                 imageVector = Icons.Rounded.Info,
                 tint = MaterialTheme.colorScheme.primary,
                 contentDescription = "Translation"
-            )
-        },
-        trailingIcon = {
-            Icon(
-                imageVector = if (hasChanges)
-                    Icons.Rounded.CheckBoxOutlineBlank
-                else
-                    Icons.Rounded.CheckBox,
-                contentDescription = "check icon",
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = modifier.clickable {
-                    if (hasChanges) {
-                        component.setTranslation(translation.value.text)
-                    }
-                }
             )
         },
         modifier = modifier.fillMaxWidth().padding(horizontal = 4.dp)
