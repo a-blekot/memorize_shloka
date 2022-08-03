@@ -5,7 +5,9 @@ import com.a_blekot.shlokas.common.data.Shloka
 data class SetTrackTask(
     val title: String,
     val filePath: String,
-    val description: String,
+    val sanskrit: String,
+    val wordsTranslation: String,
+    val translation: String,
     override val duration: Long = 0L,
 ) : Task {
     constructor(
@@ -13,6 +15,8 @@ data class SetTrackTask(
     ) : this(
         title = shloka.title,
         filePath = shloka.filePath,
-        description = shloka.description,
+        sanskrit = shloka.sanskrit,
+        wordsTranslation = shloka.wordsTranslation,
+        translation = shloka.translation,
     )
 }

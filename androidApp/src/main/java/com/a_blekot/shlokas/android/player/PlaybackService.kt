@@ -96,8 +96,8 @@ class PlaybackService : Service(), Player.Listener {
         Napier.d("stopSelf", tag = "PlaybackService")
     }
 
-    // 900_000ms = 15 min
-    private fun requireWakeLock(duration: Long = 900_000) {
+    // 1_800_000ms = 30 min
+    private fun requireWakeLock(duration: Long = 1_800_000) {
         if (packageManager.checkPermission(WAKE_LOCK, packageName) == PERMISSION_GRANTED) {
             try {
                 val manager = getSystemService(POWER_SERVICE) as? PowerManager

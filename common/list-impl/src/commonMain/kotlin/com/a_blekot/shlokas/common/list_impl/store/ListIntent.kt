@@ -9,5 +9,6 @@ sealed interface ListIntent {
     data class Remove(val id: Int) : ListIntent
     data class MoveUp(val id: Int) : ListIntent
     data class MoveDown(val id: Int) : ListIntent
+    data class Select(val id: Int, val isSelected: Boolean) : ListIntent
     data class SaveShloka(val config: ShlokaConfig) : ListIntent
 }

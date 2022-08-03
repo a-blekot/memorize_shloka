@@ -4,13 +4,7 @@ import com.a_blekot.shlokas.common.data.ListConfig
 import com.a_blekot.shlokas.common.data.ShlokaConfig
 import com.a_blekot.shlokas.common.list_api.ListState
 import com.a_blekot.shlokas.common.list_impl.ListDeps
-import com.a_blekot.shlokas.common.list_impl.store.ListIntent.Add
-import com.a_blekot.shlokas.common.list_impl.store.ListIntent.MoveDown
-import com.a_blekot.shlokas.common.list_impl.store.ListIntent.MoveUp
-import com.a_blekot.shlokas.common.list_impl.store.ListIntent.Remove
-import com.a_blekot.shlokas.common.list_impl.store.ListIntent.Save
-import com.a_blekot.shlokas.common.list_impl.store.ListIntent.SaveShloka
-import com.a_blekot.shlokas.common.list_impl.store.ListIntent.Title
+import com.a_blekot.shlokas.common.list_impl.store.ListIntent.*
 import com.a_blekot.shlokas.common.list_impl.store.ListStoreFactory.Action.LoadLastConfig
 import com.a_blekot.shlokas.common.utils.getLastListFileName
 import com.a_blekot.shlokas.common.utils.readFromFile
@@ -38,7 +32,7 @@ internal class ListStoreFactory(
         ) {}
 
     sealed interface Action {
-        object LoadLastConfig: Action
+        object LoadLastConfig : Action
     }
 
     sealed interface Msg {
@@ -48,6 +42,7 @@ internal class ListStoreFactory(
         data class RemoveShloka(val id: Int) : Msg
         data class MoveUp(val id: Int) : Msg
         data class MoveDown(val id: Int) : Msg
+        data class Select(val id: Int, val isSelected: Boolean) : Msg
     }
 
     private inner class BootstrapperImpl : CoroutineBootstrapper<Action>() {
@@ -80,6 +75,7 @@ internal class ListStoreFactory(
                 is Remove -> dispatch(Msg.RemoveShloka(intent.id))
                 is MoveUp -> dispatch(Msg.MoveUp(intent.id))
                 is MoveDown -> dispatch(Msg.MoveDown(intent.id))
+                is Select -> dispatch(Msg.Select(intent.id, intent.isSelected))
                 is SaveShloka -> saveShloka(getState().config, intent.config)
             }
         }
@@ -118,6 +114,7 @@ internal class ListStoreFactory(
                 is Msg.RemoveShloka -> update(newConfig = config.remove(msg.id))
                 is Msg.MoveUp -> update(newConfig = config.moveUp(msg.id))
                 is Msg.MoveDown -> update(newConfig = config.moveDown(msg.id))
+                is Msg.Select -> update(newConfig = config.select(msg.id, msg.isSelected))
             }
 
         private fun update(newConfig: ListConfig): ListState {
@@ -129,7 +126,7 @@ internal class ListStoreFactory(
             copy(list = list.toMutableList().apply { add(0, ShlokaConfig()) })
 
         private fun ListConfig.remove(id: Int): ListConfig =
-            copy(list = list.toMutableList().apply { removeAll { it.shloka.id == id }})
+            copy(list = list.toMutableList().apply { removeAll { it.shloka.id == id } })
 
         private fun ListConfig.moveUp(id: Int): ListConfig =
             copy(list = list.toMutableList().apply {
@@ -146,6 +143,15 @@ internal class ListStoreFactory(
                 if (index < lastIndex) {
                     val shloka = removeAt(index)
                     add(index + 1, shloka)
+                }
+            })
+
+        private fun ListConfig.select(id: Int, isSelected: Boolean): ListConfig =
+            copy(list = list.toMutableList().apply {
+                val index = indexOfFirst { it.shloka.id == id }
+                if (index > 0) {
+                    val shloka = get(index)
+                    set(index, shloka.copy(isSelected = isSelected))
                 }
             })
     }

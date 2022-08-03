@@ -97,6 +97,7 @@ class RootComponentImpl internal constructor(
 
     private fun onDetailsOutput(output: DetailsOutput): Unit =
         when (output) {
+            is DetailsOutput.Play -> router.push(Configuration.Player(output.config))
             is DetailsOutput.SaveConfig -> router.pop { isSuccess ->
                 if (isSuccess) {
                     (router.activeChild.instance as? List)?.component?.saveShloka(output.config)

@@ -10,12 +10,7 @@ import com.a_blekot.shlokas.common.list_api.ListComponent
 import com.a_blekot.shlokas.common.list_api.ListOutput
 import com.a_blekot.shlokas.common.list_api.ListState
 import com.a_blekot.shlokas.common.list_impl.store.ListIntent
-import com.a_blekot.shlokas.common.list_impl.store.ListIntent.Add
-import com.a_blekot.shlokas.common.list_impl.store.ListIntent.MoveDown
-import com.a_blekot.shlokas.common.list_impl.store.ListIntent.MoveUp
-import com.a_blekot.shlokas.common.list_impl.store.ListIntent.Remove
-import com.a_blekot.shlokas.common.list_impl.store.ListIntent.Save
-import com.a_blekot.shlokas.common.list_impl.store.ListIntent.SaveShloka
+import com.a_blekot.shlokas.common.list_impl.store.ListIntent.*
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.store.StoreFactory
@@ -46,6 +41,7 @@ class ListComponentImpl(
     override fun remove(id: Int) = store.accept(Remove(id))
     override fun moveUp(id: Int) = store.accept(MoveUp(id))
     override fun moveDown(id: Int) = store.accept(MoveDown(id))
+    override fun select(id: Int, isSelected: Boolean) = store.accept(Select(id, isSelected))
     override fun details(config: ShlokaConfig) = output(ListOutput.Details(config))
     override fun play() = output(ListOutput.Play(store.state.toPlayConfig()))
     override fun saveShloka(config: ShlokaConfig) = store.accept(SaveShloka(config))

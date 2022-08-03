@@ -231,7 +231,7 @@ class Player(
 
     private fun SetTrackTask.toMediaSource(): MediaSource {
         val metaData = MediaMetadata.Builder()
-            .setDescription(description)
+            .setDescription(sanskrit)
             .setTitle(title)
             .build()
 

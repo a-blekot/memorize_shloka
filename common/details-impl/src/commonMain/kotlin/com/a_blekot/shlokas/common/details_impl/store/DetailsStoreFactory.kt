@@ -5,12 +5,7 @@ import com.a_blekot.shlokas.common.data.Shloka
 import com.a_blekot.shlokas.common.data.ShlokaConfig
 import com.a_blekot.shlokas.common.details_api.DetailsState
 import com.a_blekot.shlokas.common.details_impl.DetailsDeps
-import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.Title
-import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.FilePath
-import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.Description
-import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.ChunkStart
-import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.ChunkEnd
-import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.Pause
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.*
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
@@ -33,10 +28,13 @@ internal class DetailsStoreFactory(
     sealed interface Msg {
         data class TitleChanged(val value: String) : Msg
         data class FilePathChanged(val value: String) : Msg
-        data class DescriptionChanged(val value: String) : Msg
+        data class SanskritChanged(val value: String) : Msg
+        data class WordsTranslationChanged(val value: String) : Msg
+        data class TranslationChanged(val value: String) : Msg
         data class ChunkStartChanged(val index: Int, val value: Long) : Msg
         data class ChunkEndChanged(val index: Int, val value: Long) : Msg
         data class PauseChanged(val value: Long) : Msg
+        data class IsSelectedChanged(val value: Boolean) : Msg
     }
 
     private inner class ExecutorImpl : CoroutineExecutor<DetailsIntent, Nothing, DetailsState, Msg, Nothing>() {
@@ -44,10 +42,13 @@ internal class DetailsStoreFactory(
             when (intent) {
                 is Title -> dispatch(Msg.TitleChanged(intent.value))
                 is FilePath -> dispatch(Msg.FilePathChanged(intent.value))
-                is Description -> dispatch(Msg.DescriptionChanged(intent.value))
+                is Sanskrit -> dispatch(Msg.SanskritChanged(intent.value))
+                is WordsTranslation -> dispatch(Msg.WordsTranslationChanged(intent.value))
+                is Translation -> dispatch(Msg.TranslationChanged(intent.value))
                 is ChunkStart -> dispatch(Msg.ChunkStartChanged(intent.index, intent.value))
                 is ChunkEnd -> dispatch(Msg.ChunkEndChanged(intent.index, intent.value))
                 is Pause -> dispatch(Msg.PauseChanged(intent.value))
+                is IsSelected -> dispatch(Msg.IsSelectedChanged(intent.isSelected))
             }
         }
     }
@@ -57,10 +58,13 @@ internal class DetailsStoreFactory(
             when (msg) {
                 is Msg.TitleChanged -> update(newConfig = config.update { copy(title = msg.value) })
                 is Msg.FilePathChanged -> update(newConfig = config.update { copy(filePath = msg.value) })
-                is Msg.DescriptionChanged -> update(newConfig = config.update { copy(description = msg.value) })
+                is Msg.SanskritChanged -> update(newConfig = config.update { copy(sanskrit = msg.value) })
+                is Msg.WordsTranslationChanged -> update(newConfig = config.update { copy(wordsTranslation = msg.value) })
+                is Msg.TranslationChanged -> update(newConfig = config.update { copy(translation = msg.value) })
                 is Msg.ChunkStartChanged -> update(newConfig = config.update(msg.index) { copy(startMs = msg.value) })
                 is Msg.ChunkEndChanged -> update(newConfig = config.update(msg.index) { copy(endMs = msg.value) })
                 is Msg.PauseChanged -> update(newConfig = config.copy(pauseAfterEach = msg.value))
+                is Msg.IsSelectedChanged -> update(newConfig = config.copy(isSelected = msg.value))
             }
 
         private fun update(newConfig: ShlokaConfig): DetailsState =

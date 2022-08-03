@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.CheckBox
+import androidx.compose.material.icons.rounded.CheckBoxOutlineBlank
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material.icons.rounded.KeyboardArrowUp
 import androidx.compose.material3.Card
@@ -77,6 +79,18 @@ fun ListItemView(index: Int, config: ShlokaConfig, component: ListComponent, mod
             Icon(
                 Icons.Rounded.KeyboardArrowDown,
                 "down",
+                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+
+        IconButton(
+            onClick = { component.select(config.shloka.id, !config.isSelected) },
+            modifier = Modifier.size(36.dp),
+        ) {
+            Icon(
+                if (config.isSelected) Icons.Rounded.CheckBox else Icons.Rounded.CheckBoxOutlineBlank,
+                "isSelected",
                 tint = MaterialTheme.colorScheme.onPrimaryContainer,
                 modifier = Modifier.fillMaxSize()
             )

@@ -11,6 +11,7 @@ interface ListComponent {
     fun remove(id: Int) {}
     fun moveUp(id: Int) {}
     fun moveDown(id: Int) {}
+    fun select(id: Int, isSelected: Boolean) {}
     fun details(config: ShlokaConfig) {}
     fun play() {}
     fun saveShloka(config: ShlokaConfig) {}

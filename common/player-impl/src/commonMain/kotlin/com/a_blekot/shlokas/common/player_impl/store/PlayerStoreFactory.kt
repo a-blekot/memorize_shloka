@@ -47,7 +47,7 @@ internal class PlayerStoreFactory(
         PlayerState(
             title = firstShloka.title,
             filePath = firstShloka.filePath,
-            description = firstShloka.description,
+            sanskrit = firstShloka.sanskrit,
             timeMs = 0,
             durationMs = durationMs,
             isPlaying = false
@@ -71,8 +71,15 @@ internal class PlayerStoreFactory(
     sealed interface Msg {
         object Play : Msg
         object Pause : Msg
-        data class Time(val timeMs: Long) : Msg
-        data class Update(val title: String, val filePath: String, val description: String) : Msg
+        data class NextRepeat(val timeMs: Long, val currentRepeat: Int, val durationMs: Long) : Msg
+        data class Update(
+            val title: String,
+            val filePath: String,
+            val sanskrit: String,
+            val wordsTranslation: String,
+            val translation: String,
+            val totalRepeats: Int
+        ) : Msg
     }
 
     private inner class BootstrapperImpl : CoroutineBootstrapper<Action>() {
@@ -145,10 +152,21 @@ internal class PlayerStoreFactory(
             when (task) {
                 is PlayTask -> {
                     dispatch(Msg.Play)
-                    dispatch(Msg.Time(task.absoluteStartMs))
+                    task.run {
+                        dispatch(Msg.NextRepeat(absoluteStartMs, currentRepeat, duration))
+                    }
                 }
                 is PauseTask -> pause(task)
-                is SetTrackTask -> dispatch(Msg.Update(task.title, task.filePath, task.description))
+                is SetTrackTask -> dispatch(
+                    Msg.Update(
+                        task.title,
+                        task.filePath,
+                        task.sanskrit,
+                        task.wordsTranslation,
+                        task.translation,
+                        deps.config.repeats
+                    )
+                )
                 is StopTask -> stop()
             }
         }
@@ -181,8 +199,19 @@ internal class PlayerStoreFactory(
             when (msg) {
                 Msg.Play -> copy(isPlaying = true)
                 Msg.Pause -> copy(isPlaying = false)
-                is Msg.Time -> copy(timeMs = msg.timeMs)
-                is Msg.Update -> copy(title = msg.title, filePath = msg.filePath, description = msg.description)
+                is Msg.NextRepeat -> copy(
+                    timeMs = msg.timeMs,
+                    currentRepeat = msg.currentRepeat,
+                    durationMs = msg.durationMs
+                )
+                is Msg.Update -> copy(
+                    title = msg.title,
+                    filePath = msg.filePath,
+                    sanskrit = msg.sanskrit,
+                    wordsTranslation = msg.wordsTranslation,
+                    translation = msg.translation,
+                    totalRepeats = msg.totalRepeats,
+                )
             }
     }
 }

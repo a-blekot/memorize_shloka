@@ -21,12 +21,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Badge
-import androidx.compose.material.icons.rounded.CheckBox
-import androidx.compose.material.icons.rounded.CheckBoxOutlineBlank
-import androidx.compose.material.icons.rounded.FileOpen
-import androidx.compose.material.icons.rounded.Info
-import androidx.compose.material.icons.rounded.Save
+import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -66,7 +61,10 @@ fun DetailsView(component: DetailsComponent) {
 
         state.value.config.run {
             item { ShlokaTitle(shloka.title, component) }
-            item { ShlokaDescription(shloka.description, component) }
+            item { ShlokaSanskrit(shloka.sanskrit, component) }
+            item { ShlokaWordsTranslation(shloka.wordsTranslation, component) }
+            item { ShlokaTranslation(shloka.translation, component) }
+            item { ShlokaSelected(isSelected, component) }
 
             chunks.forEachIndexed { i, it ->
                 item { ChunkView(i, it, component) }
@@ -74,6 +72,33 @@ fun DetailsView(component: DetailsComponent) {
         }
     }
 }
+
+@Composable
+private fun ShlokaSelected(isSelected: Boolean, component: DetailsComponent, modifier: Modifier = Modifier) =
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(12.dp, alignment = Alignment.CenterHorizontally),
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Text(
+            "is selected",
+            color = MaterialTheme.colorScheme.primary,
+            style = MaterialTheme.typography.titleLarge,
+        )
+
+        IconButton(
+            onClick = { component.setSelected(!isSelected) },
+            modifier = Modifier.size(36.dp),
+        ) {
+            Icon(
+                if (isSelected) Icons.Rounded.CheckBox else Icons.Rounded.CheckBoxOutlineBlank,
+                "isSelected",
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+    }
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -117,23 +142,23 @@ private fun ShlokaTitle(originalTitle: String, component: DetailsComponent, modi
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ShlokaDescription(originalDescription: String, component: DetailsComponent, modifier: Modifier = Modifier) {
-    val description = remember { mutableStateOf(TextFieldValue(text = originalDescription)) }
-    val hasChanges = description.value.text != originalDescription
+private fun ShlokaSanskrit(originalSanskrit: String, component: DetailsComponent, modifier: Modifier = Modifier) {
+    val sanskrit = remember { mutableStateOf(TextFieldValue(text = originalSanskrit)) }
+    val hasChanges = sanskrit.value.text != originalSanskrit
 
     OutlinedTextField(
-        value = description.value,
-        onValueChange = { description.value = it },
+        value = sanskrit.value,
+        onValueChange = { sanskrit.value = it },
         textStyle = MaterialTheme.typography.bodyLarge,
-        label = { Text(text = "Description") },
+        label = { Text(text = "Sanskrit") },
         colors = textFieldColors(),
-        placeholder = { Text(text = "Shloka description") },
+        placeholder = { Text(text = "Shloka sanskrit") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Next),
         leadingIcon = {
             Icon(
                 imageVector = Icons.Rounded.Info,
                 tint = MaterialTheme.colorScheme.primary,
-                contentDescription = "Description"
+                contentDescription = "Sanskrit"
             )
         },
         trailingIcon = {
@@ -146,7 +171,87 @@ private fun ShlokaDescription(originalDescription: String, component: DetailsCom
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = modifier.clickable {
                     if (hasChanges) {
-                        component.setDescription(description.value.text)
+                        component.setSanskrit(sanskrit.value.text)
+                    }
+                }
+            )
+        },
+        modifier = modifier.fillMaxWidth().padding(horizontal = 4.dp)
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun ShlokaWordsTranslation(originalWords: String, component: DetailsComponent, modifier: Modifier = Modifier) {
+    val words = remember { mutableStateOf(TextFieldValue(text = originalWords)) }
+    val hasChanges = words.value.text != originalWords
+
+    OutlinedTextField(
+        value = words.value,
+        onValueChange = { words.value = it },
+        textStyle = MaterialTheme.typography.bodyLarge,
+        label = { Text(text = "Words") },
+        colors = textFieldColors(),
+        placeholder = { Text(text = "Shloka words translation") },
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Next),
+        leadingIcon = {
+            Icon(
+                imageVector = Icons.Rounded.Info,
+                tint = MaterialTheme.colorScheme.primary,
+                contentDescription = "Words"
+            )
+        },
+        trailingIcon = {
+            Icon(
+                imageVector = if (hasChanges)
+                    Icons.Rounded.CheckBoxOutlineBlank
+                else
+                    Icons.Rounded.CheckBox,
+                contentDescription = "check icon",
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = modifier.clickable {
+                    if (hasChanges) {
+                        component.setWordsTranslation(words.value.text)
+                    }
+                }
+            )
+        },
+        modifier = modifier.fillMaxWidth().padding(horizontal = 4.dp)
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun ShlokaTranslation(originalTranslation: String, component: DetailsComponent, modifier: Modifier = Modifier) {
+    val translation = remember { mutableStateOf(TextFieldValue(text = originalTranslation)) }
+    val hasChanges = translation.value.text != originalTranslation
+
+    OutlinedTextField(
+        value = translation.value,
+        onValueChange = { translation.value = it },
+        textStyle = MaterialTheme.typography.bodyLarge,
+        label = { Text(text = "Translation") },
+        colors = textFieldColors(),
+        placeholder = { Text(text = "Shloka translation") },
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Next),
+        leadingIcon = {
+            Icon(
+                imageVector = Icons.Rounded.Info,
+                tint = MaterialTheme.colorScheme.primary,
+                contentDescription = "Translation"
+            )
+        },
+        trailingIcon = {
+            Icon(
+                imageVector = if (hasChanges)
+                    Icons.Rounded.CheckBoxOutlineBlank
+                else
+                    Icons.Rounded.CheckBox,
+                contentDescription = "check icon",
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = modifier.clickable {
+                    if (hasChanges) {
+                        component.setTranslation(translation.value.text)
                     }
                 }
             )
@@ -214,6 +319,18 @@ private fun ButtonsRow(component: DetailsComponent, hasChanges: Boolean, modifie
             Icon(
                 Icons.Rounded.Save,
                 "save changes",
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+
+        IconButton(
+            onClick = { component.play() },
+            modifier = Modifier.size(48.dp),
+        ) {
+            Icon(
+                Icons.Rounded.PlayCircle,
+                "play",
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.fillMaxSize()
             )
