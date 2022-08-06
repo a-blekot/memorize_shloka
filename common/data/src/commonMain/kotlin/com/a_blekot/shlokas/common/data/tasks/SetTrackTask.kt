@@ -19,7 +19,7 @@ data class SetTrackTask(
         index = index,
         title = shloka.title,
         folder = shloka.folder,
-        fileName = shloka.fileName,
+        fileName = shloka.id,
         sanskrit = shloka.sanskrit,
         words = shloka.words,
         translation = shloka.translation,

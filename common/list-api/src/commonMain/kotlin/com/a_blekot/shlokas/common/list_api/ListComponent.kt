@@ -8,10 +8,10 @@ interface ListComponent {
 
     fun add() {}
     fun save() {}
-    fun remove(id: Int) {}
-    fun moveUp(id: Int) {}
-    fun moveDown(id: Int) {}
-    fun select(id: Int, isSelected: Boolean) {}
+    fun remove(id: String) {}
+    fun moveUp(id: String) {}
+    fun moveDown(id: String) {}
+    fun select(id: String, isSelected: Boolean) {}
     fun details(config: ShlokaConfig) {}
     fun play() {}
     fun play(config: ShlokaConfig) {}

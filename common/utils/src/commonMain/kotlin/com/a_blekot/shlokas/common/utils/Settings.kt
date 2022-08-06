@@ -6,7 +6,7 @@ import com.russhwolf.settings.Settings
 private const val APP_LAUNCH_COUNT = "APP_LAUNCH_COUNT"
 private const val CURRENT_REPEATS = "CURRENT_REPEATS"
 private const val CURRENT_WEEK = "CURRENT_WEEK"
-private const val LAST_CONFIG_NAME_KEY = "LAST_CONFIG_NAME_KEY"
+private const val LAST_CONFIG_ID_KEY = "LAST_CONFIG_NAME_KEY"
 private const val PAUSE_AFTER_EACH = "PAUSE_AFTER_EACH"
 
 private const val DEFAULT_REPEATS = 10
@@ -23,11 +23,11 @@ fun onAppLaunch() =
 fun getAppLaunchCount() =
     settings.getInt(APP_LAUNCH_COUNT)
 
-fun saveLastConfigName(fileName: String) =
-    settings.getString(LAST_CONFIG_NAME_KEY, fileName)
+fun saveLastConfigId(id: String) =
+    settings.getString(LAST_CONFIG_ID_KEY, id)
 
 fun getLastConfigName() =
-    settings.getString(LAST_CONFIG_NAME_KEY)
+    settings.getString(LAST_CONFIG_ID_KEY)
 
 fun saveCurrentWeek(week: Week) =
     settings.putInt(CURRENT_WEEK, week.ordinal)

@@ -166,7 +166,13 @@ fun TitleAndProgress(state: PlayerState, modifier: Modifier = Modifier) =
                 modifier = modifier.weight(1f)
             )
 
-            SmoothProgress(currentShlokaIndex, totalShlokasCount, 10_000L, modifier.size(70.dp), strokeWidth = 2.dp)
+            SmoothProgress(
+                currentShlokaIndex,
+                totalShlokasCount,
+                totalDurationMs / totalShlokasCount,
+                modifier = modifier.size(70.dp),
+                strokeWidth = 2.dp
+            )
         }
     }
 

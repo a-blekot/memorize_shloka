@@ -1,6 +1,7 @@
 package com.a_blekot.shlokas.common.player_impl.store
 
 import com.a_blekot.shlokas.common.data.createTasks
+import com.a_blekot.shlokas.common.data.durationMs
 import com.a_blekot.shlokas.common.data.tasks.*
 import com.a_blekot.shlokas.common.player_api.PlayerFeedback
 import com.a_blekot.shlokas.common.player_api.PlayerState
@@ -38,13 +39,13 @@ internal class PlayerStoreFactory(
     private val initialState =
         PlayerState(
             title = firstShloka.title,
-            filePath = firstShloka.fileName,
             sanskrit = firstShloka.sanskrit,
-            timeMs = 0,
+            words = firstShloka.words,
+            translation = firstShloka.translation,
             durationMs = durationMs,
-            isPlaying = false,
             totalRepeats = deps.config.repeats,
-            totalShlokasCount = deps.config.shlokas.filter { it.isSelected }.size
+            totalShlokasCount = deps.config.shlokas.filter { it.isSelected }.size,
+            totalDurationMs = deps.config.durationMs
         )
 
     fun create(): PlayerStore =
@@ -202,7 +203,6 @@ internal class PlayerStoreFactory(
                 )
                 is Msg.Update -> copy(
                     title = msg.title,
-                    filePath = msg.filePath,
                     sanskrit = msg.sanskrit,
                     words = msg.words,
                     translation = msg.translation,

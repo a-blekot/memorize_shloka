@@ -11,7 +11,6 @@ kotlin {
             dependencies {
                 implementation(libs.decompose.decompose)
                 implementation(libs.kotlinx.serialization.json)
-                implementation(libs.random)
             }
         }
     }

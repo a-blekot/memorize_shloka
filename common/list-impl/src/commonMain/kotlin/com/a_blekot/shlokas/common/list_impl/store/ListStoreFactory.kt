@@ -36,10 +36,10 @@ internal class ListStoreFactory(
         object AddShloka : Msg
         data class Update(val config: ListConfig) : Msg
         data class Title(val title: String) : Msg
-        data class RemoveShloka(val id: Int) : Msg
-        data class MoveUp(val id: Int) : Msg
-        data class MoveDown(val id: Int) : Msg
-        data class Select(val id: Int, val isSelected: Boolean) : Msg
+        data class RemoveShloka(val id: String) : Msg
+        data class MoveUp(val id: String) : Msg
+        data class MoveDown(val id: String) : Msg
+        data class Select(val id: String, val isSelected: Boolean) : Msg
     }
 
     private inner class BootstrapperImpl : CoroutineBootstrapper<Action>() {
@@ -118,17 +118,17 @@ internal class ListStoreFactory(
             }
 
         private fun update(newConfig: ListConfig): ListState {
-            saveLastConfigName(newConfig.configName)
+            saveLastConfigId(newConfig.id)
             return ListState(newConfig, hasChanges = newConfig != deps.config)
         }
 
         private fun ListConfig.add(): ListConfig =
             copy(list = list.toMutableList().apply { add(0, ShlokaConfig()) })
 
-        private fun ListConfig.remove(id: Int): ListConfig =
+        private fun ListConfig.remove(id: String): ListConfig =
             copy(list = list.toMutableList().apply { removeAll { it.shloka.id == id } })
 
-        private fun ListConfig.moveUp(id: Int): ListConfig =
+        private fun ListConfig.moveUp(id: String): ListConfig =
             copy(list = list.toMutableList().apply {
                 val index = indexOfFirst { it.shloka.id == id }
                 if (index > 0) {
@@ -137,7 +137,7 @@ internal class ListStoreFactory(
                 }
             })
 
-        private fun ListConfig.moveDown(id: Int): ListConfig =
+        private fun ListConfig.moveDown(id: String): ListConfig =
             copy(list = list.toMutableList().apply {
                 val index = indexOfFirst { it.shloka.id == id }
                 if (index < lastIndex) {
@@ -146,7 +146,7 @@ internal class ListStoreFactory(
                 }
             })
 
-        private fun ListConfig.select(id: Int, isSelected: Boolean): ListConfig =
+        private fun ListConfig.select(id: String, isSelected: Boolean): ListConfig =
             copy(list = list.toMutableList().apply {
                 val index = indexOfFirst { it.shloka.id == id }
                 if (index >= 0) {

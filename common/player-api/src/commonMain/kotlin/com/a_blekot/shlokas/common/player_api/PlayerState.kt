@@ -2,7 +2,6 @@ package com.a_blekot.shlokas.common.player_api
 
 data class PlayerState(
     val title: String = "",
-    val filePath: String = "",
     val sanskrit: String = "",
     val words: String = "",
     val translation: String = "",
@@ -13,4 +12,5 @@ data class PlayerState(
     val totalRepeats: Int = 1,
     val currentShlokaIndex: Int = 1,
     val totalShlokasCount: Int = 1,
+    val totalDurationMs: Long = 0L
 )
