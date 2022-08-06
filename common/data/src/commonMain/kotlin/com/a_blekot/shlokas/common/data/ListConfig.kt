@@ -9,13 +9,17 @@ private const val VISIBLE_DIGITS = 3
 private const val DEFAULT_TITLE = "Shlokas"
 private const val EMPTY_TEXT = ""
 
+// /document/9016-4EF8:Music/Bhaktivaibhava/
+
 @Serializable
 data class ListConfig(
     val id: Long = Random.nextLong().absoluteValue,
-    val title: String = DEFAULT_TITLE + " " + id.toString().take(VISIBLE_DIGITS),
+    val title: String = EMPTY_TEXT,//DEFAULT_TITLE + " " + id.toString().take(VISIBLE_DIGITS),
     val description: String = EMPTY_TEXT,
+    val folder: String = EMPTY_TEXT,
+    val configName: String = EMPTY_TEXT,
     val list: List<ShlokaConfig> = emptyList(),
 ) {
     val fileName
-        get() = title + EXT
+        get() = configName + EXT
 }

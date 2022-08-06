@@ -11,6 +11,6 @@ object ApkConfig {
     const val VERSION_CODE = 1
     const val VERSION_NAME = "1.0"
 
-    val JAVA_VERSION = JavaVersion.VERSION_11
-    val JAVA_VERSION_NAME = JavaVersion.VERSION_11.toString()
+    val JAVA_VERSION = JavaVersion.VERSION_1_8
+    val JAVA_VERSION_NAME = JavaVersion.VERSION_1_8.toString()
 }

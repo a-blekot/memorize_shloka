@@ -8,28 +8,25 @@ import android.os.Bundle
 import android.os.IBinder
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.padding
-import androidx.compose.ui.Modifier
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.a_blekot.shlokas.android.MainApp.Companion.app
-import com.a_blekot.shlokas.android.player.PlaybackService
-import com.a_blekot.shlokas.android.theme.AppTheme
+import com.a_blekot.shlokas.android_player.PlaybackService
+import com.a_blekot.shlokas.android_ui.theme.AppTheme
 import com.a_blekot.shlokas.common.root.RootComponent
 import com.a_blekot.shlokas.common.root.RootComponentImpl
 import com.a_blekot.shlokas.common.root.RootDeps
+import com.a_blekot.shlokas.common.utils.AndroidConfigReader
 import com.a_blekot.shlokas.common.utils.AndroidFiler
 import com.a_blekot.shlokas.common.utils.dispatchers
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.defaultComponentContext
 import com.arkivanov.mvikotlin.logging.store.LoggingStoreFactory
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
-import com.google.accompanist.insets.LocalWindowInsets
-import com.google.accompanist.insets.ProvideWindowInsets
-import com.google.accompanist.insets.rememberInsetsPaddingValues
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class MainActivity : ComponentActivity() {
@@ -37,6 +34,7 @@ class MainActivity : ComponentActivity() {
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, binder: IBinder?) {
             playbackService = (binder as? PlaybackService.PlaybackBinder)?.service
+            playbackService?.setPlayerBus(app.playerBus)
             Napier.d( "ACTIVITY onServiceConnected", tag = "PlaybackService")
             Napier.d( "ACTIVITY boundService = $playbackService", tag = "PlaybackService")
         }
@@ -66,10 +64,13 @@ class MainActivity : ComponentActivity() {
 
         Napier.d( "ACTIVITY startService", tag = "PlaybackService")
         startService(playbackServiceIntent)
-        lifecycleScope.launchWhenCreated {
-            delay(500L)
-            if (applicationContext.bindService(playbackServiceIntent, serviceConnection, Context.BIND_IMPORTANT)) {
-                isBound = true
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
+                delay(500L)
+                Napier.d("app.playerBus = ${app.playerBus}", tag="PlayerBus")
+                if (applicationContext.bindService(playbackServiceIntent, serviceConnection, Context.BIND_IMPORTANT)) {
+                    isBound = true
+                }
             }
         }
     }
@@ -85,6 +86,7 @@ class MainActivity : ComponentActivity() {
     }
 
     override fun onDestroy() {
+        Napier.d("app.playerBus = ${app.playerBus}", tag="PlayerBus")
         super.onDestroy()
         unbindService()
     }
@@ -102,6 +104,7 @@ class MainActivity : ComponentActivity() {
             storeFactory = LoggingStoreFactory(DefaultStoreFactory()),
             deps = RootDeps(
                 filer = AndroidFiler(this),
+                configReader = AndroidConfigReader(this),
                 playerBus = app.playerBus,
                 dispatchers = dispatchers()
             )

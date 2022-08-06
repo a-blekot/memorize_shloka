@@ -1,6 +1,7 @@
 package com.a_blekot.shlokas.common.utils
 
 import com.a_blekot.shlokas.common.data.ListConfig
+import com.a_blekot.shlokas.common.resources.MR
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -22,6 +23,18 @@ fun writeToFile(config: ListConfig, filer: Filer): Boolean {
     filer.write(config.fileName, json.encodeToString(config))
     return true
 }
+
+fun readFirstCanto(configName: String, filer: Filer, configReader: ConfigReader): ListConfig? =
+    try {
+        val text = configReader.readConfig(configName)
+        if (text.isBlank()) {
+            null
+        }
+
+        json.decodeFromString<ListConfig>(text)
+    } catch (e: Throwable) {
+        null
+    }
 
 fun readFromFile(filePath: String, filer: Filer): ListConfig? {
     val text = filer.read(filePath)

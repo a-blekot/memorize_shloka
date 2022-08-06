@@ -9,7 +9,7 @@ androidx-lifecycle-runtime = "2.6.0-alpha01"
 canidropjetifier = "0.5"
 compose = "1.2.0"
 compose_compiler="1.2.0"
-decompose = "0.7.0"
+decompose = "0.8.0"
 detekt = "1.17.0"
 essenty = "0.2.2"
 exoplayer = "2.18.0"
@@ -19,6 +19,7 @@ kotlinx_serialization = "1.3.2"
 ktlint = "10.2.1"
 ktor = "2.0.3"
 material = "1.0.0-alpha15"
+moko-resources = "0.20.1"
 mvikotlin = "3.0.1"
 napier = "2.6.1"
 okio = "3.0.0"
@@ -39,12 +40,12 @@ versionsPlgn = { module = "com.github.ben-manes:gradle-versions-plugin", version
 accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist"}
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist"}
 
-androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity"}
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat"}
-androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core"}
+androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core"}
 androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "androidx-lifecycle-ext"}
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle-runtime"}
 
+decompose-android = { module = "com.arkivanov.decompose:decompose-android", version.ref = "decompose" }
 decompose-decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-extCompose = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }
 essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
@@ -55,6 +56,10 @@ exoplayer-ui = { module = "com.google.android.exoplayer:exoplayer-ui", version.r
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx_coroutines" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx_coroutines" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx_serialization" }
+
+moko-resources = { module = "dev.icerock.moko:resources", version.ref = "moko-resources" }
+moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "moko-resources" }
+moko-resources-generator = { module = "dev.icerock.moko:resources-generator", version.ref = "moko-resources" }
 
 mvikotlin-mvikotlin = { module = "com.arkivanov.mvikotlin:mvikotlin", version.ref = "mvikotlin" }
 mvikotlin-extensions-coroutines = { module = "com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines", version.ref = "mvikotlin" }
@@ -71,14 +76,15 @@ test-common = { module = "org.jetbrains.kotlin:kotlin-test-common", version.ref 
 test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 test-annotations = { module = "org.jetbrains.kotlin:kotlin-test-annotations-common", version.ref = "kotlin" }
 
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity"}
 androidx-composeFoundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
+androidx-composeIcons = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
 androidx-composeMaterial = { module = "androidx.compose.material3:material3", version.ref = "material" }
 androidx-composeUi = { module = "androidx.compose.ui:ui", version.ref = "compose"}
 androidx-composeUiTooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
-androidx-composeIcons = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
 
 [bundles]
-androidx-compose = [ "androidx-composeUi", "androidx-composeMaterial", "androidx-composeUiTooling", "androidx-composeFoundation", "androidx-composeIcons" ]
+androidx-compose = ["androidx-activity-compose", "androidx-composeFoundation", "androidx-composeIcons", "androidx-composeMaterial", "androidx-composeUi", "androidx-composeUiTooling" ]
 mvikotlin-bndl= [ "mvikotlin-mvikotlin", "mvikotlin-main", "mvikotlin-logging", "mvikotlin-extensions-coroutines" ]
 plaginz = ["android-gradlePlgn", "kotlin-gradlePlgn", "kotlin-serialization-gradlePlgn"]
 #pulagins = ["android-gradlePlgn", "kotlin-gradlePlgn", "kotlin-serialization-gradlePlgn", "sqlDelight-gradlePlgn", "versionsPlgn", "detektPlgn", "ktlintPlgn", "canidropjetifierPlgn"]

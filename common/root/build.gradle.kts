@@ -26,6 +26,8 @@ kotlin {
                 implementation(projects.common.listImpl)
                 implementation(projects.common.playerApi)
                 implementation(projects.common.playerImpl)
+                implementation(projects.common.settingsApi)
+                implementation(projects.common.settingsImpl)
                 implementation(projects.common.utils)
                 implementation(libs.mvikotlin.mvikotlin)
                 implementation(libs.decompose.decompose)

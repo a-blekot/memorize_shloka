@@ -44,6 +44,8 @@ class ListComponentImpl(
     override fun select(id: Int, isSelected: Boolean) = store.accept(Select(id, isSelected))
     override fun details(config: ShlokaConfig) = output(ListOutput.Details(config))
     override fun play() = output(ListOutput.Play(store.state.toPlayConfig()))
+    override fun play(config: ShlokaConfig) = output(ListOutput.Play(config.toPlayConfig()))
+    override fun settings() = output(ListOutput.Settings)
     override fun saveShloka(config: ShlokaConfig) = store.accept(SaveShloka(config))
 
     private fun ListState.toPlayConfig() =
@@ -52,5 +54,13 @@ class ListComponentImpl(
             config.list,
             getRepeats(),
             getPause()
+        )
+
+    private fun ShlokaConfig.toPlayConfig() =
+        PlayConfig(
+            getCurrentWeek(),
+            listOf(copy(isSelected = true)),
+            getRepeats(),
+            getPause(),
         )
 }

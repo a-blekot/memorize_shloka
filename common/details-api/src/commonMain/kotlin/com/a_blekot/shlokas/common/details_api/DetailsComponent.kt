@@ -10,7 +10,7 @@ interface DetailsComponent {
     fun setTitle(title: String) {}
     fun setFilePath(filePath: String) {}
     fun setSanskrit(value: String) {}
-    fun setWordsTranslation(value: String) {}
+    fun setWords(value: String) {}
     fun setTranslation(value: String) {}
     fun setChunkStart(index: Int, startMs: Long) {}
     fun setChunkEnd(index: Int, endMs: Long) {}

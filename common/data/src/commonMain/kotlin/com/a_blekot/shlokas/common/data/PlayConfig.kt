@@ -25,8 +25,8 @@ fun PlayConfig.createTasks(): List<Task> {
     var absoluteStartMs = 0L
     shlokas
         .filter { it.isSelected }
-        .forEach { shlokaConfig ->
-            val list = shlokaConfig.createTasks(week, repeats, absoluteStartMs)
+        .forEachIndexed { i, shlokaConfig ->
+            val list = shlokaConfig.createTasks(i + 1, week, repeats, absoluteStartMs)
             tasks.addAll(list)
             tasks.add(PauseTask(pauseAfterEach))
 

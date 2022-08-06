@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="test.simple">тест</string>
+    <string name="test2">тест 2</string>
+    <string name="test3">тест 3</string>
+    <string name="Test4">тест 4</string>
+    <string name="common.name">Тестовый проект</string>
+    <string name="format">Тестовые данные %d</string>
+    <string name="encoding">Выберите портфель и сумму</string>
+    <string name="positional">вторая строка %2$s первое число %1$d</string>
+    <string name="multilined">первая строка\nвторая строка\nтретья строка.</string>
+    <string name="quotes">Alex009 сказал "привет мир" &amp; "пишите тесты".</string>
+    <string name="single_quotes">Alex009 сказал \'привет\'</string>
+
+<!--    जन्माद्यस्य यतोऽन्वयादितरतश्चार्थेष्वभिज्ञ: स्वराट्-->
+<!--    तेने ब्रह्म हृदा य आदिकवये मुह्यन्ति यत्सूरय: ।-->
+<!--    तेजोवारिमृदां यथा विनिमयो यत्र त्रिसर्गोऽमृषा-->
+<!--    धाम्ना स्वेन सदा निरस्तकुहकं सत्यं परं धीमहि ॥ १ ॥-->
+<!--    <string name="sansk_SB_1_1_1"><![CDATA[<i>janmādy asya yato ’nvayād itarataś cārtheṣv abhijñaḥ svarāṭ<br>tene brahma hṛdā ya ādi-kavaye muhyanti yat sūrayaḥ<br>tejo-vāri-mṛdāṁ yathā vinimayo yatra tri-sargo ’mṛṣā<br>dhāmnā svena sadā nirasta-kuhakaṁ satyaṁ paraṁ dhīmahi</i>]]></string>-->
+<!--    <string name="words_SB_1_1_1"><![CDATA[<p><a href="/en/search/synonyms/?original=om"><em>om</em></a> — O my Lord; <a href="/en/search/synonyms/?original=namaḥ"><em>namaḥ</em></a> — offering my obeisances; <a href="/en/search/synonyms/?original=bhagavate"><em>bhagavate</em></a> — unto the Personality of Godhead; <a href="/en/search/synonyms/?original=vāsudevāya"><em>vāsudevāya</em></a> — unto Vāsudeva (the son of Vasudeva), or Lord Śrī Kṛṣṇa, the primeval Lord; <a href="/en/search/synonyms/?original=janma"><em>janma</em></a>-<a href="/en/search/synonyms/?original=ādi"><em>ādi</em></a> — creation, sustenance and destruction; <a href="/en/search/synonyms/?original=asya"><em>asya</em></a> — of the manifested universes; <a href="/en/search/synonyms/?original=yataḥ"><em>yataḥ</em></a> — from whom; <a href="/en/search/synonyms/?original=anvayāt"><em>anvayāt</em></a> — directly; <a href="/en/search/synonyms/?original=itarataḥ"><em>itarataḥ</em></a> — indirectly; <a href="/en/search/synonyms/?original=ca"><em>ca</em></a> — and; <a href="/en/search/synonyms/?original=artheṣu"><em>artheṣu</em></a> — purposes; <a href="/en/search/synonyms/?original=abhijñaḥ"><em>abhijñaḥ</em></a> — fully cognizant; <a href="/en/search/synonyms/?original=sva"><em>sva</em></a>-<a href="/en/search/synonyms/?original=rāṭ"><em>rāṭ</em></a> — fully independent; <a href="/en/search/synonyms/?original=tene"><em>tene</em></a> — imparted; <a href="/en/search/synonyms/?original=brahma"><em>brahma</em></a> — the Vedic knowledge; <a href="/en/search/synonyms/?original=hṛdā"><em>hṛdā</em></a> — consciousness of the heart; <a href="/en/search/synonyms/?original=yaḥ"><em>yaḥ</em></a> — one who; <a href="/en/search/synonyms/?original=ādi"><em>ādi</em></a>-<a href="/en/search/synonyms/?original=kavaye"><em>kavaye</em></a> — unto the original created being; <a href="/en/search/synonyms/?original=muhyanti"><em>muhyanti</em></a> — are illusioned; <a href="/en/search/synonyms/?original=yat"><em>yat</em></a> — about whom; <a href="/en/search/synonyms/?original=sūrayaḥ"><em>sūrayaḥ</em></a> — great sages and demigods; <a href="/en/search/synonyms/?original=tejaḥ"><em>tejaḥ</em></a> — fire; <a href="/en/search/synonyms/?original=vāri"><em>vāri</em></a> — water; <a href="/en/search/synonyms/?original=mṛdām"><em>mṛdām</em></a> — earth; <a href="/en/search/synonyms/?original=yathā"><em>yathā</em></a> — as much as; <a href="/en/search/synonyms/?original=vinimayaḥ"><em>vinimayaḥ</em></a> — action and reaction; <a href="/en/search/synonyms/?original=yatra"><em>yatra</em></a> — whereupon; <a href="/en/search/synonyms/?original=tri"><em>tri</em></a>-<a href="/en/search/synonyms/?original=sargaḥ"><em>sargaḥ</em></a> — three modes of creation, creative faculties; <a href="/en/search/synonyms/?original=amṛṣā"><em>amṛṣā</em></a> — almost factual; <a href="/en/search/synonyms/?original=dhāmnā"><em>dhāmnā</em></a> — along with all transcendental paraphernalia; <a href="/en/search/synonyms/?original=svena"><em>svena</em></a> — self-sufficiently; <a href="/en/search/synonyms/?original=sadā"><em>sadā</em></a> — always; <a href="/en/search/synonyms/?original=nirasta"><em>nirasta</em></a> — negation by absence; <a href="/en/search/synonyms/?original=kuhakam"><em>kuhakam</em></a> — illusion; <a href="/en/search/synonyms/?original=satyam"><em>satyam</em></a> — truth; <a href="/en/search/synonyms/?original=param"><em>param</em></a> — absolute; <a href="/en/search/synonyms/?original=dhīmahi"><em>dhīmahi</em></a> — I do meditate upon.</p>]]></string>-->
+<!--    <string name="trans_SB_1_1_1">O my Lord, Śrī Kṛṣṇa, son of Vasudeva, O all-pervading Personality of Godhead, I offer my respectful obeisances unto You. I meditate upon Lord Śrī Kṛṣṇa because He is the Absolute Truth and the primeval cause of all causes of the creation, sustenance and destruction of the manifested universes. He is directly and indirectly conscious of all manifestations, and He is independent because there is no other cause beyond Him. It is He only who first imparted the Vedic knowledge unto the heart of Brahmājī, the original living being. By Him even the great sages and demigods are placed into illusion, as one is bewildered by the illusory representations of water seen in fire, or land seen on water. Only because of Him do the material universes, temporarily manifested by the reactions of the three modes of nature, appear factual, although they are unreal. I therefore meditate upon Him, Lord Śrī Kṛṣṇa, who is eternally existent in the transcendental abode, which is forever free from the illusory representations of the material world. I meditate upon Him, for He is the Absolute Truth.</string>-->
+
+<!--    प्रायेणाल्पायुष: सभ्य कलावस्मिन् युगे जना: ।-->
+<!--    मन्दा: सुमन्दमतयो मन्दभाग्या ह्युपद्रुता: ॥ १० ॥-->
+<!--    <string name="sansk_SB_1_1_10"><![CDATA[<i>prāyeṇālpāyuṣaḥ sabhya<br>kalāv asmin yuge janāḥ<br>mandāḥ sumanda-matayo<br>manda-bhāgyā hy upadrutāḥ</i>]]></string>-->
+<!--    <string name="words_SB_1_1_10"><![CDATA[<p><a href="/en/search/synonyms/?original=prāyeṇa"><em>prāyeṇa</em></a> — almost always; <a href="/en/search/synonyms/?original=alpa"><em>alpa</em></a> — meager; <a href="/en/search/synonyms/?original=āyuṣaḥ"><em>āyuṣaḥ</em></a> — duration of life; <a href="/en/search/synonyms/?original=sabhya"><em>sabhya</em></a> — member of a learned society; <a href="/en/search/synonyms/?original=kalau"><em>kalau</em></a> — in this Age of Kali (quarrel); <a href="/en/search/synonyms/?original=asmin"><em>asmin</em></a> — herein; <a href="/en/search/synonyms/?original=yuge"><em>yuge</em></a> — age; <a href="/en/search/synonyms/?original=janāḥ"><em>janāḥ</em></a> — the public; <a href="/en/search/synonyms/?original=mandāḥ"><em>mandāḥ</em></a> — lazy; <a href="/en/search/synonyms/?original=sumanda"><em>sumanda</em></a>-<a href="/en/search/synonyms/?original=matayaḥ"><em>matayaḥ</em></a> — misguided; <a href="/en/search/synonyms/?original=manda"><em>manda</em></a>-<a href="/en/search/synonyms/?original=bhāgyāḥ"><em>bhāgyāḥ</em></a> — unlucky; <a href="/en/search/synonyms/?original=hi"><em>hi</em></a> — and above all; <a href="/en/search/synonyms/?original=upadrutāḥ"><em>upadrutāḥ</em></a> — disturbed.</p>]]></string>-->
+<!--    <string name="trans_SB_1_1_10">O learned one, in this iron Age of Kali men almost always have but short lives. They are quarrelsome, lazy, misguided, unlucky and, above all, always disturbed.</string>-->
+
+<!--    <string name="sansk_SB_1_2_6"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_2_6"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_2_6"></string>-->
+
+<!--    <string name="sansk_SB_1_2_8"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_2_8"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_2_8"></string>-->
+
+<!--    <string name="sansk_SB_1_2_11"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_2_11"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_2_11"></string>-->
+
+<!--    <string name="sansk_SB_1_2_16"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_2_16"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_2_16"></string>-->
+
+<!--    <string name="sansk_SB_1_2_17"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_2_17"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_2_17"></string>-->
+
+<!--    <string name="sansk_SB_1_2_18"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_2_18"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_2_18"></string>-->
+
+<!--    <string name="sansk_SB_1_3_28"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_3_28"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_3_28"></string>-->
+
+<!--    <string name="sansk_SB_1_3_43"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_3_43"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_3_43"></string>-->
+
+<!--    <string name="sansk_SB_1_5_11"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_5_11"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_5_11"></string>-->
+
+<!--    <string name="sansk_SB_1_5_18"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_5_18"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_5_18"></string>-->
+
+<!--    <string name="sansk_SB_1_7_6"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_7_6"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_7_6"></string>-->
+
+<!--    <string name="sansk_SB_1_7_10"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_7_10"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_7_10"></string>-->
+
+<!--    <string name="sansk_SB_1_8_26"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_8_26"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_8_26"></string>-->
+
+<!--    <string name="sansk_SB_1_8_42"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_8_42"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_8_42"></string>-->
+
+<!--    <string name="sansk_SB_1_13_10"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_13_10"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_13_10"></string>-->
+
+<!--    तुलयाम लवेनापि न स्वर्गं नापुनर्भवम् ।-->
+<!--    भगवत्सङ्गिसङ्गस्य मर्त्यानां किमुताशिष: ॥ १३ ॥-->
+<!--    <string name="sansk_SB_1_18_13"><![CDATA[<i>tulayāma lavenāpi<br>na svargaṁ nāpunar-bhavam<br>bhagavat-saṅgi-saṅgasya<br>martyānāṁ kim utāśiṣaḥ</i>]]></string>-->
+<!--    <string name="words_SB_1_18_13"><![CDATA[<p><a href="/en/search/synonyms/?original=tulayāma"><em>tulayāma</em></a> — to be balanced with; <a href="/en/search/synonyms/?original=lavena"><em>lavena</em></a> — by a moment; <a href="/en/search/synonyms/?original=api"><em>api</em></a> — even; <a href="/en/search/synonyms/?original=na"><em>na</em></a> — never; <a href="/en/search/synonyms/?original=svargam"><em>svargam</em></a> — heavenly planets; <a href="/en/search/synonyms/?original=na"><em>na</em></a> — nor; <a href="/en/search/synonyms/?original=apunaḥ"><em>apunaḥ</em></a>-<a href="/en/search/synonyms/?original=bhavam"><em>bhavam</em></a> — liberation from matter; <a href="/en/search/synonyms/?original=bhagavat"><em>bhagavat</em></a>-<a href="/en/search/synonyms/?original=saṅgi"><em>saṅgi</em></a> — devotee of the Lord; <a href="/en/search/synonyms/?original=saṅgasya"><em>saṅgasya</em></a> — of the association; <a href="/en/search/synonyms/?original=martyānām"><em>martyānām</em></a> — those who are meant for death; <a href="/en/search/synonyms/?original=kim"><em>kim</em></a> — what is there; <a href="/en/search/synonyms/?original=uta"><em>uta</em></a> — to speak of; <a href="/en/search/synonyms/?original=āśiṣaḥ"><em>āśiṣaḥ</em></a> — worldly benediction.</p>]]></string>-->
+<!--    <string name="trans_SB_1_18_13">The value of a moment’s association with the devotee of the Lord cannot even be compared to the attainment of heavenly planets or liberation from matter, and what to speak of worldly benedictions in the form of material prosperity, which are for those who are meant for death.</string>-->
+
+<!--    джанма̄дй асйа йато ‘нвайа̄д-->
+<!--    итараташ́ ча̄ртгешв абгіджн̃ах̣ свара̄т̣-->
+<!--    тене брахма хр̣да̄ йа а̄ді-кавайе-->
+<!--    мухйанті йат сӯрайах̣-->
+<!--    теджо-ва̄рі-мр̣да̄м̇ йатга̄-->
+<!--    вінімайо йатра трі-сарго ‘мр̣ша̄-->
+<!--    дга̄мна̄ свена сада̄ ніраста- -->
+<!--    кухакам̇ сатйам̇ парам̇ дгімахі-->
+<!--    <string name="sansk_SB_1_1_1"><![CDATA[<em><em><em>ом̇ намо бга</em></em>ґ<em><em>авате ва̄судева̄йа<br>джанма̄дй асйа йато ‘нвайа̄д<br>итараташ́ ча̄ртгешв абгіджн̃ах̣ свара̄т̣<br>тене брахма хр̣да̄ йа а̄ді-кавайе<br>мухйанті йат сӯрайах̣<br>теджо-ва̄рі-мр̣да̄м̇ йатга̄<br>вінімайо йатра трі-сарго ‘мр̣ша̄<br>дга̄мна̄ свена сада̄ ніраста-<br>кухакам̇ сатйам̇ парам̇ дгімахі&nbsp; &nbsp;&nbsp;</em></em></em>]]></string>-->
+<!--    <string name="words_SB_1_1_1"><![CDATA[<p><em>ом̇</em> — мій Господи; <em>намах̣</em> — в шанобі схиляючись; <em>бгаґавате</em> — Богові-Особі; <em>ва̄судева̄йа</em> — Ва̄судеві (синові Васудеви), Господу Шрі Крішні, відначальному Господеві; <em>джанма-а̄ді</em> —  творення, підтримання та знищення; <em>асйа</em> — проявлених усесвітів; <em>йатах̣</em> — що з Нього; <em>анвайа̄т</em> — прямо; <em>ітаратах̣</em> —  непрямо; <em>ча</em> — і; <em>артгешу</em> — цілях; <em>абгіджн̃ах̣</em> — повністю свідомий ; <em>сва - ра̄т̣</em>  —  цілковито незалежний ; <em>тене</em>  —  вклав ; <em>брахма</em> — ведичне знання; <em>хр̣да̄</em> — свідомість серця; <em>йах̣</em> —  той, котрий; <em>а̄ді-кавайе</em>—первісній живій істоті; <em>мухйанті</em>—  введені в оману; <em>йат</em> — що про Нього; <em>сӯрайах̣</em> — великі мудреці та півбоги; <em>теджах̣</em> — вогонь; <em>ва̄рі</em> — вода; <em>мр̣да̄м</em> — земля; <em>йатга̄</em>—так само; <em>вінімайах̣</em>—дія та протидія; <em>йатра</em>—  звідки; <em>трі-сарґах̣</em>—три <em>ґуни</em> творіння, твірні сили; <em>амр̣ша̄</em>—  мов справжні; <em>дга̄мна̄</em>  —  разом з усіма трансцендентними атрибутами; <em>свена</em> — самодостатній; <em>сада̄</em> — завжди; <em>ніраста</em>—  заперечення через відсутність; <em>кухакам</em> — ілюзії; <em>сатйам</em> —  істина; <em>парам</em> — абсолютна; <em>дгімахі</em> — я медитую на.</p>]]></string>-->
+<!--    <string name="trans_SB_1_1_1">О мій Господи! Я шанобливо схиляюся перед Тобою, Шрі Крішно, сину Васудеви, всепроникаючий Боже-Особо! Я медитую на Господа Шрі Крішну, тому що Він є Абсолютна Істина, первинна причина всіх причин у творенні, підтриманні й знищенні проявлених усесвітів. Він знає, прямо чи непрямо, що відбувається у всьому проявленому; і Він є незалежний, бо немає іншого начала, крім Нього. Саме Він вклав на початку ведичне знання у серце Брахмаджі, першоствореної живої істоти. Він вводить в оману навіть великих мудреців та півбогів,  —  так збиває з пантелику оманний образ води, що з’являється у вогні, чи образ землі на воді. Тільки Він є причиною того, що тимчасово проявлені через взаємодію трьох ґун природи матеріальні всесвіти видаються дійсними, хоча є нереальні. Отже, я медитую на Нього, Господа Шрі Крішну, що вічно перебуває у трансцендентній обителі, яка завжди вільна від ілюзорних образів матеріального світу. Я медитую на Нього, бо Він є Абсолютна Істина.</string>-->
+
+<!--    пра̄йен̣а̄лпа̄йушах̣ сабгйа-->
+<!--    кала̄в асмін йуґе джана̄х̣-->
+<!--    манда̄х̣ суманда-матайо-->
+<!--    манда-бга̄ґйа̄ хй упадрута̄х̣-->
+<!--    <string name="sansk_SB_1_1_10"><![CDATA[<em><em><em>пра̄йен̣а̄лпа̄йушах̣ сабгйа<br>кала̄в асмін йу</em>ґ<em>е джана̄х̣<br>манда̄х̣ суманда-матайо<br>манда-бга̄</em>ґ<em>йа̄ хй упадрута̄х̣</em></em></em>]]></string>-->
+<!--    <string name="words_SB_1_1_10"><![CDATA[<p><em>пра̄йен̣а</em> — майже завжди; <em>алпа</em> — короткий; <em>а̄йушах̣</em> — тривалість життя; <em>сабгйа</em> — представник вченої громади ; <em>калау</em> — цієї доби Калі (епохи чвар); <em>асмін</em> — тут; <em>йуґе</em> — епоха; <em>джана̄х̣</em> — люди; <em>манда̄х̣</em> — ледачі; <em>суманда-матайах̣</em> — заблукалі; <em>манда-бга̄ґйа̄х̣</em> — безталанні; <em>хі</em> — крім того; <em>упадрута̄х̣</em> — стривожені.</p>]]></string>-->
+<!--    <string name="trans_SB_1_1_10">О вчений муже, в цю залізну добу Калі життя людей дуже коротке. Вони сварливі, ледачі, оманені, нещасливі і, понад усе, завжди стривожені.</string>-->
+
+<!--    са ваі пум̇са̄м̇ паро дгармо-->
+<!--    йато бгактир адгокшадже-->
+<!--    ахаитукй апратихата̄-->
+<!--    йайа̄тма̄ супрасідати-->
+
+<!--    <string name="sansk_SB_1_2_6"><![CDATA[<em><em><em>са ваі пум̇са̄м̇ паро дгармо<br>йато бгактир адгокшадже<br>ахаитукй апратихата̄<br>йайа̄тма̄ супрасідати</em></em></em>]]></string>-->
+<!--    <string name="words_SB_1_2_6"><![CDATA[<p><em>сах̣</em> — то; <em>ваі</em> — безперечно; <em>пум̇са̄м</em> — для людства; <em>парах̣</em> —  піднесене; <em>дгармах̣</em> — заняття; <em>йатах̣</em> — котрим; <em>бгактіх̣</em> —  віддане служіння; <em>адгокшадже</em> — Трансцендентному; <em>ахаітукі</em>  —  безпричинне ; <em>апратіхата̄</em>  —  неперервне ; <em>йайа̄</em>  —  котрим; <em>а̄тма̄</em> — єство; <em>супрасідаті</em> — повністю вдоволюється.</p>]]></string>-->
+<!--    <string name="trans_SB_1_2_6">Діяльністю [дгармою] найвищого рівня для всього людства є діяльність, яка здатна привести людину до любовного відданого служіння трансцендентному Господеві. Це віддане служіння має бути безкорисливе й неперервне, і тоді воно цілковито задоволить душу.</string>-->
+
+<!--    <string name="sansk_SB_1_2_8"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_2_8"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_2_8"></string>-->
+
+<!--    <string name="sansk_SB_1_2_11"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_2_11"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_2_11"></string>-->
+
+<!--    <string name="sansk_SB_1_2_16"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_2_16"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_2_16"></string>-->
+
+<!--    <string name="sansk_SB_1_2_17"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_2_17"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_2_17"></string>-->
+
+<!--    <string name="sansk_SB_1_2_18"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_2_18"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_2_18"></string>-->
+
+<!--    <string name="sansk_SB_1_3_28"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_3_28"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_3_28"></string>-->
+
+<!--    <string name="sansk_SB_1_3_43"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_3_43"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_3_43"></string>-->
+
+<!--    <string name="sansk_SB_1_5_11"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_5_11"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_5_11"></string>-->
+
+<!--    <string name="sansk_SB_1_5_18"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_5_18"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_5_18"></string>-->
+
+<!--    <string name="sansk_SB_1_7_6"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_7_6"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_7_6"></string>-->
+
+<!--    <string name="sansk_SB_1_7_10"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_7_10"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_7_10"></string>-->
+
+<!--    <string name="sansk_SB_1_8_26"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_8_26"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_8_26"></string>-->
+
+<!--    <string name="sansk_SB_1_8_42"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_8_42"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_8_42"></string>-->
+
+<!--    <string name="sansk_SB_1_13_10"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_13_10"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_13_10"></string>-->
+
+<!--    <string name="sansk_SB_1_18_13"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="words_SB_1_18_13"><![CDATA[QQQQ]]></string>-->
+<!--    <string name="trans_SB_1_18_13"></string>-->
+
+<!--    <string name="sansk_SB_1_1_1"><![CDATA[<i>джанма̄дй асйа йато ‘нвайа̄д<br>итараташ́ ча̄ртхешв абхиджн̃ах̣ свара̄т̣<br> тене брахма хр̣да̄ йа а̄ди-кавайе<br>мухйанти йат сӯрайах̣<br> теджо-ва̄ри-мр̣да̄м̇ йатха̄<br>винимайо йатра три-сарго ‘мр̣ша̄<br> дха̄мна̄ свена сада̄ нираста-<br>кухакам̇ сатйам̇ парам̇ дхӣмахи</i>]]></string>-->
+<!--    <string name="words_SB_1_1_1"><![CDATA[<p><i>ом̇</i> — о мой Господь; <i>намах̣</i> — в почтении склоняюсь; <i>бхагавате</i> — Личности Бога; <i>ва̄судева̄йа</i> — Ва̄судеве (сыну Васудевы), Господу Шри Кришне, изначальному Господу; <i>джанма-а̄ди</i> — творение, поддержание и разрушение; <i>асйа</i> — проявленных вселенных; <i>йатах̣</i> — от которого; <i>анвайа̄т</i> — прямо; <i>итаратах̣</i> — косвенно; <i>ча</i> — и; <i>артхешу</i> — цели; <i>абхиджн̃ах̣</i> — обладающий полным сознанием; <i>сва-ра̄т̣</i> — полностью независимый; <i>тене</i> — вложил; <i>брахма</i> — ведическое знание; <i>хр̣да̄</i> — сознание в сердце; <i>йах̣</i> — тот, кто; <i>а̄ди-кавайе</i> — первого сотворенного существа; <i>мухйанти</i> — введены в заблуждение; <i>йат</i> — насчет которого; <i>сӯрайах̣</i> — великие мудрецы и полубоги; <i>теджах̣</i> — огонь; <i>ва̄ри</i> — вода; <i>мр̣да̄м</i> — земля; <i>йатха̄</i> — так же как и; <i>винимайах̣</i> — действие и противодействие; <i>йатра</i> — после чего; <i>три-саргах̣</i> — три <i>гуны</i> творения, созидательные энергии; <i>амр̣ша̄</i> — почти реальны; <i>дха̄мна̄</i> — вместе со всем трансцендентным окружением; <i>свена</i> — будучи самодостаточным; <i>сада̄</i> — всегда; <i>нираста</i> — отрицание на основании отсутствия; <i>кухакам</i> — иллюзия; <i>сатйам</i> — истина; <i>парам</i> — абсолютная; <i>дхӣмахи</i> — я медитирую на нее.</p>]]></string>-->
+<!--    <string name="trans_SB_1_1_1">О мой Господь Шри Кришна, сын Васудевы, о всепроникающая Личность Бога, я почтительно склоняюсь перед Тобой. Я медитирую на Господа Шри Кришну, ибо Он является Абсолютной Истиной и изначальной причиной всех причин созидания, сохранения и разрушения проявленных вселенных. Прямо и косвенно Он сознает все проявления и независим, ибо не существует иной причины, кроме Него. Именно Он вначале вложил ведическое знание в сердце Брахмаджи, первого живого существа. Даже великие мудрецы и полубоги введены Им в заблуждение, подобно тому, как человека сбивает с толку обманчивый образ воды в огне или суши на воде. Лишь благодаря Ему материальные вселенные, временно проявленные взаимодействием трех гун природы, кажутся истинными, хотя в действительности они нереальны. Поэтому я медитирую на Него, Господа Шри Кришну, вечно пребывающего в трансцендентной обители, которая всегда свободна от иллюзорных образов материального мира. Я медитирую на Него, ибо Он — Абсолютная Истина.</string>-->
+
+<!--    <string name="sansk_SB_1_1_10"><![CDATA[<i>пра̄йен̣а̄лпа̄йушах̣ сабхйа<br>кала̄в асмин йуге джана̄х̣<br> манда̄х̣ суманда-матайо<br>манда-бха̄гйа̄ хй упадрута̄х̣</i>]]></string>-->
+<!--    <string name="words_SB_1_1_10"><![CDATA[<p><i>пра̄йен̣а</i> — почти всегда; <i>алпа</i> — короткая; <i>а̄йушах̣</i> — продолжительность жизни; <i>сабхйа</i> — принадлежащий к ученым кругам; <i>калау</i> — в этот век Кали (вражды); <i>асмин</i> — в эту; <i>йуге</i> — эпоху; <i>джана̄х̣</i> — люди; <i>манда̄х̣</i> — ленивы; <i>суманда-матайах̣</i> — введены в заблуждение; <i>манда-бха̄гйа̄х̣</i> — неудачливы; <i>хи</i> — и к тому же; <i>упадрута̄х̣</i> — пребывают в тревоге.</p>]]></string>-->
+<!--    <string name="trans_SB_1_1_10">О мудрец, в этот железный век Кали жизнь людей коротка. Они вздорны, ленивы, введены в заблуждение, неудачливы и к тому же пребывают в постоянной тревоге.</string>-->
+
+<!--    <string name="sansk_SB_1_2_6"><![CDATA[<i>са ваи пум̇са̄м̇ паро дхармо<br>йато бхактир адхокшадже<br> ахаитукй апратихата̄<br>йайа̄тма̄ супрасӣдати</i>]]></string>-->
+<!--    <string name="words_SB_1_2_6"><![CDATA[<p><i>сах̣</i> — то; <i>ваи</i> — несомненно; <i>пум̇са̄м</i> — для человечества; <i>парах̣</i> — высшее; <i>дхармах̣</i> — занятие; <i>йатах̣</i> — посредством которого; <i>бхактих̣</i> — преданное служение; <i>адхокшадже</i> — Трансцендентному; <i>ахаитукӣ</i> — беспричинное; <i>апратихата̄</i> — непрерывное; <i>йайа̄</i> — которым; <i>а̄тма̄</i> — душа; <i>супрасӣдати</i> — обретает полное удовлетворение.</p>]]></string>-->
+<!--    <string name="trans_SB_1_2_6">Высшим занятием [дхармой] для всех людей является такое занятие, с помощью которого они могут прийти к любовному преданному служению трансцендентному Господу. Чтобы полностью удовлетворить душу, такое преданное служение должно быть бескорыстным и непрерывным.</string>-->
+
+<!--    <string name="sansk_SB_1_2_8"><![CDATA[<i>дхармах̣ сванушт̣хитах̣ пум̇са̄м̇<br>вишваксена-катха̄су йах̣<br> нотпа̄дайед йади ратим̇<br>ш́рама эва хи кевалам</i>]]></string>-->
+<!--    <string name="words_SB_1_2_8"><![CDATA[<p><i>дхармах̣</i> — занятие; <i>сванушт̣хитах̣</i> — соответствующее положению; <i>пум̇са̄м</i> — людей; <i>вишваксена</i> — Личности Бога (полной части); <i>катха̄су</i> — к посланию; <i>йах̣</i> — которое; <i>на</i> — не; <i>утпа̄дайет</i> — порождает; <i>йади</i> — если; <i>ратим</i> — влечение; <i>ш́рамах̣</i> — бесполезный труд; <i>эва</i> — лишь; <i>хи</i> — определенно; <i>кевалам</i> — полностью.</p>]]></string>-->
+<!--    <string name="trans_SB_1_2_8">Вся деятельность человека, совершаемая им в соответствии с его положением, — бесполезный труд, если она не пробуждает в нем интереса к посланию Личности Бога.</string>-->
+
+<!--    <string name="sansk_SB_1_2_11"><![CDATA[<i>ваданти тат таттва-видас<br>таттвам̇ йадж джн̃а̄нам адвайам<br> брахмети парама̄тмети<br>бхагава̄н ити ш́абдйате</i>]]></string>-->
+<!--    <string name="words_SB_1_2_11"><![CDATA[<p><i>ваданти</i> — говорят; <i>тат</i> — что; <i>таттва-видах̣</i> — сведущие души; <i>таттвам</i> — Абсолютная Истина; <i>йат</i> — которой; <i>джн̃<mi>а̄нам</mi></i> — знание; <i>адвайам</i> — недвойственная; <i>брахма ити</i> — известная как Брахман; <i>парама̄тма̄ ити</i> — известная как Параматма; <i>бхагава̄н ити</i> — известная как Бхагаван; <i>ш́абдйате</i> — так про нее говорят.</p>]]></string>-->
+<!--    <string name="trans_SB_1_2_11">Сведущие трансценденталисты, познавшие Абсолютную Истину, называют эту недвойственную субстанцию Брахманом, Параматмой или Бхагаваном.</string>-->
+
+<!--    <string name="sansk_SB_1_2_16"><![CDATA[<i>ш́уш́рӯшох̣ ш́раддадха̄насйа<br>ва̄судева-катха̄-ручих̣</br><br>сйа̄н махат-севайа̄ випра̄х̣</br><br>пун̣йа-тӣртха-нишеван̣а̄т</br></i>]]></string>-->
+<!--    <string name="words_SB_1_2_16"><![CDATA[<i><b>ш́уш́рӯшох̣</b></i> — слушающий;<br><i><b>ш́раддадха̄насйа</b></i> — старательно и внимательно;</br><br><i><b>ва̄судева</b></i> — относящиеся к Ва̄судеве;</br><br><i><b>катха̄</b></i> — послания;</br><br><i><b>ручих̣</b></i> — влечение;</br><br><i><b>сйа̄т</b></i> — становится возможным;</br><br><i><b>махат-севайа̄</b></i> — благодаря служению чистым преданным;</br><br><i><b>випра̄х̣</b></i> — о дваждырожденные;</br><br><i><b>пун̣йа-тӣртха</b></i> — тем, кто свободен от всех пороков;</br><br><i><b>нишеван̣а̄т</b></i> — служением.</br>]]></string>-->
+<!--    <string name="trans_SB_1_2_16">О дваждырожденные мудрецы, служить преданным, полностью свободным от всех пороков, — великое благо. Благодаря этому служению человек обретает склонность слушать послания Ва̄судевы.</string>-->
+
+<!--    <string name="sansk_SB_1_2_17"><![CDATA[<i>ш́р̣н̣вата̄м̇ сва-катха̄х̣ кр̣шн̣ах̣<br>пун̣йа-ш́раван̣а-кӣртанах̣<br> хр̣дй антах̣ стхо хй абхадра̄н̣и<br>видхуноти сухр̣т сата̄м</i>]]></string>-->
+<!--    <string name="words_SB_1_2_17"><![CDATA[<p><i>ш́р̣н̣вата̄м</i> — те, кто развил потребность слушать послание; <i>сва- катха̄х̣</i> — Его собственные слова; <i>кр̣шн̣ах̣</i> — Личности Бога; <i>пун̣йа</i> — добродетельный; <i>ш́раван̣а</i> — слушая; <i>кӣртанах̣</i> — воспевая; <i>хр̣ди антах̣ стхах̣</i> — в сердце; <i>хи</i> — несомненно; <i>абхадра̄н̣и</i> — стремление наслаждаться материей; <i>видхуноти</i> — очищает; <i>сухр̣т</i> — благодетель; <i>сата̄м</i> — правдивых.</p>]]></string>-->
+<!--    <string name="trans_SB_1_2_17">Шри Кришна, Личность Бога — Параматма (Сверхдуша) в сердце каждого и благодетель честного преданного — очищает сердце преданного от стремления к материальным наслаждениям, когда в том развивается потребность слушать Его послания, которые добродетельны сами по себе, если их правильно слушают и повторяют.</string>-->
+
+<!--    <string name="sansk_SB_1_2_18"><![CDATA[<i>нашт̣а-пра̄йешв абхадрешу<br>нитйам̇ бха̄гавата-севайа̄<br> бхагаватй уттама-ш́локе<br>бхактир бхавати наишт̣хикӣ </i>]]></string>-->
+<!--    <string name="words_SB_1_2_18"><![CDATA[<p><i>нашт̣а</i> — разрушено; <i>пра̄йешу</i> — почти полностью; <i>абхадрешу</i> — все неблагоприятное; <i>нитйам</i> — регулярным; <i>бха̄гавата</i> — «Шримад-Бхагаватам» или чистому преданному; <i>севайа̄</i> — служением; <i>бхагавати</i> — Личности Бога; <i>уттама</i> — трансцендентные; <i>ш́локе</i> — молитвы; <i>бхактих̣</i> — любовное служение; <i>бхавати</i> — возникает; <i>наишт̣хикӣ</i> — непреложное.</p>]]></string>-->
+<!--    <string name="trans_SB_1_2_18">Благодаря регулярному посещению лекций по «Бхагаватам» и служению чистому преданному все, что вызывает тревогу в сердце, почти полностью уничтожается, и тогда любовное служение Верховному Господу, воспеваемому в трансцендентных песнях, становится необратимым.</string>-->
+
+<!--    <string name="sansk_SB_1_3_28"><![CDATA[<i>эте ча̄м̇ш́а-кала̄х̣ пум̇сах̣<br>кр̣шн̣ас ту бхагава̄н свайам<br> индра̄ри-вйа̄кулам̇ локам̇<br>мр̣д̣айанти йуге йуге</i>]]></string>-->
+<!--    <string name="words_SB_1_3_28"><![CDATA[<p><i>эте</i> — все эти; <i>ча</i> — и; <i>ам̇ш́а</i> — полные части; <i>кала̄х̣</i> — части полных частей; <i>пум̇сах̣</i> — Всевышнего; <i>кр̣шн̣ах̣</i> — Господа Кришны; <i>ту</i> — но; <i>бхагава̄н</i> — Личность Бога; <i>свайам</i> — Сам; <i>индра-ари</i> — враги Индры; <i>вйа̄кулам</i> — нарушают порядок; <i>локам</i> — все планеты; <i>мр̣д̣айанти</i> — защищает; <i>йуге йуге</i> — в разные эпохи.</p>]]></string>-->
+<!--    <string name="trans_SB_1_3_28">Все перечисленные воплощения представляют собой либо полные части, либо части полных частей Господа, однако Господь Шри Кришна — изначальная Личность Бога. Они нисходят на разные планеты, когда там по вине атеистов возникают беспорядки. Господь нисходит, чтобы защитить верующих.</string>-->
+
+<!--    <string name="sansk_SB_1_3_43"><![CDATA[<i>кр̣шн̣е сва-дха̄мопагате<br>дхарма-джн̃а̄на̄дибхих̣ саха<br> калау нашт̣а-др̣ш́а̄м эша<br>пура̄н̣а̄рко ’дхунодитах̣</i>]]></string>-->
+<!--    <string name="words_SB_1_3_43"><![CDATA[<p><i>кр̣шн̣е</i> — Кришны; <i>сва-дха̄ма</i> — в собственную обитель; <i>упагате</i> — вернулся; <i>дхарма</i> — религия; <i>джн̃<mi>а̄на</mi></i> — знание; <i>а̄дибхих̣</i> — вместе; <i>саха</i> — с; <i>калау</i> — в Кали-юге; <i>нашт̣а-др̣ш́а̄м</i> — людей, утративших видение; <i>эшах̣</i> — всех тех; <i>пура̄н̣а-арках̣</i> — пурана, сияющая словно солнце; <i>адхуна̄</i> — теперь; <i>удитах̣</i> — взошла.</p>]]></string>-->
+<!--    <string name="trans_SB_1_3_43">Эта «Бхагавата-пурана» сияет, словно солнце. Она взошла сразу же после того, как Господь Кришна, сопровождаемый религией, знанием и проч., удалился в Свою обитель. Эта Пурана принесет свет людям, утратившим способность видеть в непроглядной тьме невежества века Кали.</string>-->
+
+<!--    <string name="sansk_SB_1_5_11"><![CDATA[<i>тад-ва̄г-висарго джаната̄гха-виплаво<br>йасмин прати-ш́локам абаддхаватй апи<br> на̄ма̄нй анантасйа йаш́о ’н̇кита̄ни йат<br>ш́р̣н̣ванти га̄йанти гр̣н̣анти са̄дхавах̣</i>]]></string>-->
+<!--    <string name="words_SB_1_5_11"><![CDATA[<p><i>тат</i> — тех; <i>ва̄к</i> — слов; <i>висаргах̣</i> — создание; <i>джаната̄</i> — большинства людей; <i>агха</i> — грехи; <i>виплавах̣</i> — способное произвести переворот; <i>йасмин</i> — в котором; <i>прати-ш́локам</i> — каждый стих; <i>абаддхавати</i> — несовершенно составленный; <i>апи</i> — хотя и; <i>на̄ма̄ни</i> — трансцендентные имена и проч.; <i>анантасйа</i> — безграничного Господа; <i>йаш́ах̣</i> — слава; <i>ан̇кита̄ни</i> — описывается; <i>йат</i> — что; <i>ш́р̣н̣ванти</i> — слушают; <i>га̄йанти</i> — поют; <i>гр̣н̣анти</i> — признают; <i>са̄дхавах̣</i> — чистые и честные люди.</p>]]></string>-->
+<!--    <string name="trans_SB_1_5_11">Но сочинение, состоящее из описаний трансцендентного величия имени, славы, форм, игр безграничного Верховного Господа, резко отличается от них. Оно составлено из трансцендентных слов, назначение которых — совершить переворот в неправедной жизни сбившейся с пути цивилизации. Такие трансцендентные произведения, даже если они несовершенны по форме, слушают, поют и принимают чистые люди, которые безукоризненно честны.</string>-->
+
+<!--    <string name="sansk_SB_1_5_18"><![CDATA[<i>тасйаива хетох̣ прайатета ковидо<br>на лабхйате йад бхрамата̄м упарй адхах̣<br> тал лабхйате дух̣кхавад анйатах̣ сукхам̇<br>ка̄лена сарватра габхӣра-рам̇хаса̄</i>]]></string>-->
+<!--    <string name="words_SB_1_5_18"><![CDATA[<p><i>тасйа</i> — с этой целью; <i>эва</i> — только; <i>хетох̣</i> — причина; <i>прайатета</i> — следует прилагать усилия; <i>ковидах̣</i> — тому, кто склонен к философии; <i>на</i> — не; <i>лабхйате</i> — не достигает; <i>йат</i> — что; <i>бхрамата̄м</i> — странствуя; <i>упари адхах̣</i> — сверху донизу; <i>тат</i> — то; <i>лабхйате</i> — можно обрести; <i>дух̣кават</i> — подобно несчастьям; <i>анйатах̣</i> — в результате прошлой деятельности; <i>сукхам</i> — удовлетворение чувств; <i>ка̄лена</i> — в свой срок; <i>сарватра</i> — всюду; <i>габхӣра</i> — скрыто; <i>рам̇хаса̄</i> — приходит.</p>]]></string>-->
+<!--    <string name="trans_SB_1_5_18">Истинно разумные и склонные к философии люди должны стремиться только к достижению той цели, которой нельзя достичь в этой вселенной, даже если обойти всю ее — от высшей планеты [Брахмалоки] до низшей [Паталы]. Что же касается счастья, которое приносят чувственные наслаждения, то в положенный срок оно само приходит к нам так же, как в положенный срок к нам вопреки нашей воле приходят непрошенные страдания.</string>-->
+
+<!--    <string name="sansk_SB_1_7_6"><![CDATA[<i>анартхопаш́амам̇ са̄кша̄д<br>бхакти-йогам адхокшадже<br> локасйа̄джа̄нато видва̄м̇ш́<br>чакре са̄твата-сам̇хита̄м</i>]]></string>-->
+<!--    <string name="words_SB_1_7_6"><![CDATA[<p><i>анартха</i> — нежелательного; <i>упаш́амам</i> — уменьшение; <i>са̄кша̄т</i> — непосредственно; <i>бхакти-йогам</i> — связующий процесс преданного служения; <i>адхокшадже</i> — Трансцендентному; <i>локасйа</i> — основной массы людей; <i>аджа̄натах̣</i> — тех, кто не знает об; <i>видва̄н</i> — самый ученый; <i>чакре</i> — составил; <i>са̄твата</i> — связанное с Верховной Истиной; <i>сам̇хита̄м</i> — ведическое писание.</p>]]></string>-->
+<!--    <string name="trans_SB_1_7_6">Связующий процесс преданного служения может непосредственно облегчить все материальные страдания живого существа, которые чужды его природе. Но люди в большинстве своем не знают этого. Потому мудрец Вьясадева составил это ведическое писание, которое связано с Высшей Истиной.</string>-->
+
+<!--    <string name="sansk_SB_1_7_10"><![CDATA[<i>а̄тма̄ра̄ма̄ш́ ча мунайо<br>ниргрантха̄ апй урукраме<br> курвантй ахаитукӣм̇ бхактим<br>иттхам-бхӯта-гун̣о харих̣</i>]]></string>-->
+<!--    <string name="words_SB_1_7_10"><![CDATA[<p><i>а̄тма̄ра̄ма̄х̣</i> — те, кто черпает наслаждение в <i>атме</i> (как правило, в духовной сущности); <i>ча</i> — и; <i>мунайах̣</i> — мудрецы; <i>ниргрантха̄х̣</i> — свободные от всех пут; <i>апи</i> — несмотря на; <i>урукраме</i> — великому деятелю; <i>курванти</i> — делают; <i>ахаитукӣм</i> — беспримесное; <i>бхактим</i> — преданное служение; <i>иттхам-бхӯта</i> — такие удивительные; <i>гун̣ах̣</i> — качества; <i>харих̣</i> — Господа.</p>]]></string>-->
+<!--    <string name="trans_SB_1_7_10">Все различные атмарамы [те, кто черпает наслаждение в атме, духовном «я»], особенно те из них, кто утвердился на пути самоосознания, желают нести беспримесное преданное служение Личности Бога, несмотря на то, что уже освободились от всех материальных пут. Это означает, что Господь обладает трансцендентными качествами и поэтому привлекает всех, в том числе и освобожденные души.</string>-->
+
+<!--    <string name="sansk_SB_1_8_26"><![CDATA[<i>джанмаиш́варйа-ш́рута-ш́рӣбхир<br>эдхама̄на-мадах̣ пума̄н<br> наива̄рхатй абхидха̄тум̇ ваи<br>тва̄м акин̃чана-гочарам</i>]]></string>-->
+<!--    <string name="words_SB_1_8_26"><![CDATA[<p><i>джанма</i> — рождение; <i>аиш́варйа</i> — богатство; <i>ш́рута</i> — образование; <i>ш́рӣбхих̣</i> — обладание красотой; <i>эдхама̄на</i> — непрерывно возрастающие; <i>мадах̣</i> — опьянение; <i>пума̄н</i> — человек; <i>на</i> — никогда; <i>эва</i> — когда-либо; <i>архати</i> — заслуживает; <i>абхидха̄тум</i> — обращаться с чувством; <i>ваи</i> — несомненно; <i>тва̄м</i> — к Тебе; <i>акин̃чана- гочарам</i> — тому, к кому легко приблизиться материально неимущему человеку.</p>]]></string>-->
+<!--    <string name="trans_SB_1_8_26">О мой Господь, достичь Тебя легко лишь тому, у кого нет ничего материального. Тот же, кто стоит на пути [материального] прогресса, пытаясь улучшить свою жизнь знатным происхождением, огромным богатством, хорошим образованием и телесной красотой, не может искренне обратиться к Тебе.</string>-->
+
+<!--    <string name="sansk_SB_1_8_42"><![CDATA[<i>твайи ме ’нанйа-вишайа̄<br>матир мадху-пате ’сакр̣т<br> ратим удвахата̄д аддха̄<br>ган̇геваугхам уданвати</i>]]></string>-->
+<!--    <string name="words_SB_1_8_42"><![CDATA[<p><i>твайи</i> — к Тебе; <i>ме</i> — мое; <i>ананйа-вишайа̄</i> — безраздельное; <i>матих̣</i> — внимание; <i>мадху-пате</i> — о Повелитель Мадху; <i>асакр̣т</i> — непрерывно; <i>ратим</i> — влечение; <i>удвахата̄т</i> — пусть направляется; <i>аддха̄</i> — прямо; <i>ган̇га̄</i> — Ганга; <i>ива</i> — как; <i>огхам</i> — течет; <i>уданвати</i> — к морю.</p>]]></string>-->
+<!--    <string name="trans_SB_1_8_42">О Господь Мадху, как Ганга вечно течет к морю, не зная препятствий, так и я хочу постоянно стремиться к Тебе, не отвлекаясь ни на кого другого.</string>-->
+
+<!--    <string name="sansk_SB_1_13_10"><![CDATA[<i>бхавад-видха̄ бха̄гавата̄с<br>тӣртха-бхӯта̄х̣ свайам̇ вибхо<br> тӣртхӣ-курванти тӣртха̄ни<br>сва̄нтах̣-стхена гада̄бхр̣та̄</i>]]></string>-->
+<!--    <string name="words_SB_1_13_10"><![CDATA[<p><i>бхават</i> — ты; <i>видха̄х̣</i> — как; <i>бха̄гавата̄х̣</i> — преданные; <i>тӣртха</i> — святые места паломничества; <i>бхӯта̄х̣</i> — превратил в; <i>свайам</i> — лично; <i>вибхо</i> — о могущественный; <i>тӣртхӣ-курванти</i> — сделал святым местом паломничества; <i>тӣртха̄ни</i> — святые места; <i>сва-антах̣- стхена</i> — пребывающий в сердце; <i>гада̄-бхр̣та̄</i> — Личность Бога.</p>]]></string>-->
+<!--    <string name="trans_SB_1_13_10">О мой господин, воистину такие преданные, как ты — это олицетворенные святые места. Ты несешь в своем сердце Личность Бога и потому превращаешь любое место в место паломничества.</string>-->
+
+<!--    <string name="sansk_SB_1_18_13"><![CDATA[<i>тулайа̄ма лавена̄пи<br>на сваргам̇ на̄пунар-бхавам<br> бхагават-сан̇ги-сан̇гасйа<br>мартйа̄на̄м̇ ким ута̄ш́ишах̣</i>]]></string>-->
+<!--    <string name="words_SB_1_18_13"><![CDATA[<p><i>тулайа̄ма</i> — уравновешиваться; <i>лавена</i> — мгновенье; <i>апи</i> — даже; <i>на</i> — никогда; <i>сваргам</i> — райские планеты; <i>на</i> — ни; <i>апунах̣-бхавам</i> — освобождение от материального; <i>бхагават-сан̇ги</i> — преданным Господа; <i>сан̇гасйа</i> — общение с; <i>мартйа̄на̄м</i> — обреченные на смерть; <i>ким</i> — что; <i>ута</i> — говорить о; <i>а̄ш́ишах̣</i> — мирских благах.</p>]]></string>-->
+<!--    <string name="trans_SB_1_18_13">Ценность одного мгновения, проведенного в общении с преданным Господа, невозможно сравнить даже с достижением райских планет или освобождением от материи, не говоря уже о мирских благословениях в форме материального благополучия, которые предназначены для тех, кому суждено умереть.</string>-->
+
+
+</resources>

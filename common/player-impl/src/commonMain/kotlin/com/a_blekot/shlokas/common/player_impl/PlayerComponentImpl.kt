@@ -1,5 +1,6 @@
 package com.a_blekot.shlokas.common.player_impl
 
+import com.a_blekot.shlokas.common.data.tasks.StopTask
 import com.a_blekot.shlokas.common.player_api.PlayerComponent
 import com.a_blekot.shlokas.common.player_api.PlayerOutput
 import com.a_blekot.shlokas.common.player_api.PlayerState
@@ -17,8 +18,10 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.lifecycle.doOnDestroy
 import com.arkivanov.essenty.lifecycle.doOnPause
+import com.arkivanov.essenty.lifecycle.doOnStop
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -43,6 +46,8 @@ class PlayerComponentImpl(
     override val flow: Value<PlayerState> = store.asValue()
 
     init {
+        Napier.d("playerBus = ${deps.playerBus}", tag="PlayerBus")
+
         store.labels
             .onEach(::handleLabel)
             .launchIn(scope)
@@ -51,7 +56,9 @@ class PlayerComponentImpl(
             store.accept(Pause)
         }
         lifecycle.doOnDestroy {
-            store.accept(Stop)
+            Napier.d("playerBus = ${deps.playerBus}", tag="PlayerBus")
+
+            deps.playerBus.update(StopTask)
         }
 
         store.init()

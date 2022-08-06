@@ -16,6 +16,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "shlokas"
 include(
+    ":android-player",
+    ":android-ui",
+    ":android-user-app",
     ":androidApp",
     ":common:root",
     ":common:data",
@@ -25,12 +28,15 @@ include(
     ":common:list-impl",
     ":common:player-api",
     ":common:player-impl",
+    ":common:resources",
+    ":common:settings-api",
+    ":common:settings-impl",
     ":common:utils",
 )
 
 buildCache {
     local {
-        directory = File(rootDir, "build-cache")
+//        directory = org.gradle.internal.component.external.model.ComponentVariant.File(rootDir, "build-cache")
         removeUnusedEntriesAfterDays = 2
     }
 }

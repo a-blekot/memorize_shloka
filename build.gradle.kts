@@ -7,6 +7,7 @@ buildscript {
 
     dependencies {
         classpath(libs.bundles.plaginz)
+        classpath(libs.moko.resources.generator)
     }
 }
 

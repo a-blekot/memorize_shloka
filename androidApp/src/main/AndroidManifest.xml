@@ -21,9 +21,10 @@
         android:name=".MainApp"
         android:allowBackup="false"
         android:icon="@drawable/aum"
+        android:label="Shlokas.dev"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@drawable/aum"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
@@ -36,11 +37,11 @@
         </activity>
 
         <service
-            android:name=".player.PlaybackService"
+            android:name="com.a_blekot.shlokas.android_player.PlaybackService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="mediaPlayback"
-            android:stopWithTask="false" />
+            android:stopWithTask="true" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

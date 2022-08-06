@@ -6,10 +6,7 @@ import com.a_blekot.shlokas.common.list_api.ListState
 import com.a_blekot.shlokas.common.list_impl.ListDeps
 import com.a_blekot.shlokas.common.list_impl.store.ListIntent.*
 import com.a_blekot.shlokas.common.list_impl.store.ListStoreFactory.Action.LoadLastConfig
-import com.a_blekot.shlokas.common.utils.getLastListFileName
-import com.a_blekot.shlokas.common.utils.readFromFile
-import com.a_blekot.shlokas.common.utils.saveLastListFileName
-import com.a_blekot.shlokas.common.utils.writeToFile
+import com.a_blekot.shlokas.common.utils.*
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
@@ -57,8 +54,11 @@ internal class ListStoreFactory(
         override fun executeAction(action: Action, getState: () -> ListState) {
             when (action) {
                 LoadLastConfig -> {
-                    val lastPath = getLastListFileName()
-                    val config = readFromFile(lastPath, deps.filer)
+                    var lastConfigName = getLastConfigName()
+                    if (lastConfigName.isNullOrBlank()) {
+                        lastConfigName = "sb_1_canto_config"
+                    }
+                    val config = readFirstCanto(lastConfigName, deps.filer, deps.configReader)
                     config?.let {
                         deps.config = config
                         dispatch(Msg.Update(config))
@@ -118,7 +118,7 @@ internal class ListStoreFactory(
             }
 
         private fun update(newConfig: ListConfig): ListState {
-            saveLastListFileName(newConfig.fileName)
+            saveLastConfigName(newConfig.configName)
             return ListState(newConfig, hasChanges = newConfig != deps.config)
         }
 

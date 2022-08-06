@@ -26,7 +26,7 @@ val defaultChunks
 val ShlokaConfig.durationMs
     get() = chunks.sumOf { it.durationMs + pauseAfterEach }
 
-fun ShlokaConfig.createTasks(week: Week, repeats: Int, startMs: Long): List<Task> {
+fun ShlokaConfig.createTasks(index: Int, week: Week, repeats: Int, startMs: Long): List<Task> {
     check(chunks.size == CHUNKS_SIZE) {
         "Shloka should consist of four padas!"
     }
@@ -35,7 +35,7 @@ fun ShlokaConfig.createTasks(week: Week, repeats: Int, startMs: Long): List<Task
 
     var absoluteStartMs = startMs
 
-    tasks.add(SetTrackTask(shloka))
+    tasks.add(SetTrackTask(index, shloka))
 
     when (week) {
         Week.FIRST -> {

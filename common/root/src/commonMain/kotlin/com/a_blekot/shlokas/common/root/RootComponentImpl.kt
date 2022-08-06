@@ -15,12 +15,15 @@ import com.a_blekot.shlokas.common.player_api.PlayerComponent
 import com.a_blekot.shlokas.common.player_api.PlayerOutput
 import com.a_blekot.shlokas.common.player_impl.PlayerComponentImpl
 import com.a_blekot.shlokas.common.player_impl.PlayerDeps
-import com.a_blekot.shlokas.common.root.RootComponent.Child.Details
-import com.a_blekot.shlokas.common.root.RootComponent.Child.List
-import com.a_blekot.shlokas.common.root.RootComponent.Child.Player
+import com.a_blekot.shlokas.common.root.RootComponent.Child.*
+import com.a_blekot.shlokas.common.settings_api.SettingsComponent
+import com.a_blekot.shlokas.common.settings_api.SettingsOutput
+import com.a_blekot.shlokas.common.settings_impl.SettingsComponentImpl
+import com.a_blekot.shlokas.common.settings_impl.SettingsDeps
 import com.a_blekot.shlokas.common.utils.Consumer
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.*
+import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
@@ -31,6 +34,7 @@ class RootComponentImpl internal constructor(
     private val list: (ComponentContext, Consumer<ListOutput>) -> ListComponent,
     private val player: (ComponentContext, config: PlayConfig, Consumer<PlayerOutput>) -> PlayerComponent,
     private val details: (ComponentContext, config: ShlokaConfig, Consumer<DetailsOutput>) -> DetailsComponent,
+    private val settings: (ComponentContext, Consumer<SettingsOutput>) -> SettingsComponent,
 ) : RootComponent, ComponentContext by componentContext {
 
     constructor(
@@ -43,7 +47,7 @@ class RootComponentImpl internal constructor(
             ListComponentImpl(
                 componentContext = childContext,
                 storeFactory = storeFactory,
-                deps = deps.run { ListDeps(ListConfig(), filer, dispatchers) },
+                deps = deps.run { ListDeps(ListConfig(), filer, configReader, dispatchers) },
                 output = output
             )
         },
@@ -63,16 +67,28 @@ class RootComponentImpl internal constructor(
                 output = output
             )
         },
+        settings = { childContext, output ->
+            SettingsComponentImpl(
+                componentContext = childContext,
+                storeFactory = storeFactory,
+                deps = deps.run { SettingsDeps(dispatchers) },
+                output = output
+            )
+        },
     )
 
-    private val router =
-        router<Configuration, RootComponent.Child>(
+    private val navigation = StackNavigation<Configuration>()
+
+    private val stack =
+        childStack(
+            source = navigation,
             initialConfiguration = Configuration.List,
             handleBackButton = true,
             childFactory = ::createChild
         )
 
-    override val routerState: Value<RouterState<*, RootComponent.Child>> = router.state
+    override val childStack: Value<ChildStack<*, RootComponent.Child>>
+        get() = stack
 
     private fun createChild(configuration: Configuration, componentContext: ComponentContext): RootComponent.Child =
         when (configuration) {
@@ -82,28 +98,33 @@ class RootComponentImpl internal constructor(
                 Player(player(componentContext, configuration.config, Consumer(::onPlayerOutput)))
             is Configuration.Details ->
                 Details(details(componentContext, configuration.config, Consumer(::onDetailsOutput)))
+            is Configuration.Settings ->
+                Settings(settings(componentContext, Consumer(::onSettingsOutput)))
         }
 
     private fun onListOutput(output: ListOutput): Unit =
         when (output) {
-            is ListOutput.Play -> router.push(Configuration.Player(output.config))
-            is ListOutput.Details -> router.push(Configuration.Details(output.config))
+            is ListOutput.Play -> navigation.push(Configuration.Player(output.config))
+            is ListOutput.Details -> navigation.push(Configuration.Details(output.config))
+            is ListOutput.Settings -> navigation.push(Configuration.Settings)
         }
 
     private fun onPlayerOutput(output: PlayerOutput): Unit =
         when (output) {
-            is PlayerOutput.Stop -> router.pop()
+            is PlayerOutput.Stop -> navigation.pop()
         }
 
     private fun onDetailsOutput(output: DetailsOutput): Unit =
         when (output) {
-            is DetailsOutput.Play -> router.push(Configuration.Player(output.config))
-            is DetailsOutput.SaveConfig -> router.pop { isSuccess ->
+            is DetailsOutput.Play -> navigation.push(Configuration.Player(output.config))
+            is DetailsOutput.SaveConfig -> navigation.pop { isSuccess ->
                 if (isSuccess) {
-                    (router.activeChild.instance as? List)?.component?.saveShloka(output.config)
+                    (childStack.value.active.instance as? RootComponent.Child.List)?.component?.saveShloka(output.config)
                 }
             }
         }
+
+    private fun onSettingsOutput(output: SettingsOutput) {}
 
     private sealed class Configuration : Parcelable {
         @Parcelize
@@ -114,5 +135,8 @@ class RootComponentImpl internal constructor(
 
         @Parcelize
         data class Details(val config: ShlokaConfig) : Configuration()
+
+        @Parcelize
+        object Settings : Configuration()
     }
 }

@@ -1,19 +1,11 @@
 package com.a_blekot.shlokas.common.player_impl.store
 
 import com.a_blekot.shlokas.common.data.createTasks
-import com.a_blekot.shlokas.common.data.tasks.PauseTask
-import com.a_blekot.shlokas.common.data.tasks.PlayTask
-import com.a_blekot.shlokas.common.data.tasks.SetTrackTask
-import com.a_blekot.shlokas.common.data.tasks.StopTask
-import com.a_blekot.shlokas.common.data.tasks.Task
+import com.a_blekot.shlokas.common.data.tasks.*
 import com.a_blekot.shlokas.common.player_api.PlayerFeedback
 import com.a_blekot.shlokas.common.player_api.PlayerState
 import com.a_blekot.shlokas.common.player_impl.PlayerDeps
-import com.a_blekot.shlokas.common.player_impl.store.PlayerIntent.Play
-import com.a_blekot.shlokas.common.player_impl.store.PlayerIntent.Pause
-import com.a_blekot.shlokas.common.player_impl.store.PlayerIntent.Restart
-import com.a_blekot.shlokas.common.player_impl.store.PlayerIntent.Stop
-import com.a_blekot.shlokas.common.player_impl.store.PlayerLabel.PlayerTask
+import com.a_blekot.shlokas.common.player_impl.store.PlayerIntent.*
 import com.a_blekot.shlokas.common.player_impl.store.PlayerStoreFactory.Action.Feedback
 import com.a_blekot.shlokas.common.player_impl.store.PlayerStoreFactory.Action.Start
 import com.arkivanov.mvikotlin.core.store.Reducer
@@ -46,11 +38,13 @@ internal class PlayerStoreFactory(
     private val initialState =
         PlayerState(
             title = firstShloka.title,
-            filePath = firstShloka.filePath,
+            filePath = firstShloka.fileName,
             sanskrit = firstShloka.sanskrit,
             timeMs = 0,
             durationMs = durationMs,
-            isPlaying = false
+            isPlaying = false,
+            totalRepeats = deps.config.repeats,
+            totalShlokasCount = deps.config.shlokas.filter { it.isSelected }.size
         )
 
     fun create(): PlayerStore =
@@ -73,12 +67,12 @@ internal class PlayerStoreFactory(
         object Pause : Msg
         data class NextRepeat(val timeMs: Long, val currentRepeat: Int, val durationMs: Long) : Msg
         data class Update(
+            val index: Int,
             val title: String,
             val filePath: String,
             val sanskrit: String,
-            val wordsTranslation: String,
+            val words: String,
             val translation: String,
-            val totalRepeats: Int
         ) : Msg
     }
 
@@ -142,13 +136,15 @@ internal class PlayerStoreFactory(
             }
         }
 
-        private fun stop() {
-            dispatch(Msg.Pause)
-            publish(PlayerLabel.Stop)
-        }
+        private fun stop() =
+            scope.launch {
+                publish(PlayerLabel.PlayerTask(StopTask))
+                delay(500L)
+                publish(PlayerLabel.Stop)
+            }
 
         suspend fun handleTask(task: Task) {
-            publish(PlayerTask(task))
+            publish(PlayerLabel.PlayerTask(task))
             when (task) {
                 is PlayTask -> {
                     dispatch(Msg.Play)
@@ -159,15 +155,15 @@ internal class PlayerStoreFactory(
                 is PauseTask -> pause(task)
                 is SetTrackTask -> dispatch(
                     Msg.Update(
+                        task.index,
                         task.title,
-                        task.filePath,
+                        task.fileName,
                         task.sanskrit,
-                        task.wordsTranslation,
+                        task.words,
                         task.translation,
-                        deps.config.repeats
                     )
                 )
-                is StopTask -> stop()
+                is StopTask -> publish(PlayerLabel.Stop)
             }
         }
 
@@ -208,9 +204,9 @@ internal class PlayerStoreFactory(
                     title = msg.title,
                     filePath = msg.filePath,
                     sanskrit = msg.sanskrit,
-                    wordsTranslation = msg.wordsTranslation,
+                    words = msg.words,
                     translation = msg.translation,
-                    totalRepeats = msg.totalRepeats,
+                    currentShlokaIndex = msg.index,
                 )
             }
     }

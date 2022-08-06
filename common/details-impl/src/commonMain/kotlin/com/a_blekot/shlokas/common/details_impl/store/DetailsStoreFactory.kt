@@ -29,7 +29,7 @@ internal class DetailsStoreFactory(
         data class TitleChanged(val value: String) : Msg
         data class FilePathChanged(val value: String) : Msg
         data class SanskritChanged(val value: String) : Msg
-        data class WordsTranslationChanged(val value: String) : Msg
+        data class WordsChanged(val value: String) : Msg
         data class TranslationChanged(val value: String) : Msg
         data class ChunkStartChanged(val index: Int, val value: Long) : Msg
         data class ChunkEndChanged(val index: Int, val value: Long) : Msg
@@ -43,7 +43,7 @@ internal class DetailsStoreFactory(
                 is Title -> dispatch(Msg.TitleChanged(intent.value))
                 is FilePath -> dispatch(Msg.FilePathChanged(intent.value))
                 is Sanskrit -> dispatch(Msg.SanskritChanged(intent.value))
-                is WordsTranslation -> dispatch(Msg.WordsTranslationChanged(intent.value))
+                is Words -> dispatch(Msg.WordsChanged(intent.value))
                 is Translation -> dispatch(Msg.TranslationChanged(intent.value))
                 is ChunkStart -> dispatch(Msg.ChunkStartChanged(intent.index, intent.value))
                 is ChunkEnd -> dispatch(Msg.ChunkEndChanged(intent.index, intent.value))
@@ -57,9 +57,9 @@ internal class DetailsStoreFactory(
         override fun DetailsState.reduce(msg: Msg): DetailsState =
             when (msg) {
                 is Msg.TitleChanged -> update(newConfig = config.update { copy(title = msg.value) })
-                is Msg.FilePathChanged -> update(newConfig = config.update { copy(filePath = msg.value) })
+                is Msg.FilePathChanged -> update(newConfig = config.update { copy(fileName = msg.value) })
                 is Msg.SanskritChanged -> update(newConfig = config.update { copy(sanskrit = msg.value) })
-                is Msg.WordsTranslationChanged -> update(newConfig = config.update { copy(wordsTranslation = msg.value) })
+                is Msg.WordsChanged -> update(newConfig = config.update { copy(words = msg.value) })
                 is Msg.TranslationChanged -> update(newConfig = config.update { copy(translation = msg.value) })
                 is Msg.ChunkStartChanged -> update(newConfig = config.update(msg.index) { copy(startMs = msg.value) })
                 is Msg.ChunkEndChanged -> update(newConfig = config.update(msg.index) { copy(endMs = msg.value) })

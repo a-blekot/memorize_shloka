@@ -36,7 +36,7 @@ class DetailsComponentImpl(
     override fun setTitle(title: String) = store.accept(Title(title))
     override fun setFilePath(filePath: String) = store.accept(FilePath(filePath))
     override fun setSanskrit(value: String) = store.accept(Sanskrit(value))
-    override fun setWordsTranslation(value: String) = store.accept(WordsTranslation(value))
+    override fun setWords(value: String) = store.accept(Words(value))
     override fun setTranslation(value: String) = store.accept(Translation(value))
     override fun setChunkStart(index: Int, startMs: Long) = store.accept(ChunkStart(index, startMs))
     override fun setChunkEnd(index: Int, endMs: Long) = store.accept(ChunkEnd(index, endMs))

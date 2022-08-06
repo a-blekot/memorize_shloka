@@ -14,5 +14,7 @@ interface ListComponent {
     fun select(id: Int, isSelected: Boolean) {}
     fun details(config: ShlokaConfig) {}
     fun play() {}
+    fun play(config: ShlokaConfig) {}
+    fun settings() {}
     fun saveShloka(config: ShlokaConfig) {}
 }
