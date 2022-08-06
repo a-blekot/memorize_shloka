@@ -35,6 +35,7 @@ class MainActivity : ComponentActivity() {
         override fun onServiceConnected(name: ComponentName?, binder: IBinder?) {
             playbackService = (binder as? PlaybackService.PlaybackBinder)?.service
             playbackService?.setPlayerBus(app.playerBus)
+            playbackService?.onActivityStarted()
             Napier.d( "ACTIVITY onServiceConnected", tag = "PlaybackService")
             Napier.d( "ACTIVITY boundService = $playbackService", tag = "PlaybackService")
         }
@@ -53,19 +54,29 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val root = root(defaultComponentContext())
-
         setContent {
             AppTheme {
-                MainContent(root)
+                MainContent(root(defaultComponentContext()))
             }
         }
+        bindService()
+    }
 
+    override fun onStart() {
+        super.onStart()
         Napier.d( "ACTIVITY startService", tag = "PlaybackService")
         startService(playbackServiceIntent)
+    }
+
+    override fun onStop() {
+        playbackService?.onActivityStopped()
+        unbindService()
+        super.onStop()
+    }
+
+    private fun bindService() {
         lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 delay(500L)
                 Napier.d("app.playerBus = ${app.playerBus}", tag="PlayerBus")
                 if (applicationContext.bindService(playbackServiceIntent, serviceConnection, Context.BIND_IMPORTANT)) {
@@ -73,22 +84,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-
-    override fun onStart() {
-        playbackService?.onActivityStarted()
-        super.onStart()
-    }
-
-    override fun onStop() {
-        playbackService?.onActivityStopped()
-        super.onStop()
-    }
-
-    override fun onDestroy() {
-        Napier.d("app.playerBus = ${app.playerBus}", tag="PlayerBus")
-        super.onDestroy()
-        unbindService()
     }
 
     private fun unbindService() {

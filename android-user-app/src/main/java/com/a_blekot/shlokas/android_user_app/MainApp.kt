@@ -80,10 +80,10 @@ class MainApp : Application() {
         ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleEventObserver)
 
         Napier.base(DebugAntilog())
-
+//        PlayerBusImpl@70d1426
         app = this
         playerBus = PlayerBusImpl(dispatchers())
-
+        Napier.d("app.playerBus = $playerBus", tag="PlayerBus")
         onAppLaunch()
     }
 }

@@ -156,11 +156,15 @@ class Player(
     lateinit var playerBus: PlayerBus
 
     fun setPlayerBuss(playerBus: PlayerBus) {
-        Napier.d("Player:: playerBus = $playerBus", tag="PlayerBus")
-        this.playerBus = playerBus
-        playerBus.observeTasks()
-            .onEach { handleTask(it) }
-            .launchIn(playerScope)
+        if (!this::playerBus.isInitialized || this.playerBus != playerBus) {
+            this.playerBus = playerBus
+            playerBus.observeTasks()
+                .onEach { handleTask(it) }
+                .launchIn(playerScope)
+            Napier.d("Player::SET playerBus = $playerBus", tag="PlayerBus")
+        } else {
+            Napier.d("Player::SAME playerBus = ${this.playerBus}", tag="PlayerBus")
+        }
     }
 
     fun release() {
