@@ -21,10 +21,16 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.a_blekot.shlokas.android_ui.custom.InfoPopup
+import com.a_blekot.shlokas.android_ui.custom.SmallColumn
+import com.a_blekot.shlokas.android_ui.custom.StandartColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartRow
 import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingM
+import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
+import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingZero
 import com.a_blekot.shlokas.android_ui.theme.textFieldColors
+import com.a_blekot.shlokas.common.data.Week
+import com.a_blekot.shlokas.common.data.Week.*
 import com.a_blekot.shlokas.common.settings_api.SettingsComponent
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 
@@ -69,29 +75,9 @@ fun SettingsView(component: SettingsComponent) {
                 modifier = Modifier.fillMaxWidth()
             )
 
-            val weeks = remember { mutableStateOf(TextFieldValue(text = state.value.week.ordinal.toString())) }
-
-            OutlinedTextField(
-                value = weeks.value,
-                onValueChange = {
-                    weeks.value = it
-                    component.setWeek(it.text.toIntOrNull() ?: 0)
-                },
-                textStyle = typography.titleLarge,
-                maxLines = 1,
-                label = { Text(text = "week") },
-                colors = textFieldColors(),
-                placeholder = { Text(text = "1") },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Rounded.Today,
-                        tint = colorScheme.primary,
-                        contentDescription = "Week"
-                    )
-                },
-                modifier = Modifier.fillMaxWidth()
-            )
+            Weeks(state.value.week) {
+                component.setWeek(it.ordinal)
+            }
 
             StandartRow(
                 horizontalArrangement = Arrangement.spacedBy(paddingM),
@@ -119,6 +105,49 @@ fun SettingsView(component: SettingsComponent) {
             }
         }
 
+    }
+}
+
+@Composable
+private fun Weeks(week: Week, onChanged: (Week) -> Unit) {
+    SmallColumn {
+        StandartRow(
+            padding = paddingZero,
+            horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start)) {
+            RadioButton(
+                selected = week == FIRST,
+                onClick = { onChanged(FIRST) }
+            )
+            Text(
+                text = "по одной строке",
+                style = typography.titleLarge,
+                color = colorScheme.primary
+            )
+        }
+
+        StandartRow(padding = paddingZero,horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start)) {
+            RadioButton(
+                selected = week == SECOND,
+                onClick = { onChanged(SECOND) }
+            )
+            Text(
+                text = "по две строки",
+                style = typography.titleLarge,
+                color = colorScheme.primary
+            )
+        }
+
+        StandartRow(padding = paddingZero,horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start)) {
+            RadioButton(
+                selected = week == THIRD,
+                onClick = { onChanged(THIRD) }
+            )
+            Text(
+                text = "весь стих",
+                style = typography.titleLarge,
+                color = colorScheme.primary
+            )
+        }
     }
 }
 

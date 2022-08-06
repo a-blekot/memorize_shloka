@@ -46,6 +46,23 @@ fun StandartColumn(
     )
 
 @Composable
+fun SmallColumn(
+    modifier: Modifier = Modifier,
+    verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(paddingXS),
+    horizontalAlignment: Alignment.Horizontal = Alignment.CenterHorizontally,
+    padding: Dp = paddingZero,
+    content: @Composable ColumnScope.() -> Unit
+) =
+    Column(
+        verticalArrangement = verticalArrangement,
+        horizontalAlignment = horizontalAlignment,
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(padding),
+        content = content
+    )
+
+@Composable
 fun StandartLazyColumn(
     modifier: Modifier = Modifier,
     itemPadding: Dp = paddingXS,

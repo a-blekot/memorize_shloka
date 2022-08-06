@@ -21,7 +21,7 @@ import com.a_blekot.shlokas.android_ui.custom.StandartLazyColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartRow
 import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeL
-import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusSmall
+import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusS
 import com.a_blekot.shlokas.common.list_api.ListComponent
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 
@@ -52,7 +52,7 @@ private fun ButtonsRow(listHasChanges: Boolean, component: ListComponent, modifi
             .border(
                 width = Dimens.borderSmall,
                 color = colorScheme.primary,
-                shape = RoundedCornerShape(radiusSmall)
+                shape = RoundedCornerShape(radiusS)
             )
     ) {
 

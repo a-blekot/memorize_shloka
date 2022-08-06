@@ -1,11 +1,10 @@
 package com.a_blekot.shlokas.common.utils
 
 import com.a_blekot.shlokas.common.data.ListConfig
-import com.a_blekot.shlokas.common.resources.MR
+import com.a_blekot.shlokas.common.utils.resources.ConfigReader
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonDecoder
 
 private val json = Json {
     prettyPrint = true

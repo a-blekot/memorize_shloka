@@ -6,7 +6,8 @@ object Dimens {
     val iconSizeL = 36.dp
     val iconSizeXL = 48.dp
 
-    val radiusSmall = 4.dp
+    val radiusS = 4.dp
+    val radiusM = 8.dp
 
     val borderSmall = 2.dp
 

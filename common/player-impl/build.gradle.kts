@@ -10,6 +10,7 @@ kotlin {
             dependencies {
                 implementation(projects.common.data)
                 implementation(projects.common.playerApi)
+                implementation(projects.common.resources)
                 implementation(projects.common.utils)
 
                 implementation(libs.decompose.decompose)

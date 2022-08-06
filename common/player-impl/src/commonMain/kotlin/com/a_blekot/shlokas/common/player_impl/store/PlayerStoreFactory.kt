@@ -7,8 +7,10 @@ import com.a_blekot.shlokas.common.player_api.PlayerFeedback
 import com.a_blekot.shlokas.common.player_api.PlayerState
 import com.a_blekot.shlokas.common.player_impl.PlayerDeps
 import com.a_blekot.shlokas.common.player_impl.store.PlayerIntent.*
+import com.a_blekot.shlokas.common.player_impl.store.PlayerLabel.PlayerTask
 import com.a_blekot.shlokas.common.player_impl.store.PlayerStoreFactory.Action.Feedback
 import com.a_blekot.shlokas.common.player_impl.store.PlayerStoreFactory.Action.Start
+import com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
@@ -25,7 +27,7 @@ private const val TIMER_INTERVAL_MS = 100L
 internal class PlayerStoreFactory(
     private val storeFactory: StoreFactory,
     private val deps: PlayerDeps
-) {
+) : StringResourceHandler by deps.stringResourceHandler {
 
     init {
         check(deps.config.shlokas.isNotEmpty()) {
@@ -39,9 +41,9 @@ internal class PlayerStoreFactory(
     private val initialState =
         PlayerState(
             title = firstShloka.title,
-            sanskrit = firstShloka.sanskrit,
-            words = firstShloka.words,
-            translation = firstShloka.translation,
+            sanskrit = resolveSanskrit(firstShloka.id),
+            words = resolveWords(firstShloka.id),
+            translation = resolveTranslation(firstShloka.id),
             durationMs = durationMs,
             totalRepeats = deps.config.repeats,
             totalShlokasCount = deps.config.shlokas.filter { it.isSelected }.size,
@@ -70,7 +72,6 @@ internal class PlayerStoreFactory(
         data class Update(
             val index: Int,
             val title: String,
-            val filePath: String,
             val sanskrit: String,
             val words: String,
             val translation: String,
@@ -137,42 +138,46 @@ internal class PlayerStoreFactory(
             }
         }
 
-        private fun stop() =
-            scope.launch {
-                publish(PlayerLabel.PlayerTask(StopTask))
-                delay(500L)
-                publish(PlayerLabel.Stop)
-            }
-
         suspend fun handleTask(task: Task) {
-            publish(PlayerLabel.PlayerTask(task))
             when (task) {
                 is PlayTask -> {
+                    publish(PlayerTask(task))
                     dispatch(Msg.Play)
                     task.run {
                         dispatch(Msg.NextRepeat(absoluteStartMs, currentRepeat, duration))
                     }
                 }
                 is PauseTask -> pause(task)
-                is SetTrackTask -> dispatch(
-                    Msg.Update(
-                        task.index,
-                        task.title,
-                        task.fileName,
-                        task.sanskrit,
-                        task.words,
-                        task.translation,
-                    )
-                )
-                is StopTask -> publish(PlayerLabel.Stop)
+                is SetTrackTask -> setTrack(task)
+                is StopTask -> stop()
             }
         }
 
         private suspend fun pause(task: PauseTask) {
+            publish(PlayerTask(task))
             dispatch(Msg.Pause)
             delay(task.duration)
             nextTask()
         }
+
+        private fun stop() {
+            publish(PlayerTask(StopTask))
+            publish(PlayerLabel.Stop)
+        }
+
+        private fun setTrack(task: SetTrackTask) =
+            task.run {
+                publish(PlayerTask(copy(description = resolveDescription(id))))
+                dispatch(
+                    Msg.Update(
+                        index = index,
+                        title = title,
+                        sanskrit = resolveSanskrit(id),
+                        words = resolveWords(id),
+                        translation = resolveTranslation(id),
+                    )
+                )
+            }
 
 //        private fun playbackStarted() =
 //            (currentTask as? PlayTask)?.run {

@@ -17,9 +17,10 @@ import com.a_blekot.shlokas.android_user_app.MainApp.Companion.app
 import com.a_blekot.shlokas.common.root.RootComponent
 import com.a_blekot.shlokas.common.root.RootComponentImpl
 import com.a_blekot.shlokas.common.root.RootDeps
-import com.a_blekot.shlokas.common.utils.AndroidConfigReader
+import com.a_blekot.shlokas.common.utils.resources.AndroidConfigReader
 import com.a_blekot.shlokas.common.utils.AndroidFiler
 import com.a_blekot.shlokas.common.utils.dispatchers
+import com.a_blekot.shlokas.common.utils.resources.AndroidStringResourceHandler
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.defaultComponentContext
 import com.arkivanov.mvikotlin.logging.store.LoggingStoreFactory
@@ -100,6 +101,7 @@ class MainActivity : ComponentActivity() {
             deps = RootDeps(
                 filer = AndroidFiler(this),
                 configReader = AndroidConfigReader(this),
+                stringResourceHandler = AndroidStringResourceHandler(this),
                 playerBus = app.playerBus,
                 dispatchers = dispatchers()
             )

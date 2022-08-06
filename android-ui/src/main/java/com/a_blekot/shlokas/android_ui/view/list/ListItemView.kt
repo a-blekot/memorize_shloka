@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.a_blekot.shlokas.android_ui.custom.StandartCheckBox
 import com.a_blekot.shlokas.android_ui.custom.StandartRow
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
-import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusSmall
+import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusS
 import com.a_blekot.shlokas.common.data.ShlokaConfig
 import com.a_blekot.shlokas.common.list_api.ListComponent
 
@@ -27,7 +27,7 @@ fun ListItemView(index: Int, config: ShlokaConfig, component: ListComponent, mod
         modifier = modifier
             .background(
                 color = colorScheme.primaryContainer.copy(alpha = 0.3f),
-                shape = RoundedCornerShape(radiusSmall)
+                shape = RoundedCornerShape(radiusS)
             )
             .padding(vertical = 10.dp)
             .clickable { component.play(config) }

@@ -10,8 +10,4 @@ data class Shloka(
     val id: String = "",
     val title: String = "",
     val folder: String = "",
-    val devanagari: String = "",
-    val sanskrit: String = "",
-    val words: String = "",
-    val translation: String = "",
 ): Parcelable

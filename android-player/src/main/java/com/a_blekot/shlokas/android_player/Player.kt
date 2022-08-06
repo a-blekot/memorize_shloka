@@ -3,11 +3,9 @@ package com.a_blekot.shlokas.android_player
 import android.app.Notification
 import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import com.a_blekot.shlokas.android_player.R
 import com.a_blekot.shlokas.common.data.tasks.PauseTask
 import com.a_blekot.shlokas.common.data.tasks.PlayTask
 import com.a_blekot.shlokas.common.data.tasks.SetTrackTask
@@ -31,7 +29,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import com.a_blekot.shlokas.common.utils.getAsset
+import com.a_blekot.shlokas.common.utils.resources.getAsset
 
 
 private const val ASSETS_PREFIX = "asset:///"
@@ -246,23 +244,24 @@ class Player(
     }
 
     private fun SetTrackTask.toMediaItem(): MediaItem {
-        val path = getAsset(folder, fileName)
-        val uri = Uri.parse("$ASSETS_PREFIX$path")
-//        val uri1 = Uri.parse("${ASSETS_PREFIX}sb_1_canto/$fileName$MP3")
-//        Napier.d("uri1 = $uri1", tag = "PLPL")
-//        Napier.d("uri2 = $uri2", tag = "PLPL")
-        return MediaItem.fromUri(uri)
+        val uri = Uri.parse("$ASSETS_PREFIX${getAsset(folder, id)}")
+
+        return MediaItem.Builder()
+            .setUri(uri)
+            .setMediaMetadata(toMetaData())
+            .build()
     }
 
     private fun SetTrackTask.toMediaSource(): MediaSource {
-        val metaData = MediaMetadata.Builder()
-            .setDescription(sanskrit)
+        val path = getAsset(folder, id)
+        return getMediaSource(path, toMetaData())
+    }
+
+    private fun SetTrackTask.toMetaData() =
+        MediaMetadata.Builder()
+            .setDescription(description)
             .setTitle(title)
             .build()
-
-        val path = getAsset(folder, fileName)
-        return getMediaSource(path, metaData)
-    }
 
     private fun getMediaSource(filePath: String, metaData: MediaMetadata) =
         mediaSourceFactory
@@ -278,7 +277,6 @@ class Player(
     }
 
     private fun getUri(filePath: String) =
-        "$ASSETS_PREFIX$filePath"
-//        Uri.parse("$ASSETS_PREFIX$filePath")
+        Uri.parse("$ASSETS_PREFIX$filePath")
 //        Uri.parse(filePath.replace("/document/", "/storage/").replace(":", "/") )
 }

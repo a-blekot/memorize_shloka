@@ -49,9 +49,9 @@ fun DetailsView(component: DetailsComponent) {
 
         state.value.config.run {
             item { ShlokaTitle(shloka.title, component) }
-            item { ShlokaSanskrit(shloka.sanskrit, component) }
-            item { ShlokaWords(shloka.words, component) }
-            item { ShlokaTranslation(shloka.translation, component) }
+//            item { ShlokaSanskrit(shloka.sanskrit, component) }
+//            item { ShlokaWords(shloka.words, component) }
+//            item { ShlokaTranslation(shloka.translation, component) }
             item { ShlokaSelected(isSelected, component) }
 
             chunks.forEachIndexed { i, it ->

@@ -57,13 +57,13 @@ internal class DetailsStoreFactory(
         override fun DetailsState.reduce(msg: Msg): DetailsState =
             when (msg) {
                 is Msg.TitleChanged -> update(newConfig = config.update { copy(title = msg.value) })
-                is Msg.FilePathChanged -> {this} //update(newConfig = config.update { copy(fileName = msg.value) })
-                is Msg.SanskritChanged -> update(newConfig = config.update { copy(sanskrit = msg.value) })
-                is Msg.WordsChanged -> update(newConfig = config.update { copy(words = msg.value) })
-                is Msg.TranslationChanged -> update(newConfig = config.update { copy(translation = msg.value) })
+                is Msg.FilePathChanged -> this //update(newConfig = config.update { copy(fileName = msg.value) })
+                is Msg.SanskritChanged -> this // update(newConfig = config.update { copy(sanskrit = msg.value) })
+                is Msg.WordsChanged -> this // update(newConfig = config.update { copy(words = msg.value) })
+                is Msg.TranslationChanged -> this // update(newConfig = config.update { copy(translation = msg.value) })
                 is Msg.ChunkStartChanged -> update(newConfig = config.update(msg.index) { copy(startMs = msg.value) })
                 is Msg.ChunkEndChanged -> update(newConfig = config.update(msg.index) { copy(endMs = msg.value) })
-                is Msg.PauseChanged -> update(newConfig = config.copy(pauseAfterEach = msg.value))
+                is Msg.PauseChanged -> this // update(newConfig = config.copy(pauseAfterEach = msg.value))
                 is Msg.IsSelectedChanged -> update(newConfig = config.copy(isSelected = msg.value))
             }
 

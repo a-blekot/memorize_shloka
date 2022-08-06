@@ -16,7 +16,6 @@ private const val DEFAULT_PAUSE = 150L
 data class ShlokaConfig(
     val shloka: Shloka = Shloka(),
     val chunks: List<Chunk> = defaultChunks,
-    val pauseAfterEach: Long = DEFAULT_PAUSE,
     val isSelected: Boolean = true
 ): Parcelable
 
@@ -24,7 +23,7 @@ val defaultChunks
     get() = MutableList(CHUNKS_SIZE) { Chunk() }
 
 val ShlokaConfig.durationMs
-    get() = chunks.sumOf { it.durationMs + pauseAfterEach }
+    get() = chunks.sumOf { it.durationMs + DEFAULT_PAUSE }
 
 fun ShlokaConfig.createTasks(index: Int, week: Week, repeats: Int, startMs: Long): List<Task> {
     check(chunks.size == CHUNKS_SIZE) {
@@ -42,8 +41,8 @@ fun ShlokaConfig.createTasks(index: Int, week: Week, repeats: Int, startMs: Long
             chunks.forEach { chunk ->
                 repeat(repeats) {
                     tasks.add(PlayTask(chunk, it + 1, absoluteStartMs))
-                    tasks.add(PauseTask(pauseAfterEach))
-                    absoluteStartMs += (chunk.durationMs + pauseAfterEach)
+                    tasks.add(PauseTask(DEFAULT_PAUSE))
+                    absoluteStartMs += (chunk.durationMs + DEFAULT_PAUSE)
                 }
             }
         }
@@ -52,14 +51,14 @@ fun ShlokaConfig.createTasks(index: Int, week: Week, repeats: Int, startMs: Long
             repeat(repeats) {
                 val chunk = chunks[0] + chunks[1]
                 tasks.add(PlayTask(chunk, it + 1, absoluteStartMs))
-                tasks.add(PauseTask(pauseAfterEach))
-                absoluteStartMs += (chunk.durationMs + pauseAfterEach)
+                tasks.add(PauseTask(DEFAULT_PAUSE))
+                absoluteStartMs += (chunk.durationMs + DEFAULT_PAUSE)
             }
             repeat(repeats) {
                 val chunk = chunks[2] + chunks[3]
                 tasks.add(PlayTask(chunk, it + 1, absoluteStartMs))
-                tasks.add(PauseTask(pauseAfterEach))
-                absoluteStartMs += (chunk.durationMs + pauseAfterEach)
+                tasks.add(PauseTask(DEFAULT_PAUSE))
+                absoluteStartMs += (chunk.durationMs + DEFAULT_PAUSE)
             }
         }
 
@@ -67,8 +66,8 @@ fun ShlokaConfig.createTasks(index: Int, week: Week, repeats: Int, startMs: Long
             repeat(repeats) {
                 val chunk = chunks[0] + chunks[3]
                 tasks.add(PlayTask(chunk, it + 1, absoluteStartMs))
-                tasks.add(PauseTask(pauseAfterEach))
-                absoluteStartMs += (chunk.durationMs + pauseAfterEach)
+                tasks.add(PauseTask(DEFAULT_PAUSE))
+                absoluteStartMs += (chunk.durationMs + DEFAULT_PAUSE)
             }
         }
     }
