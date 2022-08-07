@@ -1,8 +1,12 @@
 package com.a_blekot.shlokas.common.player_impl.store
 
+import com.a_blekot.shlokas.common.data.FtueStatus
+import com.a_blekot.shlokas.common.data.FtueStatus.SHOW_ARROW
 import com.a_blekot.shlokas.common.data.createTasks
 import com.a_blekot.shlokas.common.data.durationMs
 import com.a_blekot.shlokas.common.data.tasks.*
+import com.a_blekot.shlokas.common.player_api.PlaybackState
+import com.a_blekot.shlokas.common.player_api.PlaybackState.*
 import com.a_blekot.shlokas.common.player_api.PlayerFeedback
 import com.a_blekot.shlokas.common.player_api.PlayerState
 import com.a_blekot.shlokas.common.player_impl.PlayerDeps
@@ -10,6 +14,8 @@ import com.a_blekot.shlokas.common.player_impl.store.PlayerIntent.*
 import com.a_blekot.shlokas.common.player_impl.store.PlayerLabel.PlayerTask
 import com.a_blekot.shlokas.common.player_impl.store.PlayerStoreFactory.Action.Feedback
 import com.a_blekot.shlokas.common.player_impl.store.PlayerStoreFactory.Action.Start
+import com.a_blekot.shlokas.common.utils.getAppLaunchCount
+import com.a_blekot.shlokas.common.utils.getAutoPlay
 import com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
@@ -47,7 +53,9 @@ internal class PlayerStoreFactory(
             durationMs = durationMs,
             totalRepeats = deps.config.repeats,
             totalShlokasCount = deps.config.shlokas.filter { it.isSelected }.size,
-            totalDurationMs = deps.config.durationMs
+            totalDurationMs = deps.config.durationMs,
+            showPointingArrow = getAppLaunchCount() <= SHOW_ARROW.appLaunches,
+            isAutoplay = getAutoPlay()
         )
 
     fun create(): PlayerStore =
@@ -68,6 +76,7 @@ internal class PlayerStoreFactory(
     sealed interface Msg {
         object Play : Msg
         object Pause : Msg
+        object Idle: Msg
         data class NextRepeat(val timeMs: Long, val currentRepeat: Int, val durationMs: Long) : Msg
         data class Update(
             val index: Int,
@@ -108,7 +117,7 @@ internal class PlayerStoreFactory(
 
         override fun executeIntent(intent: PlayerIntent, getState: () -> PlayerState) {
             when (intent) {
-                Play -> dispatch(Msg.Play)
+                Play -> nextTask()
                 Pause -> dispatch(Msg.Pause)
                 Restart -> start()
                 Stop -> stop()
@@ -155,6 +164,7 @@ internal class PlayerStoreFactory(
                     }
                 }
                 is PauseTask -> pause(task)
+                is IdleTask -> idle(task)
                 is SetTrackTask -> setTrack(task)
                 is StopTask -> stop()
             }
@@ -165,6 +175,15 @@ internal class PlayerStoreFactory(
             dispatch(Msg.Pause)
             delay(task.duration)
             nextTask()
+        }
+
+        private fun idle(task: IdleTask) {
+            if (getAutoPlay()) {
+                nextTask()
+            } else {
+                publish(PlayerTask(task))
+                dispatch(Msg.Idle)
+            }
         }
 
         private fun stop() {
@@ -215,8 +234,9 @@ internal class PlayerStoreFactory(
     private inner class ReducerImpl : Reducer<PlayerState, Msg> {
         override fun PlayerState.reduce(msg: Msg): PlayerState =
             when (msg) {
-                Msg.Play -> copy(isPlaying = true)
-                Msg.Pause -> copy(isPlaying = false)
+                Msg.Play -> copy(playbackState = PLAYING)
+                Msg.Pause -> copy(playbackState = PAUSED)
+                Msg.Idle -> copy(playbackState = IDLE)
                 is Msg.NextRepeat -> copy(
                     timeMs = msg.timeMs,
                     currentRepeat = msg.currentRepeat,

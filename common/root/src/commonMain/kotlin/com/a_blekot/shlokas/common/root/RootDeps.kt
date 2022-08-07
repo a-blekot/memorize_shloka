@@ -12,4 +12,5 @@ data class RootDeps(
     val stringResourceHandler: StringResourceHandler,
     val playerBus: PlayerBus,
     val dispatchers: DispatcherProvider,
+    val onEmail: () -> Unit
 )

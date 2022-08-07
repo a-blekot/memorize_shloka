@@ -22,6 +22,7 @@ internal class SettingsStoreFactory(
         get() = SettingsState(
             getRepeats(),
             getCurrentWeek(),
+            getAutoPlay()
         )
 
     fun create(): SettingsStore =
@@ -41,6 +42,7 @@ internal class SettingsStoreFactory(
     sealed interface Msg {
         data class Repeats(val value: Int) : Msg
         data class Weeks(val value: Week) : Msg
+        data class Autoplay(val value: Boolean) : Msg
     }
 
     private inner class BootstrapperImpl : CoroutineBootstrapper<Action>() {
@@ -62,6 +64,7 @@ internal class SettingsStoreFactory(
             when (intent) {
                 is Repeats -> setRepeats(intent.value)
                 is Weeks -> setWeek(intent.value)
+                is SettingsIntent.Autoplay -> setAutoplay(intent.value)
             }
         }
 
@@ -74,6 +77,11 @@ internal class SettingsStoreFactory(
             val week = weekFromOrdinal(value)
             saveCurrentWeek(week)
             dispatch(Msg.Weeks(week))
+        }
+
+        private fun setAutoplay(value: Boolean) {
+            saveAutoPlay(value)
+            dispatch(Msg.Autoplay(value))
         }
 
         private fun checkFtue() {
@@ -90,6 +98,7 @@ internal class SettingsStoreFactory(
             when (msg) {
                 is Msg.Repeats -> copy(repeats = msg.value)
                 is Msg.Weeks -> copy(week = msg.value)
+                is Msg.Autoplay -> copy(isAutoplay = msg.value)
             }
     }
 }

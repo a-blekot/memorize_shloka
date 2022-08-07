@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Email
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.Repeat
 import androidx.compose.material3.*
@@ -22,6 +23,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.a_blekot.shlokas.android_ui.custom.InfoPopup
 import com.a_blekot.shlokas.android_ui.custom.SmallColumn
+import com.a_blekot.shlokas.android_ui.custom.StandartCheckBox
 import com.a_blekot.shlokas.android_ui.custom.StandartRow
 import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingM
@@ -30,10 +32,12 @@ import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingZero
 import com.a_blekot.shlokas.android_ui.theme.textFieldColors
 import com.a_blekot.shlokas.common.data.Week
 import com.a_blekot.shlokas.common.data.Week.*
-import com.a_blekot.shlokas.common.resources.MR
+import com.a_blekot.shlokas.common.resources.MR.strings.label_autoplay
+import com.a_blekot.shlokas.common.resources.MR.strings.label_four_lines
 import com.a_blekot.shlokas.common.resources.MR.strings.label_one_line
 import com.a_blekot.shlokas.common.resources.MR.strings.label_repeats
 import com.a_blekot.shlokas.common.resources.MR.strings.label_show_tutorial
+import com.a_blekot.shlokas.common.resources.MR.strings.label_two_lines
 import com.a_blekot.shlokas.common.resources.resolve
 import com.a_blekot.shlokas.common.settings_api.SettingsComponent
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
@@ -56,6 +60,23 @@ fun SettingsView(component: SettingsComponent) {
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth()
         ) {
+
+            StandartRow(
+                horizontalArrangement = Arrangement.spacedBy(paddingM),
+                modifier = Modifier.clickable { infoIsVisible.value = true }
+            ) {
+                StandartCheckBox(state.value.isAutoplay) {
+                    component.setAutoplay(it)
+                }
+
+                Text(
+                    text = label_autoplay.resolve(context),
+                    style = typography.titleLarge,
+                    color = colorScheme.primary,
+                    maxLines = 1,
+                )
+            }
+
             val repeats = remember { mutableStateOf(TextFieldValue(text = state.value.repeats.toString())) }
 
             OutlinedTextField(
@@ -102,14 +123,36 @@ fun SettingsView(component: SettingsComponent) {
                     maxLines = 1,
                 )
             }
+
+            StandartRow(
+                horizontalArrangement = Arrangement.spacedBy(paddingM),
+            ) {
+
+                Icon(
+                    Icons.Rounded.Email,
+                    "Email",
+                    tint = colorScheme.primary,
+                    modifier = Modifier.size(Dimens.iconSizeL).clickable {
+                        component.sendEmail()
+                    }
+                )
+
+                Text(
+                    text = "Обратная связь",
+                    style = typography.titleLarge,
+                    color = colorScheme.primary,
+                    maxLines = 1,
+                    modifier = Modifier.clickable { component.sendEmail() }
+                )
+            }
         }
 
         if (infoIsVisible.value) {
             InfoPopup(modifier = Modifier.fillMaxSize()) {
                 infoIsVisible.value = false
+                component.onTutorialCompleted()
             }
         }
-
     }
 }
 
@@ -120,7 +163,8 @@ private fun Weeks(week: Week, onChanged: (Week) -> Unit) {
     SmallColumn {
         StandartRow(
             padding = paddingZero,
-            horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start)) {
+            horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start)
+        ) {
             RadioButton(
                 selected = week == FIRST,
                 onClick = { onChanged(FIRST) }
@@ -128,31 +172,40 @@ private fun Weeks(week: Week, onChanged: (Week) -> Unit) {
             Text(
                 text = label_one_line.resolve(context),
                 style = typography.titleLarge,
-                color = colorScheme.primary
+                color = colorScheme.primary,
+                modifier = Modifier.clickable { onChanged(FIRST) }
             )
         }
 
-        StandartRow(padding = paddingZero,horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start)) {
+        StandartRow(
+            padding = paddingZero,
+            horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start)
+        ) {
             RadioButton(
                 selected = week == SECOND,
-                onClick = { onChanged(SECOND) }
+                onClick = { onChanged(SECOND) },
             )
             Text(
-                text = MR.strings.label_two_lines.resolve(context),
+                text = label_two_lines.resolve(context),
                 style = typography.titleLarge,
-                color = colorScheme.primary
+                color = colorScheme.primary,
+                modifier = Modifier.clickable { onChanged(SECOND) }
             )
         }
 
-        StandartRow(padding = paddingZero,horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start)) {
+        StandartRow(
+            padding = paddingZero,
+            horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start)
+        ) {
             RadioButton(
                 selected = week == THIRD,
                 onClick = { onChanged(THIRD) }
             )
             Text(
-                text = MR.strings.label_four_lines.resolve(context),
+                text = label_four_lines.resolve(context),
                 style = typography.titleLarge,
-                color = colorScheme.primary
+                color = colorScheme.primary,
+                modifier = Modifier.clickable { onChanged(THIRD) }
             )
         }
     }

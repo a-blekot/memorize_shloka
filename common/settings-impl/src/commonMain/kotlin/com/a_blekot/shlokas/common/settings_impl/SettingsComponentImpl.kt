@@ -3,14 +3,11 @@ package com.a_blekot.shlokas.common.settings_impl
 import com.a_blekot.shlokas.common.settings_api.SettingsComponent
 import com.a_blekot.shlokas.common.settings_api.SettingsOutput
 import com.a_blekot.shlokas.common.settings_api.SettingsState
-import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.Repeats
-import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.Weeks
+import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent
+import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.*
 import com.a_blekot.shlokas.common.settings_impl.store.SettingsLabel
 import com.a_blekot.shlokas.common.settings_impl.store.SettingsStoreFactory
-import com.a_blekot.shlokas.common.utils.Consumer
-import com.a_blekot.shlokas.common.utils.asValue
-import com.a_blekot.shlokas.common.utils.getStore
-import com.a_blekot.shlokas.common.utils.lifecycleCoroutineScope
+import com.a_blekot.shlokas.common.utils.*
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.store.StoreFactory
@@ -48,6 +45,9 @@ class SettingsComponentImpl(
 
     override fun setRepeats(value: Int) = store.accept(Repeats(value))
     override fun setWeek(value: Int) = store.accept(Weeks(value))
+    override fun setAutoplay(value: Boolean) = store.accept(Autoplay(value))
+    override fun onTutorialCompleted() = setTutorialCompleted()
+    override fun sendEmail() = output(SettingsOutput.Email)
 
     private fun handleLabel(label: SettingsLabel) {
     }

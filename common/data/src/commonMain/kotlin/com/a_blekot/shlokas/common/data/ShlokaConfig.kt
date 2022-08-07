@@ -1,9 +1,6 @@
 package com.a_blekot.shlokas.common.data
 
-import com.a_blekot.shlokas.common.data.tasks.PauseTask
-import com.a_blekot.shlokas.common.data.tasks.PlayTask
-import com.a_blekot.shlokas.common.data.tasks.SetTrackTask
-import com.a_blekot.shlokas.common.data.tasks.Task
+import com.a_blekot.shlokas.common.data.tasks.*
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
 import kotlinx.serialization.Serializable
@@ -35,6 +32,7 @@ fun ShlokaConfig.createTasks(index: Int, week: Week, repeats: Int, startMs: Long
     var absoluteStartMs = startMs
 
     tasks.add(SetTrackTask(index, shloka))
+    tasks.add(IdleTask)
 
     when (week) {
         Week.FIRST -> {

@@ -23,7 +23,10 @@ internal class ListStoreFactory(
     fun create(): ListStore =
         object : ListStore, Store<ListIntent, ListState, Nothing> by storeFactory.create(
             name = "ListStore",
-            initialState = ListState(deps.config),
+            initialState = ListState(
+                deps.config,
+                isTutorialCompleted = isTutorialCompleted()
+            ),
             bootstrapper = BootstrapperImpl(),
             executorFactory = { ExecutorImpl() },
             reducer = ReducerImpl()
@@ -35,6 +38,7 @@ internal class ListStoreFactory(
 
     sealed interface Msg {
         object AddShloka : Msg
+        object TutorialCompleted : Msg
         data class Update(val config: ListConfig) : Msg
         data class Title(val title: String) : Msg
         data class RemoveShloka(val id: String) : Msg
@@ -70,6 +74,7 @@ internal class ListStoreFactory(
             when (intent) {
                 Add -> dispatch(Msg.AddShloka)
                 Save -> saveList(getState().config)
+                TutorialCompleted -> tutorialCompleted()
                 is Title -> rename(getState().config.title, intent.title)
                 is Remove -> dispatch(Msg.RemoveShloka(intent.id))
                 is MoveUp -> dispatch(Msg.MoveUp(intent.id))
@@ -77,6 +82,11 @@ internal class ListStoreFactory(
                 is Select -> dispatch(Msg.Select(intent.id, intent.isSelected))
                 is SaveShloka -> saveShloka(getState().config, intent.config)
             }
+        }
+
+        private fun tutorialCompleted() {
+            setTutorialCompleted()
+            dispatch(Msg.TutorialCompleted)
         }
 
         private fun ListConfig.updateTitles() =
@@ -116,6 +126,7 @@ internal class ListStoreFactory(
         override fun ListState.reduce(msg: Msg): ListState =
             when (msg) {
                 Msg.AddShloka -> update(newConfig = config.add())
+                Msg.TutorialCompleted -> copy(isTutorialCompleted = true)
                 is Msg.Update -> update(newConfig = msg.config)
                 is Msg.Title -> update(newConfig = config.copy(title = msg.title))
                 is Msg.RemoveShloka -> update(newConfig = config.remove(msg.id))

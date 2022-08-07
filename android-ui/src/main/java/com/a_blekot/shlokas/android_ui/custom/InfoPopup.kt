@@ -1,12 +1,11 @@
 package com.a_blekot.shlokas.android_ui.custom
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBackIos
@@ -24,14 +23,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.borderSmall
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusS
+import com.a_blekot.shlokas.common.resources.MR
+import dev.icerock.moko.resources.ImageResource
 
 @Composable
-fun InfoPopup(info: FtueInfo = ftueInfo(), modifier: Modifier = Modifier, onClose: () -> Unit) {
+fun InfoPopup(info: FtueInfo = ftueInfo(), modifier: Modifier = Modifier, onCompleted: () -> Unit) {
     check(info.isNotEmpty()) {
         "InfoPopup list should not be empty!"
     }
@@ -41,9 +44,11 @@ fun InfoPopup(info: FtueInfo = ftueInfo(), modifier: Modifier = Modifier, onClos
     StandartColumn(
         modifier = modifier
             .background(
-                colorScheme.background.copy(alpha = 0.94f),
+                colorScheme.background,
                 shape = RoundedCornerShape(radiusS)
             )
+            .focusable(true)
+            .clickable(true) {}
     ) {
         StandartRow {
             Text(
@@ -54,24 +59,21 @@ fun InfoPopup(info: FtueInfo = ftueInfo(), modifier: Modifier = Modifier, onClos
                 modifier = Modifier.weight(1f)
             )
 
-            IconButton(
-                onClick = onClose,
-                modifier = Modifier
-                    .size(Dimens.iconSizeL)
-                    .background(
-                        color = colorScheme.primary,
-                        shape = CircleShape
-                    ),
-            ) {
-                Icon(
-                    Icons.Rounded.Close,
-                    "close",
-                    tint = colorScheme.onPrimary,
-                    modifier = Modifier.fillMaxSize()
-                )
+            if (page.value == maxPage) {
+                IconButton(
+                    onClick = onCompleted,
+                    modifier = Modifier
+                        .size(Dimens.iconSizeL),
+                ) {
+                    Icon(
+                        Icons.Rounded.Close,
+                        "close",
+                        tint = colorScheme.primary,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
             }
         }
-
 
         Divider(color = colorScheme.primary, thickness = borderSmall)
 
@@ -80,6 +82,20 @@ fun InfoPopup(info: FtueInfo = ftueInfo(), modifier: Modifier = Modifier, onClos
         }
 
         StandartLazyColumn {
+            info.items[page.value].image?.drawableResId?.let {
+                item {
+                    Image(
+                        painter = painterResource(it),
+                        contentScale = ContentScale.FillBounds,
+                        contentDescription = "tutorial",
+                        modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .align(Alignment.CenterHorizontally)
+                    )
+                }
+            }
+
             itemsIndexed(info.items[page.value].items, key = { i, _ -> i }) { index, text ->
                 FtueInfoRow(index, text)
             }
@@ -99,12 +115,11 @@ private fun FtueInfoRow(index: Int, text: String, modifier: Modifier = Modifier)
             )
             .padding(vertical = paddingS)
     ) {
-        Text(
-            "${index + 1})",
-            color = colorScheme.onPrimaryContainer,
-            style = typography.titleLarge
-        )
-
+//        Text(
+//            "${index + 1})",
+//            color = colorScheme.onPrimaryContainer,
+//            style = typography.titleLarge
+//        )
         Text(
             text = text,
             color = colorScheme.onPrimaryContainer,
@@ -143,11 +158,11 @@ private fun ButtonsRow(
             modifier = modifier.weight(1f)
         )
 
-//        Text(
-//            text = "${page + 1} / ${maxPage + 1}",
-//            color = colorScheme.primary,
-//            style = typography.titleLarge
-//        )
+        Text(
+            text = "${page + 1} / ${maxPage + 1}",
+            color = colorScheme.primary,
+            style = typography.titleLarge
+        )
 
         IconButton(
             onClick = { onNextPage(page + 1) },
@@ -169,23 +184,103 @@ fun ftueInfo() =
         title = "О приложении",
         items = listOf(
             ftueInfoItem1(),
-            ftueInfoItem1(),
-            ftueInfoItem1(),
+            ftueInfoItem2(),
+            ftueInfoItem3(),
+            ftueInfoItem4(),
+            ftueInfoItem5(),
+            ftueInfoItem6(),
+            ftueInfoItem7(),
+            ftueInfoItem8(),
+            ftueInfoItem9(),
         )
     )
 
 fun ftueInfoItem1() =
     FtueInfoItem(
-        title = "Настройки",
+        title = "Методика изучения",
+        image = MR.images.tutorial_1,
         items = listOf(
-            "Количестов повторов для каждого стиха",
-            "Номер недели",
-            "Количестов повторов для каждого стиха",
-            "Номер недели",
-            "Количестов повторов для каждого стиха",
-            "Номер недели",
-            "Количестов повторов для каждого стиха",
-            "Номер недели",
+            "Первая неделя",
+            "Повторяем построчно",
+            "10 раз каждую строку",
+            "нужно выбрать пункт \"по одной строке\" в настройках (см. дальше)",
+        )
+    )
+
+fun ftueInfoItem2() =
+    FtueInfoItem(
+        title = "Методика изучения",
+        image = MR.images.tutorial_2,
+        items = listOf(
+            "Вторая неделя",
+            "Повторяем по две строки",
+            "1я-2я и 3я-4я",
+            "нужно выбрать пункт \"по две строки\" в настройках (см. дальше)",
+        )
+    )
+
+fun ftueInfoItem3() =
+    FtueInfoItem(
+        title = "Методика изучения",
+        image = MR.images.tutorial_3,
+        items = listOf(
+            "Третья неделя",
+            "Повторяем все четыре строки вместе",
+            "нужно выбрать пункт \"весь стих\" в настройках (см. дальше)",
+        )
+    )
+
+fun ftueInfoItem4() =
+    FtueInfoItem(
+        title = "Методика изучения",
+        image = MR.images.tutorial_4,
+        items = listOf(
+            "Выберите от 1 до 20 стихов",
+            "Их Вы выучите за три недели \uD83D\uDCAA \uD83E\uDD13",
+        )
+    )
+
+fun ftueInfoItem5() =
+    FtueInfoItem(
+        title = "Методика изучения",
+        image = MR.images.tutorial_5,
+        items = listOf(
+            "Повторяйте стихи вслух \uD83D\uDD0A",
+        )
+    )
+
+fun ftueInfoItem6() =
+    FtueInfoItem(
+        title = "Настройки",
+        image = MR.images.tutorial_6,
+    )
+
+fun ftueInfoItem7() =
+    FtueInfoItem(
+        title = "Настройки",
+        image = MR.images.tutorial_7,
+        items = listOf(
+            "Рекомендуется - 10 повторений каждого стиха",
+        )
+    )
+
+fun ftueInfoItem8() =
+    FtueInfoItem(
+        title = "Настройки",
+        image = MR.images.tutorial_8,
+        items = listOf(
+            "Соответственно для первой, второй и третьей недели",
+        )
+    )
+
+fun ftueInfoItem9() =
+    FtueInfoItem(
+        title = "Настройки",
+        image = MR.images.tutorial_9,
+        items = listOf(
+            "Собщить об ошибке",
+            "Пожелания по функционалу",
+            "Письмо с критикой \uD83D\uDC7A \nили благодарностью \uD83D\uDE07",
         )
     )
 
@@ -199,5 +294,6 @@ data class FtueInfo(
 
 data class FtueInfoItem(
     val title: String,
-    val items: List<String>
+    val image: ImageResource? = null,
+    val items: List<String> = emptyList(),
 )

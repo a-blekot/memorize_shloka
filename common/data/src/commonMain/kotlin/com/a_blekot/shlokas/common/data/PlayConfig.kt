@@ -1,5 +1,6 @@
 package com.a_blekot.shlokas.common.data
 
+import com.a_blekot.shlokas.common.data.tasks.IdleTask
 import com.a_blekot.shlokas.common.data.tasks.PauseTask
 import com.a_blekot.shlokas.common.data.tasks.StopTask
 import com.a_blekot.shlokas.common.data.tasks.StopTask.duration

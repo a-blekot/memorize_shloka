@@ -7,4 +7,7 @@ interface SettingsComponent {
 
     fun setRepeats(value: Int) {}
     fun setWeek(value: Int) {}
+    fun setAutoplay(value: Boolean) {}
+    fun onTutorialCompleted() {}
+    fun sendEmail() {}
 }

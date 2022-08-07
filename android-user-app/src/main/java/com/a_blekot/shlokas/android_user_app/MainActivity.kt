@@ -4,6 +4,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
+import android.net.Uri
 import android.os.Bundle
 import android.os.IBinder
 import androidx.activity.ComponentActivity
@@ -103,7 +104,21 @@ class MainActivity : ComponentActivity() {
                 configReader = AndroidConfigReader(this),
                 stringResourceHandler = AndroidStringResourceHandler(this),
                 playerBus = app.playerBus,
-                dispatchers = dispatchers()
+                dispatchers = dispatchers(),
+                onEmail = ::sendEmail
             )
         )
+
+    private fun sendEmail() {
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            val uriText = "mailto:aleksey.blekot@gmail.com?subject=Шлоки - обратная связь&body=Харе Кришна! Спасибо за приложение \uD83D\uDE07"
+            data = Uri.parse(uriText)
+        }
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        } else {
+            Napier.w("yoyoyoy")
+            Napier.w("No activity for $intent")
+        }
+    }
 }

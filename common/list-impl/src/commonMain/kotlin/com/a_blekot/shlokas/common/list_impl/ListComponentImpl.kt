@@ -47,6 +47,7 @@ class ListComponentImpl(
     override fun play(config: ShlokaConfig) = output(ListOutput.Play(config.toPlayConfig()))
     override fun settings() = output(ListOutput.Settings)
     override fun saveShloka(config: ShlokaConfig) = store.accept(SaveShloka(config))
+    override fun onTutorialCompleted() = store.accept(TutorialCompleted)
 
     private fun ListState.toPlayConfig() =
         PlayConfig(

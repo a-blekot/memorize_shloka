@@ -2,6 +2,7 @@ package com.a_blekot.shlokas.android_ui.view.list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -17,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import com.a_blekot.shlokas.android_ui.custom.InfoPopup
 import com.a_blekot.shlokas.android_ui.custom.StandartColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartLazyColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartRow
@@ -29,19 +31,27 @@ import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 @Composable
 fun ListView(component: ListComponent) {
     val state = component.flow.subscribeAsState()
-    StandartColumn(modifier = Modifier.background(colorScheme.background)) {
-        Text(
-            state.value.config.title,
-            color = colorScheme.primary,
-            style = MaterialTheme.typography.headlineLarge,
-            textAlign = TextAlign.Center
-        )
+    Box(modifier = Modifier.fillMaxSize()) {
+        StandartColumn(modifier = Modifier.background(colorScheme.background)) {
+            Text(
+                state.value.config.title,
+                color = colorScheme.primary,
+                style = MaterialTheme.typography.headlineLarge,
+                textAlign = TextAlign.Center
+            )
 
-        ButtonsRow(component)
+            ButtonsRow(component)
 
-        StandartLazyColumn {
-            itemsIndexed(state.value.config.list, key = { _, it -> it.shloka.id }) { index, config ->
-                ListItemView(index, config, component)
+            StandartLazyColumn {
+                itemsIndexed(state.value.config.list, key = { _, it -> it.shloka.id }) { index, config ->
+                    ListItemView(index, config, component)
+                }
+            }
+        }
+
+        if (!state.value.isTutorialCompleted) {
+            InfoPopup(modifier = Modifier.fillMaxSize()) {
+                component.onTutorialCompleted()
             }
         }
     }

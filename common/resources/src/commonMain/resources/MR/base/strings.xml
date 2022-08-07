@@ -9,12 +9,13 @@
     <string name="single_quotes">Alex009 said \'hello\'</string>
 
     <string name="label_repeats">Повторы</string>
+    <string name="label_autoplay">Проигрывать автоматически</string>
     <string name="label_show_tutorial">Показать инструкцию</string>
     <string name="label_sanskrit">Санскрит</string>
     <string name="label_words">Пословный перевод</string>
     <string name="label_translation">Перевод</string>
-    <string name="label_one_line">по две строки</string>
-    <string name="label_two_lines">по одной строке</string>
+    <string name="label_one_line">по одной строке</string>
+    <string name="label_two_lines">по две строки</string>
     <string name="label_four_lines">весь стих</string>
     <string name="title_SB_1_canto">Шримад-Бхагаватам\nпервая песнь</string>
 

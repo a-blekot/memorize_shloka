@@ -6,19 +6,11 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import com.a_blekot.shlokas.common.data.tasks.PauseTask
-import com.a_blekot.shlokas.common.data.tasks.PlayTask
-import com.a_blekot.shlokas.common.data.tasks.SetTrackTask
-import com.a_blekot.shlokas.common.data.tasks.StopTask
-import com.a_blekot.shlokas.common.data.tasks.StopTask.duration
-import com.a_blekot.shlokas.common.data.tasks.Task
+import com.a_blekot.shlokas.common.data.tasks.*
 import com.a_blekot.shlokas.common.player_api.PlayerBus
 import com.a_blekot.shlokas.common.player_api.PlayerFeedback
-import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.IllegalSeekPositionException
-import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.MediaMetadata
-import com.google.android.exoplayer2.PlaybackException
+import com.a_blekot.shlokas.common.utils.resources.getAsset
+import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
@@ -26,11 +18,9 @@ import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import com.google.android.exoplayer2.upstream.FileDataSource
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import com.a_blekot.shlokas.common.utils.resources.getAsset
 
 
 private const val ASSETS_PREFIX = "asset:///"
@@ -160,9 +150,9 @@ class Player(
             playerBus.observeTasks()
                 .onEach { handleTask(it) }
                 .launchIn(playerScope)
-            Napier.d("Player::SET playerBus = $playerBus", tag="PlayerBus")
+            Napier.d("Player::SET playerBus = $playerBus", tag = "PlayerBus")
         } else {
-            Napier.d("Player::SAME playerBus = ${this.playerBus}", tag="PlayerBus")
+            Napier.d("Player::SAME playerBus = ${this.playerBus}", tag = "PlayerBus")
         }
     }
 
@@ -188,7 +178,7 @@ class Player(
         when (task) {
             is SetTrackTask -> setTrack(task)
             is PlayTask -> play(task)
-            is PauseTask -> pause()
+            is PauseTask, is IdleTask -> pause()
             is StopTask -> stop()
         }
     }

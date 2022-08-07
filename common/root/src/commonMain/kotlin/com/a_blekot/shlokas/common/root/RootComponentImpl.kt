@@ -31,10 +31,11 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 
 class RootComponentImpl internal constructor(
     componentContext: ComponentContext,
+    private val deps: RootDeps,
     private val list: (ComponentContext, Consumer<ListOutput>) -> ListComponent,
     private val player: (ComponentContext, config: PlayConfig, Consumer<PlayerOutput>) -> PlayerComponent,
     private val details: (ComponentContext, config: ShlokaConfig, Consumer<DetailsOutput>) -> DetailsComponent,
-    private val settings: (ComponentContext, Consumer<SettingsOutput>) -> SettingsComponent,
+    private val settings: (ComponentContext, Consumer<SettingsOutput>) -> SettingsComponent
 ) : RootComponent, ComponentContext by componentContext {
 
     constructor(
@@ -43,6 +44,7 @@ class RootComponentImpl internal constructor(
         deps: RootDeps,
     ) : this(
         componentContext = componentContext,
+        deps = deps,
         list = { childContext, output ->
             ListComponentImpl(
                 componentContext = childContext,
@@ -124,7 +126,11 @@ class RootComponentImpl internal constructor(
             }
         }
 
-    private fun onSettingsOutput(output: SettingsOutput) {}
+    private fun onSettingsOutput(output: SettingsOutput) {
+        when (output) {
+            SettingsOutput.Email -> deps.onEmail()
+        }
+    }
 
     private sealed class Configuration : Parcelable {
         @Parcelize
