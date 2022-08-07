@@ -4,6 +4,10 @@ import android.content.Context
 import dev.icerock.moko.resources.desc.desc
 
 class AndroidStringResourceHandler(private val context: Context) : StringResourceHandler{
+
+    override fun resolveTitle(id: String) =
+        getTitle(id).desc().toString(context)
+
     override fun resolveDevanagari(id: String): String {
         TODO("Not yet implemented")
     }
@@ -19,4 +23,7 @@ class AndroidStringResourceHandler(private val context: Context) : StringResourc
 
     override fun resolveDescription(id: String) =
         getDescription(id).desc().toString(context)
+
+    override fun resolveListTitle(id: String) =
+        getListTitle(id).desc().toString(context)
 }

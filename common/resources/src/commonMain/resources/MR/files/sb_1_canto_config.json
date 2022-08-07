@@ -1,12 +1,10 @@
 {
     "id": "sb_1_canto_config",
-    "title": "Śrīmad-Bhāgavatam: 1 canto",
     "folder": "sb_1_canto",
     "list": [
         {
             "shloka": {
                 "id": "SB_1_1_1",
-                "title": "ШБ 1.1.1",
                 "folder": "sb_1_canto"
             },
             "chunks": [
@@ -32,7 +30,6 @@
         {
             "shloka": {
                 "id": "SB_1_1_10",
-                "title": "ШБ 1.1.10",
                 "folder": "sb_1_canto"
             },
             "chunks": [
@@ -58,7 +55,6 @@
         {
             "shloka": {
                 "id": "SB_1_2_6",
-                "title": "ШБ 1.2.6",
                 "folder": "sb_1_canto"
             },
             "chunks": [
@@ -84,7 +80,6 @@
         {
             "shloka": {
                 "id": "SB_1_2_8",
-                "title": "ШБ 1.2.8",
                 "folder": "sb_1_canto"
             },
             "chunks": [
@@ -110,7 +105,6 @@
         {
             "shloka": {
                 "id": "SB_1_2_11",
-                "title": "ШБ 1.2.11",
                 "folder": "sb_1_canto"
             },
             "chunks": [
@@ -136,7 +130,6 @@
         {
             "shloka": {
                 "id": "SB_1_2_16",
-                "title": "ШБ 1.2.16",
                 "folder": "sb_1_canto"
             },
             "chunks": [
@@ -162,7 +155,6 @@
         {
             "shloka": {
                 "id": "SB_1_2_17",
-                "title": "ШБ 1.2.17",
                 "folder": "sb_1_canto"
             },
             "chunks": [
@@ -188,7 +180,6 @@
         {
             "shloka": {
                 "id": "SB_1_2_18",
-                "title": "ШБ 1.2.18",
                 "folder": "sb_1_canto"
             },
             "chunks": [
@@ -214,7 +205,6 @@
         {
             "shloka": {
                 "id": "SB_1_3_28",
-                "title": "ШБ 1.3.28",
                 "folder": "sb_1_canto"
             },
             "chunks": [
@@ -240,7 +230,6 @@
         {
             "shloka": {
                 "id": "SB_1_3_43",
-                "title": "ШБ 1.3.43",
                 "folder": "sb_1_canto"
             },
             "chunks": [
@@ -266,7 +255,6 @@
         {
             "shloka": {
                 "id": "SB_1_5_11",
-                "title": "ШБ 1.5.11",
                 "folder": "sb_1_canto"
             },
             "chunks": [
@@ -292,7 +280,6 @@
         {
             "shloka": {
                 "id": "SB_1_5_18",
-                "title": "ШБ 1.5.18",
                 "folder": "sb_1_canto"
             },
             "chunks": [
@@ -318,7 +305,6 @@
         {
             "shloka": {
                 "id": "SB_1_7_6",
-                "title": "ШБ 1.7.6",
                 "folder": "sb_1_canto"
             },
             "chunks": [
@@ -344,7 +330,6 @@
         {
             "shloka": {
                 "id": "SB_1_7_10",
-                "title": "ШБ 1.7.10",
                 "folder": "sb_1_canto"
             },
             "chunks": [
@@ -370,7 +355,6 @@
         {
             "shloka": {
                 "id": "SB_1_8_26",
-                "title": "ШБ 1.8.26",
                 "folder": "sb_1_canto"
             },
             "chunks": [
@@ -396,7 +380,6 @@
         {
             "shloka": {
                 "id": "SB_1_8_42",
-                "title": "ШБ 1.8.42",
                 "folder": "sb_1_canto"
             },
             "chunks": [
@@ -422,7 +405,6 @@
         {
             "shloka": {
                 "id": "SB_1_13_10",
-                "title": "ШБ 1.13.10",
                 "folder": "sb_1_canto"
             },
             "chunks": [
@@ -448,7 +430,6 @@
         {
             "shloka": {
                 "id": "SB_1_18_13",
-                "title": "ШБ 1.18.13",
                 "folder": "sb_1_canto"
             },
             "chunks": [

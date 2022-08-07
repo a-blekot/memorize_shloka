@@ -16,6 +16,7 @@ import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import com.a_blekot.shlokas.android_ui.custom.StandartColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartLazyColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartRow
@@ -33,6 +34,7 @@ fun ListView(component: ListComponent) {
             state.value.config.title,
             color = colorScheme.primary,
             style = MaterialTheme.typography.headlineLarge,
+            textAlign = TextAlign.Center
         )
 
         ButtonsRow(component)

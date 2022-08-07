@@ -40,7 +40,7 @@ internal class PlayerStoreFactory(
     private val firstShloka = deps.config.shlokas.first().shloka
     private val initialState =
         PlayerState(
-            title = firstShloka.title,
+            title = resolveTitle(firstShloka.id),
             sanskrit = resolveSanskrit(firstShloka.id),
             words = resolveWords(firstShloka.id),
             translation = resolveTranslation(firstShloka.id),
@@ -167,7 +167,14 @@ internal class PlayerStoreFactory(
 
         private fun setTrack(task: SetTrackTask) =
             task.run {
-                publish(PlayerTask(copy(description = resolveDescription(id))))
+                val title = resolveTitle(id)
+
+                publish(PlayerTask(
+                    copy(
+                        title = title,
+                        description = resolveDescription(id),
+                    ))
+                )
                 dispatch(
                     Msg.Update(
                         index = index,

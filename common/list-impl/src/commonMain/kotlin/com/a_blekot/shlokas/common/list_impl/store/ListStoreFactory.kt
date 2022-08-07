@@ -7,6 +7,7 @@ import com.a_blekot.shlokas.common.list_impl.ListDeps
 import com.a_blekot.shlokas.common.list_impl.store.ListIntent.*
 import com.a_blekot.shlokas.common.list_impl.store.ListStoreFactory.Action.LoadLastConfig
 import com.a_blekot.shlokas.common.utils.*
+import com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
@@ -17,12 +18,22 @@ import kotlinx.coroutines.launch
 internal class ListStoreFactory(
     private val storeFactory: StoreFactory,
     private val deps: ListDeps
-) {
+) : StringResourceHandler by deps.stringResourceHandler {
+
+    val initialState
+        get() = ListState(
+            config = deps.config.copy(
+                title = resolveListTitle(deps.config.id),
+                list = deps.config.list.map {
+                    it.copy(shloka = it.shloka.copy(title = resolveTitle(it.shloka.id)))
+                }
+            )
+        )
 
     fun create(): ListStore =
         object : ListStore, Store<ListIntent, ListState, Nothing> by storeFactory.create(
             name = "ListStore",
-            initialState = ListState(deps.config),
+            initialState = initialState,
             bootstrapper = BootstrapperImpl(),
             executorFactory = { ExecutorImpl() },
             reducer = ReducerImpl()

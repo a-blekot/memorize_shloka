@@ -47,7 +47,7 @@ class RootComponentImpl internal constructor(
             ListComponentImpl(
                 componentContext = childContext,
                 storeFactory = storeFactory,
-                deps = deps.run { ListDeps(ListConfig(), filer, configReader, dispatchers) },
+                deps = deps.run { ListDeps(ListConfig(), filer, configReader, stringResourceHandler, dispatchers) },
                 output = output
             )
         },
