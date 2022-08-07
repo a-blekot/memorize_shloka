@@ -10,6 +10,7 @@ import com.a_blekot.shlokas.common.data.tasks.PauseTask
 import com.a_blekot.shlokas.common.data.tasks.PlayTask
 import com.a_blekot.shlokas.common.data.tasks.SetTrackTask
 import com.a_blekot.shlokas.common.data.tasks.StopTask
+import com.a_blekot.shlokas.common.data.tasks.StopTask.duration
 import com.a_blekot.shlokas.common.data.tasks.Task
 import com.a_blekot.shlokas.common.player_api.PlayerBus
 import com.a_blekot.shlokas.common.player_api.PlayerFeedback
@@ -182,7 +183,7 @@ class Player(
     }
 
     private fun handleTask(task: Task) {
-        Napier.d("handleTask $task", tag = "AUDIO_PLAYER")
+        Napier.e("handleTask $task", tag = "AUDIO_PLAYER")
         currentTask = task
         when (task) {
             is SetTrackTask -> setTrack(task)
@@ -207,6 +208,7 @@ class Player(
         exoPlayer?.run {
             playWhenReady = false
             clearMediaItems()
+            Napier.e("STOP and CLEAR!!!!!!!!!!!!!", tag = "AUDIO_PLAYER")
         }
 
     private fun play(task: PlayTask) =
@@ -231,14 +233,14 @@ class Player(
 
     private fun onPlaybackStarted() {
         Napier.w("onPlaybackStarted", tag = "AUDIO_PLAYER")
-        if (currentTask is PlayTask) {
+        (currentTask as? PlayTask)?.run {
             playerScope.launch {
-                Napier.w("PlayerFeedback.Started", tag = "AUDIO_PLAYER")
-                playerBus.update(PlayerFeedback.Started)
-                delay(currentTask.duration)
-                Napier.w("PlayerFeedback.Completed", tag = "AUDIO_PLAYER")
-                playerBus.update(PlayerFeedback.Completed)
-                pause()
+                Napier.w("PlayerFeedback.Started (duration = ${duration})", tag = "AUDIO_PLAYER")
+                playerBus.update(PlayerFeedback.Started(duration))
+//                delay(duration)
+//                Napier.w("PlayerFeedback.Completed", tag = "AUDIO_PLAYER")
+//                playerBus.update(PlayerFeedback.Completed)
+//                pause()
             }
         }
     }

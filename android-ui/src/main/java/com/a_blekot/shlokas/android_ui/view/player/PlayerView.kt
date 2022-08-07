@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.a_blekot.shlokas.android_ui.custom.SmoothProgress
@@ -35,10 +36,12 @@ import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingXS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusM
 import com.a_blekot.shlokas.common.player_api.PlayerComponent
 import com.a_blekot.shlokas.common.player_api.PlayerState
+import com.a_blekot.shlokas.common.resources.MR.strings.label_sanskrit
 import com.a_blekot.shlokas.common.resources.MR.strings.label_translation
 import com.a_blekot.shlokas.common.resources.MR.strings.label_words
 import com.a_blekot.shlokas.common.resources.resolve
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
+import io.github.aakira.napier.Napier
 
 //import com.arkivanov.decompose.value.MutableValue
 
@@ -47,7 +50,7 @@ fun PlayerView(component: PlayerComponent) {
     val state = component.flow.subscribeAsState()
 
     StandartColumn(
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+        verticalArrangement = Arrangement.spacedBy(paddingS),
         modifier = Modifier
             .background(color = colorScheme.background)
             .padding(paddingXS)
@@ -64,7 +67,7 @@ fun PlayerView(component: PlayerComponent) {
             HtmlText(
                 text = sanskrit,
                 color = colorScheme.primary,
-                style = typography.headlineMedium,
+                style = typography.headlineSmall,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth().padding(horizontal = paddingXS)
             )
@@ -72,10 +75,18 @@ fun PlayerView(component: PlayerComponent) {
             val wordsAreVisible = remember { mutableStateOf(false) }
             val translationIsVisible = remember { mutableStateOf(false) }
             val context = LocalContext.current
-            
+            val translationStyle = typography.titleLarge
+
             StandartLazyColumn {
-                addFoldableView(label_words.resolve(context), words, wordsAreVisible)
-                addFoldableView(label_translation.resolve(context), translation, translationIsVisible)
+//                addFoldableView(
+//                    label_sanskrit.resolve(context),
+//                    sanskrit,
+//                    sanskritIsVisible,
+//                    sanskritStyle,
+//                    TextAlign.Center
+//                )
+                addFoldableView(label_words.resolve(context), words, wordsAreVisible, translationStyle)
+                addFoldableView(label_translation.resolve(context), translation, translationIsVisible, translationStyle)
             }
 
             Spacer(Modifier.weight(1.0f))
@@ -102,7 +113,13 @@ fun PlayerView(component: PlayerComponent) {
     }
 }
 
-fun LazyListScope.addFoldableView(title: String, text: String, contentIsVisible: MutableState<Boolean>) {
+fun LazyListScope.addFoldableView(
+    title: String,
+    text: String,
+    contentIsVisible: MutableState<Boolean>,
+    style: TextStyle,
+    textAlign: TextAlign = TextAlign.Start
+) {
     if (text.isNotBlank()) {
         item {
             FoldableView(
@@ -114,8 +131,8 @@ fun LazyListScope.addFoldableView(title: String, text: String, contentIsVisible:
                 HtmlText(
                     text = text,
                     color = colorScheme.onSecondaryContainer,
-                    style = typography.titleLarge,
-                    textAlign = TextAlign.Start,
+                    style = style,
+                    textAlign = textAlign,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = paddingS)
@@ -132,7 +149,7 @@ fun TitleAndProgress(state: PlayerState, modifier: Modifier = Modifier) =
         Row(
             horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start),
             verticalAlignment = Alignment.CenterVertically,
-            modifier = modifier.padding(paddingXS)
+            modifier = modifier.padding(horizontal = paddingXS).padding(top = paddingXS)
         ) {
             SmoothProgress(currentRepeat, totalRepeats, durationMs, modifier.size(70.dp), strokeWidth = borderSmall)
 

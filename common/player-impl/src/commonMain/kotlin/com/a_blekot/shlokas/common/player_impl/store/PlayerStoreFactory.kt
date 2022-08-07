@@ -133,8 +133,15 @@ internal class PlayerStoreFactory(
         private fun feedback(feedback: PlayerFeedback) {
             when (feedback) {
                 PlayerFeedback.Ready -> nextTask()
-                PlayerFeedback.Started -> {}
-                PlayerFeedback.Completed -> nextTask()
+                is PlayerFeedback.Started -> handlePlaybackStarted(feedback.durationMs)
+//                PlayerFeedback.Completed -> nextTask()
+            }
+        }
+
+        private fun handlePlaybackStarted(durationMs: Long) {
+            scope.launch(deps.dispatchers.default) {
+                delay(durationMs)
+                nextTask() // next task is Pause or Stop
             }
         }
 
@@ -169,11 +176,13 @@ internal class PlayerStoreFactory(
             task.run {
                 val title = resolveTitle(id)
 
-                publish(PlayerTask(
-                    copy(
-                        title = title,
-                        description = resolveDescription(id),
-                    ))
+                publish(
+                    PlayerTask(
+                        copy(
+                            title = title,
+                            description = resolveDescription(id),
+                        )
+                    )
                 )
                 dispatch(
                     Msg.Update(
