@@ -20,20 +20,10 @@ internal class ListStoreFactory(
     private val deps: ListDeps
 ) : StringResourceHandler by deps.stringResourceHandler {
 
-    val initialState
-        get() = ListState(
-            config = deps.config.copy(
-                title = resolveListTitle(deps.config.id),
-                list = deps.config.list.map {
-                    it.copy(shloka = it.shloka.copy(title = resolveTitle(it.shloka.id)))
-                }
-            )
-        )
-
     fun create(): ListStore =
         object : ListStore, Store<ListIntent, ListState, Nothing> by storeFactory.create(
             name = "ListStore",
-            initialState = initialState,
+            initialState = ListState(deps.config),
             bootstrapper = BootstrapperImpl(),
             executorFactory = { ExecutorImpl() },
             reducer = ReducerImpl()
@@ -65,14 +55,12 @@ internal class ListStoreFactory(
         override fun executeAction(action: Action, getState: () -> ListState) {
             when (action) {
                 LoadLastConfig -> {
-                    var lastConfigName = getLastConfigName()
-                    if (lastConfigName.isNullOrBlank()) {
-                        lastConfigName = "sb_1_canto_config"
-                    }
-                    val config = readFirstCanto(lastConfigName, deps.filer, deps.configReader)
+                    val id = getLastConfigId().ifBlank { "sb_1_canto_config" }
+                    val config = readFirstCanto(id, deps.filer, deps.configReader)
+
                     config?.let {
-                        deps.config = config
-                        dispatch(Msg.Update(config))
+                        deps.config = config.updateTitles()
+                        dispatch(Msg.Update(deps.config))
                     }
                 }
             }
@@ -90,6 +78,14 @@ internal class ListStoreFactory(
                 is SaveShloka -> saveShloka(getState().config, intent.config)
             }
         }
+
+        private fun ListConfig.updateTitles() =
+            copy(
+                title = resolveListTitle(id),
+                list = list.map {
+                    it.copy(shloka = it.shloka.copy(title = resolveTitle(it.shloka.id)))
+                }
+            )
 
         private fun saveShloka(listConfig: ListConfig, shlokaConfig: ShlokaConfig) =
             saveList(listConfig.save(shlokaConfig))

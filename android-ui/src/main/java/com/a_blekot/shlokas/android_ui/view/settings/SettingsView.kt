@@ -7,7 +7,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.Repeat
-import androidx.compose.material.icons.rounded.Today
 import androidx.compose.material3.*
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
@@ -16,13 +15,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.a_blekot.shlokas.android_ui.custom.InfoPopup
 import com.a_blekot.shlokas.android_ui.custom.SmallColumn
-import com.a_blekot.shlokas.android_ui.custom.StandartColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartRow
 import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingM
@@ -31,6 +30,11 @@ import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingZero
 import com.a_blekot.shlokas.android_ui.theme.textFieldColors
 import com.a_blekot.shlokas.common.data.Week
 import com.a_blekot.shlokas.common.data.Week.*
+import com.a_blekot.shlokas.common.resources.MR
+import com.a_blekot.shlokas.common.resources.MR.strings.label_one_line
+import com.a_blekot.shlokas.common.resources.MR.strings.label_repeats
+import com.a_blekot.shlokas.common.resources.MR.strings.label_show_tutorial
+import com.a_blekot.shlokas.common.resources.resolve
 import com.a_blekot.shlokas.common.settings_api.SettingsComponent
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 
@@ -39,6 +43,7 @@ import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 fun SettingsView(component: SettingsComponent) {
     val state = component.flow.subscribeAsState()
     val infoIsVisible = remember { mutableStateOf(false) }
+    val context = LocalContext.current
 
     Box(
         modifier = Modifier
@@ -61,7 +66,7 @@ fun SettingsView(component: SettingsComponent) {
                 },
                 textStyle = typography.titleLarge,
                 maxLines = 1,
-                label = { Text(text = "repeats") },
+                label = { Text(text = label_repeats.resolve(context)) },
                 colors = textFieldColors(),
                 placeholder = { Text(text = "enter some number") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
@@ -91,7 +96,7 @@ fun SettingsView(component: SettingsComponent) {
                 )
 
                 Text(
-                    text = "Show tutorial",
+                    text = label_show_tutorial.resolve(context),
                     style = typography.titleLarge,
                     color = colorScheme.primary,
                     maxLines = 1,
@@ -110,6 +115,8 @@ fun SettingsView(component: SettingsComponent) {
 
 @Composable
 private fun Weeks(week: Week, onChanged: (Week) -> Unit) {
+    val context = LocalContext.current
+
     SmallColumn {
         StandartRow(
             padding = paddingZero,
@@ -119,7 +126,7 @@ private fun Weeks(week: Week, onChanged: (Week) -> Unit) {
                 onClick = { onChanged(FIRST) }
             )
             Text(
-                text = "по одной строке",
+                text = label_one_line.resolve(context),
                 style = typography.titleLarge,
                 color = colorScheme.primary
             )
@@ -131,7 +138,7 @@ private fun Weeks(week: Week, onChanged: (Week) -> Unit) {
                 onClick = { onChanged(SECOND) }
             )
             Text(
-                text = "по две строки",
+                text = MR.strings.label_two_lines.resolve(context),
                 style = typography.titleLarge,
                 color = colorScheme.primary
             )
@@ -143,7 +150,7 @@ private fun Weeks(week: Week, onChanged: (Week) -> Unit) {
                 onClick = { onChanged(THIRD) }
             )
             Text(
-                text = "весь стих",
+                text = MR.strings.label_four_lines.resolve(context),
                 style = typography.titleLarge,
                 color = colorScheme.primary
             )

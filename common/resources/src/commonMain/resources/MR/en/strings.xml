@@ -12,6 +12,13 @@
     <string name="quotes">Alex009 сказал "привет мир" &amp; "пишите тесты".</string>
     <string name="single_quotes">Alex009 сказал \'привет\'</string>
 
+    <string name="label_repeats">Repeats</string>
+    <string name="label_show_tutorial">Show tutorial</string>
+    <string name="label_words">Synonyms</string>
+    <string name="label_translation">Translation</string>
+    <string name="label_one_line">one line</string>
+    <string name="label_two_lines">two lines</string>
+    <string name="label_four_lines">whole verse</string>
     <string name="title_SB_1_canto">Śrīmad-Bhāgavatam\nfirst canto</string>
 
     <!--    जन्माद्यस्य यतोऽन्वयादितरतश्चार्थेष्वभिज्ञ: स्वराट्-->

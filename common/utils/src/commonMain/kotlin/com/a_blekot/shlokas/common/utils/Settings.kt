@@ -26,7 +26,7 @@ fun getAppLaunchCount() =
 fun saveLastConfigId(id: String) =
     settings.getString(LAST_CONFIG_ID_KEY, id)
 
-fun getLastConfigName() =
+fun getLastConfigId() =
     settings.getString(LAST_CONFIG_ID_KEY)
 
 fun saveCurrentWeek(week: Week) =

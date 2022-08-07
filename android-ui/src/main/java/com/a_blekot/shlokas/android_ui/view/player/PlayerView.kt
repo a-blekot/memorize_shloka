@@ -21,9 +21,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.a_blekot.shlokas.android_ui.custom.SmoothProgress
 import com.a_blekot.shlokas.android_ui.custom.StandartColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartLazyColumn
@@ -33,9 +33,11 @@ import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingXS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusM
-import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusS
 import com.a_blekot.shlokas.common.player_api.PlayerComponent
 import com.a_blekot.shlokas.common.player_api.PlayerState
+import com.a_blekot.shlokas.common.resources.MR.strings.label_translation
+import com.a_blekot.shlokas.common.resources.MR.strings.label_words
+import com.a_blekot.shlokas.common.resources.resolve
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 
 //import com.arkivanov.decompose.value.MutableValue
@@ -69,10 +71,11 @@ fun PlayerView(component: PlayerComponent) {
 
             val wordsAreVisible = remember { mutableStateOf(false) }
             val translationIsVisible = remember { mutableStateOf(false) }
-
+            val context = LocalContext.current
+            
             StandartLazyColumn {
-                addFoldableView("Words", words, wordsAreVisible)
-                addFoldableView("Translation", translation, translationIsVisible)
+                addFoldableView(label_words.resolve(context), words, wordsAreVisible)
+                addFoldableView(label_translation.resolve(context), translation, translationIsVisible)
             }
 
             Spacer(Modifier.weight(1.0f))
