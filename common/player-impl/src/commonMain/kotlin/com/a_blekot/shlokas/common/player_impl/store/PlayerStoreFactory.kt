@@ -1,11 +1,8 @@
 package com.a_blekot.shlokas.common.player_impl.store
 
-import com.a_blekot.shlokas.common.data.FtueStatus
-import com.a_blekot.shlokas.common.data.FtueStatus.SHOW_ARROW
 import com.a_blekot.shlokas.common.data.createTasks
 import com.a_blekot.shlokas.common.data.durationMs
 import com.a_blekot.shlokas.common.data.tasks.*
-import com.a_blekot.shlokas.common.player_api.PlaybackState
 import com.a_blekot.shlokas.common.player_api.PlaybackState.*
 import com.a_blekot.shlokas.common.player_api.PlayerFeedback
 import com.a_blekot.shlokas.common.player_api.PlayerState
@@ -14,7 +11,6 @@ import com.a_blekot.shlokas.common.player_impl.store.PlayerIntent.*
 import com.a_blekot.shlokas.common.player_impl.store.PlayerLabel.PlayerTask
 import com.a_blekot.shlokas.common.player_impl.store.PlayerStoreFactory.Action.Feedback
 import com.a_blekot.shlokas.common.player_impl.store.PlayerStoreFactory.Action.Start
-import com.a_blekot.shlokas.common.utils.getAppLaunchCount
 import com.a_blekot.shlokas.common.utils.getAutoPlay
 import com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
 import com.arkivanov.mvikotlin.core.store.Reducer
@@ -27,8 +23,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-
-private const val TIMER_INTERVAL_MS = 100L
 
 internal class PlayerStoreFactory(
     private val storeFactory: StoreFactory,
