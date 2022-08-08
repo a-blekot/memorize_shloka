@@ -54,7 +54,6 @@ internal class PlayerStoreFactory(
             totalRepeats = deps.config.repeats,
             totalShlokasCount = deps.config.shlokas.filter { it.isSelected }.size,
             totalDurationMs = deps.config.durationMs,
-            showPointingArrow = getAppLaunchCount() <= SHOW_ARROW.appLaunches,
             isAutoplay = getAutoPlay()
         )
 

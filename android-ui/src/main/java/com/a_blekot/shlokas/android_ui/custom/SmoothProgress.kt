@@ -20,6 +20,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.a_blekot.shlokas.android_ui.theme.Dimens
+import com.a_blekot.shlokas.android_ui.theme.Dimens.borderSmall
 
 @Composable
 fun SmoothProgress(
@@ -30,7 +32,7 @@ fun SmoothProgress(
     color: Color = colorScheme.primary,
     bgColor: Color = colorScheme.background,
     borderColor: Color = colorScheme.secondaryContainer,
-    strokeWidth: Dp = ProgressIndicatorDefaults.CircularStrokeWidth
+    strokeWidth: Dp = borderSmall
 ) {
     val currentProgress: Float by animateFloatAsState(
         targetValue = current.toFloat() / total,

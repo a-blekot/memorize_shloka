@@ -15,7 +15,6 @@ data class PlayerState(
     val currentShlokaIndex: Int = 0,
     val totalShlokasCount: Int = 1,
     val totalDurationMs: Long = 0L,
-    val showPointingArrow: Boolean = false,
     val isAutoplay: Boolean = true,
 )
 
