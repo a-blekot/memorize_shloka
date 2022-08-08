@@ -1,8 +1,8 @@
 import org.gradle.api.JavaVersion
 
 object ApkConfig {
-    const val APPLICATION_ID = "com.a_blekot.shlokas"
-    const val APPLICATION_ID_SUFFIX = ".dev"
+    const val APPLICATION_ID = "com.a_blekot.memorize_shloka"
+    const val APPLICATION_ID_SUFFIX = ""//".dev"
 
     const val MIN_SDK_VERSION = 24
     const val TARGET_SDK_VERSION = 32

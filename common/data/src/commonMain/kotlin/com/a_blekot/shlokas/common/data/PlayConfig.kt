@@ -1,9 +1,7 @@
 package com.a_blekot.shlokas.common.data
 
-import com.a_blekot.shlokas.common.data.tasks.IdleTask
 import com.a_blekot.shlokas.common.data.tasks.PauseTask
 import com.a_blekot.shlokas.common.data.tasks.StopTask
-import com.a_blekot.shlokas.common.data.tasks.StopTask.duration
 import com.a_blekot.shlokas.common.data.tasks.Task
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize

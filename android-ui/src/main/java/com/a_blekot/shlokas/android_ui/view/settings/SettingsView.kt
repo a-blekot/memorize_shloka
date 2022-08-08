@@ -63,7 +63,6 @@ fun SettingsView(component: SettingsComponent) {
 
             StandartRow(
                 horizontalArrangement = Arrangement.spacedBy(paddingM),
-                modifier = Modifier.clickable { infoIsVisible.value = true }
             ) {
                 StandartCheckBox(state.value.isAutoplay) {
                     component.setAutoplay(it)

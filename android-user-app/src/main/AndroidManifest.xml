@@ -28,8 +28,8 @@
     <application
         android:name=".MainApp"
         android:allowBackup="false"
-        android:icon="@drawable/aum"
-        android:label="Memorize Shloka"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@drawable/aum"
         android:supportsRtl="false"
