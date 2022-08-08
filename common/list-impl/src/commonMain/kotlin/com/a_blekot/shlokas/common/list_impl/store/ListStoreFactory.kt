@@ -20,6 +20,8 @@ internal class ListStoreFactory(
     private val deps: ListDeps
 ) : StringResourceHandler by deps.stringResourceHandler {
 
+    private var locale = getLocale()
+
     fun create(): ListStore =
         object : ListStore, Store<ListIntent, ListState, Nothing> by storeFactory.create(
             name = "ListStore",
@@ -74,6 +76,7 @@ internal class ListStoreFactory(
             when (intent) {
                 Add -> dispatch(Msg.AddShloka)
                 Save -> saveList(getState().config)
+                CheckLocale -> checkLocale(getState().config)
                 TutorialCompleted -> tutorialCompleted()
                 is Title -> rename(getState().config.title, intent.title)
                 is Remove -> dispatch(Msg.RemoveShloka(intent.id))
@@ -81,6 +84,14 @@ internal class ListStoreFactory(
                 is MoveDown -> dispatch(Msg.MoveDown(intent.id))
                 is Select -> dispatch(Msg.Select(intent.id, intent.isSelected))
                 is SaveShloka -> saveShloka(getState().config, intent.config)
+            }
+        }
+
+        private fun checkLocale(config: ListConfig) {
+            if (locale != getLocale()) {
+                locale = getLocale()
+                deps.config = config.updateTitles()
+                dispatch(Msg.Update(deps.config))
             }
         }
 

@@ -3,6 +3,7 @@ package com.a_blekot.memorize_shloka
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import androidx.compose.ui.text.intl.Locale
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.ProcessLifecycleOwner
@@ -11,7 +12,9 @@ import com.a_blekot.shlokas.common.player_api.PlayerBus
 import com.a_blekot.shlokas.common.player_impl.PlayerBusImpl
 import com.a_blekot.shlokas.common.utils.LogTag.LIFECYCLE_ACTIVITY
 import com.a_blekot.shlokas.common.utils.LogTag.LIFECYCLE_APP
+import com.a_blekot.shlokas.common.utils.checkLocale
 import com.a_blekot.shlokas.common.utils.dispatchers
+import com.a_blekot.shlokas.common.utils.getLocale
 import com.a_blekot.shlokas.common.utils.onAppLaunch
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import io.github.aakira.napier.DebugAntilog
@@ -76,6 +79,8 @@ class MainApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        checkLocale(Locale.current.language)
 
         registerActivityLifecycleCallbacks(activityLifecycleCallbacks)
         ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleEventObserver)

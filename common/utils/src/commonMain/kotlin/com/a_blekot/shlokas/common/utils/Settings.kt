@@ -6,6 +6,7 @@ import com.russhwolf.settings.Settings
 private const val APP_LAUNCH_COUNT = "APP_LAUNCH_COUNT"
 private const val CURRENT_REPEATS = "CURRENT_REPEATS"
 private const val CURRENT_WEEK = "CURRENT_WEEK"
+private const val LOCALE_KEY = "LOCALE_KEY"
 private const val LAST_CONFIG_ID_KEY = "LAST_CONFIG_NAME_KEY"
 private const val AUTOPLAY_KEY = "AUTOPLAY_KEY"
 private const val PAUSE_AFTER_EACH = "PAUSE_AFTER_EACH"
@@ -44,6 +45,12 @@ fun getCurrentWeek() =
     settings.getInt(CURRENT_WEEK).let {
         weekFromOrdinal(it)
     }
+
+fun saveLocale(locale: String) =
+    settings.putString(LOCALE_KEY, locale)
+
+fun getLocale() =
+    settings.getString(LOCALE_KEY)
 
 fun saveRepeats(repeats: Int) =
     settings.putInt(CURRENT_REPEATS, repeats.coerceIn(1, MAX_REPEATS))

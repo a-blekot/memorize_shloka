@@ -30,6 +30,8 @@ import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingM
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingZero
 import com.a_blekot.shlokas.android_ui.theme.textFieldColors
+import com.a_blekot.shlokas.common.data.Locales.en
+import com.a_blekot.shlokas.common.data.Locales.ru
 import com.a_blekot.shlokas.common.data.Week
 import com.a_blekot.shlokas.common.data.Week.*
 import com.a_blekot.shlokas.common.resources.MR.strings.label_autoplay
@@ -38,6 +40,10 @@ import com.a_blekot.shlokas.common.resources.MR.strings.label_one_line
 import com.a_blekot.shlokas.common.resources.MR.strings.label_repeats
 import com.a_blekot.shlokas.common.resources.MR.strings.label_show_tutorial
 import com.a_blekot.shlokas.common.resources.MR.strings.label_two_lines
+import com.a_blekot.shlokas.common.resources.MR.strings.label_feedback
+import com.a_blekot.shlokas.common.resources.MR.strings.label_locale_en
+import com.a_blekot.shlokas.common.resources.MR.strings.label_locale_ru
+import com.a_blekot.shlokas.common.resources.MR.strings.label_select_locale
 import com.a_blekot.shlokas.common.resources.resolve
 import com.a_blekot.shlokas.common.settings_api.SettingsComponent
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
@@ -104,6 +110,10 @@ fun SettingsView(component: SettingsComponent) {
                 component.setWeek(it.ordinal)
             }
 
+            Locale(state.value.locale) {
+                component.setLocale(it)
+            }
+
             StandartRow(
                 horizontalArrangement = Arrangement.spacedBy(paddingM),
                 modifier = Modifier.clickable { infoIsVisible.value = true }
@@ -137,7 +147,7 @@ fun SettingsView(component: SettingsComponent) {
                 )
 
                 Text(
-                    text = "Обратная связь",
+                    text = label_feedback.resolve(context),
                     style = typography.titleLarge,
                     color = colorScheme.primary,
                     maxLines = 1,
@@ -210,3 +220,51 @@ private fun Weeks(week: Week, onChanged: (Week) -> Unit) {
     }
 }
 
+@Composable
+private fun Locale(locale: String, onChanged: (String) -> Unit) {
+    val context = LocalContext.current
+
+    SmallColumn {
+        Divider(color = colorScheme.primary, thickness = Dimens.borderSmall)
+
+        Text(
+            text = label_select_locale.resolve(context),
+            style = typography.titleLarge,
+            color = colorScheme.primary,
+        )
+
+        StandartRow(
+            padding = paddingZero,
+            horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start)
+        ) {
+            RadioButton(
+                selected = locale == en,
+                onClick = { onChanged(en) }
+            )
+            Text(
+                text = label_locale_en.resolve(context),
+                style = typography.titleLarge,
+                color = colorScheme.primary,
+                modifier = Modifier.clickable { onChanged(en) }
+            )
+        }
+
+        StandartRow(
+            padding = paddingZero,
+            horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start)
+        ) {
+            RadioButton(
+                selected = locale == ru,
+                onClick = { onChanged(ru) },
+            )
+            Text(
+                text = label_locale_ru.resolve(context),
+                style = typography.titleLarge,
+                color = colorScheme.primary,
+                modifier = Modifier.clickable { onChanged(ru) }
+            )
+        }
+
+        Divider(color = colorScheme.primary, thickness = Dimens.borderSmall)
+    }
+}

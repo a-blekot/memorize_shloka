@@ -3,8 +3,7 @@ package com.a_blekot.shlokas.common.settings_impl.store
 import com.a_blekot.shlokas.common.data.Week
 import com.a_blekot.shlokas.common.settings_api.SettingsState
 import com.a_blekot.shlokas.common.settings_impl.SettingsDeps
-import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.Repeats
-import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.Weeks
+import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.*
 import com.a_blekot.shlokas.common.settings_impl.store.SettingsStoreFactory.Action.CeckFtue
 import com.a_blekot.shlokas.common.utils.*
 import com.arkivanov.mvikotlin.core.store.Reducer
@@ -22,7 +21,8 @@ internal class SettingsStoreFactory(
         get() = SettingsState(
             getRepeats(),
             getCurrentWeek(),
-            getAutoPlay()
+            getLocale(),
+            getAutoPlay(),
         )
 
     fun create(): SettingsStore =
@@ -42,6 +42,7 @@ internal class SettingsStoreFactory(
     sealed interface Msg {
         data class Repeats(val value: Int) : Msg
         data class Weeks(val value: Week) : Msg
+        data class Locale(val value: String) : Msg
         data class Autoplay(val value: Boolean) : Msg
     }
 
@@ -64,7 +65,8 @@ internal class SettingsStoreFactory(
             when (intent) {
                 is Repeats -> setRepeats(intent.value)
                 is Weeks -> setWeek(intent.value)
-                is SettingsIntent.Autoplay -> setAutoplay(intent.value)
+                is Locale -> setLocale(intent.value)
+                is Autoplay -> setAutoplay(intent.value)
             }
         }
 
@@ -79,6 +81,11 @@ internal class SettingsStoreFactory(
             dispatch(Msg.Weeks(week))
         }
 
+        private fun setLocale(value: String) {
+            setAppLocale(value)
+            dispatch(Msg.Locale(value))
+        }
+
         private fun setAutoplay(value: Boolean) {
             saveAutoPlay(value)
             dispatch(Msg.Autoplay(value))
@@ -86,11 +93,6 @@ internal class SettingsStoreFactory(
 
         private fun checkFtue() {
         }
-
-//        private fun stop() {
-//            dispatch(Msg.Pause)
-//            publish(SettingsLabel.Stop)
-//        }
     }
 
     private inner class ReducerImpl : Reducer<SettingsState, Msg> {
@@ -98,6 +100,7 @@ internal class SettingsStoreFactory(
             when (msg) {
                 is Msg.Repeats -> copy(repeats = msg.value)
                 is Msg.Weeks -> copy(week = msg.value)
+                is Msg.Locale -> copy(locale = msg.value)
                 is Msg.Autoplay -> copy(isAutoplay = msg.value)
             }
     }

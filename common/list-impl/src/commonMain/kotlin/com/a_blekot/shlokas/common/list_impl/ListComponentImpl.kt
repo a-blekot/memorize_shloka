@@ -18,6 +18,11 @@ import com.a_blekot.shlokas.common.list_impl.store.ListStoreFactory
 import com.a_blekot.shlokas.common.utils.getCurrentWeek
 import com.a_blekot.shlokas.common.utils.getPause
 import com.a_blekot.shlokas.common.utils.getRepeats
+import com.arkivanov.essenty.lifecycle.doOnPause
+import com.arkivanov.essenty.lifecycle.doOnResume
+import com.arkivanov.essenty.lifecycle.doOnStart
+import com.arkivanov.essenty.lifecycle.doOnStop
+import io.github.aakira.napier.Napier
 
 class ListComponentImpl(
     componentContext: ComponentContext,
@@ -35,6 +40,13 @@ class ListComponentImpl(
         }
 
     override val flow: Value<ListState> = store.asValue()
+
+    init {
+        lifecycle.doOnStart {
+            Napier.d("list doOnStart")
+            store.accept(CheckLocale)
+        }
+    }
 
     override fun add() = store.accept(Add)
     override fun save() = store.accept(Save)

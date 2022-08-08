@@ -5,6 +5,7 @@ import com.a_blekot.shlokas.common.data.ShlokaConfig
 sealed interface ListIntent {
     object Add : ListIntent
     object Save : ListIntent
+    object CheckLocale : ListIntent
     object TutorialCompleted : ListIntent
     data class Title(val title: String) : ListIntent
     data class Remove(val id: String) : ListIntent
