@@ -14,6 +14,8 @@
     <string name="label_sanskrit">Санскрит</string>
     <string name="label_words">Пословный перевод</string>
     <string name="label_translation">Перевод</string>
+    <string name="label_repeats_counter">Повторы</string>
+    <string name="label_verses_counter">Стихи</string>
     <string name="label_one_line">по одной строке</string>
     <string name="label_two_lines">по две строки</string>
     <string name="label_four_lines">весь стих</string>

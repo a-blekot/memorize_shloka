@@ -251,7 +251,8 @@ fun TitleAndProgress(state: PlayerState, modifier: Modifier = Modifier) =
                 maxLines = 1,
                 modifier = modifier.weight(1f)
             )
-
+            <string name="label_repeats_counter">Повторы</string>
+            <string name="label_verses_counter">Стихи</string>
             SmoothProgress(
                 currentShlokaIndex,
                 totalShlokasCount,

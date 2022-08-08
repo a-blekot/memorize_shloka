@@ -5,8 +5,8 @@ import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
 import kotlinx.serialization.Serializable
 
+const val DEFAULT_PAUSE = 150L
 private const val CHUNKS_SIZE = 4
-private const val DEFAULT_PAUSE = 150L
 
 @Parcelize
 @Serializable
@@ -39,6 +39,7 @@ fun ShlokaConfig.createTasks(index: Int, week: Week, repeats: Int, startMs: Long
             chunks.forEach { chunk ->
                 repeat(repeats) {
                     tasks.add(PlayTask(chunk, it + 1, absoluteStartMs))
+                    if (it == repeats - 1) tasks.add(ResetCounterTask)
                     tasks.add(PauseTask(DEFAULT_PAUSE))
                     absoluteStartMs += (chunk.durationMs + DEFAULT_PAUSE)
                 }
@@ -49,12 +50,14 @@ fun ShlokaConfig.createTasks(index: Int, week: Week, repeats: Int, startMs: Long
             repeat(repeats) {
                 val chunk = chunks[0] + chunks[1]
                 tasks.add(PlayTask(chunk, it + 1, absoluteStartMs))
+                if (it == repeats - 1) tasks.add(ResetCounterTask)
                 tasks.add(PauseTask(DEFAULT_PAUSE))
                 absoluteStartMs += (chunk.durationMs + DEFAULT_PAUSE)
             }
             repeat(repeats) {
                 val chunk = chunks[2] + chunks[3]
                 tasks.add(PlayTask(chunk, it + 1, absoluteStartMs))
+                if (it == repeats - 1) tasks.add(ResetCounterTask)
                 tasks.add(PauseTask(DEFAULT_PAUSE))
                 absoluteStartMs += (chunk.durationMs + DEFAULT_PAUSE)
             }
@@ -64,6 +67,7 @@ fun ShlokaConfig.createTasks(index: Int, week: Week, repeats: Int, startMs: Long
             repeat(repeats) {
                 val chunk = chunks[0] + chunks[3]
                 tasks.add(PlayTask(chunk, it + 1, absoluteStartMs))
+                if (it == repeats - 1) tasks.add(ResetCounterTask)
                 tasks.add(PauseTask(DEFAULT_PAUSE))
                 absoluteStartMs += (chunk.durationMs + DEFAULT_PAUSE)
             }

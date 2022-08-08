@@ -12,7 +12,7 @@ data class PlayerState(
     val playbackState: PlaybackState = IDLE,
     val currentRepeat: Int = 0,
     val totalRepeats: Int = 1,
-    val currentShlokaIndex: Int = 1,
+    val currentShlokaIndex: Int = 0,
     val totalShlokasCount: Int = 1,
     val totalDurationMs: Long = 0L,
     val showPointingArrow: Boolean = false,

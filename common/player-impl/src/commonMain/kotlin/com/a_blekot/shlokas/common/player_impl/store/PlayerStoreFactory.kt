@@ -77,6 +77,7 @@ internal class PlayerStoreFactory(
         object Play : Msg
         object Pause : Msg
         object Idle: Msg
+        data class ResetCounter(val durationMs: Long): Msg
         data class NextRepeat(val timeMs: Long, val currentRepeat: Int, val durationMs: Long) : Msg
         data class Update(
             val index: Int,
@@ -167,6 +168,7 @@ internal class PlayerStoreFactory(
                 is IdleTask -> idle(task)
                 is SetTrackTask -> setTrack(task)
                 is StopTask -> stop()
+                is ResetCounterTask -> resetCounter(task)
             }
         }
 
@@ -214,6 +216,11 @@ internal class PlayerStoreFactory(
                 )
             }
 
+        private fun resetCounter(task: ResetCounterTask) {
+            dispatch(Msg.ResetCounter(task.duration))
+            nextTask()
+        }
+
 //        private fun playbackStarted() =
 //            (currentTask as? PlayTask)?.run {
 //                Napier.w("PlayerFeedback.Started", tag = "PlayerStore")
@@ -241,6 +248,10 @@ internal class PlayerStoreFactory(
                     timeMs = msg.timeMs,
                     currentRepeat = msg.currentRepeat,
                     durationMs = msg.durationMs
+                )
+                is Msg.ResetCounter -> copy(
+                    durationMs = msg.durationMs,
+                    currentRepeat = 0,
                 )
                 is Msg.Update -> copy(
                     title = msg.title,
