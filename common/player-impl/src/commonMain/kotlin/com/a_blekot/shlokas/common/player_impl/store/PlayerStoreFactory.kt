@@ -71,7 +71,7 @@ internal class PlayerStoreFactory(
         object Pause : Msg
         object Idle: Msg
         data class ResetCounter(val durationMs: Long): Msg
-        data class NextRepeat(val timeMs: Long, val currentRepeat: Int, val durationMs: Long) : Msg
+        data class NextRepeat(val currentRepeat: Int, val durationMs: Long) : Msg
         data class Update(
             val index: Int,
             val title: String,
@@ -154,7 +154,7 @@ internal class PlayerStoreFactory(
                     publish(PlayerTask(task))
                     dispatch(Msg.Play)
                     task.run {
-                        dispatch(Msg.NextRepeat(absoluteStartMs, currentRepeat, duration))
+                        dispatch(Msg.NextRepeat(currentRepeat, duration))
                     }
                 }
                 is PauseTask -> pause(task)
@@ -238,7 +238,6 @@ internal class PlayerStoreFactory(
                 Msg.Pause -> copy(playbackState = PAUSED)
                 Msg.Idle -> copy(playbackState = IDLE)
                 is Msg.NextRepeat -> copy(
-                    timeMs = msg.timeMs,
                     currentRepeat = msg.currentRepeat,
                     durationMs = msg.durationMs
                 )

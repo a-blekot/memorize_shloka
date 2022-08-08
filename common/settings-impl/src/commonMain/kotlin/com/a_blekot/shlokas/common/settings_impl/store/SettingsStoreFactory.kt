@@ -20,6 +20,7 @@ internal class SettingsStoreFactory(
     private val initialState
         get() = SettingsState(
             getRepeats(),
+            getPause(),
             getCurrentWeek(),
             getLocale(),
             getAutoPlay(),
@@ -41,6 +42,7 @@ internal class SettingsStoreFactory(
 
     sealed interface Msg {
         data class Repeats(val value: Int) : Msg
+        data class Pause(val value: Long) : Msg
         data class Weeks(val value: Week) : Msg
         data class Locale(val value: String) : Msg
         data class Autoplay(val value: Boolean) : Msg
@@ -64,6 +66,7 @@ internal class SettingsStoreFactory(
         override fun executeIntent(intent: SettingsIntent, getState: () -> SettingsState) {
             when (intent) {
                 is Repeats -> setRepeats(intent.value)
+                is Pause -> setPause(intent.value)
                 is Weeks -> setWeek(intent.value)
                 is Locale -> setLocale(intent.value)
                 is Autoplay -> setAutoplay(intent.value)
@@ -71,8 +74,13 @@ internal class SettingsStoreFactory(
         }
 
         private fun setRepeats(value: Int) {
-            saveRepeats(value.coerceIn(1, 100))
-            dispatch(Msg.Repeats(value))
+            val savedValue = saveRepeats(value) // coerce in range
+            dispatch(Msg.Repeats(savedValue))
+        }
+
+        private fun setPause(value: Long) {
+            val savedValue = savePause(value) // coerce in range
+            dispatch(Msg.Pause(savedValue))
         }
 
         private fun setWeek(value: Int) {
@@ -99,6 +107,7 @@ internal class SettingsStoreFactory(
         override fun SettingsState.reduce(msg: Msg): SettingsState =
             when (msg) {
                 is Msg.Repeats -> copy(repeats = msg.value)
+                is Msg.Pause -> copy(pause = msg.value)
                 is Msg.Weeks -> copy(week = msg.value)
                 is Msg.Locale -> copy(locale = msg.value)
                 is Msg.Autoplay -> copy(isAutoplay = msg.value)

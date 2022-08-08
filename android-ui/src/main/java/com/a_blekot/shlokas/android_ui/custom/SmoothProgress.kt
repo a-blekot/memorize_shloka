@@ -8,9 +8,9 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
-import androidx.compose.material3.ProgressIndicatorDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,9 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.borderSmall
+import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
 
 @Composable
 fun SmoothProgress(
@@ -51,7 +50,6 @@ fun SmoothProgress(
                 shape = CircleShape
             )
     ) {
-
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -69,12 +67,31 @@ fun SmoothProgress(
             strokeWidth = strokeWidth
         )
 
-        Text(
-            text = "$current/$total",
-            color = color,
-            style = MaterialTheme.typography.titleLarge,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth().padding(4.dp)
-        )
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "$current",
+                color = color,
+                style = MaterialTheme.typography.titleLarge,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Divider(
+                modifier = Modifier.padding(horizontal = paddingS),
+                color = borderColor,
+                thickness = borderSmall
+            )
+
+            Text(
+                text = "$total",
+                color = color,
+                style = MaterialTheme.typography.titleLarge,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     }
 }

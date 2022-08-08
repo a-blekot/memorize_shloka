@@ -44,6 +44,7 @@ class SettingsComponentImpl(
     }
 
     override fun setRepeats(value: Int) = store.accept(Repeats(value))
+    override fun setPause(value: Long) = store.accept(Pause(value))
     override fun setWeek(value: Int) = store.accept(Weeks(value))
     override fun setLocale(value: String) = store.accept(Locale(value))
     override fun setAutoplay(value: Boolean) = store.accept(Autoplay(value))

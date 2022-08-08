@@ -7,7 +7,6 @@ data class PlayerState(
     val sanskrit: String = "",
     val words: String = "",
     val translation: String = "",
-    val timeMs: Long = 0L,
     val durationMs: Long = 0L,
     val playbackState: PlaybackState = IDLE,
     val currentRepeat: Int = 0,

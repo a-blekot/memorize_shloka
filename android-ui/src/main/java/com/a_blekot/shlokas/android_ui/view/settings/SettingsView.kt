@@ -7,6 +7,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Email
 import androidx.compose.material.icons.rounded.Info
+import androidx.compose.material.icons.rounded.PauseCircleOutline
 import androidx.compose.material.icons.rounded.Repeat
 import androidx.compose.material3.*
 import androidx.compose.material3.MaterialTheme.colorScheme
@@ -43,6 +44,10 @@ import com.a_blekot.shlokas.common.resources.MR.strings.label_two_lines
 import com.a_blekot.shlokas.common.resources.MR.strings.label_feedback
 import com.a_blekot.shlokas.common.resources.MR.strings.label_locale_en
 import com.a_blekot.shlokas.common.resources.MR.strings.label_locale_ru
+import com.a_blekot.shlokas.common.resources.MR.strings.label_pause
+import com.a_blekot.shlokas.common.resources.MR.strings.label_pause_placeholder
+import com.a_blekot.shlokas.common.resources.MR.strings.label_repeat_mode
+import com.a_blekot.shlokas.common.resources.MR.strings.label_repeats_placeholder
 import com.a_blekot.shlokas.common.resources.MR.strings.label_select_locale
 import com.a_blekot.shlokas.common.resources.resolve
 import com.a_blekot.shlokas.common.settings_api.SettingsComponent
@@ -94,13 +99,37 @@ fun SettingsView(component: SettingsComponent) {
                 maxLines = 1,
                 label = { Text(text = label_repeats.resolve(context)) },
                 colors = textFieldColors(),
-                placeholder = { Text(text = "enter some number") },
+                placeholder = { Text(text = label_repeats_placeholder.resolve(context)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Rounded.Repeat,
                         tint = colorScheme.primary,
                         contentDescription = "Repeat"
+                    )
+                },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            val pause = remember { mutableStateOf(TextFieldValue(text = state.value.pause.toString())) }
+
+            OutlinedTextField(
+                value = pause.value,
+                onValueChange = {
+                    pause.value = it
+                    component.setPause(it.text.toLongOrNull() ?: 1)
+                },
+                textStyle = typography.titleLarge,
+                maxLines = 1,
+                label = { Text(text = label_pause.resolve(context)) },
+                colors = textFieldColors(),
+                placeholder = { Text(text = label_pause_placeholder.resolve(context)) },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Rounded.PauseCircleOutline,
+                        tint = colorScheme.primary,
+                        contentDescription = "Pause"
                     )
                 },
                 modifier = Modifier.fillMaxWidth()
@@ -170,6 +199,13 @@ private fun Weeks(week: Week, onChanged: (Week) -> Unit) {
     val context = LocalContext.current
 
     SmallColumn {
+
+        Text(
+            text = label_repeat_mode.resolve(context),
+            style = typography.titleLarge,
+            color = colorScheme.primary,
+        )
+
         StandartRow(
             padding = paddingZero,
             horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start)

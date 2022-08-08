@@ -5,7 +5,6 @@ import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
 import kotlinx.serialization.Serializable
 
-const val DEFAULT_PAUSE = 150L
 private const val CHUNKS_SIZE = 4
 
 @Parcelize
@@ -20,16 +19,14 @@ val defaultChunks
     get() = MutableList(CHUNKS_SIZE) { Chunk() }
 
 val ShlokaConfig.durationMs
-    get() = chunks.sumOf { it.durationMs + DEFAULT_PAUSE }
+    get() = chunks.sumOf { it.durationMs }
 
-fun ShlokaConfig.createTasks(index: Int, week: Week, repeats: Int, startMs: Long): List<Task> {
+fun ShlokaConfig.createTasks(index: Int, week: Week, repeats: Int, pauseMs: Long): List<Task> {
     check(chunks.size == CHUNKS_SIZE) {
         "Shloka should consist of four padas!"
     }
 
     val tasks = mutableListOf<Task>()
-
-    var absoluteStartMs = startMs
 
     tasks.add(SetTrackTask(index, shloka))
     tasks.add(IdleTask)
@@ -38,10 +35,9 @@ fun ShlokaConfig.createTasks(index: Int, week: Week, repeats: Int, startMs: Long
         Week.FIRST -> {
             chunks.forEach { chunk ->
                 repeat(repeats) {
-                    tasks.add(PlayTask(chunk, it + 1, absoluteStartMs))
-                    if (it == repeats - 1) tasks.add(ResetCounterTask)
-                    tasks.add(PauseTask(DEFAULT_PAUSE))
-                    absoluteStartMs += (chunk.durationMs + DEFAULT_PAUSE)
+                    tasks.add(PlayTask(chunk, it + 1))
+                    if (it == repeats - 1) tasks.add(ResetCounterTask(pauseMs))
+                    tasks.add(PauseTask(pauseMs))
                 }
             }
         }
@@ -49,27 +45,24 @@ fun ShlokaConfig.createTasks(index: Int, week: Week, repeats: Int, startMs: Long
         Week.SECOND -> {
             repeat(repeats) {
                 val chunk = chunks[0] + chunks[1]
-                tasks.add(PlayTask(chunk, it + 1, absoluteStartMs))
-                if (it == repeats - 1) tasks.add(ResetCounterTask)
-                tasks.add(PauseTask(DEFAULT_PAUSE))
-                absoluteStartMs += (chunk.durationMs + DEFAULT_PAUSE)
+                tasks.add(PlayTask(chunk, it + 1))
+                if (it == repeats - 1) tasks.add(ResetCounterTask(pauseMs))
+                tasks.add(PauseTask(pauseMs))
             }
             repeat(repeats) {
                 val chunk = chunks[2] + chunks[3]
-                tasks.add(PlayTask(chunk, it + 1, absoluteStartMs))
-                if (it == repeats - 1) tasks.add(ResetCounterTask)
-                tasks.add(PauseTask(DEFAULT_PAUSE))
-                absoluteStartMs += (chunk.durationMs + DEFAULT_PAUSE)
+                tasks.add(PlayTask(chunk, it + 1))
+                if (it == repeats - 1) tasks.add(ResetCounterTask(pauseMs))
+                tasks.add(PauseTask(pauseMs))
             }
         }
 
         Week.THIRD -> {
             repeat(repeats) {
                 val chunk = chunks[0] + chunks[3]
-                tasks.add(PlayTask(chunk, it + 1, absoluteStartMs))
-                if (it == repeats - 1) tasks.add(ResetCounterTask)
-                tasks.add(PauseTask(DEFAULT_PAUSE))
-                absoluteStartMs += (chunk.durationMs + DEFAULT_PAUSE)
+                tasks.add(PlayTask(chunk, it + 1))
+                if (it == repeats - 1) tasks.add(ResetCounterTask(pauseMs))
+                tasks.add(PauseTask(pauseMs))
             }
         }
     }

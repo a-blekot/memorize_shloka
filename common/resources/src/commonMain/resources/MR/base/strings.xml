@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
     <string name="label_repeats">Повторы</string>
+    <string name="label_pause">Пауза</string>
     <string name="label_autoplay">Проигрывать автоматически</string>
+
+    <string name="label_repeats_placeholder">количество повторов</string>
+    <string name="label_pause_placeholder">пауза между повторами, миллисекунды</string>
+
     <string name="label_show_tutorial">Показать инструкцию</string>
     <string name="label_feedback">Обратная связь</string>
     <string name="label_sanskrit">Санскрит</string>
@@ -10,6 +15,7 @@
 
     <string name="label_repeats_counter">Повторы</string>
     <string name="label_verses_counter">Стихи</string>
+    <string name="label_repeat_mode">Режим повтора</string>
     <string name="label_one_line">по одной строке</string>
     <string name="label_two_lines">по две строки</string>
     <string name="label_four_lines">весь стих</string>

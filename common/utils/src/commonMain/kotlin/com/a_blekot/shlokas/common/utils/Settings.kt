@@ -13,8 +13,11 @@ private const val PAUSE_AFTER_EACH = "PAUSE_AFTER_EACH"
 private const val TUTORIAL_COMPLETED_KEY = "TUTORIAL_COMPLETED_KEY"
 
 private const val DEFAULT_REPEATS = 10
-private const val MAX_REPEATS = 10
+private const val MAX_REPEATS = 16_108
+
+private const val MIN_PAUSE = 100L
 private const val DEFAULT_PAUSE = 500L
+private const val MAX_PAUSE = 10_000L
 
 private val settings = Settings()
 
@@ -52,14 +55,20 @@ fun saveLocale(locale: String) =
 fun getLocale() =
     settings.getString(LOCALE_KEY)
 
-fun saveRepeats(repeats: Int) =
-    settings.putInt(CURRENT_REPEATS, repeats.coerceIn(1, MAX_REPEATS))
+fun saveRepeats(repeats: Int): Int {
+    val savedValue = repeats.coerceIn(1, MAX_REPEATS)
+    settings.putInt(CURRENT_REPEATS, savedValue)
+    return savedValue
+}
 
 fun getRepeats() =
     settings.getInt(CURRENT_REPEATS, DEFAULT_REPEATS).coerceIn(1, MAX_REPEATS)
 
-fun savePause(pause: Long) =
-    settings.putLong(PAUSE_AFTER_EACH, pause)
+fun savePause(pause: Long): Long {
+    val savedValue = pause.coerceIn(MIN_PAUSE, MAX_PAUSE)
+    settings.putLong(PAUSE_AFTER_EACH, savedValue)
+    return savedValue
+}
 
 fun getPause() =
     settings.getLong(PAUSE_AFTER_EACH, DEFAULT_PAUSE)

@@ -21,15 +21,12 @@ val PlayConfig.durationMs
 fun PlayConfig.createTasks(): List<Task> {
     val tasks = mutableListOf<Task>()
 
-    var absoluteStartMs = 0L
     shlokas
         .filter { it.isSelected }
         .forEachIndexed { i, shlokaConfig ->
-            val list = shlokaConfig.createTasks(i + 1, week, repeats, absoluteStartMs)
+            val list = shlokaConfig.createTasks(i + 1, week, repeats, pauseAfterEach)
             tasks.addAll(list)
             tasks.add(PauseTask(pauseAfterEach))
-
-            absoluteStartMs += list.sumOf { it.duration } + pauseAfterEach
         }
 
     tasks.add(StopTask)
