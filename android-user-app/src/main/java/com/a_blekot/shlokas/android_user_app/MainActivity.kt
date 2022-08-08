@@ -56,9 +56,11 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val root = root(defaultComponentContext())
+
         setContent {
             AppTheme {
-                MainContent(root(defaultComponentContext()))
+                MainContent(root)
             }
         }
         bindService()
