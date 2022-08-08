@@ -13,9 +13,10 @@ decompose = "0.8.0"
 detekt = "1.17.0"
 essenty = "0.2.2"
 exoplayer = "2.18.0"
-#firebase-crashlytics-bom = "30.3.1"
-firebase-analytics = "21.1.0"
-firebase-crashlytics = "18.2.12"
+firebase-bom = "30.3.1"
+google-services = "4.3.13"
+#firebase-analytics = "21.1.0"
+#firebase-crashlytics = "18.2.12"
 firebase-crashlytics-gradlePlgn = "2.9.1"
 kotlin = "1.7.0"
 kotlinx_coroutines = "1.6.3"
@@ -41,6 +42,7 @@ kotlin-serialization-gradlePlgn = { module = "org.jetbrains.kotlin:kotlin-serial
 kotlin-gradlePlgn = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 ktlintPlgn = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint" }
 versionsPlgn = { module = "com.github.ben-manes:gradle-versions-plugin", version.ref = "versions" }
+google-services-gradlePlgn = { module = "com.google.gms:google-services", version.ref = "google-services" }
 
 accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanist"}
 accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanist"}
@@ -58,10 +60,11 @@ essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = 
 exoplayer-core = { module = "com.google.android.exoplayer:exoplayer-core", version.ref = "exoplayer" }
 exoplayer-ui = { module = "com.google.android.exoplayer:exoplayer-ui", version.ref = "exoplayer" }
 
-#firebase-bom = { module = "com.google.firebase:firebase-analytics", version.ref = "firebase-crashlytics" }
-firebase-analytics = { module = "com.google.firebase:firebase-analytics", version.ref="firebase-analytics"  }
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics", version.ref="firebase-crashlytics"  }
-firebase-crashlytics-ktx = { module = "com.google.firebase:firebase-crashlytics-ktx", version.ref="firebase-crashlytics" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics"  }
+firebase-crashlytics-ktx = { module = "com.google.firebase:firebase-crashlytics-ktx" }
 
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx_coroutines" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx_coroutines" }

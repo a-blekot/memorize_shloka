@@ -9,6 +9,7 @@ buildscript {
         classpath(libs.bundles.plaginz)
         classpath(libs.moko.resources.generator)
         classpath(libs.firebase.crashlytics.gradlePlgn)
+        classpath(libs.google.services.gradlePlgn)
     }
 }
 
