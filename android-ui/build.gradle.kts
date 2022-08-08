@@ -26,5 +26,6 @@ dependencies {
 //    implementation(libs.decompose.android)
     implementation(libs.decompose.decompose)
     implementation(libs.decompose.extCompose)
-    implementation(libs.napier.android)
+    debugImplementation(libs.napier.android.debug)
+    releaseImplementation(libs.napier.android.release)
 }

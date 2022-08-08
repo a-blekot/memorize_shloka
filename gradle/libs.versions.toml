@@ -13,6 +13,10 @@ decompose = "0.8.0"
 detekt = "1.17.0"
 essenty = "0.2.2"
 exoplayer = "2.18.0"
+#firebase-crashlytics-bom = "30.3.1"
+firebase-analytics = "21.1.0"
+firebase-crashlytics = "18.2.12"
+firebase-crashlytics-gradlePlgn = "2.9.1"
 kotlin = "1.7.0"
 kotlinx_coroutines = "1.6.3"
 kotlinx_serialization = "1.3.2"
@@ -32,6 +36,7 @@ versions = "0.42.0"
 [libraries]
 android-gradlePlgn = { module = "com.android.tools.build:gradle", version.ref = "android-gradlePlgn"}
 detektPlgn = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+firebase-crashlytics-gradlePlgn = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebase-crashlytics-gradlePlgn" }
 kotlin-serialization-gradlePlgn = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 kotlin-gradlePlgn = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 ktlintPlgn = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint" }
@@ -53,6 +58,11 @@ essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = 
 exoplayer-core = { module = "com.google.android.exoplayer:exoplayer-core", version.ref = "exoplayer" }
 exoplayer-ui = { module = "com.google.android.exoplayer:exoplayer-ui", version.ref = "exoplayer" }
 
+#firebase-bom = { module = "com.google.firebase:firebase-analytics", version.ref = "firebase-crashlytics" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics", version.ref="firebase-analytics"  }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics", version.ref="firebase-crashlytics"  }
+firebase-crashlytics-ktx = { module = "com.google.firebase:firebase-crashlytics-ktx", version.ref="firebase-crashlytics" }
+
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx_coroutines" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx_coroutines" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx_serialization" }
@@ -68,7 +78,8 @@ mvikotlin-main = { module = "com.arkivanov.mvikotlin:mvikotlin-main", version.re
 mvikotlin-rx = { module = "com.arkivanov.mvikotlin:rx", version.ref = "mvikotlin" }
 
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
-napier-android = { module = "io.github.aakira:napier-android-debug", version.ref = "napier" }
+napier-android-debug = { module = "io.github.aakira:napier-android-debug", version.ref = "napier" }
+napier-android-release = { module = "io.github.aakira:napier-android", version.ref = "napier" }
 random = { module = "com.benasher44:uuid", version.ref = "random" }
 settings = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "settings" }
 

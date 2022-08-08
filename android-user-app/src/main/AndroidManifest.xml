@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.a_blekot.shlokas.android_user_app">
+    package="com.a_blekot.memorize_shloka">
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -29,7 +29,7 @@
         android:name=".MainApp"
         android:allowBackup="false"
         android:icon="@drawable/aum"
-        android:label="Shlokas"
+        android:label="Memorize Shloka"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@drawable/aum"
         android:supportsRtl="false"

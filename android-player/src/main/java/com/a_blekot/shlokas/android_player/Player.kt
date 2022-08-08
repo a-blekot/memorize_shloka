@@ -214,18 +214,18 @@ class Player(
         }
 
     private fun onPlaybackReady() {
-        Napier.w("onPlaybackReady", tag = "AUDIO_PLAYER")
+        Napier.d("onPlaybackReady", tag = "AUDIO_PLAYER")
         if (currentTask is SetTrackTask) {
-            Napier.w("PlayerFeedback.Ready", tag = "AUDIO_PLAYER")
+            Napier.d("PlayerFeedback.Ready", tag = "AUDIO_PLAYER")
             playerBus.update(PlayerFeedback.Ready)
         }
     }
 
     private fun onPlaybackStarted() {
-        Napier.w("onPlaybackStarted", tag = "AUDIO_PLAYER")
+        Napier.d("onPlaybackStarted", tag = "AUDIO_PLAYER")
         (currentTask as? PlayTask)?.run {
             playerScope.launch {
-                Napier.w("PlayerFeedback.Started (duration = ${duration})", tag = "AUDIO_PLAYER")
+                Napier.d("PlayerFeedback.Started (duration = ${duration})", tag = "AUDIO_PLAYER")
                 playerBus.update(PlayerFeedback.Started(duration))
 //                delay(duration)
 //                Napier.w("PlayerFeedback.Completed", tag = "AUDIO_PLAYER")

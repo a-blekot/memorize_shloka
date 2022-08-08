@@ -16,9 +16,10 @@ dependencies {
     implementation(libs.exoplayer.core)
     implementation(libs.exoplayer.ui)
 
-    implementation(libs.androidx.lifecycle.process)
-    implementation(libs.androidx.lifecycle.runtime)
+//    implementation(libs.androidx.lifecycle.process)
+//    implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.napier.android)
+    debugImplementation(libs.napier.android.debug)
+    releaseImplementation(libs.napier.android.release)
 }

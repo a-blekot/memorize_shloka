@@ -1,4 +1,4 @@
-package com.a_blekot.shlokas.android_user_app
+package com.a_blekot.memorize_shloka
 
 import android.content.ComponentName
 import android.content.Context
@@ -12,9 +12,9 @@ import androidx.activity.compose.setContent
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.a_blekot.memorize_shloka.MainApp.Companion.app
 import com.a_blekot.shlokas.android_player.PlaybackService
 import com.a_blekot.shlokas.android_ui.theme.AppTheme
-import com.a_blekot.shlokas.android_user_app.MainApp.Companion.app
 import com.a_blekot.shlokas.common.root.RootComponent
 import com.a_blekot.shlokas.common.root.RootComponentImpl
 import com.a_blekot.shlokas.common.root.RootDeps
@@ -119,8 +119,7 @@ class MainActivity : ComponentActivity() {
         if (intent.resolveActivity(packageManager) != null) {
             startActivity(intent)
         } else {
-            Napier.w("yoyoyoy")
-            Napier.w("No activity for $intent")
+            Napier.e("No activity for $intent")
         }
     }
 }

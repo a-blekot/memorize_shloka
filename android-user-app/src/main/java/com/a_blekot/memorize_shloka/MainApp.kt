@@ -1,4 +1,4 @@
-package com.a_blekot.shlokas.android_user_app
+package com.a_blekot.memorize_shloka
 
 import android.app.Activity
 import android.app.Application
@@ -6,13 +6,15 @@ import android.os.Bundle
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.ProcessLifecycleOwner
+import com.a_blekot.memorize_shloka.android_user_app.BuildConfig
+import com.a_blekot.memorize_shloka.utils.CrashlyticsAntilog
 import com.a_blekot.shlokas.common.player_api.PlayerBus
 import com.a_blekot.shlokas.common.player_impl.PlayerBusImpl
-import com.a_blekot.shlokas.common.utils.LogTag
 import com.a_blekot.shlokas.common.utils.LogTag.LIFECYCLE_ACTIVITY
 import com.a_blekot.shlokas.common.utils.LogTag.LIFECYCLE_APP
 import com.a_blekot.shlokas.common.utils.dispatchers
 import com.a_blekot.shlokas.common.utils.onAppLaunch
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 
@@ -79,8 +81,14 @@ class MainApp : Application() {
         registerActivityLifecycleCallbacks(activityLifecycleCallbacks)
         ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleEventObserver)
 
-        Napier.base(DebugAntilog())
-//        PlayerBusImpl@70d1426
+        if (BuildConfig.DEBUG) {
+            FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(false)
+            Napier.base(DebugAntilog())
+        } else {
+            FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
+            Napier.base(CrashlyticsAntilog(this))
+        }
+
         app = this
         playerBus = PlayerBusImpl(dispatchers())
         Napier.d("app.playerBus = $playerBus", tag="PlayerBus")

@@ -29,5 +29,6 @@ dependencies {
     implementation(libs.decompose.extCompose)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.napier.android)
+    debugImplementation(libs.napier.android.debug)
+    releaseImplementation(libs.napier.android.release)
 }

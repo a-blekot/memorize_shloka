@@ -1,6 +1,7 @@
 plugins {
     id("dev.icerock.mobile.multiplatform-resources")
     id("android-application-convention")
+    id("com.google.firebase.crashlytics")
     id("kotlin-parcelize")
 }
 
@@ -27,5 +28,11 @@ dependencies {
     implementation(libs.decompose.extCompose)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.napier.android)
+    debugImplementation(libs.napier.android.debug)
+    releaseImplementation(libs.napier.android.release)
+
+//    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.crashlytics.ktx)
 }

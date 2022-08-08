@@ -1,7 +1,6 @@
-package com.a_blekot.shlokas.android_user_app
+package com.a_blekot.memorize_shloka
 
 import androidx.compose.runtime.Composable
-import com.a_blekot.shlokas.android_ui.view.details.DetailsView
 import com.a_blekot.shlokas.android_ui.view.list.ListView
 import com.a_blekot.shlokas.android_ui.view.player.PlayerView
 import com.a_blekot.shlokas.android_ui.view.settings.SettingsView

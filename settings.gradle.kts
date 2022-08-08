@@ -19,7 +19,7 @@ include(
     ":android-player",
     ":android-ui",
     ":android-user-app",
-    ":androidApp",
+//    ":androidApp",
     ":common:root",
     ":common:data",
     ":common:details-api",

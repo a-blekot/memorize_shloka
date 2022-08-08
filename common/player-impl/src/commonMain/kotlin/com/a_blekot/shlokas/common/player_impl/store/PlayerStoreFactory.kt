@@ -96,7 +96,7 @@ internal class PlayerStoreFactory(
             scope.launch {
                 deps.playerBus.observeFeedback()
                     .onEach {
-                        Napier.w("PlayerFeedback", tag = "PlayerStore")
+                        Napier.d("PlayerFeedback", tag = "PlayerStore")
                         dispatch(Feedback(it))
                     }
                     .launchIn(scope)
@@ -132,7 +132,7 @@ internal class PlayerStoreFactory(
 
         private fun nextTask() {
             if (iterator.hasNext()) {
-                Napier.w("nextTask", tag = "PlayerStore")
+                Napier.d("nextTask", tag = "PlayerStore")
                 scope.launch {
                     handleTask(iterator.next())
                 }
