@@ -36,9 +36,9 @@ class SettingsComponentImpl(
     override val flow: Value<SettingsState> = store.asValue()
 
     init {
-        store.labels
-            .onEach(::handleLabel)
-            .launchIn(scope)
+//        store.labels
+//            .onEach(::handleLabel)
+//            .launchIn(scope)
 
         store.init()
     }
@@ -48,7 +48,4 @@ class SettingsComponentImpl(
     override fun setAutoplay(value: Boolean) = store.accept(Autoplay(value))
     override fun onTutorialCompleted() = setTutorialCompleted()
     override fun sendEmail() = output(SettingsOutput.Email)
-
-    private fun handleLabel(label: SettingsLabel) {
-    }
 }

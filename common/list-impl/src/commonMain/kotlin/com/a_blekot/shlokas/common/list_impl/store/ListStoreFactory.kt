@@ -60,7 +60,7 @@ internal class ListStoreFactory(
             when (action) {
                 LoadLastConfig -> {
                     val id = getLastConfigId().ifBlank { "sb_1_canto_config" }
-                    val config = readFirstCanto(id, deps.filer, deps.configReader)
+                    val config = readFirstCanto(id, deps.configReader)
 
                     config?.let {
                         deps.config = config.updateTitles()

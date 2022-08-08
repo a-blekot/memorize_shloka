@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.ProcessLifecycleOwner
-import com.a_blekot.memorize_shloka.android_user_app.BuildConfig
 import com.a_blekot.memorize_shloka.utils.CrashlyticsAntilog
 import com.a_blekot.shlokas.common.player_api.PlayerBus
 import com.a_blekot.shlokas.common.player_impl.PlayerBusImpl

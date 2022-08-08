@@ -1,6 +1,6 @@
 [versions]
 accompanist = "0.24.13-rc"
-android-gradlePlgn = "7.2.1"
+android-gradlePlgn = "7.2.2"
 androidx-activity = "1.6.0-alpha05"
 androidx-appcompat = "1.6.0-alpha05"
 androidx-core = "1.8.0"

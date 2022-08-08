@@ -1,8 +1,36 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id("dev.icerock.mobile.multiplatform-resources")
     id("android-application-convention")
     id("com.google.firebase.crashlytics")
     id("kotlin-parcelize")
+}
+
+val keystorePropertiesFile = rootProject.file("keystore.properties")
+val keystoreProperties = Properties()
+keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+
+android {
+    signingConfigs {
+        maybeCreate( "config").apply {
+            keyAlias = keystoreProperties.getProperty("keyAlias")
+            keyPassword = keystoreProperties.getProperty("keyPassword")
+            storeFile = file(keystoreProperties.getProperty("storeFile"))
+            storePassword = keystoreProperties.getProperty("storePassword")
+        }
+    }
+
+    buildTypes {
+        maybeCreate("debug").apply {
+            signingConfig = signingConfigs.getByName("config")
+        }
+
+        maybeCreate("release").apply {
+            signingConfig = signingConfigs.getByName("config")
+        }
+    }
 }
 
 dependencies {

@@ -23,14 +23,14 @@ fun writeToFile(config: ListConfig, filer: Filer): Boolean {
     return true
 }
 
-fun readFirstCanto(configName: String, filer: Filer, configReader: ConfigReader): ListConfig? =
+fun readFirstCanto(configName: String, configReader: ConfigReader): ListConfig? =
     try {
         val text = configReader.readConfig(configName)
         if (text.isBlank()) {
             null
+        } else {
+            json.decodeFromString<ListConfig>(text)
         }
-
-        json.decodeFromString<ListConfig>(text)
     } catch (e: Throwable) {
         null
     }
