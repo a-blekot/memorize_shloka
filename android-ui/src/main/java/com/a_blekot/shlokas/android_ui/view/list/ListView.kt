@@ -27,6 +27,7 @@ import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeXL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusS
 import com.a_blekot.shlokas.common.list_api.ListComponent
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
+import io.github.aakira.napier.Napier
 
 @Composable
 fun ListView(component: ListComponent) {
@@ -48,6 +49,8 @@ fun ListView(component: ListComponent) {
                 }
             }
         }
+
+        Napier.d("isTutorialCompleted = ${state.value.isTutorialCompleted}", tag = "TUTOR")
 
         if (!state.value.isTutorialCompleted) {
             InfoPopup(modifier = Modifier.fillMaxSize()) {

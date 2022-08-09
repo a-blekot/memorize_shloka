@@ -13,7 +13,9 @@ import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineBootstrapper
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 internal class ListStoreFactory(
     private val storeFactory: StoreFactory,
@@ -61,12 +63,16 @@ internal class ListStoreFactory(
         override fun executeAction(action: Action, getState: () -> ListState) {
             when (action) {
                 LoadLastConfig -> {
-                    val id = getLastConfigId().ifBlank { "sb_1_canto_config" }
-                    val config = readFirstCanto(id, deps.configReader)
+                    scope.launch(deps.dispatchers.io) {
+                        val id = getLastConfigId().ifBlank { "sb_1_canto_config" }
+                        val config = readFirstCanto(id, deps.configReader)
 
-                    config?.let {
-                        deps.config = config.updateTitles()
-                        dispatch(Msg.Update(deps.config))
+                        config?.let {
+                            deps.config = config.updateTitles()
+                            withContext(deps.dispatchers.main) {
+                                dispatch(Msg.Update(deps.config))
+                            }
+                        }
                     }
                 }
             }
@@ -96,6 +102,7 @@ internal class ListStoreFactory(
         }
 
         private fun tutorialCompleted() {
+            Napier.d("Store::tutorialCompleted", tag = "TUTOR")
             setTutorialCompleted()
             dispatch(Msg.TutorialCompleted)
         }
@@ -148,7 +155,7 @@ internal class ListStoreFactory(
 
         private fun update(newConfig: ListConfig): ListState {
             saveLastConfigId(newConfig.id)
-            return ListState(newConfig, hasChanges = newConfig != deps.config)
+            return ListState(newConfig, hasChanges = newConfig != deps.config, isTutorialCompleted())
         }
 
         private fun ListConfig.add(): ListConfig =

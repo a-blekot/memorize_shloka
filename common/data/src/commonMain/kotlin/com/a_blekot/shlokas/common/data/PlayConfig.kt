@@ -15,9 +15,6 @@ data class PlayConfig(
     val pauseAfterEach: Long
 ) : Parcelable
 
-val PlayConfig.durationMs
-    get() = (shlokas.filter { it.isSelected }.sumOf { it.durationMs + pauseAfterEach }) * repeats
-
 fun PlayConfig.createTasks(): List<Task> {
     val tasks = mutableListOf<Task>()
 

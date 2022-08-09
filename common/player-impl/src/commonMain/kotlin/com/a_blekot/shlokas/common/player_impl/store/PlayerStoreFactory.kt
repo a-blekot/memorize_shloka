@@ -47,7 +47,7 @@ internal class PlayerStoreFactory(
             durationMs = durationMs,
             totalRepeats = deps.config.repeats,
             totalShlokasCount = deps.config.shlokas.filter { it.isSelected }.size,
-            totalDurationMs = deps.config.durationMs,
+            totalDurationMs = durationMs,
             isAutoplay = getAutoPlay()
         )
 

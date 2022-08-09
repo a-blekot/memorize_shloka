@@ -2,6 +2,7 @@ package com.a_blekot.shlokas.common.utils
 
 import com.a_blekot.shlokas.common.data.Week
 import com.russhwolf.settings.Settings
+import io.github.aakira.napier.Napier
 
 private const val APP_LAUNCH_COUNT = "APP_LAUNCH_COUNT"
 private const val CURRENT_REPEATS = "CURRENT_REPEATS"
@@ -73,11 +74,16 @@ fun savePause(pause: Long): Long {
 fun getPause() =
     settings.getLong(PAUSE_AFTER_EACH, DEFAULT_PAUSE)
 
-fun isTutorialCompleted() =
-    settings.getBoolean(TUTORIAL_COMPLETED_KEY)
+fun isTutorialCompleted(): Boolean {
+    val result = settings.getBoolean(TUTORIAL_COMPLETED_KEY)
+    Napier.d("settings.isTutorialCompleted() = $result", tag = "TUTOR")
+    return result
+}
 
-fun setTutorialCompleted() =
+fun setTutorialCompleted() {
+    Napier.d("setTutorialCompleted", tag = "TUTOR")
     settings.putBoolean(TUTORIAL_COMPLETED_KEY, true)
+}
 
 fun weekFromOrdinal(ordinal: Int) =
     Week.values().firstOrNull { it.ordinal == ordinal } ?: Week.FIRST
