@@ -4,6 +4,7 @@ import com.a_blekot.shlokas.common.data.ListConfig
 
 data class ListState(
     val config: ListConfig,
+    val locale: String,
     val hasChanges: Boolean = false,
     val isTutorialCompleted: Boolean = true
 )

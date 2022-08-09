@@ -22,10 +22,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import com.a_blekot.shlokas.android_ui.custom.InfoPopup
-import com.a_blekot.shlokas.android_ui.custom.SmallColumn
-import com.a_blekot.shlokas.android_ui.custom.StandartCheckBox
-import com.a_blekot.shlokas.android_ui.custom.StandartRow
+import com.a_blekot.shlokas.android_ui.custom.*
 import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingM
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
@@ -36,19 +33,19 @@ import com.a_blekot.shlokas.common.data.Locales.ru
 import com.a_blekot.shlokas.common.data.Week
 import com.a_blekot.shlokas.common.data.Week.*
 import com.a_blekot.shlokas.common.resources.MR.strings.label_autoplay
-import com.a_blekot.shlokas.common.resources.MR.strings.label_four_lines
-import com.a_blekot.shlokas.common.resources.MR.strings.label_one_line
-import com.a_blekot.shlokas.common.resources.MR.strings.label_repeats
-import com.a_blekot.shlokas.common.resources.MR.strings.label_show_tutorial
-import com.a_blekot.shlokas.common.resources.MR.strings.label_two_lines
 import com.a_blekot.shlokas.common.resources.MR.strings.label_feedback
+import com.a_blekot.shlokas.common.resources.MR.strings.label_four_lines
 import com.a_blekot.shlokas.common.resources.MR.strings.label_locale_en
 import com.a_blekot.shlokas.common.resources.MR.strings.label_locale_ru
+import com.a_blekot.shlokas.common.resources.MR.strings.label_one_line
 import com.a_blekot.shlokas.common.resources.MR.strings.label_pause
 import com.a_blekot.shlokas.common.resources.MR.strings.label_pause_placeholder
 import com.a_blekot.shlokas.common.resources.MR.strings.label_repeat_mode
+import com.a_blekot.shlokas.common.resources.MR.strings.label_repeats
 import com.a_blekot.shlokas.common.resources.MR.strings.label_repeats_placeholder
 import com.a_blekot.shlokas.common.resources.MR.strings.label_select_locale
+import com.a_blekot.shlokas.common.resources.MR.strings.label_show_tutorial
+import com.a_blekot.shlokas.common.resources.MR.strings.label_two_lines
 import com.a_blekot.shlokas.common.resources.resolve
 import com.a_blekot.shlokas.common.settings_api.SettingsComponent
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
@@ -72,21 +69,6 @@ fun SettingsView(component: SettingsComponent) {
             modifier = Modifier.fillMaxWidth()
         ) {
 
-            StandartRow(
-                horizontalArrangement = Arrangement.spacedBy(paddingM),
-            ) {
-                StandartCheckBox(state.value.isAutoplay) {
-                    component.setAutoplay(it)
-                }
-
-                Text(
-                    text = label_autoplay.resolve(context),
-                    style = typography.titleLarge,
-                    color = colorScheme.primary,
-                    maxLines = 1,
-                )
-            }
-
             val repeats = remember { mutableStateOf(TextFieldValue(text = state.value.repeats.toString())) }
 
             OutlinedTextField(
@@ -108,7 +90,7 @@ fun SettingsView(component: SettingsComponent) {
                         contentDescription = "Repeat"
                     )
                 },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().padding(top = paddingM)
             )
 
             val pause = remember { mutableStateOf(TextFieldValue(text = state.value.pause.toString())) }
@@ -135,17 +117,34 @@ fun SettingsView(component: SettingsComponent) {
                 modifier = Modifier.fillMaxWidth()
             )
 
-            Weeks(state.value.week) {
+            Weeks(state.value.week, modifier = Modifier.padding(top = paddingM)) {
                 component.setWeek(it.ordinal)
             }
 
-            Locale(state.value.locale) {
+            StandartRow(
+                horizontalArrangement = Arrangement.spacedBy(paddingM),
+            ) {
+                StandartCheckBox(state.value.isAutoplay) {
+                    component.setAutoplay(it)
+                }
+
+                Text(
+                    text = label_autoplay.resolve(context),
+                    style = typography.titleLarge,
+                    color = colorScheme.primary,
+                    maxLines = 1,
+                )
+            }
+
+            Divider(color = colorScheme.primary, thickness = Dimens.borderSmall)
+
+            Locale(state.value.locale, modifier = Modifier.padding(top = paddingM)) {
                 component.setLocale(it)
             }
 
             StandartRow(
                 horizontalArrangement = Arrangement.spacedBy(paddingM),
-                modifier = Modifier.clickable { infoIsVisible.value = true }
+                modifier = Modifier.clickable { infoIsVisible.value = true }.padding(top = paddingM)
             ) {
                 Icon(
                     Icons.Rounded.Info,
@@ -186,7 +185,7 @@ fun SettingsView(component: SettingsComponent) {
         }
 
         if (infoIsVisible.value) {
-            InfoPopup(modifier = Modifier.fillMaxSize()) {
+            InfoPopup(ftueInfo(state.value.locale), modifier = Modifier.fillMaxSize()) {
                 infoIsVisible.value = false
                 component.onTutorialCompleted()
             }
@@ -195,10 +194,12 @@ fun SettingsView(component: SettingsComponent) {
 }
 
 @Composable
-private fun Weeks(week: Week, onChanged: (Week) -> Unit) {
+private fun Weeks(week: Week, modifier: Modifier = Modifier, onChanged: (Week) -> Unit) {
     val context = LocalContext.current
 
-    SmallColumn {
+    SmallColumn(
+        modifier = modifier
+    ) {
 
         Text(
             text = label_repeat_mode.resolve(context),
@@ -257,11 +258,12 @@ private fun Weeks(week: Week, onChanged: (Week) -> Unit) {
 }
 
 @Composable
-private fun Locale(locale: String, onChanged: (String) -> Unit) {
+private fun Locale(locale: String, modifier: Modifier = Modifier, onChanged: (String) -> Unit) {
     val context = LocalContext.current
 
-    SmallColumn {
-        Divider(color = colorScheme.primary, thickness = Dimens.borderSmall)
+    SmallColumn(
+        modifier = modifier
+    ) {
 
         Text(
             text = label_select_locale.resolve(context),

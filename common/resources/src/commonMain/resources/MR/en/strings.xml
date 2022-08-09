@@ -16,6 +16,48 @@
     <string name="label_repeats_counter">Repeats</string>
     <string name="label_verses_counter">Verses</string>
 
+    <string name="tutorial_about">About application</string>
+    <string name="tutorial_metodics">Memorization technique</string>
+    <string name="tutorial_settings">Settings</string>
+
+    <string name="tutorial_1_1">First week</string>
+    <string name="tutorial_1_2">Repeat line by line</string>
+    <string name="tutorial_1_3">10 times each line</string>
+    <string name="tutorial_1_4">select item \"one line\" in settings</string>
+
+    <string name="tutorial_2_1">Second week</string>
+    <string name="tutorial_2_2">Repeat two lines a time</string>
+    <string name="tutorial_2_3">1st-2nd и 3rd-4th</string>
+    <string name="tutorial_2_4">select item \"two lines\" in settings</string>
+
+    <string name="tutorial_3_1">Third week</string>
+    <string name="tutorial_3_2">Repeat four lines all together</string>
+    <string name="tutorial_3_3">select item \"whole verse\" in settings</string>
+
+    <string name="tutorial_4_1">Select 1 up to 20 verses</string>
+    <string name="tutorial_4_2">You will memorize them in three weeks 💪🤓</string>
+
+    <string name="tutorial_5_1">Repeat all verses aloud 🔊</string>
+
+    <string name="tutorial_6_1">Settings ⚙️</string>
+
+    <string name="tutorial_7_1">It is recommended - 10 repeats for each verse ⚙️</string>
+    <string name="tutorial_7_2">⌛ 20 minutes for 10 verses</string>
+
+    <string name="tutorial_8_1">⏸️ pause between each repeat</string>
+    <string name="tutorial_8_2">by default 5️⃣0️⃣0️⃣ms = 0️⃣,5️⃣sec</string>
+
+    <string name="tutorial_9_1">For first, second and third weeks respectively📅</string>
+
+    <string name="tutorial_9_2">Start play next verse automatically</string>
+
+    <string name="tutorial_10_1">Show current tutorial</string>
+
+    <string name="tutorial_11_1">Contact developer</string>
+    <string name="tutorial_11_2">Report bugs</string>
+    <string name="tutorial_11_3">Feature requests</string>
+    <string name="tutorial_11_4">Criticism 👺 or \ngratitude 😇</string>
+
     <string name="label_repeat_mode">Repeat mode</string>
     <string name="label_one_line">one line</string>
     <string name="label_two_lines">two lines</string>

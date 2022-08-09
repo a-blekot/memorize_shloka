@@ -24,17 +24,48 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.borderSmall
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusS
+import com.a_blekot.shlokas.common.data.Locales
+import com.a_blekot.shlokas.common.data.Locales.en
 import com.a_blekot.shlokas.common.resources.MR
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_10_1
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_11_1
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_11_2
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_11_3
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_11_4
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_1_1
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_1_2
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_1_3
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_1_4
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_2_1
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_2_2
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_2_3
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_2_4
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_3_1
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_3_2
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_3_3
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_4_1
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_4_2
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_5_1
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_6_1
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_7_1
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_7_2
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_8_1
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_8_2
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_9_1
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_9_2
+import com.a_blekot.shlokas.common.resources.resolve
 import dev.icerock.moko.resources.ImageResource
+import dev.icerock.moko.resources.StringResource
 
 @Composable
-fun InfoPopup(info: FtueInfo = ftueInfo(), modifier: Modifier = Modifier, onCompleted: () -> Unit) {
+fun InfoPopup(info: FtueInfo, modifier: Modifier = Modifier, onCompleted: () -> Unit) {
     check(info.isNotEmpty()) {
         "InfoPopup list should not be empty!"
     }
@@ -52,7 +83,7 @@ fun InfoPopup(info: FtueInfo = ftueInfo(), modifier: Modifier = Modifier, onComp
     ) {
         StandartRow {
             Text(
-                text = info.title,
+                text = info.title.resolve(LocalContext.current),
                 color = colorScheme.primary,
                 style = typography.headlineLarge,
                 textAlign = TextAlign.Center,
@@ -77,7 +108,7 @@ fun InfoPopup(info: FtueInfo = ftueInfo(), modifier: Modifier = Modifier, onComp
 
         Divider(color = colorScheme.primary, thickness = borderSmall)
 
-        ButtonsRow(page.value, maxPage, title = info.items[page.value].title) { nextPage ->
+        ButtonsRow(page.value, maxPage, titleRes = info.items[page.value].title) { nextPage ->
             page.value = nextPage
         }
 
@@ -104,7 +135,7 @@ fun InfoPopup(info: FtueInfo = ftueInfo(), modifier: Modifier = Modifier, onComp
 }
 
 @Composable
-private fun FtueInfoRow(index: Int, text: String, modifier: Modifier = Modifier) {
+private fun FtueInfoRow(index: Int, textRes: StringResource, modifier: Modifier = Modifier) {
     StandartRow(
         horizontalArrangement = Arrangement.spacedBy(paddingS),
         verticalAlignment = Alignment.Top,
@@ -115,13 +146,9 @@ private fun FtueInfoRow(index: Int, text: String, modifier: Modifier = Modifier)
             )
             .padding(vertical = paddingS)
     ) {
-//        Text(
-//            "${index + 1})",
-//            color = colorScheme.onPrimaryContainer,
-//            style = typography.titleLarge
-//        )
+
         Text(
-            text = text,
+            text = textRes.resolve(LocalContext.current),
             color = colorScheme.onPrimaryContainer,
             style = typography.titleLarge,
         )
@@ -132,7 +159,7 @@ private fun FtueInfoRow(index: Int, text: String, modifier: Modifier = Modifier)
 private fun ButtonsRow(
     page: Int,
     maxPage: Int,
-    title: String,
+    titleRes: StringResource,
     modifier: Modifier = Modifier,
     onNextPage: (Int) -> Unit
 ) {
@@ -151,7 +178,7 @@ private fun ButtonsRow(
         }
 
         Text(
-            text = title,
+            text = titleRes.resolve(LocalContext.current),
             color = colorScheme.primary,
             style = typography.headlineSmall,
             textAlign = TextAlign.Center,
@@ -179,113 +206,145 @@ private fun ButtonsRow(
     }
 }
 
-fun ftueInfo() =
+fun ftueInfo(locale: String) =
     FtueInfo(
-        title = "О приложении",
+        title = tutorial_about,
         items = listOf(
             ftueInfoItem1(),
             ftueInfoItem2(),
             ftueInfoItem3(),
-            ftueInfoItem4(),
-            ftueInfoItem5(),
-            ftueInfoItem6(),
-            ftueInfoItem7(),
-            ftueInfoItem8(),
-            ftueInfoItem9(),
+            ftueInfoItem4(locale),
+            ftueInfoItem5(locale),
+            ftueInfoItem6(locale),
+            ftueInfoItem7(locale),
+            ftueInfoItem8(locale),
+            ftueInfoItem9_1(locale),
+            ftueInfoItem9_2(locale),
+            ftueInfoItem10(locale),
+            ftueInfoItem11(locale),
         )
     )
 
 fun ftueInfoItem1() =
     FtueInfoItem(
-        title = "Методика изучения",
+        title = tutorial_metodics,
         image = MR.images.tutorial_1,
         items = listOf(
-            "Первая неделя",
-            "Повторяем построчно",
-            "10 раз каждую строку",
-            "нужно выбрать пункт \"по одной строке\" в настройках (см. дальше)",
+            tutorial_1_1,
+            tutorial_1_2,
+            tutorial_1_3,
+            tutorial_1_4,
         )
     )
 
 fun ftueInfoItem2() =
     FtueInfoItem(
-        title = "Методика изучения",
+        title = tutorial_metodics,
         image = MR.images.tutorial_2,
         items = listOf(
-            "Вторая неделя",
-            "Повторяем по две строки",
-            "1я-2я и 3я-4я",
-            "нужно выбрать пункт \"по две строки\" в настройках (см. дальше)",
+            tutorial_2_1,
+            tutorial_2_2,
+            tutorial_2_3,
+            tutorial_2_4,
         )
     )
 
 fun ftueInfoItem3() =
     FtueInfoItem(
-        title = "Методика изучения",
+        title = tutorial_metodics,
         image = MR.images.tutorial_3,
         items = listOf(
-            "Третья неделя",
-            "Повторяем все четыре строки вместе",
-            "нужно выбрать пункт \"весь стих\" в настройках (см. дальше)",
+            tutorial_3_1,
+            tutorial_3_2,
+            tutorial_3_3,
         )
     )
 
-fun ftueInfoItem4() =
+fun ftueInfoItem4(locale: String) =
     FtueInfoItem(
-        title = "Методика изучения",
-        image = MR.images.tutorial_4,
+        title = tutorial_metodics,
+        image = if (locale == Locales.ru) MR.images.tutorial_4_ru else MR.images.tutorial_4_en,
         items = listOf(
-            "Выберите от 1 до 20 стихов",
-            "Их Вы выучите за три недели \uD83D\uDCAA \uD83E\uDD13",
+            tutorial_4_1,
+            tutorial_4_2,
         )
     )
 
-fun ftueInfoItem5() =
+fun ftueInfoItem5(locale: String) =
     FtueInfoItem(
-        title = "Методика изучения",
-        image = MR.images.tutorial_5,
+        title = tutorial_metodics,
+        image = if (locale == Locales.ru) MR.images.tutorial_5_ru else MR.images.tutorial_5_en,
+        items = listOf(tutorial_5_1)
+    )
+
+fun ftueInfoItem6(locale: String) =
+    FtueInfoItem(
+        title = tutorial_settings,
+        image = if (locale == Locales.ru) MR.images.tutorial_6_ru else MR.images.tutorial_6_en,
+        items = listOf(tutorial_6_1)
+    )
+
+fun ftueInfoItem7(locale: String) =
+    FtueInfoItem(
+        title = tutorial_settings,
+        image = if (locale == Locales.ru) MR.images.tutorial_7_ru else MR.images.tutorial_7_en,
         items = listOf(
-            "Повторяйте стихи вслух \uD83D\uDD0A",
+            tutorial_7_1,
+            tutorial_7_2,
         )
     )
 
-fun ftueInfoItem6() =
+fun ftueInfoItem8(locale: String) =
     FtueInfoItem(
-        title = "Настройки",
-        image = MR.images.tutorial_6,
-    )
-
-fun ftueInfoItem7() =
-    FtueInfoItem(
-        title = "Настройки",
-        image = MR.images.tutorial_7,
+        title = tutorial_settings,
+        image = if (locale == Locales.ru) MR.images.tutorial_8_ru else MR.images.tutorial_8_en,
         items = listOf(
-            "Рекомендуется - 10 повторений каждого стиха",
+            tutorial_8_1,
+            tutorial_8_2,
         )
     )
 
-fun ftueInfoItem8() =
+fun ftueInfoItem9_1(locale: String) =
     FtueInfoItem(
-        title = "Настройки",
-        image = MR.images.tutorial_8,
+        title = tutorial_settings,
+        image = if (locale == Locales.ru) MR.images.tutorial_9_2_ru else MR.images.tutorial_9_2_en,
         items = listOf(
-            "Соответственно для первой, второй и третьей недели",
+            tutorial_9_1,
         )
     )
 
-fun ftueInfoItem9() =
+fun ftueInfoItem9_2(locale: String) =
     FtueInfoItem(
-        title = "Настройки",
-        image = MR.images.tutorial_9,
+        title = tutorial_settings,
+        image = if (locale == Locales.ru) MR.images.tutorial_9_1_ru else MR.images.tutorial_9_1_en,
         items = listOf(
-            "Собщить об ошибке",
-            "Пожелания по функционалу",
-            "Письмо с критикой \uD83D\uDC7A \nили благодарностью \uD83D\uDE07",
+            tutorial_9_2,
+        )
+    )
+
+fun ftueInfoItem10(locale: String) =
+    FtueInfoItem(
+        title = tutorial_settings,
+        image = if (locale == Locales.ru) MR.images.tutorial_10_ru else MR.images.tutorial_10_en,
+        items = listOf(
+            tutorial_10_1,
+        )
+    )
+
+fun ftueInfoItem11(locale: String) =
+    FtueInfoItem(
+        title = tutorial_settings,
+        image = if (locale == Locales.ru) MR.images.tutorial_11_ru else MR.images.tutorial_11_en,
+        items = listOf(
+            tutorial_11_1,
+            tutorial_11_2,
+            tutorial_11_3,
+            tutorial_11_4,
         )
     )
 
 data class FtueInfo(
-    val title: String = "",
+    val title: StringResource,
     val items: List<FtueInfoItem> = emptyList(),
 ) {
     fun isNotEmpty() =
@@ -293,7 +352,7 @@ data class FtueInfo(
 }
 
 data class FtueInfoItem(
-    val title: String,
+    val title: StringResource,
     val image: ImageResource? = null,
-    val items: List<String> = emptyList(),
+    val items: List<StringResource> = emptyList(),
 )

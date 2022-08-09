@@ -29,6 +29,7 @@ internal class ListStoreFactory(
             name = "ListStore",
             initialState = ListState(
                 deps.config,
+                locale = getLocale(),
                 isTutorialCompleted = isTutorialCompleted()
             ),
             bootstrapper = BootstrapperImpl(),
@@ -155,7 +156,12 @@ internal class ListStoreFactory(
 
         private fun update(newConfig: ListConfig): ListState {
             saveLastConfigId(newConfig.id)
-            return ListState(newConfig, hasChanges = newConfig != deps.config, isTutorialCompleted())
+            return ListState(
+                newConfig,
+                locale = getLocale(),
+                hasChanges = newConfig != deps.config,
+                isTutorialCompleted = isTutorialCompleted()
+            )
         }
 
         private fun ListConfig.add(): ListConfig =

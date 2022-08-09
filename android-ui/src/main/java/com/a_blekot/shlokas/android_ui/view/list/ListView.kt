@@ -18,10 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import com.a_blekot.shlokas.android_ui.custom.InfoPopup
-import com.a_blekot.shlokas.android_ui.custom.StandartColumn
-import com.a_blekot.shlokas.android_ui.custom.StandartLazyColumn
-import com.a_blekot.shlokas.android_ui.custom.StandartRow
+import com.a_blekot.shlokas.android_ui.custom.*
 import com.a_blekot.shlokas.android_ui.theme.Dimens.borderSmall
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeXL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusS
@@ -53,7 +50,7 @@ fun ListView(component: ListComponent) {
         Napier.d("isTutorialCompleted = ${state.value.isTutorialCompleted}", tag = "TUTOR")
 
         if (!state.value.isTutorialCompleted) {
-            InfoPopup(modifier = Modifier.fillMaxSize()) {
+            InfoPopup(ftueInfo(state.value.locale), modifier = Modifier.fillMaxSize()) {
                 component.onTutorialCompleted()
             }
         }
