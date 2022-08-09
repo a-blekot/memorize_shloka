@@ -32,8 +32,11 @@ import com.a_blekot.shlokas.android_ui.theme.Dimens.borderSmall
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusS
 import com.a_blekot.shlokas.common.data.Locales
-import com.a_blekot.shlokas.common.data.Locales.en
+import com.a_blekot.shlokas.common.data.Locales.ru
 import com.a_blekot.shlokas.common.resources.MR
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_about
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_metodics
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_settings
 import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_10_1
 import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_11_1
 import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_11_2
@@ -263,7 +266,7 @@ fun ftueInfoItem3() =
 fun ftueInfoItem4(locale: String) =
     FtueInfoItem(
         title = tutorial_metodics,
-        image = if (locale == Locales.ru) MR.images.tutorial_4_ru else MR.images.tutorial_4_en,
+        image = if (locale == ru) MR.images.tutorial_4_ru else MR.images.tutorial_4_en,
         items = listOf(
             tutorial_4_1,
             tutorial_4_2,
@@ -273,21 +276,21 @@ fun ftueInfoItem4(locale: String) =
 fun ftueInfoItem5(locale: String) =
     FtueInfoItem(
         title = tutorial_metodics,
-        image = if (locale == Locales.ru) MR.images.tutorial_5_ru else MR.images.tutorial_5_en,
+        image = if (locale == ru) MR.images.tutorial_5_ru else MR.images.tutorial_5_en,
         items = listOf(tutorial_5_1)
     )
 
 fun ftueInfoItem6(locale: String) =
     FtueInfoItem(
         title = tutorial_settings,
-        image = if (locale == Locales.ru) MR.images.tutorial_6_ru else MR.images.tutorial_6_en,
+        image = if (locale == ru) MR.images.tutorial_6_ru else MR.images.tutorial_6_en,
         items = listOf(tutorial_6_1)
     )
 
 fun ftueInfoItem7(locale: String) =
     FtueInfoItem(
         title = tutorial_settings,
-        image = if (locale == Locales.ru) MR.images.tutorial_7_ru else MR.images.tutorial_7_en,
+        image = if (locale == ru) MR.images.tutorial_7_ru else MR.images.tutorial_7_en,
         items = listOf(
             tutorial_7_1,
             tutorial_7_2,
@@ -297,7 +300,7 @@ fun ftueInfoItem7(locale: String) =
 fun ftueInfoItem8(locale: String) =
     FtueInfoItem(
         title = tutorial_settings,
-        image = if (locale == Locales.ru) MR.images.tutorial_8_ru else MR.images.tutorial_8_en,
+        image = if (locale == ru) MR.images.tutorial_8_ru else MR.images.tutorial_8_en,
         items = listOf(
             tutorial_8_1,
             tutorial_8_2,
@@ -307,7 +310,7 @@ fun ftueInfoItem8(locale: String) =
 fun ftueInfoItem9_1(locale: String) =
     FtueInfoItem(
         title = tutorial_settings,
-        image = if (locale == Locales.ru) MR.images.tutorial_9_2_ru else MR.images.tutorial_9_2_en,
+        image = if (locale == ru) MR.images.tutorial_9_1_ru else MR.images.tutorial_9_1_en,
         items = listOf(
             tutorial_9_1,
         )
@@ -316,7 +319,7 @@ fun ftueInfoItem9_1(locale: String) =
 fun ftueInfoItem9_2(locale: String) =
     FtueInfoItem(
         title = tutorial_settings,
-        image = if (locale == Locales.ru) MR.images.tutorial_9_1_ru else MR.images.tutorial_9_1_en,
+        image = if (locale == ru) MR.images.tutorial_9_2_ru else MR.images.tutorial_9_2_en,
         items = listOf(
             tutorial_9_2,
         )
@@ -325,7 +328,7 @@ fun ftueInfoItem9_2(locale: String) =
 fun ftueInfoItem10(locale: String) =
     FtueInfoItem(
         title = tutorial_settings,
-        image = if (locale == Locales.ru) MR.images.tutorial_10_ru else MR.images.tutorial_10_en,
+        image = if (locale == ru) MR.images.tutorial_10_ru else MR.images.tutorial_10_en,
         items = listOf(
             tutorial_10_1,
         )
@@ -334,7 +337,7 @@ fun ftueInfoItem10(locale: String) =
 fun ftueInfoItem11(locale: String) =
     FtueInfoItem(
         title = tutorial_settings,
-        image = if (locale == Locales.ru) MR.images.tutorial_11_ru else MR.images.tutorial_11_en,
+        image = if (locale == ru) MR.images.tutorial_11_ru else MR.images.tutorial_11_en,
         items = listOf(
             tutorial_11_1,
             tutorial_11_2,
