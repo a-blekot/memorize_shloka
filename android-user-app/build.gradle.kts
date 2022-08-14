@@ -60,7 +60,6 @@ dependencies {
     debugImplementation(libs.napier.android.debug)
     releaseImplementation(libs.napier.android.release)
 
-//    implementation(platform(libs.firebase.bom))
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)

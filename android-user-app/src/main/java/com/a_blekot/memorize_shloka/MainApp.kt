@@ -13,8 +13,7 @@ import com.a_blekot.shlokas.common.player_impl.PlayerBusImpl
 import com.a_blekot.shlokas.common.utils.LogTag.LIFECYCLE_ACTIVITY
 import com.a_blekot.shlokas.common.utils.LogTag.LIFECYCLE_APP
 import com.a_blekot.shlokas.common.utils.checkLocale
-import com.a_blekot.shlokas.common.utils.dispatchers
-import com.a_blekot.shlokas.common.utils.getLocale
+import com.a_blekot.shlokas.common.utils.dispatchers.dispatchers
 import com.a_blekot.shlokas.common.utils.onAppLaunch
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import io.github.aakira.napier.DebugAntilog

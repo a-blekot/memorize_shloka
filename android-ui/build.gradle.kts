@@ -23,7 +23,6 @@ dependencies {
 
     implementation(libs.bundles.androidx.compose)
     implementation(libs.accompanist.insets)
-//    implementation(libs.decompose.android)
     implementation(libs.decompose.decompose)
     implementation(libs.decompose.extCompose)
     debugImplementation(libs.napier.android.debug)

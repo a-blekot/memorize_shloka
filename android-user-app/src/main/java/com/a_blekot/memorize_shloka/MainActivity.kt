@@ -20,7 +20,8 @@ import com.a_blekot.shlokas.common.root.RootComponentImpl
 import com.a_blekot.shlokas.common.root.RootDeps
 import com.a_blekot.shlokas.common.utils.resources.AndroidConfigReader
 import com.a_blekot.shlokas.common.utils.AndroidFiler
-import com.a_blekot.shlokas.common.utils.dispatchers
+import com.a_blekot.shlokas.common.utils.LogTag.PLAYBACK_SERVICE
+import com.a_blekot.shlokas.common.utils.dispatchers.dispatchers
 import com.a_blekot.shlokas.common.utils.resources.AndroidStringResourceHandler
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.defaultComponentContext
@@ -38,14 +39,14 @@ class MainActivity : ComponentActivity() {
             playbackService = (binder as? PlaybackService.PlaybackBinder)?.service
             playbackService?.setPlayerBus(app.playerBus)
             playbackService?.onActivityStarted()
-            Napier.d( "ACTIVITY onServiceConnected", tag = "PlaybackService")
-            Napier.d( "ACTIVITY boundService = $playbackService", tag = "PlaybackService")
+            Napier.d( "ACTIVITY onServiceConnected", tag = PLAYBACK_SERVICE.name)
+            Napier.d( "ACTIVITY boundService = $playbackService", tag = PLAYBACK_SERVICE.name)
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
             playbackService = null
-            Napier.d( "ACTIVITY onServiceDisconnected", tag = "PlaybackService")
-            Napier.d( "ACTIVITY boundService = $playbackService", tag = "PlaybackService")
+            Napier.d( "ACTIVITY onServiceDisconnected", tag = PLAYBACK_SERVICE.name)
+            Napier.d( "ACTIVITY boundService = $playbackService", tag = PLAYBACK_SERVICE.name)
         }
     }
     private val playbackServiceIntent
@@ -68,8 +69,18 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
-        Napier.d( "ACTIVITY startService", tag = "PlaybackService")
-        startService(playbackServiceIntent)
+        Napier.d( "ACTIVITY startService", tag = PLAYBACK_SERVICE.name)
+        
+        try {
+            startService(playbackServiceIntent)
+        } catch ( e: IllegalArgumentException) {
+            // The process is classed as idle by the platform.
+            // Starting a background service is not allowed in this state.
+            Napier.d("Failed to start service (process is idle).", tag = PLAYBACK_SERVICE.name)
+        } catch (e: IllegalStateException) {
+            // The app is in background, starting service is disallow
+            Napier.d("Failed to start service (app is in background)", tag = PLAYBACK_SERVICE.name)
+        }
     }
 
     override fun onStop() {

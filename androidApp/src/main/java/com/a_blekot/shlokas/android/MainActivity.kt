@@ -36,14 +36,14 @@ class MainActivity : ComponentActivity() {
         override fun onServiceConnected(name: ComponentName?, binder: IBinder?) {
             playbackService = (binder as? PlaybackService.PlaybackBinder)?.service
             playbackService?.setPlayerBus(app.playerBus)
-            Napier.d( "ACTIVITY onServiceConnected", tag = "PlaybackService")
-            Napier.d( "ACTIVITY boundService = $playbackService", tag = "PlaybackService")
+            Napier.d( "ACTIVITY onServiceConnected", tag = PLAYBACK_SERVICE.name)
+            Napier.d( "ACTIVITY boundService = $playbackService", tag = PLAYBACK_SERVICE.name)
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
             playbackService = null
-            Napier.d( "ACTIVITY onServiceDisconnected", tag = "PlaybackService")
-            Napier.d( "ACTIVITY boundService = $playbackService", tag = "PlaybackService")
+            Napier.d( "ACTIVITY onServiceDisconnected", tag = PLAYBACK_SERVICE.name)
+            Napier.d( "ACTIVITY boundService = $playbackService", tag = PLAYBACK_SERVICE.name)
         }
     }
     private val playbackServiceIntent
@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        Napier.d( "ACTIVITY startService", tag = "PlaybackService")
+        Napier.d( "ACTIVITY startService", tag = PLAYBACK_SERVICE.name)
         startService(playbackServiceIntent)
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {

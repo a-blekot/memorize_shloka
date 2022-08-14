@@ -1,7 +1,7 @@
 package com.a_blekot.shlokas.common.details_impl
 
 import com.a_blekot.shlokas.common.data.ShlokaConfig
-import com.a_blekot.shlokas.common.utils.DispatcherProvider
+import com.a_blekot.shlokas.common.utils.dispatchers.DispatcherProvider
 
 data class DetailsDeps(
     val config: ShlokaConfig,

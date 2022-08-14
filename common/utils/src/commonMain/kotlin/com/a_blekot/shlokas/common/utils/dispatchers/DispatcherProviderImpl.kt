@@ -1,4 +1,4 @@
-package com.a_blekot.shlokas.common.utils
+package com.a_blekot.shlokas.common.utils.dispatchers
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

@@ -3,13 +3,11 @@ package com.a_blekot.shlokas.common.player_impl
 import com.a_blekot.shlokas.common.data.tasks.Task
 import com.a_blekot.shlokas.common.player_api.PlayerBus
 import com.a_blekot.shlokas.common.player_api.PlayerFeedback
-import com.a_blekot.shlokas.common.utils.DispatcherProvider
+import com.a_blekot.shlokas.common.utils.dispatchers.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 
