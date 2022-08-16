@@ -5,6 +5,7 @@ import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -230,7 +231,7 @@ fun FoldableView(
     ) {
         StandartRow(
             horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start),
-            modifier = modifier
+            modifier = modifier.clickable { contentIsVisible.value = !contentIsVisible.value }
         ) {
             IconButton(
                 onClick = { contentIsVisible.value = !contentIsVisible.value },
@@ -258,12 +259,3 @@ fun FoldableView(
         }
     }
 }
-
-//@Preview(showBackground = true, backgroundColor = 0xFF00FF00)
-//@Composable
-//fun PlayerViewPreview() {
-//    PlayerView(PlayerComponentStub)
-//}
-//object PlayerComponentStub : PlayerComponent {
-//    override val flow = MutableValue(PlayerState(title = "ШБ 1.1.6", timeMs = 32_050L))
-//}

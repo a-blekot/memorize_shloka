@@ -1,16 +1,14 @@
 package com.a_blekot.shlokas.android_ui.custom
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.focusable
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBackIos
 import androidx.compose.material.icons.rounded.ArrowForwardIos
-import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.DoneOutline
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme.colorScheme
@@ -18,25 +16,29 @@ import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.TabRowDefaults.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.borderSmall
+import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
+import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusM
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusS
-import com.a_blekot.shlokas.common.data.Locales
 import com.a_blekot.shlokas.common.data.Locales.ru
 import com.a_blekot.shlokas.common.resources.MR
-import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_about
-import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_metodics
-import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_settings
+import com.a_blekot.shlokas.common.resources.MR.strings.label_show_later
 import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_10_1
 import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_11_1
 import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_11_2
@@ -63,77 +65,142 @@ import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_8_1
 import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_8_2
 import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_9_1
 import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_9_2
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_about
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_metodics
+import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_settings
 import com.a_blekot.shlokas.common.resources.resolve
 import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.StringResource
 
 @Composable
-fun InfoPopup(info: FtueInfo, modifier: Modifier = Modifier, onCompleted: () -> Unit) {
+fun InfoPopup(info: FtueInfo, modifier: Modifier = Modifier, onSkip: () -> Unit, onComplete: () -> Unit) {
     check(info.isNotEmpty()) {
         "InfoPopup list should not be empty!"
     }
     val page = remember { mutableStateOf(0) }
     val maxPage = info.items.lastIndex
 
-    StandartColumn(
+    Box(
         modifier = modifier
-            .background(
-                colorScheme.background,
-                shape = RoundedCornerShape(radiusS)
-            )
+            .background(Color(0x88000000))
             .focusable(true)
-            .clickable(true) {}
+            .clickable(true) {},
+        contentAlignment = Alignment.Center
     ) {
-        StandartRow {
+        StandartColumn(
+            modifier = Modifier
+                .fillMaxSize(0.9f)
+                .background(
+                    colorScheme.background,
+                    shape = RoundedCornerShape(radiusM)
+                )
+                .focusable(true)
+                .clickable(true) {}
+        ) {
             Text(
                 text = info.title.resolve(LocalContext.current),
                 color = colorScheme.primary,
                 style = typography.headlineLarge,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.weight(1f)
             )
 
+            Divider(color = colorScheme.primary, thickness = borderSmall)
+
+            ButtonsRow(page.value, maxPage, titleRes = info.items[page.value].title) { nextPage ->
+                page.value = nextPage
+            }
+
+            StandartLazyColumn {
+                info.items[page.value].image?.drawableResId?.let {
+                    item {
+                        Image(
+                            painter = painterResource(it),
+                            contentScale = ContentScale.FillBounds,
+                            contentDescription = "tutorial",
+                            modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .align(Alignment.CenterHorizontally)
+                        )
+                    }
+                }
+
+                itemsIndexed(info.items[page.value].items, key = { i, _ -> i }) { index, text ->
+                    FtueInfoRow(index, text)
+                }
+            }
+
             if (page.value == maxPage) {
-                IconButton(
-                    onClick = onCompleted,
-                    modifier = Modifier
-                        .size(Dimens.iconSizeL),
-                ) {
-                    Icon(
-                        Icons.Rounded.Close,
-                        "close",
-                        tint = colorScheme.primary,
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
-            }
-        }
-
-        Divider(color = colorScheme.primary, thickness = borderSmall)
-
-        ButtonsRow(page.value, maxPage, titleRes = info.items[page.value].title) { nextPage ->
-            page.value = nextPage
-        }
-
-        StandartLazyColumn {
-            info.items[page.value].image?.drawableResId?.let {
-                item {
-                    Image(
-                        painter = painterResource(it),
-                        contentScale = ContentScale.FillBounds,
-                        contentDescription = "tutorial",
-                        modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .align(Alignment.CenterHorizontally)
-                    )
-                }
+                Spacer(modifier = Modifier.height(paddingS))
+                CloseButton(onComplete)
+                Spacer(modifier = Modifier.height(paddingS))
             }
 
-            itemsIndexed(info.items[page.value].items, key = { i, _ -> i }) { index, text ->
-                FtueInfoRow(index, text)
+            Spacer(modifier = Modifier.weight(1f))
+
+            if (page.value == 0) {
+                Spacer(modifier = Modifier.height(paddingS))
+                SkipButton(modifier = Modifier.fillMaxWidth(0.8f), onSkip)
+                Spacer(modifier = Modifier.height(paddingS))
             }
         }
+    }
+}
+
+@Composable
+private fun SkipButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
+    Box(
+        modifier = modifier
+            .height(50.dp)
+            .background(
+                color = colorScheme.secondaryContainer,
+                shape = RoundedCornerShape(radiusM)
+            )
+            .border(
+                width = borderSmall,
+                color = colorScheme.primary,
+                shape = RoundedCornerShape(radiusM)
+            )
+            .clickable { onClick.invoke() },
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = label_show_later.resolve(LocalContext.current),
+            color = colorScheme.onPrimaryContainer,
+            style = typography.headlineSmall,
+            textAlign = TextAlign.Center,
+        )
+    }
+}
+
+@Composable
+private fun CloseButton(onClick: () -> Unit) {
+    val infiniteTransition = rememberInfiniteTransition()
+    val scale by infiniteTransition.animateFloat(
+        initialValue = 1f,
+        targetValue = 1.7f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(700, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+
+    IconButton(
+        onClick = onClick,
+        modifier = Modifier
+            .size(Dimens.iconSizeXL)
+            .scale(scale)
+            .background(
+                color = colorScheme.secondaryContainer,
+                shape = RoundedCornerShape(radiusM)
+            ),
+    ) {
+        Icon(
+            Icons.Rounded.DoneOutline,
+            "completed",
+            tint = Color.Green,
+            modifier = Modifier.fillMaxSize()
+        )
     }
 }
 
@@ -194,10 +261,23 @@ private fun ButtonsRow(
             style = typography.titleLarge
         )
 
+        val infiniteTransition = rememberInfiniteTransition()
+        val scale by infiniteTransition.animateFloat(
+            initialValue = 1f,
+            targetValue = 1.4f,
+            animationSpec = infiniteRepeatable(
+                animation = tween(700, easing = LinearEasing),
+                repeatMode = RepeatMode.Reverse
+            )
+        )
+
         IconButton(
             onClick = { onNextPage(page + 1) },
             enabled = page < maxPage,
-            modifier = Modifier.size(Dimens.iconSizeL),
+            modifier = Modifier
+                .size(Dimens.iconSizeL)
+                .scale(scale)
+            ,
         ) {
             Icon(
                 Icons.Rounded.ArrowForwardIos,

@@ -1,7 +1,6 @@
 package com.a_blekot.shlokas.common.player_impl.store
 
 import com.a_blekot.shlokas.common.data.createTasks
-import com.a_blekot.shlokas.common.data.durationMs
 import com.a_blekot.shlokas.common.data.tasks.*
 import com.a_blekot.shlokas.common.player_api.PlaybackState.*
 import com.a_blekot.shlokas.common.player_api.PlayerFeedback
@@ -11,6 +10,7 @@ import com.a_blekot.shlokas.common.player_impl.store.PlayerIntent.*
 import com.a_blekot.shlokas.common.player_impl.store.PlayerLabel.PlayerTask
 import com.a_blekot.shlokas.common.player_impl.store.PlayerStoreFactory.Action.Feedback
 import com.a_blekot.shlokas.common.player_impl.store.PlayerStoreFactory.Action.Start
+import com.a_blekot.shlokas.common.utils.analytics.playCompleted
 import com.a_blekot.shlokas.common.utils.getAutoPlay
 import com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
 import com.arkivanov.mvikotlin.core.store.Reducer
@@ -30,7 +30,7 @@ internal class PlayerStoreFactory(
 ) : StringResourceHandler by deps.stringResourceHandler {
 
     init {
-        check(deps.config.shlokas.isNotEmpty()) {
+        check(deps.config.shlokas.any { it.isSelected }) {
             "PlayConfig can't be empty!"
         }
     }
@@ -69,8 +69,8 @@ internal class PlayerStoreFactory(
     sealed interface Msg {
         object Play : Msg
         object Pause : Msg
-        object Idle: Msg
-        data class ResetCounter(val durationMs: Long): Msg
+        object Idle : Msg
+        data class ResetCounter(val durationMs: Long) : Msg
         data class NextRepeat(val currentRepeat: Int, val durationMs: Long) : Msg
         data class Update(
             val index: Int,
@@ -160,7 +160,14 @@ internal class PlayerStoreFactory(
                 is PauseTask -> pause(task)
                 is IdleTask -> idle(task)
                 is SetTrackTask -> setTrack(task)
-                is StopTask -> stop()
+                is StopTask -> {
+                    deps.analytics.playCompleted(
+                        count = deps.config.shlokas.size,
+                        repeats = deps.config.repeats,
+                        durationSec = durationMs / 1000
+                    )
+                    stop()
+                }
                 is ResetCounterTask -> resetCounter(task)
             }
         }

@@ -12,6 +12,7 @@
     <string name="label_sanskrit">Санскрит</string>
     <string name="label_words">Пословный перевод</string>
     <string name="label_translation">Перевод</string>
+    <string name="label_show_later">Показать позже</string>
 
     <string name="label_repeats_counter">Повторы</string>
     <string name="label_verses_counter">Стихи</string>

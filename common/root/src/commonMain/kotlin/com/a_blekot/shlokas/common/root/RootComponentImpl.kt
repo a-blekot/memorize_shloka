@@ -49,7 +49,7 @@ class RootComponentImpl internal constructor(
             ListComponentImpl(
                 componentContext = childContext,
                 storeFactory = storeFactory,
-                deps = deps.run { ListDeps(ListConfig(), filer, configReader, stringResourceHandler, dispatchers) },
+                deps = deps.run { ListDeps(ListConfig(), filer, configReader, stringResourceHandler, analytics, dispatchers) },
                 output = output
             )
         },
@@ -57,7 +57,7 @@ class RootComponentImpl internal constructor(
             PlayerComponentImpl(
                 componentContext = childContext,
                 storeFactory = storeFactory,
-                deps = deps.run { PlayerDeps(config, playerBus, stringResourceHandler, dispatchers) },
+                deps = deps.run { PlayerDeps(config, playerBus, stringResourceHandler, analytics, dispatchers) },
                 output = output
             )
         },
@@ -73,7 +73,7 @@ class RootComponentImpl internal constructor(
             SettingsComponentImpl(
                 componentContext = childContext,
                 storeFactory = storeFactory,
-                deps = deps.run { SettingsDeps(dispatchers) },
+                deps = deps.run { SettingsDeps(analytics, dispatchers) },
                 output = output
             )
         },

@@ -12,6 +12,8 @@ private const val LAST_CONFIG_ID_KEY = "LAST_CONFIG_NAME_KEY"
 private const val AUTOPLAY_KEY = "AUTOPLAY_KEY"
 private const val PAUSE_AFTER_EACH = "PAUSE_AFTER_EACH"
 private const val TUTORIAL_COMPLETED_KEY = "TUTORIAL_COMPLETED_KEY"
+private const val TUTORIAL_SKIPP_COUNT_KEY = "TUTORIAL_SKIPP_COUNT_KEY"
+private const val SHLOKA_SELECTED_KEY = "SHLOKA_SELECTED_KEY"
 
 private const val DEFAULT_REPEATS = 10
 private const val MAX_REPEATS = 16_108
@@ -40,7 +42,7 @@ fun saveAutoPlay(value: Boolean) =
     settings.putBoolean(AUTOPLAY_KEY, value)
 
 fun getAutoPlay() =
-    settings.getBoolean(AUTOPLAY_KEY, true)
+    settings.getBoolean(AUTOPLAY_KEY, false)
 
 fun saveCurrentWeek(week: Week) =
     settings.putInt(CURRENT_WEEK, week.ordinal)
@@ -74,16 +76,25 @@ fun savePause(pause: Long): Long {
 fun getPause() =
     settings.getLong(PAUSE_AFTER_EACH, DEFAULT_PAUSE)
 
-fun isTutorialCompleted(): Boolean {
-    val result = settings.getBoolean(TUTORIAL_COMPLETED_KEY)
-    Napier.d("settings.isTutorialCompleted() = $result", tag = "TUTOR")
-    return result
-}
+fun isTutorialCompleted() =
+    settings.getBoolean(TUTORIAL_COMPLETED_KEY)
 
-fun setTutorialCompleted() {
-    Napier.d("setTutorialCompleted", tag = "TUTOR")
+fun setTutorialCompleted() =
     settings.putBoolean(TUTORIAL_COMPLETED_KEY, true)
-}
+
+fun onTutorialSkipped() =
+    getTutorialSkippCount().let {
+        settings.putInt(TUTORIAL_SKIPP_COUNT_KEY, it + 1)
+    }
+
+fun getTutorialSkippCount() =
+    settings.getInt(TUTORIAL_SKIPP_COUNT_KEY)
 
 fun weekFromOrdinal(ordinal: Int) =
     Week.values().firstOrNull { it.ordinal == ordinal } ?: Week.FIRST
+
+fun selectShloka(id: String, isSelected: Boolean) =
+    settings.putBoolean("$SHLOKA_SELECTED_KEY-$id", isSelected)
+
+fun isSelected(id: String) =
+    settings.getBoolean("$SHLOKA_SELECTED_KEY-$id", true)

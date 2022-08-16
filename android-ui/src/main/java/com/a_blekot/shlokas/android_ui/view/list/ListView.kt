@@ -47,12 +47,15 @@ fun ListView(component: ListComponent) {
             }
         }
 
-        Napier.d("isTutorialCompleted = ${state.value.isTutorialCompleted}", tag = "TUTOR")
+        Napier.d("isTutorialCompleted = ${state.value.shouldShowTutorial}", tag = "TUTOR")
 
-        if (!state.value.isTutorialCompleted) {
-            InfoPopup(ftueInfo(state.value.locale), modifier = Modifier.fillMaxSize()) {
-                component.onTutorialCompleted()
-            }
+        if (state.value.shouldShowTutorial) {
+            InfoPopup(
+                ftueInfo(state.value.locale),
+                modifier = Modifier.fillMaxSize(),
+                onSkip = component::onTutorialSkipped,
+                onComplete = component::onTutorialCompleted
+            )
         }
     }
 }

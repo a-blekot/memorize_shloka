@@ -3,18 +3,16 @@ package com.a_blekot.shlokas.common.settings_impl
 import com.a_blekot.shlokas.common.settings_api.SettingsComponent
 import com.a_blekot.shlokas.common.settings_api.SettingsOutput
 import com.a_blekot.shlokas.common.settings_api.SettingsState
-import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent
 import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.*
-import com.a_blekot.shlokas.common.settings_impl.store.SettingsLabel
 import com.a_blekot.shlokas.common.settings_impl.store.SettingsStoreFactory
 import com.a_blekot.shlokas.common.utils.*
+import com.a_blekot.shlokas.common.utils.analytics.AnalyticsScreen
+import com.a_blekot.shlokas.common.utils.analytics.tutorialComplete
+import com.a_blekot.shlokas.common.utils.analytics.tutorialSettings
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 
 class SettingsComponentImpl(
     componentContext: ComponentContext,
@@ -48,6 +46,12 @@ class SettingsComponentImpl(
     override fun setWeek(value: Int) = store.accept(Weeks(value))
     override fun setLocale(value: String) = store.accept(Locale(value))
     override fun setAutoplay(value: Boolean) = store.accept(Autoplay(value))
-    override fun onTutorialCompleted() = setTutorialCompleted()
+    override fun onShowTutorial() = deps.analytics.tutorialSettings()
+    override fun onTutorialCompleted() {
+        if (!isTutorialCompleted()) {
+            deps.analytics.tutorialComplete(AnalyticsScreen.SETTINGS)
+            setTutorialCompleted()
+        }
+    }
     override fun sendEmail() = output(SettingsOutput.Email)
 }

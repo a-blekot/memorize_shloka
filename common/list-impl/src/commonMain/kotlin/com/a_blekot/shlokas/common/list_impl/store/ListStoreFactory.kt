@@ -7,15 +7,21 @@ import com.a_blekot.shlokas.common.list_impl.ListDeps
 import com.a_blekot.shlokas.common.list_impl.store.ListIntent.*
 import com.a_blekot.shlokas.common.list_impl.store.ListStoreFactory.Action.LoadLastConfig
 import com.a_blekot.shlokas.common.utils.*
+import com.a_blekot.shlokas.common.utils.analytics.AnalyticsScreen
+import com.a_blekot.shlokas.common.utils.analytics.tutorialComplete
+import com.a_blekot.shlokas.common.utils.analytics.tutorialOpen
+import com.a_blekot.shlokas.common.utils.analytics.tutorialSkip
 import com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineBootstrapper
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
-import io.github.aakira.napier.Napier
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
+private const val TUTORIAL_DELAY_MS = 1_000L
 
 internal class ListStoreFactory(
     private val storeFactory: StoreFactory,
@@ -30,7 +36,7 @@ internal class ListStoreFactory(
             initialState = ListState(
                 deps.config,
                 locale = getLocale(),
-                isTutorialCompleted = isTutorialCompleted()
+                shouldShowTutorial = false
             ),
             bootstrapper = BootstrapperImpl(),
             executorFactory = { ExecutorImpl() },
@@ -43,7 +49,9 @@ internal class ListStoreFactory(
 
     sealed interface Msg {
         object AddShloka : Msg
+        object ShowTutorial : Msg
         object TutorialCompleted : Msg
+        object TutorialSkipped : Msg
         data class Update(val config: ListConfig) : Msg
         data class Title(val title: String) : Msg
         data class RemoveShloka(val id: String) : Msg
@@ -69,9 +77,11 @@ internal class ListStoreFactory(
                         val config = readFirstCanto(id, deps.configReader)
 
                         config?.let {
-                            deps.config = config.updateTitles()
+                            deps.config = config.updateList()
                             withContext(deps.dispatchers.main) {
                                 dispatch(Msg.Update(deps.config))
+
+                                showTutorialIfNeeded()
                             }
                         }
                     }
@@ -85,34 +95,57 @@ internal class ListStoreFactory(
                 Save -> saveList(getState().config)
                 CheckLocale -> checkLocale(getState().config)
                 TutorialCompleted -> tutorialCompleted()
+                TutorialSkipped -> tutorialSkipped()
                 is Title -> rename(getState().config.title, intent.title)
                 is Remove -> dispatch(Msg.RemoveShloka(intent.id))
                 is MoveUp -> dispatch(Msg.MoveUp(intent.id))
                 is MoveDown -> dispatch(Msg.MoveDown(intent.id))
-                is Select -> dispatch(Msg.Select(intent.id, intent.isSelected))
+                is Select -> select(intent.id, intent.isSelected)
                 is SaveShloka -> saveShloka(getState().config, intent.config)
+            }
+        }
+
+        private fun select(id: String, isSelected: Boolean) {
+            selectShloka(id, isSelected)
+            dispatch(Msg.Select(id, isSelected))
+        }
+
+        private suspend fun showTutorialIfNeeded() {
+            if (shouldShowTutorial()) {
+                delay(TUTORIAL_DELAY_MS)
+                deps.analytics.tutorialOpen()
+                dispatch(Msg.ShowTutorial)
             }
         }
 
         private fun checkLocale(config: ListConfig) {
             if (locale != getLocale()) {
                 locale = getLocale()
-                deps.config = config.updateTitles()
+                deps.config = config.updateList()
                 dispatch(Msg.Update(deps.config))
             }
         }
 
         private fun tutorialCompleted() {
-            Napier.d("Store::tutorialCompleted", tag = "TUTOR")
             setTutorialCompleted()
+            deps.analytics.tutorialComplete(AnalyticsScreen.LIST)
             dispatch(Msg.TutorialCompleted)
         }
 
-        private fun ListConfig.updateTitles() =
+        private fun tutorialSkipped() {
+            onTutorialSkipped()
+            deps.analytics.tutorialSkip()
+            dispatch(Msg.TutorialSkipped)
+        }
+
+        private fun ListConfig.updateList() =
             copy(
                 title = resolveListTitle(id),
                 list = list.map {
-                    it.copy(shloka = it.shloka.copy(title = resolveTitle(it.shloka.id)))
+                    it.copy(
+                        shloka = it.shloka.copy(title = resolveTitle(it.shloka.id)),
+                        isSelected = isSelected(it.shloka.id)
+                    )
                 }
             )
 
@@ -145,7 +178,9 @@ internal class ListStoreFactory(
         override fun ListState.reduce(msg: Msg): ListState =
             when (msg) {
                 Msg.AddShloka -> update(newConfig = config.add())
-                Msg.TutorialCompleted -> copy(isTutorialCompleted = true)
+                Msg.ShowTutorial -> copy(shouldShowTutorial = true)
+                Msg.TutorialCompleted -> copy(shouldShowTutorial = false)
+                Msg.TutorialSkipped -> copy(shouldShowTutorial = false)
                 is Msg.Update -> update(newConfig = msg.config)
                 is Msg.Title -> update(newConfig = config.copy(title = msg.title))
                 is Msg.RemoveShloka -> update(newConfig = config.remove(msg.id))
@@ -154,13 +189,11 @@ internal class ListStoreFactory(
                 is Msg.Select -> update(newConfig = config.select(msg.id, msg.isSelected))
             }
 
-        private fun update(newConfig: ListConfig): ListState {
+        private fun ListState.update(newConfig: ListConfig): ListState {
             saveLastConfigId(newConfig.id)
-            return ListState(
-                newConfig,
-                locale = getLocale(),
+            return copy(
+                config = newConfig,
                 hasChanges = newConfig != deps.config,
-                isTutorialCompleted = isTutorialCompleted()
             )
         }
 
@@ -197,4 +230,9 @@ internal class ListStoreFactory(
                 }
             })
     }
+
+    private fun shouldShowTutorial() =
+        getAppLaunchCount().let {
+            (it < 10 && it % 3 == 0) && !isTutorialCompleted()
+        }
 }

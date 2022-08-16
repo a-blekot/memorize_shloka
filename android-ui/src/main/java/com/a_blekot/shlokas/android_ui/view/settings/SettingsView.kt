@@ -61,12 +61,11 @@ fun SettingsView(component: SettingsComponent) {
         modifier = Modifier
             .fillMaxSize()
             .background(colorScheme.background)
-            .padding(horizontal = 8.dp)
     ) {
         Column(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(paddingS),
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().padding(horizontal = paddingS)
         ) {
 
             val repeats = remember { mutableStateOf(TextFieldValue(text = state.value.repeats.toString())) }
@@ -144,7 +143,10 @@ fun SettingsView(component: SettingsComponent) {
 
             StandartRow(
                 horizontalArrangement = Arrangement.spacedBy(paddingM),
-                modifier = Modifier.clickable { infoIsVisible.value = true }.padding(top = paddingM)
+                modifier = Modifier.clickable {
+                    infoIsVisible.value = true
+                    component.onShowTutorial()
+                }.padding(top = paddingM)
             ) {
                 Icon(
                     Icons.Rounded.Info,
@@ -185,10 +187,14 @@ fun SettingsView(component: SettingsComponent) {
         }
 
         if (infoIsVisible.value) {
-            InfoPopup(ftueInfo(state.value.locale), modifier = Modifier.fillMaxSize()) {
-                infoIsVisible.value = false
-                component.onTutorialCompleted()
-            }
+            InfoPopup(ftueInfo(state.value.locale),
+                modifier = Modifier.fillMaxSize(),
+                onSkip = { infoIsVisible.value = false },
+                onComplete = {
+                    infoIsVisible.value = false
+                    component.onTutorialCompleted()
+                }
+            )
         }
     }
 }

@@ -10,6 +10,7 @@ interface SettingsComponent {
     fun setWeek(value: Int) {}
     fun setLocale(value: String) {}
     fun setAutoplay(value: Boolean) {}
+    fun onShowTutorial() {}
     fun onTutorialCompleted() {}
     fun sendEmail() {}
 }

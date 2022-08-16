@@ -117,6 +117,7 @@ class MainActivity : ComponentActivity() {
                 configReader = AndroidConfigReader(this),
                 stringResourceHandler = AndroidStringResourceHandler(this),
                 playerBus = app.playerBus,
+                analytics = app.analytics,
                 dispatchers = dispatchers(),
                 onEmail = ::sendEmail
             )

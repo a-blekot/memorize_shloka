@@ -12,6 +12,7 @@
     <string name="label_sanskrit">Sanskrit</string>
     <string name="label_words">Synonyms</string>
     <string name="label_translation">Translation</string>
+    <string name="label_show_later">Show later</string>
 
     <string name="label_repeats_counter">Repeats</string>
     <string name="label_verses_counter">Verses</string>

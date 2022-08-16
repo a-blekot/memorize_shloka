@@ -15,19 +15,18 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.a_blekot.shlokas.common.list_impl.store.ListStoreFactory
+import com.a_blekot.shlokas.common.utils.analytics.playList
+import com.a_blekot.shlokas.common.utils.analytics.playShloka
 import com.a_blekot.shlokas.common.utils.getCurrentWeek
 import com.a_blekot.shlokas.common.utils.getPause
 import com.a_blekot.shlokas.common.utils.getRepeats
-import com.arkivanov.essenty.lifecycle.doOnPause
-import com.arkivanov.essenty.lifecycle.doOnResume
 import com.arkivanov.essenty.lifecycle.doOnStart
-import com.arkivanov.essenty.lifecycle.doOnStop
 import io.github.aakira.napier.Napier
 
 class ListComponentImpl(
     componentContext: ComponentContext,
     storeFactory: StoreFactory,
-    deps: ListDeps,
+    private val deps: ListDeps,
     private val output: Consumer<ListOutput>
 ) : ListComponent, ComponentContext by componentContext {
 
@@ -56,22 +55,30 @@ class ListComponentImpl(
     override fun select(id: String, isSelected: Boolean) = store.accept(Select(id, isSelected))
     override fun details(config: ShlokaConfig) = output(ListOutput.Details(config))
     override fun play() = onPlay()
-    override fun play(config: ShlokaConfig) = output(ListOutput.Play(config.toPlayConfig()))
+    override fun play(config: ShlokaConfig) {
+        val playConfig = config.toPlayConfig()
+        playShlokaAnalytics(config.shloka.id, playConfig)
+        output(ListOutput.Play(playConfig))
+    }
+
     override fun settings() = output(ListOutput.Settings)
     override fun saveShloka(config: ShlokaConfig) = store.accept(SaveShloka(config))
     override fun onTutorialCompleted() = store.accept(TutorialCompleted)
+    override fun onTutorialSkipped() = store.accept(TutorialSkipped)
 
     private fun onPlay() =
         store.state.config.run {
-        if (list.isNotEmpty()) {
-            output(ListOutput.Play(this.toPlayConfig()))
+            val playConfig = this.toPlayConfig()
+            if (playConfig.shlokas.isNotEmpty()) {
+                playListAnalytics(id, playConfig)
+                output(ListOutput.Play(playConfig))
+            }
         }
-    }
 
     private fun ListConfig.toPlayConfig() =
         PlayConfig(
             week = getCurrentWeek(),
-            shlokas = list,
+            shlokas = list.filter { it.isSelected },
             repeats = getRepeats(),
             pauseAfterEach = getPause()
         )
@@ -82,5 +89,18 @@ class ListComponentImpl(
             shlokas = listOf(copy(isSelected = true)),
             repeats = getRepeats(),
             pauseAfterEach = getPause(),
+        )
+
+    private fun playListAnalytics(id: String, config: PlayConfig) =
+        deps.analytics.playList(
+            listId = id,
+            count = config.shlokas.size,
+            repeats = config.repeats
+        )
+
+    private fun playShlokaAnalytics(id: String, config: PlayConfig) =
+        deps.analytics.playShloka(
+            shlokaId = id,
+            repeats = config.repeats
         )
 }

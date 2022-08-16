@@ -6,5 +6,5 @@ data class ListState(
     val config: ListConfig,
     val locale: String,
     val hasChanges: Boolean = false,
-    val isTutorialCompleted: Boolean = true
+    val shouldShowTutorial: Boolean = true
 )
