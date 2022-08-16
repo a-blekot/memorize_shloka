@@ -2,7 +2,9 @@ package com.a_blekot.shlokas.common.list_impl.store
 
 import com.a_blekot.shlokas.common.data.ListConfig
 import com.a_blekot.shlokas.common.data.ShlokaConfig
+import com.a_blekot.shlokas.common.list_api.ListPresentation
 import com.a_blekot.shlokas.common.list_api.ListState
+import com.a_blekot.shlokas.common.list_api.Lists
 import com.a_blekot.shlokas.common.list_impl.ListDeps
 import com.a_blekot.shlokas.common.list_impl.store.ListIntent.*
 import com.a_blekot.shlokas.common.list_impl.store.ListStoreFactory.Action.LoadLastConfig
@@ -20,6 +22,7 @@ import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import io.github.aakira.napier.Napier
 
 private const val TUTORIAL_DELAY_MS = 1_000L
 
@@ -35,6 +38,7 @@ internal class ListStoreFactory(
             name = "ListStore",
             initialState = ListState(
                 deps.config,
+                availableLists = availableLists(),
                 locale = getLocale(),
                 shouldShowTutorial = false
             ),
@@ -52,6 +56,7 @@ internal class ListStoreFactory(
         object ShowTutorial : Msg
         object TutorialCompleted : Msg
         object TutorialSkipped : Msg
+        data class SetList(val config: ListConfig) : Msg
         data class Update(val config: ListConfig) : Msg
         data class Title(val title: String) : Msg
         data class RemoveShloka(val id: String) : Msg
@@ -73,17 +78,9 @@ internal class ListStoreFactory(
             when (action) {
                 LoadLastConfig -> {
                     scope.launch(deps.dispatchers.io) {
-                        val id = getLastConfigId().ifBlank { "sb_1_canto_config" }
-                        val config = readFirstCanto(id, deps.configReader)
-
-                        config?.let {
-                            deps.config = config.updateList()
-                            withContext(deps.dispatchers.main) {
-                                dispatch(Msg.Update(deps.config))
-
-                                showTutorialIfNeeded()
-                            }
-                        }
+                        Napier.d("getLastConfigId() = ${getLastConfigId()}")
+                        val id = getLastConfigId().ifBlank { Lists.SB_1.id }
+                        setList(id, onComplete = ::showTutorialIfNeeded)
                     }
                 }
             }
@@ -96,12 +93,24 @@ internal class ListStoreFactory(
                 CheckLocale -> checkLocale(getState().config)
                 TutorialCompleted -> tutorialCompleted()
                 TutorialSkipped -> tutorialSkipped()
+                is SetList -> scope.launch { setList(intent.id) }
                 is Title -> rename(getState().config.title, intent.title)
                 is Remove -> dispatch(Msg.RemoveShloka(intent.id))
                 is MoveUp -> dispatch(Msg.MoveUp(intent.id))
                 is MoveDown -> dispatch(Msg.MoveDown(intent.id))
                 is Select -> select(intent.id, intent.isSelected)
                 is SaveShloka -> saveShloka(getState().config, intent.config)
+            }
+        }
+
+        private suspend fun setList(id: String, onComplete: suspend () -> Unit = {}) {
+            val config = readConfig(id, deps.configReader)
+            config?.let {
+                deps.config = config.updateList()
+                withContext(deps.dispatchers.main) {
+                    dispatch(Msg.SetList(deps.config))
+                    onComplete.invoke()
+                }
             }
         }
 
@@ -181,6 +190,7 @@ internal class ListStoreFactory(
                 Msg.ShowTutorial -> copy(shouldShowTutorial = true)
                 Msg.TutorialCompleted -> copy(shouldShowTutorial = false)
                 Msg.TutorialSkipped -> copy(shouldShowTutorial = false)
+                is Msg.SetList -> setList(newConfig = msg.config)
                 is Msg.Update -> update(newConfig = msg.config)
                 is Msg.Title -> update(newConfig = config.copy(title = msg.title))
                 is Msg.RemoveShloka -> update(newConfig = config.remove(msg.id))
@@ -188,6 +198,15 @@ internal class ListStoreFactory(
                 is Msg.MoveDown -> update(newConfig = config.moveDown(msg.id))
                 is Msg.Select -> update(newConfig = config.select(msg.id, msg.isSelected))
             }
+
+        private fun ListState.setList(newConfig: ListConfig): ListState {
+            saveLastConfigId(newConfig.id)
+            return copy(
+                config = newConfig,
+                availableLists = availableLists(),
+                hasChanges = newConfig != deps.config,
+            )
+        }
 
         private fun ListState.update(newConfig: ListConfig): ListState {
             saveLastConfigId(newConfig.id)
@@ -234,5 +253,14 @@ internal class ListStoreFactory(
     private fun shouldShowTutorial() =
         getAppLaunchCount().let {
             (it < 10 && it % 3 == 0) && !isTutorialCompleted()
+        }
+
+    private fun availableLists() =
+        Lists.values().map {
+            ListPresentation(
+                id = it.id,
+                title = resolveListTitle(it.id),
+                isSelected = deps.config.id == it.id
+            )
         }
 }

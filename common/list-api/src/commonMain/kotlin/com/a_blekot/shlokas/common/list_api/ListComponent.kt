@@ -19,4 +19,5 @@ interface ListComponent {
     fun saveShloka(config: ShlokaConfig) {}
     fun onTutorialCompleted() {}
     fun onTutorialSkipped() {}
+    fun setList(id: String) {}
 }

@@ -2,6 +2,7 @@ package com.a_blekot.shlokas.common.utils
 
 import com.a_blekot.shlokas.common.data.ListConfig
 import com.a_blekot.shlokas.common.utils.resources.ConfigReader
+import io.github.aakira.napier.Napier
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -23,7 +24,7 @@ fun writeToFile(config: ListConfig, filer: Filer): Boolean {
     return true
 }
 
-fun readFirstCanto(configName: String, configReader: ConfigReader): ListConfig? =
+fun readConfig(configName: String, configReader: ConfigReader): ListConfig? =
     try {
         val text = configReader.readConfig(configName)
         if (text.isBlank()) {
@@ -32,6 +33,7 @@ fun readFirstCanto(configName: String, configReader: ConfigReader): ListConfig? 
             json.decodeFromString<ListConfig>(text)
         }
     } catch (e: Throwable) {
+        Napier.e("config not found $configName")
         null
     }
 

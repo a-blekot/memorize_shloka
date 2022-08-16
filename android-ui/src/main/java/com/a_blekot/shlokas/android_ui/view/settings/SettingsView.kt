@@ -21,7 +21,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.unit.dp
 import com.a_blekot.shlokas.android_ui.custom.*
 import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingM
@@ -135,7 +134,7 @@ fun SettingsView(component: SettingsComponent) {
                 )
             }
 
-            Divider(color = colorScheme.primary, thickness = Dimens.borderSmall)
+            Divider(color = colorScheme.primary, thickness = Dimens.borderS)
 
             Locale(state.value.locale, modifier = Modifier.padding(top = paddingM)) {
                 component.setLocale(it)
@@ -309,6 +308,6 @@ private fun Locale(locale: String, modifier: Modifier = Modifier, onChanged: (St
             )
         }
 
-        Divider(color = colorScheme.primary, thickness = Dimens.borderSmall)
+        Divider(color = colorScheme.primary, thickness = Dimens.borderS)
     }
 }

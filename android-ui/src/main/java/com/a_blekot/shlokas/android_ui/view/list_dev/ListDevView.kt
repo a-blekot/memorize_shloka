@@ -50,7 +50,7 @@ private fun ButtonsRow(listHasChanges: Boolean, component: ListComponent, modifi
     StandartRow(
         modifier = modifier
             .border(
-                width = Dimens.borderSmall,
+                width = Dimens.borderS,
                 color = colorScheme.primary,
                 shape = RoundedCornerShape(radiusS)
             )

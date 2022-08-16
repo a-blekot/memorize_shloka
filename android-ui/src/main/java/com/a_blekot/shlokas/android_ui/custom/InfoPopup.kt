@@ -27,12 +27,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.a_blekot.shlokas.android_ui.theme.Dimens
-import com.a_blekot.shlokas.android_ui.theme.Dimens.borderSmall
-import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingL
+import com.a_blekot.shlokas.android_ui.theme.Dimens.borderS
+import com.a_blekot.shlokas.android_ui.theme.Dimens.buttonHeight
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusM
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusS
@@ -104,7 +103,7 @@ fun InfoPopup(info: FtueInfo, modifier: Modifier = Modifier, onSkip: () -> Unit,
                 textAlign = TextAlign.Center,
             )
 
-            Divider(color = colorScheme.primary, thickness = borderSmall)
+            Divider(color = colorScheme.primary, thickness = borderS)
 
             ButtonsRow(page.value, maxPage, titleRes = info.items[page.value].title) { nextPage ->
                 page.value = nextPage
@@ -151,13 +150,13 @@ fun InfoPopup(info: FtueInfo, modifier: Modifier = Modifier, onSkip: () -> Unit,
 private fun SkipButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
     Box(
         modifier = modifier
-            .height(50.dp)
+            .height(buttonHeight)
             .background(
                 color = colorScheme.secondaryContainer,
                 shape = RoundedCornerShape(radiusM)
             )
             .border(
-                width = borderSmall,
+                width = borderS,
                 color = colorScheme.primary,
                 shape = RoundedCornerShape(radiusM)
             )

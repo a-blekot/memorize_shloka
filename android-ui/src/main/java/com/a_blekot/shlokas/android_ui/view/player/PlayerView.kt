@@ -1,7 +1,6 @@
 package com.a_blekot.shlokas.android_ui.view.player
 
 import HtmlText
-import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -17,7 +16,6 @@ import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -28,25 +26,21 @@ import com.a_blekot.shlokas.android_ui.custom.SmoothProgress
 import com.a_blekot.shlokas.android_ui.custom.StandartColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartLazyColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartRow
-import com.a_blekot.shlokas.android_ui.theme.Dimens.borderSmall
+import com.a_blekot.shlokas.android_ui.theme.Dimens.borderS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeXL
-import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingXS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusM
-import com.a_blekot.shlokas.common.player_api.PlaybackState
 import com.a_blekot.shlokas.common.player_api.PlaybackState.*
 import com.a_blekot.shlokas.common.player_api.PlayerComponent
 import com.a_blekot.shlokas.common.player_api.PlayerState
 import com.a_blekot.shlokas.common.resources.MR.strings.label_repeats_counter
-import com.a_blekot.shlokas.common.resources.MR.strings.label_sanskrit
 import com.a_blekot.shlokas.common.resources.MR.strings.label_translation
 import com.a_blekot.shlokas.common.resources.MR.strings.label_verses_counter
 import com.a_blekot.shlokas.common.resources.MR.strings.label_words
 import com.a_blekot.shlokas.common.resources.resolve
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
-import io.github.aakira.napier.Napier
 
 //import com.arkivanov.decompose.value.MutableValue
 
@@ -61,7 +55,7 @@ fun PlayerView(component: PlayerComponent) {
             .background(color = colorScheme.background)
             .padding(paddingXS)
             .border(
-                width = borderSmall,
+                width = borderS,
                 color = colorScheme.primary,
                 shape = RoundedCornerShape(radiusM)
             )

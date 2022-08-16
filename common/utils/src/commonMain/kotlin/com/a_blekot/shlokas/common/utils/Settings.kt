@@ -33,7 +33,7 @@ fun getAppLaunchCount() =
     settings.getInt(APP_LAUNCH_COUNT)
 
 fun saveLastConfigId(id: String) =
-    settings.getString(LAST_CONFIG_ID_KEY, id)
+    settings.putString(LAST_CONFIG_ID_KEY, id)
 
 fun getLastConfigId() =
     settings.getString(LAST_CONFIG_ID_KEY)

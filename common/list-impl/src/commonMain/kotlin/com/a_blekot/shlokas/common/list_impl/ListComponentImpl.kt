@@ -65,6 +65,7 @@ class ListComponentImpl(
     override fun saveShloka(config: ShlokaConfig) = store.accept(SaveShloka(config))
     override fun onTutorialCompleted() = store.accept(TutorialCompleted)
     override fun onTutorialSkipped() = store.accept(TutorialSkipped)
+    override fun setList(id: String) = store.accept(SetList(id))
 
     private fun onPlay() =
         store.state.config.run {

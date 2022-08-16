@@ -1,0 +1,270 @@
+{
+  "id": "ni_config",
+  "folder": "ni",
+  "list": [
+    {
+      "shloka": {
+        "id": "NI_01",
+        "folder": "ni"
+      },
+      "chunks": [
+        {
+          "startMs": 300,
+          "endMs": 4850
+        },
+        {
+          "startMs": 4850,
+          "endMs": 9500
+        },
+        {
+          "startMs": 9500,
+          "endMs": 14000
+        },
+        {
+          "startMs": 14000,
+          "endMs": 18500
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "NI_02",
+        "folder": "ni"
+      },
+      "chunks": [
+        {
+          "startMs": 200,
+          "endMs": 3600
+        },
+        {
+          "startMs": 3600,
+          "endMs": 6800
+        },
+        {
+          "startMs": 7200,
+          "endMs": 10400
+        },
+        {
+          "startMs": 10600,
+          "endMs": 14200
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "NI_03",
+        "folder": "ni"
+      },
+      "chunks": [
+        {
+          "startMs": 300,
+          "endMs": 4000
+        },
+        {
+          "startMs": 4400,
+          "endMs": 7900
+        },
+        {
+          "startMs": 8100,
+          "endMs": 11800
+        },
+        {
+          "startMs": 12100,
+          "endMs": 16000
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "NI_04",
+        "folder": "ni"
+      },
+      "chunks": [
+        {
+          "startMs": 250,
+          "endMs": 3400
+        },
+        {
+          "startMs": 3800,
+          "endMs": 7000
+        },
+        {
+          "startMs": 7400,
+          "endMs": 10800
+        },
+        {
+          "startMs": 11300,
+          "endMs": 14700
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "NI_05",
+        "folder": "ni"
+      },
+      "chunks": [
+        {
+          "startMs": 600,
+          "endMs": 5800
+        },
+        {
+          "startMs": 6100,
+          "endMs": 11500
+        },
+        {
+          "startMs": 12200,
+          "endMs": 17300
+        },
+        {
+          "startMs": 17600,
+          "endMs": 22800
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "NI_06",
+        "folder": "ni"
+      },
+      "chunks": [
+        {
+          "startMs": 500,
+          "endMs": 6300
+        },
+        {
+          "startMs": 7000,
+          "endMs": 12350
+        },
+        {
+          "startMs": 13000,
+          "endMs": 18500
+        },
+        {
+          "startMs": 19200,
+          "endMs": 24900
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "NI_07",
+        "folder": "ni"
+      },
+      "chunks": [
+        {
+          "startMs": 1100,
+          "endMs": 6600
+        },
+        {
+          "startMs": 7200,
+          "endMs": 12400
+        },
+        {
+          "startMs": 12800,
+          "endMs": 18300
+        },
+        {
+          "startMs": 18800,
+          "endMs": 24300
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "NI_08",
+        "folder": "ni"
+      },
+      "chunks": [
+        {
+          "startMs": 900,
+          "endMs": 6200
+        },
+        {
+          "startMs": 6700,
+          "endMs": 12100
+        },
+        {
+          "startMs": 12600,
+          "endMs": 17900
+        },
+        {
+          "startMs": 18400,
+          "endMs": 24000
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "NI_09",
+        "folder": "ni"
+      },
+      "chunks": [
+        {
+          "startMs": 600,
+          "endMs": 9300
+        },
+        {
+          "startMs": 9300,
+          "endMs": 18000
+        },
+        {
+          "startMs": 18000,
+          "endMs": 27000
+        },
+        {
+          "startMs": 27000,
+          "endMs": 35400
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "NI_10",
+        "folder": "ni"
+      },
+      "chunks": [
+        {
+          "startMs": 200,
+          "endMs": 9200
+        },
+        {
+          "startMs": 9200,
+          "endMs": 18000
+        },
+        {
+          "startMs": 18000,
+          "endMs": 26500
+        },
+        {
+          "startMs": 26500,
+          "endMs": 35300
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "NI_11",
+        "folder": "ni"
+      },
+      "chunks": [
+        {
+          "startMs": 200,
+          "endMs": 7100
+        },
+        {
+          "startMs": 7100,
+          "endMs": 13800
+        },
+        {
+          "startMs": 14200,
+          "endMs": 20500
+        },
+        {
+          "startMs": 20800,
+          "endMs": 27200
+        }
+      ]
+    }
+  ]
+}

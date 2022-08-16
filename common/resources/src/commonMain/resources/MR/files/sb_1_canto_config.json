@@ -24,8 +24,7 @@
                     "startMs": 22615,
                     "endMs": 28250
                 }
-            ],
-            "isSelected": true
+            ]
         },
         {
             "shloka": {
@@ -49,8 +48,7 @@
                     "startMs": 8500,
                     "endMs": 11200
                 }
-            ],
-            "isSelected": true
+            ]
         },
         {
             "shloka": {
@@ -60,7 +58,7 @@
             "chunks": [
                 {
                     "startMs": 100,
-                    "endMs": 2470
+                    "endMs": 2650
                 },
                 {
                     "startMs": 2770,
@@ -74,8 +72,7 @@
                     "startMs": 7450,
                     "endMs": 10050
                 }
-            ],
-            "isSelected": true
+            ]
         },
         {
             "shloka": {
@@ -88,19 +85,18 @@
                     "endMs": 2870
                 },
                 {
-                    "startMs": 2870,
+                    "startMs": 2900,
                     "endMs": 5550
                 },
                 {
                     "startMs": 5900,
-                    "endMs": 8225
+                    "endMs": 8200
                 },
                 {
                     "startMs": 8225,
                     "endMs": 10500
                 }
-            ],
-            "isSelected": true
+            ]
         },
         {
             "shloka": {
@@ -124,8 +120,7 @@
                     "startMs": 7750,
                     "endMs": 9900
                 }
-            ],
-            "isSelected": true
+            ]
         },
         {
             "shloka": {
@@ -149,8 +144,7 @@
                     "startMs": 8730,
                     "endMs": 11020
                 }
-            ],
-            "isSelected": true
+            ]
         },
         {
             "shloka": {
@@ -174,8 +168,7 @@
                     "startMs": 8450,
                     "endMs": 10900
                 }
-            ],
-            "isSelected": true
+            ]
         },
         {
             "shloka": {
@@ -185,10 +178,10 @@
             "chunks": [
                 {
                     "startMs": 200,
-                    "endMs": 3050
+                    "endMs": 3100
                 },
                 {
-                    "startMs": 3050,
+                    "startMs": 3090,
                     "endMs": 5730
                 },
                 {
@@ -199,8 +192,7 @@
                     "startMs": 8400,
                     "endMs": 10880
                 }
-            ],
-            "isSelected": true
+            ]
         },
         {
             "shloka": {
@@ -210,7 +202,7 @@
             "chunks": [
                 {
                     "startMs": 250,
-                    "endMs": 2950
+                    "endMs": 3000
                 },
                 {
                     "startMs": 2950,
@@ -224,8 +216,7 @@
                     "startMs": 8400,
                     "endMs": 10700
                 }
-            ],
-            "isSelected": true
+            ]
         },
         {
             "shloka": {
@@ -243,14 +234,13 @@
                 },
                 {
                     "startMs": 6000,
-                    "endMs": 8280
+                    "endMs": 8300
                 },
                 {
                     "startMs": 8280,
                     "endMs": 10870
                 }
-            ],
-            "isSelected": true
+            ]
         },
         {
             "shloka": {
@@ -274,8 +264,7 @@
                     "startMs": 11580,
                     "endMs": 15200
                 }
-            ],
-            "isSelected": true
+            ]
         },
         {
             "shloka": {
@@ -299,8 +288,7 @@
                     "startMs": 12000,
                     "endMs": 15630
                 }
-            ],
-            "isSelected": true
+            ]
         },
         {
             "shloka": {
@@ -318,14 +306,13 @@
                 },
                 {
                     "startMs": 5150,
-                    "endMs": 7950
+                    "endMs": 8000
                 },
                 {
                     "startMs": 8000,
                     "endMs": 10520
                 }
-            ],
-            "isSelected": true
+            ]
         },
         {
             "shloka": {
@@ -349,8 +336,7 @@
                     "startMs": 8350,
                     "endMs": 10900
                 }
-            ],
-            "isSelected": true
+            ]
         },
         {
             "shloka": {
@@ -368,14 +354,13 @@
                 },
                 {
                     "startMs": 5850,
-                    "endMs": 8600
+                    "endMs": 8500
                 },
                 {
-                    "startMs": 8610,
+                    "startMs": 8500,
                     "endMs": 11000
                 }
-            ],
-            "isSelected": true
+            ]
         },
         {
             "shloka": {
@@ -399,8 +384,7 @@
                     "startMs": 7470,
                     "endMs": 10150
                 }
-            ],
-            "isSelected": true
+            ]
         },
         {
             "shloka": {
@@ -424,8 +408,7 @@
                     "startMs": 8240,
                     "endMs": 11150
                 }
-            ],
-            "isSelected": true
+            ]
         },
         {
             "shloka": {
@@ -449,8 +432,7 @@
                     "startMs": 7800,
                     "endMs": 10500
                 }
-            ],
-            "isSelected": true
+            ]
         }
     ]
 }

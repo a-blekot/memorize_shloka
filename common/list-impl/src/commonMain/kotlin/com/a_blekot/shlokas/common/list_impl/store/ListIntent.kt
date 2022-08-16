@@ -8,6 +8,7 @@ sealed interface ListIntent {
     object CheckLocale : ListIntent
     object TutorialCompleted : ListIntent
     object TutorialSkipped : ListIntent
+    data class SetList(val id: String) : ListIntent
     data class Title(val title: String) : ListIntent
     data class Remove(val id: String) : ListIntent
     data class MoveUp(val id: String) : ListIntent

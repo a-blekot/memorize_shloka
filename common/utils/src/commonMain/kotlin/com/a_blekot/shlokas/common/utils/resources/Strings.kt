@@ -2,123 +2,49 @@ package com.a_blekot.shlokas.common.utils.resources
 
 import com.a_blekot.shlokas.common.resources.MR
 
+private const val SB = "SB"
+private const val NI = "NI"
+
 fun getTitle(id: String) =
-    when (id) {
-        "SB_1_1_1" -> MR.strings.title_SB_1_1_1
-        "SB_1_1_10" -> MR.strings.title_SB_1_1_10
-        "SB_1_2_6" -> MR.strings.title_SB_1_2_6
-        "SB_1_2_8" -> MR.strings.title_SB_1_2_8
-        "SB_1_2_11" -> MR.strings.title_SB_1_2_11
-        "SB_1_2_16" -> MR.strings.title_SB_1_2_16
-        "SB_1_2_17" -> MR.strings.title_SB_1_2_17
-        "SB_1_2_18" -> MR.strings.title_SB_1_2_18
-        "SB_1_3_28" -> MR.strings.title_SB_1_3_28
-        "SB_1_3_43" -> MR.strings.title_SB_1_3_43
-        "SB_1_5_11" -> MR.strings.title_SB_1_5_11
-        "SB_1_5_18" -> MR.strings.title_SB_1_5_18
-        "SB_1_7_6" -> MR.strings.title_SB_1_7_6
-        "SB_1_7_10" -> MR.strings.title_SB_1_7_10
-        "SB_1_8_26" -> MR.strings.title_SB_1_8_26
-        "SB_1_8_42" -> MR.strings.title_SB_1_8_42
-        "SB_1_13_10" -> MR.strings.title_SB_1_13_10
-        "SB_1_18_13" -> MR.strings.title_SB_1_18_13
+    when {
+        id.startsWith(SB) -> StringsSB.getTitle(id)
+        id.startsWith(NI) -> StringsNI.getTitle(id)
         else -> throw IllegalArgumentException("unknown shloka id: $id")
     }
 
 fun getSanskrit(id: String) =
-    when (id) {
-        "SB_1_1_1" -> MR.strings.sansk_SB_1_1_1
-        "SB_1_1_10" -> MR.strings.sansk_SB_1_1_10
-        "SB_1_2_6" -> MR.strings.sansk_SB_1_2_6
-        "SB_1_2_8" -> MR.strings.sansk_SB_1_2_8
-        "SB_1_2_11" -> MR.strings.sansk_SB_1_2_11
-        "SB_1_2_16" -> MR.strings.sansk_SB_1_2_16
-        "SB_1_2_17" -> MR.strings.sansk_SB_1_2_17
-        "SB_1_2_18" -> MR.strings.sansk_SB_1_2_18
-        "SB_1_3_28" -> MR.strings.sansk_SB_1_3_28
-        "SB_1_3_43" -> MR.strings.sansk_SB_1_3_43
-        "SB_1_5_11" -> MR.strings.sansk_SB_1_5_11
-        "SB_1_5_18" -> MR.strings.sansk_SB_1_5_18
-        "SB_1_7_6" -> MR.strings.sansk_SB_1_7_6
-        "SB_1_7_10" -> MR.strings.sansk_SB_1_7_10
-        "SB_1_8_26" -> MR.strings.sansk_SB_1_8_26
-        "SB_1_8_42" -> MR.strings.sansk_SB_1_8_42
-        "SB_1_13_10" -> MR.strings.sansk_SB_1_13_10
-        "SB_1_18_13" -> MR.strings.sansk_SB_1_18_13
+    when {
+        id.startsWith(SB) -> StringsSB.getSanskrit(id)
+        id.startsWith(NI) -> StringsNI.getSanskrit(id)
         else -> throw IllegalArgumentException("unknown shloka id: $id")
     }
 
 fun getWords(id: String) =
-    when (id) {
-        "SB_1_1_1" -> MR.strings.words_SB_1_1_1
-        "SB_1_1_10" -> MR.strings.words_SB_1_1_10
-        "SB_1_2_6" -> MR.strings.words_SB_1_2_6
-        "SB_1_2_8" -> MR.strings.words_SB_1_2_8
-        "SB_1_2_11" -> MR.strings.words_SB_1_2_11
-        "SB_1_2_16" -> MR.strings.words_SB_1_2_16
-        "SB_1_2_17" -> MR.strings.words_SB_1_2_17
-        "SB_1_2_18" -> MR.strings.words_SB_1_2_18
-        "SB_1_3_28" -> MR.strings.words_SB_1_3_28
-        "SB_1_3_43" -> MR.strings.words_SB_1_3_43
-        "SB_1_5_11" -> MR.strings.words_SB_1_5_11
-        "SB_1_5_18" -> MR.strings.words_SB_1_5_18
-        "SB_1_7_6" -> MR.strings.words_SB_1_7_6
-        "SB_1_7_10" -> MR.strings.words_SB_1_7_10
-        "SB_1_8_26" -> MR.strings.words_SB_1_8_26
-        "SB_1_8_42" -> MR.strings.words_SB_1_8_42
-        "SB_1_13_10" -> MR.strings.words_SB_1_13_10
-        "SB_1_18_13" -> MR.strings.words_SB_1_18_13
+    when {
+        id.startsWith(SB) -> StringsSB.getWords(id)
+        id.startsWith(NI) -> StringsNI.getWords(id)
         else -> throw IllegalArgumentException("unknown shloka id: $id")
     }
 
 fun getTranslation(id: String) =
-    when (id) {
-        "SB_1_1_1" -> MR.strings.trans_SB_1_1_1
-        "SB_1_1_10" -> MR.strings.trans_SB_1_1_10
-        "SB_1_2_6" -> MR.strings.trans_SB_1_2_6
-        "SB_1_2_8" -> MR.strings.trans_SB_1_2_8
-        "SB_1_2_11" -> MR.strings.trans_SB_1_2_11
-        "SB_1_2_16" -> MR.strings.trans_SB_1_2_16
-        "SB_1_2_17" -> MR.strings.trans_SB_1_2_17
-        "SB_1_2_18" -> MR.strings.trans_SB_1_2_18
-        "SB_1_3_28" -> MR.strings.trans_SB_1_3_28
-        "SB_1_3_43" -> MR.strings.trans_SB_1_3_43
-        "SB_1_5_11" -> MR.strings.trans_SB_1_5_11
-        "SB_1_5_18" -> MR.strings.trans_SB_1_5_18
-        "SB_1_7_6" -> MR.strings.trans_SB_1_7_6
-        "SB_1_7_10" -> MR.strings.trans_SB_1_7_10
-        "SB_1_8_26" -> MR.strings.trans_SB_1_8_26
-        "SB_1_8_42" -> MR.strings.trans_SB_1_8_42
-        "SB_1_13_10" -> MR.strings.trans_SB_1_13_10
-        "SB_1_18_13" -> MR.strings.trans_SB_1_18_13
+    when {
+        id.startsWith(SB) -> StringsSB.getTranslation(id)
+        id.startsWith(NI) -> StringsNI.getTranslation(id)
         else -> throw IllegalArgumentException("unknown shloka id: $id")
     }
 
 fun getDescription(id: String) =
-    when (id) {
-        "SB_1_1_1" -> MR.strings.descr_SB_1_1_1
-        "SB_1_1_10" -> MR.strings.descr_SB_1_1_10
-        "SB_1_2_6" -> MR.strings.descr_SB_1_2_6
-        "SB_1_2_8" -> MR.strings.descr_SB_1_2_8
-        "SB_1_2_11" -> MR.strings.descr_SB_1_2_11
-        "SB_1_2_16" -> MR.strings.descr_SB_1_2_16
-        "SB_1_2_17" -> MR.strings.descr_SB_1_2_17
-        "SB_1_2_18" -> MR.strings.descr_SB_1_2_18
-        "SB_1_3_28" -> MR.strings.descr_SB_1_3_28
-        "SB_1_3_43" -> MR.strings.descr_SB_1_3_43
-        "SB_1_5_11" -> MR.strings.descr_SB_1_5_11
-        "SB_1_5_18" -> MR.strings.descr_SB_1_5_18
-        "SB_1_7_6" -> MR.strings.descr_SB_1_7_6
-        "SB_1_7_10" -> MR.strings.descr_SB_1_7_10
-        "SB_1_8_26" -> MR.strings.descr_SB_1_8_26
-        "SB_1_8_42" -> MR.strings.descr_SB_1_8_42
-        "SB_1_13_10" -> MR.strings.descr_SB_1_13_10
-        "SB_1_18_13" -> MR.strings.descr_SB_1_18_13
+    when {
+        id.startsWith(SB) -> StringsSB.getDescription(id)
+        id.startsWith(NI) -> StringsNI.getDescription(id)
         else -> throw IllegalArgumentException("unknown shloka id: $id")
     }
 
 fun getListTitle(id: String) =
     when (id) {
         "sb_1_canto_config" -> MR.strings.title_SB_1_canto
+        "ni_config" -> MR.strings.title_NI
         else -> throw IllegalArgumentException("unknown list config id: $id")
     }
+
+private fun String.takeOrNull(n: Int) = if (length < n) null else take(n)
