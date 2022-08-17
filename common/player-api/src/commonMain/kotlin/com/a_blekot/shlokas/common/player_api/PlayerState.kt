@@ -21,5 +21,5 @@ enum class PlaybackState {
     IDLE,
     PLAYING,
     PAUSED,
-    STOPPED
+    FORCE_PAUSED,
 }

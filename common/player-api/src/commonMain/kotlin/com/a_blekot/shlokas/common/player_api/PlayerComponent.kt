@@ -5,8 +5,8 @@ import com.arkivanov.decompose.value.Value
 interface PlayerComponent {
     val flow: Value<PlayerState>
 
-    fun play() {}
-    fun pause() {}
+    fun forcePlay() {}
+    fun forcePause() {}
     fun restart() {}
     fun stop() {}
 }

@@ -22,7 +22,6 @@ import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import io.github.aakira.napier.Napier
 
 private const val TUTORIAL_DELAY_MS = 1_000L
 
@@ -78,7 +77,6 @@ internal class ListStoreFactory(
             when (action) {
                 LoadLastConfig -> {
                     scope.launch(deps.dispatchers.io) {
-                        Napier.d("getLastConfigId() = ${getLastConfigId()}")
                         val id = getLastConfigId().ifBlank { Lists.SB_1.id }
                         setList(id, onComplete = ::showTutorialIfNeeded)
                     }

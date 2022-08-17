@@ -2,7 +2,6 @@ package com.a_blekot.shlokas.common.utils
 
 import com.a_blekot.shlokas.common.data.Week
 import com.russhwolf.settings.Settings
-import io.github.aakira.napier.Napier
 
 private const val APP_LAUNCH_COUNT = "APP_LAUNCH_COUNT"
 private const val CURRENT_REPEATS = "CURRENT_REPEATS"

@@ -227,10 +227,6 @@ class Player(
             playerScope.launch {
                 Napier.d("PlayerFeedback.Started (duration = ${duration})", tag = "AUDIO_PLAYER")
                 playerBus.update(PlayerFeedback.Started(duration))
-//                delay(duration)
-//                Napier.w("PlayerFeedback.Completed", tag = "AUDIO_PLAYER")
-//                playerBus.update(PlayerFeedback.Completed)
-//                pause()
             }
         }
     }

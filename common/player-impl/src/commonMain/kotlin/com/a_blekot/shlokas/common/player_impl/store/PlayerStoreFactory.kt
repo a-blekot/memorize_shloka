@@ -19,6 +19,7 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineBootstrapper
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import io.github.aakira.napier.Napier
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -69,6 +70,7 @@ internal class PlayerStoreFactory(
     sealed interface Msg {
         object Play : Msg
         object Pause : Msg
+        object ForcePause : Msg
         object Idle : Msg
         data class ResetCounter(val durationMs: Long) : Msg
         data class NextRepeat(val currentRepeat: Int, val durationMs: Long) : Msg
@@ -100,6 +102,8 @@ internal class PlayerStoreFactory(
 
     private inner class ExecutorImpl : CoroutineExecutor<PlayerIntent, Action, PlayerState, Msg, PlayerLabel>() {
 
+        private var playJob: Job? = null
+        private var currentPlayTask: PlayTask? = null
         private var iterator = tasks.iterator()
 
         override fun executeAction(action: Action, getState: () -> PlayerState) {
@@ -111,8 +115,8 @@ internal class PlayerStoreFactory(
 
         override fun executeIntent(intent: PlayerIntent, getState: () -> PlayerState) {
             when (intent) {
-                Play -> nextTask()
-                Pause -> dispatch(Msg.Pause)
+                ForcePlay -> forcePlay()
+                ForcePause -> forcePause()
                 Restart -> start()
                 Stop -> stop()
             }
@@ -137,12 +141,11 @@ internal class PlayerStoreFactory(
             when (feedback) {
                 PlayerFeedback.Ready -> nextTask()
                 is PlayerFeedback.Started -> handlePlaybackStarted(feedback.durationMs)
-//                PlayerFeedback.Completed -> nextTask()
             }
         }
 
         private fun handlePlaybackStarted(durationMs: Long) {
-            scope.launch(deps.dispatchers.default) {
+            playJob = scope.launch(deps.dispatchers.default) {
                 delay(durationMs)
                 nextTask() // next task is Pause or Stop
             }
@@ -150,13 +153,7 @@ internal class PlayerStoreFactory(
 
         suspend fun handleTask(task: Task) {
             when (task) {
-                is PlayTask -> {
-                    publish(PlayerTask(task))
-                    dispatch(Msg.Play)
-                    task.run {
-                        dispatch(Msg.NextRepeat(currentRepeat, duration))
-                    }
-                }
+                is PlayTask -> play(task)
                 is PauseTask -> pause(task)
                 is IdleTask -> idle(task)
                 is SetTrackTask -> setTrack(task)
@@ -170,6 +167,28 @@ internal class PlayerStoreFactory(
                 }
                 is ResetCounterTask -> resetCounter(task)
             }
+        }
+
+        private fun play(task: PlayTask) {
+            currentPlayTask = task
+            publish(PlayerTask(task))
+            dispatch(Msg.Play)
+            task.run {
+                dispatch(Msg.NextRepeat(currentRepeat, duration))
+            }
+        }
+
+        private fun forcePlay() =
+            scope.launch {
+                currentPlayTask?.let {
+                    handleTask(it)
+                } ?: nextTask()
+            }
+
+        private fun forcePause() {
+            playJob?.cancel()
+            publish(PlayerTask(PauseTask(200L)))
+            dispatch(Msg.ForcePause)
         }
 
         private suspend fun pause(task: PauseTask) {
@@ -195,6 +214,7 @@ internal class PlayerStoreFactory(
 
         private fun setTrack(task: SetTrackTask) =
             task.run {
+                currentPlayTask = null
                 val title = resolveTitle(id)
 
                 publish(
@@ -243,6 +263,7 @@ internal class PlayerStoreFactory(
             when (msg) {
                 Msg.Play -> copy(playbackState = PLAYING)
                 Msg.Pause -> copy(playbackState = PAUSED)
+                Msg.ForcePause -> copy(playbackState = FORCE_PAUSED)
                 Msg.Idle -> copy(playbackState = IDLE)
                 is Msg.NextRepeat -> copy(
                     currentRepeat = msg.currentRepeat,

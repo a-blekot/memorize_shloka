@@ -1,7 +1,6 @@
 package com.a_blekot.shlokas.android_ui.view.player
 
 import HtmlText
-import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -9,14 +8,22 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.*
-import androidx.compose.material3.*
+import androidx.compose.material.icons.rounded.ExpandLess
+import androidx.compose.material.icons.rounded.ExpandMore
+import androidx.compose.material.icons.rounded.Pause
+import androidx.compose.material.icons.rounded.PlayArrow
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
-import androidx.compose.runtime.*
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
@@ -32,6 +39,7 @@ import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeXL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingXS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusM
+import com.a_blekot.shlokas.common.player_api.PlaybackState
 import com.a_blekot.shlokas.common.player_api.PlaybackState.*
 import com.a_blekot.shlokas.common.player_api.PlayerComponent
 import com.a_blekot.shlokas.common.player_api.PlayerState
@@ -42,9 +50,6 @@ import com.a_blekot.shlokas.common.resources.MR.strings.label_words
 import com.a_blekot.shlokas.common.resources.resolve
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 
-//import com.arkivanov.decompose.value.MutableValue
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlayerView(component: PlayerComponent) {
     val state = component.flow.subscribeAsState()
@@ -60,9 +65,8 @@ fun PlayerView(component: PlayerComponent) {
                 shape = RoundedCornerShape(radiusM)
             )
     ) {
-
         state.value.run {
-            TitleAndProgress(this)
+            TitleAndProgress(this, component)
 
             HtmlText(
                 text = sanskrit,
@@ -71,12 +75,6 @@ fun PlayerView(component: PlayerComponent) {
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth().padding(horizontal = paddingXS)
             )
-
-            if (!isAutoplay && playbackState == IDLE) {
-                Spacer(modifier = Modifier.height(paddingS))
-                PlayerFAB(component::play)
-                Spacer(modifier = Modifier.height(paddingS))
-            }
 
             val wordsAreVisible = remember { mutableStateOf(false) }
             val translationIsVisible = remember { mutableStateOf(false) }
@@ -99,35 +97,44 @@ fun PlayerView(component: PlayerComponent) {
 }
 
 @Composable
-private fun PlayerFAB(onClick: () -> Unit) {
-    val infiniteTransition = rememberInfiniteTransition()
-    val scale by infiniteTransition.animateFloat(
-        initialValue = 1f,
-        targetValue = 1.7f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(700, easing = LinearEasing),
-            repeatMode = RepeatMode.Reverse
-        )
-    )
-
+private fun PlayPauseFAB(
+    playbackState: PlaybackState,
+    isAutoplay: Boolean,
+    component: PlayerComponent,
+    modifier: Modifier = Modifier
+) {
     IconButton(
-        onClick,
-        modifier = Modifier
+        onClick = {
+            when (playbackState) {
+                PLAYING -> component.forcePause()
+                IDLE -> if (!isAutoplay) component.forcePlay()
+                FORCE_PAUSED -> component.forcePlay()
+                else -> {
+                    /** do nothing **/
+                }
+            }
+        },
+        modifier = modifier
             .size(iconSizeXL)
-            .scale(scale)
             .background(
                 color = colorScheme.secondaryContainer,
                 shape = RoundedCornerShape(radiusM)
             )
     ) {
         Icon(
-            Icons.Rounded.PlayArrow,
-            "Play",
+            playbackState.icon,
+            "Play/Pause",
             tint = colorScheme.onPrimaryContainer,
             modifier = Modifier.fillMaxSize()
         )
     }
 }
+
+private val PlaybackState.icon
+    get() = when (this) {
+        IDLE, FORCE_PAUSED -> Icons.Rounded.PlayArrow
+        else -> Icons.Rounded.Pause
+    }
 
 fun LazyListScope.addFoldableView(
     title: String,
@@ -160,7 +167,7 @@ fun LazyListScope.addFoldableView(
 }
 
 @Composable
-fun TitleAndProgress(state: PlayerState, modifier: Modifier = Modifier) =
+fun TitleAndProgress(state: PlayerState, component: PlayerComponent, modifier: Modifier = Modifier) =
     state.run {
         Row(
             horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start),
@@ -183,14 +190,24 @@ fun TitleAndProgress(state: PlayerState, modifier: Modifier = Modifier) =
                 )
             }
 
-            Text(
-                text = title,
-                color = colorScheme.primary,
-                style = typography.headlineLarge,
-                textAlign = TextAlign.Center,
-                maxLines = 1,
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = modifier.weight(1f)
-            )
+            ) {
+                Text(
+                    text = title,
+                    color = colorScheme.primary,
+                    style = typography.headlineLarge,
+                    textAlign = TextAlign.Center,
+                    maxLines = 1,
+                )
+
+                PlayPauseFAB(
+                    playbackState = playbackState,
+                    isAutoplay = isAutoplay,
+                    component = component,
+                )
+            }
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
