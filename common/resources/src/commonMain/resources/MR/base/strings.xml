@@ -26,6 +26,11 @@
     <string name="label_locale_ru">русский</string>
     <string name="label_locale_uk">украинский</string>
 
+    <string name="label_prerating_title">Любишь учить стихи?!</string>
+    <string name="label_prerating_subtitle">Поставь 5 звезд!</string>
+    <string name="label_prerating_accept">Конечно!</string>
+    <string name="label_prerating_close">Позже</string>
+
     <string name="tutorial_about">О приложении</string>
     <string name="tutorial_metodics">Методика изучения</string>
     <string name="tutorial_settings">Настройки</string>

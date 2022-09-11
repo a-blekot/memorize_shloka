@@ -14,5 +14,7 @@ data class RootDeps(
     val playerBus: PlayerBus,
     val analytics: Analytics,
     val dispatchers: DispatcherProvider,
-    val onEmail: () -> Unit
+    val onEmail: () -> Unit,
+    val onShareApp: () -> Unit,
+    val onInappReview: () -> Unit
 )

@@ -7,5 +7,6 @@ data class ListState(
     val availableLists: List<ListPresentation> = emptyList(),
     val locale: String,
     val hasChanges: Boolean = false,
-    val shouldShowTutorial: Boolean = true
+    val shouldShowTutorial: Boolean = true,
+    val shouldShowPreRating: Boolean = false
 )

@@ -69,6 +69,11 @@
     <string name="label_locale_ru">russian</string>
     <string name="label_locale_uk">ukrainian</string>
 
+    <string name="label_prerating_title">Love studying verses?!</string>
+    <string name="label_prerating_subtitle">Rate us 5 stars!</string>
+    <string name="label_prerating_accept">Sure!</string>
+    <string name="label_prerating_close">Not now</string>
+
     <string name="title_SB_1_canto">Śrīmad-Bhāgavatam\nfirst canto</string>
     <string name="title_NI">Nectar of Instruction</string>
 

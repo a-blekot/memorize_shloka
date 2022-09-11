@@ -16,8 +16,12 @@ interface ListComponent {
     fun play() {}
     fun play(config: ShlokaConfig) {}
     fun settings() {}
+    fun shareApp() {}
     fun saveShloka(config: ShlokaConfig) {}
     fun onTutorialCompleted() {}
     fun onTutorialSkipped() {}
     fun setList(id: String) {}
+
+    fun onPreRatingAccepted() {}
+    fun onPreRatingClosed() {}
 }

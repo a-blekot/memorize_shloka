@@ -12,6 +12,7 @@ import com.a_blekot.shlokas.common.player_impl.store.PlayerStoreFactory.Action.F
 import com.a_blekot.shlokas.common.player_impl.store.PlayerStoreFactory.Action.Start
 import com.a_blekot.shlokas.common.utils.analytics.playCompleted
 import com.a_blekot.shlokas.common.utils.getAutoPlay
+import com.a_blekot.shlokas.common.utils.onPlayCompleted
 import com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
@@ -158,6 +159,7 @@ internal class PlayerStoreFactory(
                 is IdleTask -> idle(task)
                 is SetTrackTask -> setTrack(task)
                 is StopTask -> {
+                    onPlayCompleted()
                     deps.analytics.playCompleted(
                         count = deps.config.shlokas.size,
                         repeats = deps.config.repeats,

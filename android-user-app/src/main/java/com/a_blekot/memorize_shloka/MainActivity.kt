@@ -13,15 +13,16 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.a_blekot.memorize_shloka.MainApp.Companion.app
+import com.a_blekot.memorize_shloka.utils.showInappReview
 import com.a_blekot.shlokas.android_player.PlaybackService
 import com.a_blekot.shlokas.android_ui.theme.AppTheme
 import com.a_blekot.shlokas.common.root.RootComponent
 import com.a_blekot.shlokas.common.root.RootComponentImpl
 import com.a_blekot.shlokas.common.root.RootDeps
-import com.a_blekot.shlokas.common.utils.resources.AndroidConfigReader
 import com.a_blekot.shlokas.common.utils.AndroidFiler
 import com.a_blekot.shlokas.common.utils.LogTag.PLAYBACK_SERVICE
 import com.a_blekot.shlokas.common.utils.dispatchers.dispatchers
+import com.a_blekot.shlokas.common.utils.resources.AndroidConfigReader
 import com.a_blekot.shlokas.common.utils.resources.AndroidStringResourceHandler
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.defaultComponentContext
@@ -119,7 +120,9 @@ class MainActivity : ComponentActivity() {
                 playerBus = app.playerBus,
                 analytics = app.analytics,
                 dispatchers = dispatchers(),
-                onEmail = ::sendEmail
+                onEmail = ::sendEmail,
+                onShareApp = ::shareApp,
+                onInappReview = ::inappReview,
             )
         )
 
@@ -134,4 +137,20 @@ class MainActivity : ComponentActivity() {
             Napier.e("No activity for $intent")
         }
     }
+
+    private fun shareApp() {
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, "http://play.google.com/store/apps/details?id=$packageName")
+        }
+        Intent.createChooser(intent,"Share via")
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        } else {
+            Napier.e("No activity for $intent")
+        }
+    }
+
+    private fun inappReview() =
+        showInappReview(this)
 }

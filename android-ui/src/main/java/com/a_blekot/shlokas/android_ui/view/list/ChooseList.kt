@@ -19,6 +19,7 @@ import com.a_blekot.shlokas.android_ui.theme.Dimens.borderS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.buttonHeight
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingM
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusM
+import com.a_blekot.shlokas.android_ui.theme.dialogBgColor
 import com.a_blekot.shlokas.common.list_api.ListPresentation
 
 @Composable
@@ -29,7 +30,7 @@ fun ChooseList(
 ) {
     Box(
         modifier = modifier
-            .background(Color(0x88000000))
+            .background(dialogBgColor)
             .focusable(true)
             .clickable(true) {},
         contentAlignment = Alignment.Center

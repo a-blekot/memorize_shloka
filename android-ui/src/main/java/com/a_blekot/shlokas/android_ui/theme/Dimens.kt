@@ -3,6 +3,7 @@ package com.a_blekot.shlokas.android_ui.theme
 import androidx.compose.ui.unit.dp
 
 object Dimens {
+    val iconSizeM = 24.dp
     val iconSizeL = 36.dp
     val iconSizeXL = 48.dp
 

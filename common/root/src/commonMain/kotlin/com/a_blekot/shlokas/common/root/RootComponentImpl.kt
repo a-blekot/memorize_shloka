@@ -109,6 +109,8 @@ class RootComponentImpl internal constructor(
             is ListOutput.Play -> navigation.push(Configuration.Player(output.config))
             is ListOutput.Details -> navigation.push(Configuration.Details(output.config))
             is ListOutput.Settings -> navigation.push(Configuration.Settings)
+            is ListOutput.ShareApp -> deps.onShareApp()
+            is ListOutput.InappReview -> deps.onInappReview()
         }
 
     private fun onPlayerOutput(output: PlayerOutput): Unit =

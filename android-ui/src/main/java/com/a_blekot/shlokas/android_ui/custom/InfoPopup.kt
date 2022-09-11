@@ -1,5 +1,6 @@
 package com.a_blekot.shlokas.android_ui.custom
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -35,6 +36,7 @@ import com.a_blekot.shlokas.android_ui.theme.Dimens.buttonHeight
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusM
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusS
+import com.a_blekot.shlokas.android_ui.theme.dialogBgColor
 import com.a_blekot.shlokas.common.data.Locales.ru
 import com.a_blekot.shlokas.common.resources.MR
 import com.a_blekot.shlokas.common.resources.MR.strings.label_show_later
@@ -79,9 +81,13 @@ fun InfoPopup(info: FtueInfo, modifier: Modifier = Modifier, onSkip: () -> Unit,
     val page = remember { mutableStateOf(0) }
     val maxPage = info.items.lastIndex
 
+    BackHandler {
+        onSkip.invoke()
+    }
+
     Box(
         modifier = modifier
-            .background(Color(0x88000000))
+            .background(dialogBgColor)
             .focusable(true)
             .clickable(true) {},
         contentAlignment = Alignment.Center
@@ -137,11 +143,9 @@ fun InfoPopup(info: FtueInfo, modifier: Modifier = Modifier, onSkip: () -> Unit,
 
             Spacer(modifier = Modifier.weight(1f))
 
-            if (page.value == 0) {
-                Spacer(modifier = Modifier.height(paddingS))
-                SkipButton(modifier = Modifier.fillMaxWidth(0.8f), onSkip)
-                Spacer(modifier = Modifier.height(paddingS))
-            }
+            Spacer(modifier = Modifier.height(paddingS))
+            SkipButton(modifier = Modifier.fillMaxWidth(0.8f), onSkip)
+            Spacer(modifier = Modifier.height(paddingS))
         }
     }
 }
@@ -197,7 +201,7 @@ private fun CloseButton(onClick: () -> Unit) {
         Icon(
             Icons.Rounded.DoneOutline,
             "completed",
-            tint = Color.Green,
+            tint = colorScheme.onSecondaryContainer,
             modifier = Modifier.fillMaxSize()
         )
     }

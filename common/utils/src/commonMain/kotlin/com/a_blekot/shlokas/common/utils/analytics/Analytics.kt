@@ -3,6 +3,8 @@ package com.a_blekot.shlokas.common.utils.analytics
 import com.a_blekot.shlokas.common.utils.analytics.AnalyticsEvent.TUTORIAL_OPEN
 import com.a_blekot.shlokas.common.utils.analytics.AnalyticsParam.*
 import com.a_blekot.shlokas.common.utils.getAppLaunchCount
+import com.a_blekot.shlokas.common.utils.getPreRatingClosedCount
+import com.a_blekot.shlokas.common.utils.getPreRatingShownCount
 import com.a_blekot.shlokas.common.utils.getTutorialSkippCount
 
 interface Analytics {
@@ -36,6 +38,23 @@ fun Analytics.playCompleted(count: Int, repeats: Int, durationSec: Long) =
             REPEATS.low to repeats,
             DURATION.low to durationSec
         )
+    )
+
+fun Analytics.preratingShown() =
+    logEvent(
+        AnalyticsEvent.PRERATING_SHOWN,
+        mapOf(COUNT.low to getPreRatingShownCount())
+    )
+
+fun Analytics.preratingAccepted() =
+    logEvent(
+        AnalyticsEvent.PRERATING_ACCEPTED,
+    )
+
+fun Analytics.preratingClosed() =
+    logEvent(
+        AnalyticsEvent.PRERATING_CLOSED,
+        mapOf(COUNT.low to getPreRatingClosedCount())
     )
 
 fun Analytics.tutorialOpen() =

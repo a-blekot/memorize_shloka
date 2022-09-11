@@ -26,6 +26,7 @@ moko-resources = "0.20.1"
 mvikotlin = "3.0.1"
 napier = "2.6.1"
 okio = "3.0.0"
+play-core = "1.8.1"
 random = "0.5.0"
 settings = "0.9"
 sql_delight = "1.5.3"
@@ -87,6 +88,9 @@ mvikotlin-rx = { module = "com.arkivanov.mvikotlin:rx", version.ref = "mvikotlin
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 napier-android-debug = { module = "io.github.aakira:napier-android-debug", version.ref = "napier" }
 napier-android-release = { module = "io.github.aakira:napier-android", version.ref = "napier" }
+
+play-core = { module = "com.google.android.play:core-ktx", version.ref = "play-core" }
+
 random = { module = "com.benasher44:uuid", version.ref = "random" }
 settings = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "settings" }
 

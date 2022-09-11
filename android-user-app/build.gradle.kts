@@ -64,4 +64,6 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.crashlytics.ktx)
+
+    implementation(libs.play.core)
 }

@@ -24,7 +24,6 @@ import kotlinx.coroutines.launch
 
 
 private const val ASSETS_PREFIX = "asset:///"
-private const val MP3 = ".mp3"
 private const val CHANNEL_ID = "SHLOKA_CHANNEL_16108"
 const val NOTIFICATION_ID = 16108
 
@@ -234,15 +233,7 @@ class Player(
     private fun SetTrackTask.toMediaItem(): MediaItem {
         val uri = Uri.parse("$ASSETS_PREFIX${getAsset(folder, id)}")
 
-        return MediaItem.Builder()
-            .setUri(uri)
-            .setMediaMetadata(toMetaData())
-            .build()
-    }
-
-    private fun SetTrackTask.toMediaSource(): MediaSource {
-        val path = getAsset(folder, id)
-        return getMediaSource(path, toMetaData())
+        return MediaItem.fromUri(uri)
     }
 
     private fun SetTrackTask.toMetaData() =
@@ -250,21 +241,4 @@ class Player(
             .setDescription(description)
             .setTitle(title)
             .build()
-
-    private fun getMediaSource(filePath: String, metaData: MediaMetadata) =
-        mediaSourceFactory
-            .createMediaSource(
-                MediaItem.Builder()
-                    .setUri(getUri(filePath))
-                    .setMediaMetadata(metaData)
-                    .build()
-            )
-
-    private val mediaSourceFactory by lazy {
-        ProgressiveMediaSource.Factory(FileDataSource.Factory())
-    }
-
-    private fun getUri(filePath: String) =
-        Uri.parse("$ASSETS_PREFIX$filePath")
-//        Uri.parse(filePath.replace("/document/", "/storage/").replace(":", "/") )
 }

@@ -9,10 +9,7 @@ import com.a_blekot.shlokas.common.list_impl.ListDeps
 import com.a_blekot.shlokas.common.list_impl.store.ListIntent.*
 import com.a_blekot.shlokas.common.list_impl.store.ListStoreFactory.Action.LoadLastConfig
 import com.a_blekot.shlokas.common.utils.*
-import com.a_blekot.shlokas.common.utils.analytics.AnalyticsScreen
-import com.a_blekot.shlokas.common.utils.analytics.tutorialComplete
-import com.a_blekot.shlokas.common.utils.analytics.tutorialOpen
-import com.a_blekot.shlokas.common.utils.analytics.tutorialSkip
+import com.a_blekot.shlokas.common.utils.analytics.*
 import com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
@@ -33,8 +30,9 @@ internal class ListStoreFactory(
     private var locale = getLocale()
 
     fun create(): ListStore =
-        object : ListStore, Store<ListIntent, ListState, Nothing> by storeFactory.create(
+        object : ListStore, Store<ListIntent, ListState, ListLabel> by storeFactory.create(
             name = "ListStore",
+            autoInit = false,
             initialState = ListState(
                 deps.config,
                 availableLists = availableLists(),
@@ -55,6 +53,8 @@ internal class ListStoreFactory(
         object ShowTutorial : Msg
         object TutorialCompleted : Msg
         object TutorialSkipped : Msg
+        object ShowPreRating : Msg
+        object ClosePreRating : Msg
         data class SetList(val config: ListConfig) : Msg
         data class Update(val config: ListConfig) : Msg
         data class Title(val title: String) : Msg
@@ -72,7 +72,7 @@ internal class ListStoreFactory(
         }
     }
 
-    private inner class ExecutorImpl : CoroutineExecutor<ListIntent, Action, ListState, Msg, Nothing>() {
+    private inner class ExecutorImpl : CoroutineExecutor<ListIntent, Action, ListState, Msg, ListLabel>() {
         override fun executeAction(action: Action, getState: () -> ListState) {
             when (action) {
                 LoadLastConfig -> {
@@ -89,6 +89,9 @@ internal class ListStoreFactory(
                 Add -> dispatch(Msg.AddShloka)
                 Save -> saveList(getState().config)
                 CheckLocale -> checkLocale(getState().config)
+                CheckPreRating -> InappReviewInteractor.check { showPreRating() }
+                PreRatingAccepted -> preRatingAccepted()
+                PreRatingClosed -> preRatingClosed()
                 TutorialCompleted -> tutorialCompleted()
                 TutorialSkipped -> tutorialSkipped()
                 is SetList -> scope.launch { setList(intent.id) }
@@ -131,6 +134,24 @@ internal class ListStoreFactory(
                 deps.config = config.updateList()
                 dispatch(Msg.Update(deps.config))
             }
+        }
+
+        private fun showPreRating() {
+            onPreRatingShown()
+            deps.analytics.preratingShown()
+            dispatch(Msg.ShowPreRating)
+        }
+
+        private fun preRatingAccepted() {
+            deps.analytics.preratingAccepted()
+            dispatch(Msg.ClosePreRating)
+            publish(ListLabel.ShowInappReview)
+        }
+
+        private fun preRatingClosed() {
+            onPreRatingClosed()
+            deps.analytics.preratingClosed()
+            dispatch(Msg.ClosePreRating)
         }
 
         private fun tutorialCompleted() {
@@ -188,6 +209,8 @@ internal class ListStoreFactory(
                 Msg.ShowTutorial -> copy(shouldShowTutorial = true)
                 Msg.TutorialCompleted -> copy(shouldShowTutorial = false)
                 Msg.TutorialSkipped -> copy(shouldShowTutorial = false)
+                Msg.ShowPreRating -> copy(shouldShowPreRating = true)
+                Msg.ClosePreRating -> copy(shouldShowPreRating = false)
                 is Msg.SetList -> setList(newConfig = msg.config)
                 is Msg.Update -> update(newConfig = msg.config)
                 is Msg.Title -> update(newConfig = config.copy(title = msg.title))
@@ -250,7 +273,7 @@ internal class ListStoreFactory(
 
     private fun shouldShowTutorial() =
         getAppLaunchCount().let {
-            (it < 10 && it % 3 == 0) && !isTutorialCompleted()
+           it == 2 || it == 7 && !isTutorialCompleted()
         }
 
     private fun availableLists() =

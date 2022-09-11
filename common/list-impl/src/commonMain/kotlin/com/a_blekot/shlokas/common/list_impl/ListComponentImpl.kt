@@ -3,25 +3,24 @@ package com.a_blekot.shlokas.common.list_impl
 import com.a_blekot.shlokas.common.data.ListConfig
 import com.a_blekot.shlokas.common.data.PlayConfig
 import com.a_blekot.shlokas.common.data.ShlokaConfig
-import com.a_blekot.shlokas.common.utils.Consumer
-import com.a_blekot.shlokas.common.utils.asValue
-import com.a_blekot.shlokas.common.utils.getStore
-
 import com.a_blekot.shlokas.common.list_api.ListComponent
 import com.a_blekot.shlokas.common.list_api.ListOutput
 import com.a_blekot.shlokas.common.list_api.ListState
 import com.a_blekot.shlokas.common.list_impl.store.ListIntent.*
-import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.decompose.value.Value
-import com.arkivanov.mvikotlin.core.store.StoreFactory
+import com.a_blekot.shlokas.common.list_impl.store.ListLabel
 import com.a_blekot.shlokas.common.list_impl.store.ListStoreFactory
+import com.a_blekot.shlokas.common.utils.*
 import com.a_blekot.shlokas.common.utils.analytics.playList
 import com.a_blekot.shlokas.common.utils.analytics.playShloka
-import com.a_blekot.shlokas.common.utils.getCurrentWeek
-import com.a_blekot.shlokas.common.utils.getPause
-import com.a_blekot.shlokas.common.utils.getRepeats
+import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.lifecycle.doOnStart
+import com.arkivanov.mvikotlin.core.store.StoreFactory
+import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import io.github.aakira.napier.Napier
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class ListComponentImpl(
     componentContext: ComponentContext,
@@ -38,13 +37,23 @@ class ListComponentImpl(
             ).create()
         }
 
+    private val scope: CoroutineScope = lifecycleCoroutineScope(deps.dispatchers.main)
+
     override val flow: Value<ListState> = store.asValue()
 
     init {
+
+        store.labels
+            .onEach(::handleLabel)
+            .launchIn(scope)
+
         lifecycle.doOnStart {
             Napier.d("list doOnStart")
             store.accept(CheckLocale)
+            store.accept(CheckPreRating)
         }
+
+        store.init()
     }
 
     override fun add() = store.accept(Add)
@@ -62,10 +71,20 @@ class ListComponentImpl(
     }
 
     override fun settings() = output(ListOutput.Settings)
+    override fun shareApp() = output(ListOutput.ShareApp)
     override fun saveShloka(config: ShlokaConfig) = store.accept(SaveShloka(config))
     override fun onTutorialCompleted() = store.accept(TutorialCompleted)
     override fun onTutorialSkipped() = store.accept(TutorialSkipped)
     override fun setList(id: String) = store.accept(SetList(id))
+
+    override fun onPreRatingAccepted() = store.accept(PreRatingAccepted)
+    override fun onPreRatingClosed() = store.accept(PreRatingClosed)
+
+    private fun handleLabel(label: ListLabel) {
+        when (label) {
+            ListLabel.ShowInappReview -> { output(ListOutput.InappReview) }
+        }
+    }
 
     private fun onPlay() =
         store.state.config.run {

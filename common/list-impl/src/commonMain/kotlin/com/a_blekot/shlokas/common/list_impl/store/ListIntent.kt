@@ -6,6 +6,9 @@ sealed interface ListIntent {
     object Add : ListIntent
     object Save : ListIntent
     object CheckLocale : ListIntent
+    object CheckPreRating : ListIntent
+    object PreRatingAccepted : ListIntent
+    object PreRatingClosed : ListIntent
     object TutorialCompleted : ListIntent
     object TutorialSkipped : ListIntent
     data class SetList(val id: String) : ListIntent
