@@ -8,4 +8,5 @@ interface StringResourceHandler {
     fun resolveTranslation(id: String): String
     fun resolveDescription(id: String): String
     fun resolveListTitle(id: String): String
+    fun resolveListShortTitle(id: String): String
 }

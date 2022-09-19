@@ -8,10 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ExpandLess
-import androidx.compose.material.icons.rounded.ExpandMore
-import androidx.compose.material.icons.rounded.Pause
-import androidx.compose.material.icons.rounded.PlayArrow
+import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme.colorScheme
@@ -23,7 +20,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
@@ -108,8 +104,8 @@ private fun PlayPauseFAB(
             when (playbackState) {
                 PLAYING -> component.forcePause()
                 IDLE -> if (!isAutoplay) component.forcePlay()
-                FORCE_PAUSED -> component.forcePlay()
-                else -> {
+                FORCE_PAUSED, NO_AUDIO -> component.forcePlay()
+                PAUSED -> {
                     /** do nothing **/
                 }
             }
@@ -133,6 +129,7 @@ private fun PlayPauseFAB(
 private val PlaybackState.icon
     get() = when (this) {
         IDLE, FORCE_PAUSED -> Icons.Rounded.PlayArrow
+        NO_AUDIO -> Icons.Rounded.MusicOff
         else -> Icons.Rounded.Pause
     }
 

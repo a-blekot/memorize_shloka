@@ -27,9 +27,14 @@ fun ShlokaConfig.createTasks(index: Int, week: Week, repeats: Int, pauseMs: Long
     }
 
     val tasks = mutableListOf<Task>()
-
     tasks.add(SetTrackTask(index, shloka))
-    tasks.add(IdleTask)
+
+    if (!shloka.hasAudio) {
+        tasks.add(NoAudioTask)
+        return tasks
+    } else {
+        tasks.add(IdleTask)
+    }
 
     when (week) {
         Week.FIRST -> {

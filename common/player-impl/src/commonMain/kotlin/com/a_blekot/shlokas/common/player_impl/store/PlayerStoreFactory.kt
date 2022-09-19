@@ -73,6 +73,7 @@ internal class PlayerStoreFactory(
         object Pause : Msg
         object ForcePause : Msg
         object Idle : Msg
+        object NoAudio : Msg
         data class ResetCounter(val durationMs: Long) : Msg
         data class NextRepeat(val currentRepeat: Int, val durationMs: Long) : Msg
         data class Update(
@@ -157,6 +158,7 @@ internal class PlayerStoreFactory(
                 is PlayTask -> play(task)
                 is PauseTask -> pause(task)
                 is IdleTask -> idle(task)
+                is NoAudioTask -> noAudio(task)
                 is SetTrackTask -> setTrack(task)
                 is StopTask -> {
                     onPlayCompleted()
@@ -209,6 +211,11 @@ internal class PlayerStoreFactory(
             }
         }
 
+        private fun noAudio(task: NoAudioTask) {
+            publish(PlayerTask(task))
+            dispatch(Msg.NoAudio)
+        }
+
         private fun stop() {
             publish(PlayerTask(StopTask))
             publish(PlayerLabel.Stop)
@@ -219,14 +226,16 @@ internal class PlayerStoreFactory(
                 currentPlayTask = null
                 val title = resolveTitle(id)
 
-                publish(
-                    PlayerTask(
-                        copy(
-                            title = title,
-                            description = resolveDescription(id),
+                if (hasAudio) {
+                    publish(
+                        PlayerTask(
+                            copy(
+                                title = title,
+                                description = resolveDescription(id),
+                            )
                         )
                     )
-                )
+                }
                 dispatch(
                     Msg.Update(
                         index = index,
@@ -267,6 +276,7 @@ internal class PlayerStoreFactory(
                 Msg.Pause -> copy(playbackState = PAUSED)
                 Msg.ForcePause -> copy(playbackState = FORCE_PAUSED)
                 Msg.Idle -> copy(playbackState = IDLE)
+                Msg.NoAudio -> copy(playbackState = NO_AUDIO)
                 is Msg.NextRepeat -> copy(
                     currentRepeat = msg.currentRepeat,
                     durationMs = msg.durationMs

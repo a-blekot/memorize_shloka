@@ -177,7 +177,7 @@ class Player(
         when (task) {
             is SetTrackTask -> setTrack(task)
             is PlayTask -> play(task)
-            is PauseTask, is IdleTask -> pause()
+            is PauseTask, IdleTask, NoAudioTask -> pause()
             is StopTask -> stop()
         }
     }
@@ -231,7 +231,7 @@ class Player(
     }
 
     private fun SetTrackTask.toMediaItem(): MediaItem {
-        val uri = Uri.parse("$ASSETS_PREFIX${getAsset(folder, id)}")
+        val uri = Uri.parse("$ASSETS_PREFIX${getAsset(id)}")
 
         return MediaItem.fromUri(uri)
     }

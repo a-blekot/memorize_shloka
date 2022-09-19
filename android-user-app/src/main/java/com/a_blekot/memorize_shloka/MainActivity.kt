@@ -13,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.a_blekot.memorize_shloka.MainApp.Companion.app
+import com.a_blekot.memorize_shloka.utils.BillingHelperAndroid
 import com.a_blekot.memorize_shloka.utils.showInappReview
 import com.a_blekot.shlokas.android_player.PlaybackService
 import com.a_blekot.shlokas.android_ui.theme.AppTheme
@@ -21,6 +22,7 @@ import com.a_blekot.shlokas.common.root.RootComponentImpl
 import com.a_blekot.shlokas.common.root.RootDeps
 import com.a_blekot.shlokas.common.utils.AndroidFiler
 import com.a_blekot.shlokas.common.utils.LogTag.PLAYBACK_SERVICE
+import com.a_blekot.shlokas.common.utils.billing.BillingHelper
 import com.a_blekot.shlokas.common.utils.dispatchers.dispatchers
 import com.a_blekot.shlokas.common.utils.resources.AndroidConfigReader
 import com.a_blekot.shlokas.common.utils.resources.AndroidStringResourceHandler
@@ -40,14 +42,14 @@ class MainActivity : ComponentActivity() {
             playbackService = (binder as? PlaybackService.PlaybackBinder)?.service
             playbackService?.setPlayerBus(app.playerBus)
             playbackService?.onActivityStarted()
-            Napier.d( "ACTIVITY onServiceConnected", tag = PLAYBACK_SERVICE.name)
-            Napier.d( "ACTIVITY boundService = $playbackService", tag = PLAYBACK_SERVICE.name)
+            Napier.d("ACTIVITY onServiceConnected", tag = PLAYBACK_SERVICE.name)
+            Napier.d("ACTIVITY boundService = $playbackService", tag = PLAYBACK_SERVICE.name)
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
             playbackService = null
-            Napier.d( "ACTIVITY onServiceDisconnected", tag = PLAYBACK_SERVICE.name)
-            Napier.d( "ACTIVITY boundService = $playbackService", tag = PLAYBACK_SERVICE.name)
+            Napier.d("ACTIVITY onServiceDisconnected", tag = PLAYBACK_SERVICE.name)
+            Napier.d("ACTIVITY boundService = $playbackService", tag = PLAYBACK_SERVICE.name)
         }
     }
     private val playbackServiceIntent
@@ -55,14 +57,18 @@ class MainActivity : ComponentActivity() {
 
     private var isBound = false
     private var playbackService: PlaybackService? = null
+    private var billingHelper: BillingHelper? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        billingHelper = BillingHelperAndroid(this)
+
         val root = root(defaultComponentContext())
 
         setContent {
             AppTheme {
                 MainContent(root)
+//                MainContent(root, billingHelper)
             }
         }
         bindService()
@@ -70,11 +76,13 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
-        Napier.d( "ACTIVITY startService", tag = PLAYBACK_SERVICE.name)
-        
+        Napier.d("ACTIVITY startService", tag = PLAYBACK_SERVICE.name)
+
+//        billingHelper?.checkUnconsumedPurchases()
+
         try {
             startService(playbackServiceIntent)
-        } catch ( e: IllegalArgumentException) {
+        } catch (e: IllegalArgumentException) {
             // The process is classed as idle by the platform.
             // Starting a background service is not allowed in this state.
             Napier.d("Failed to start service (process is idle).", tag = PLAYBACK_SERVICE.name)
@@ -94,7 +102,7 @@ class MainActivity : ComponentActivity() {
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 delay(500L)
-                Napier.d("app.playerBus = ${app.playerBus}", tag="PlayerBus")
+                Napier.d("app.playerBus = ${app.playerBus}", tag = "PlayerBus")
                 if (applicationContext.bindService(playbackServiceIntent, serviceConnection, Context.BIND_IMPORTANT)) {
                     isBound = true
                 }
@@ -117,6 +125,7 @@ class MainActivity : ComponentActivity() {
                 filer = AndroidFiler(this),
                 configReader = AndroidConfigReader(this),
                 stringResourceHandler = AndroidStringResourceHandler(this),
+                billingHelper = billingHelper,
                 playerBus = app.playerBus,
                 analytics = app.analytics,
                 dispatchers = dispatchers(),
@@ -128,7 +137,8 @@ class MainActivity : ComponentActivity() {
 
     private fun sendEmail() {
         val intent = Intent(Intent.ACTION_SENDTO).apply {
-            val uriText = "mailto:aleksey.blekot@gmail.com?subject=Шлоки - обратная связь&body=Харе Кришна! Спасибо за приложение \uD83D\uDE07"
+            val uriText =
+                "mailto:aleksey.blekot@gmail.com?subject=Шлоки - обратная связь&body=Харе Кришна! Спасибо за приложение \uD83D\uDE07"
             data = Uri.parse(uriText)
         }
         if (intent.resolveActivity(packageManager) != null) {
@@ -143,7 +153,7 @@ class MainActivity : ComponentActivity() {
             type = "text/plain"
             putExtra(Intent.EXTRA_TEXT, "http://play.google.com/store/apps/details?id=$packageName")
         }
-        Intent.createChooser(intent,"Share via")
+        Intent.createChooser(intent, "Share via")
         if (intent.resolveActivity(packageManager) != null) {
             startActivity(intent)
         } else {

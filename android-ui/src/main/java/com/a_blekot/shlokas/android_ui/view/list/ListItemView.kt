@@ -2,10 +2,11 @@ package com.a_blekot.shlokas.android_ui.view.list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.MusicOff
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
@@ -15,6 +16,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.a_blekot.shlokas.android_ui.custom.StandartCheckBox
 import com.a_blekot.shlokas.android_ui.custom.StandartRow
+import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusS
 import com.a_blekot.shlokas.common.data.ShlokaConfig
@@ -47,6 +49,15 @@ fun ListItemView(index: Int, config: ShlokaConfig, component: ListComponent, mod
         )
 
         Spacer(modifier = Modifier.weight(1.0f))
+
+        if (!config.shloka.hasAudio) {
+            Icon(
+                Icons.Rounded.MusicOff,
+                "no audio available",
+                tint = colorScheme.onPrimaryContainer,
+                modifier = Modifier.size(Dimens.iconSizeL)
+            )
+        }
 
         StandartCheckBox(config.isSelected, color = colorScheme.onPrimaryContainer) {
             component.select(config.shloka.id, it)

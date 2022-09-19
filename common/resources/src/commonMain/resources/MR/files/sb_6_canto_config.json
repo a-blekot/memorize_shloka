@@ -1,0 +1,201 @@
+{
+    "id": "sb_6_canto_config",
+    "folder": "sb_6_canto",
+    "list": [
+        {
+            "shloka": {
+                "id": "SB_6_1_13_14",
+                "folder": "sb_6_canto",
+                "hasAudio": false
+            },
+            "chunks": [
+                {
+                    "startMs": 4663,
+                    "endMs": 10208
+                },
+                {
+                    "startMs": 10640,
+                    "endMs": 16080
+                },
+                {
+                    "startMs": 16580,
+                    "endMs": 22300
+                },
+                {
+                    "startMs": 22615,
+                    "endMs": 28250
+                }
+            ]
+        },
+        {
+            "shloka": {
+                "id": "SB_6_1_15",
+                "folder": "sb_6_canto"
+            },
+            "chunks": [
+                {
+                    "startMs": 300,
+                    "endMs": 3150
+                },
+                {
+                    "startMs": 3200,
+                    "endMs": 5900
+                },
+                {
+                    "startMs": 6175,
+                    "endMs": 8450
+                },
+                {
+                    "startMs": 8500,
+                    "endMs": 11200
+                }
+            ]
+        },
+        {
+            "shloka": {
+                "id": "SB_6_1_40",
+                "folder": "sb_6_canto",
+                "hasAudio": false
+            },
+            "chunks": [
+                {
+                    "startMs": 100,
+                    "endMs": 2650
+                },
+                {
+                    "startMs": 2770,
+                    "endMs": 5090
+                },
+                {
+                    "startMs": 5250,
+                    "endMs": 7450
+                },
+                {
+                    "startMs": 7450,
+                    "endMs": 10050
+                }
+            ]
+        },
+        {
+            "shloka": {
+                "id": "SB_6_3_19",
+                "folder": "sb_6_canto"
+            },
+            "chunks": [
+                {
+                    "startMs": 150,
+                    "endMs": 2870
+                },
+                {
+                    "startMs": 2900,
+                    "endMs": 5550
+                },
+                {
+                    "startMs": 5900,
+                    "endMs": 8200
+                },
+                {
+                    "startMs": 8225,
+                    "endMs": 10500
+                }
+            ]
+        },
+        {
+            "shloka": {
+                "id": "SB_6_3_20_21",
+                "folder": "sb_6_canto",
+                "hasAudio": false
+            },
+            "chunks": [
+                {
+                    "startMs": 150,
+                    "endMs": 2450
+                },
+                {
+                    "startMs": 2450,
+                    "endMs": 5201
+                },
+                {
+                    "startMs": 5400,
+                    "endMs": 7650
+                },
+                {
+                    "startMs": 7750,
+                    "endMs": 9900
+                }
+            ]
+        },
+        {
+            "shloka": {
+                "id": "SB_6_3_31",
+                "folder": "sb_6_canto"
+            },
+            "chunks": [
+                {
+                    "startMs": 150,
+                    "endMs": 2870
+                },
+                {
+                    "startMs": 2900,
+                    "endMs": 5550
+                },
+                {
+                    "startMs": 5900,
+                    "endMs": 8200
+                },
+                {
+                    "startMs": 8225,
+                    "endMs": 10500
+                }
+            ]
+        },
+        {
+            "shloka": {
+                "id": "SB_6_14_5",
+                "folder": "sb_6_canto"
+            },
+            "chunks": [
+                {
+                    "startMs": 150,
+                    "endMs": 2870
+                },
+                {
+                    "startMs": 2900,
+                    "endMs": 5550
+                },
+                {
+                    "startMs": 5900,
+                    "endMs": 8200
+                },
+                {
+                    "startMs": 8225,
+                    "endMs": 10500
+                }
+            ]
+        },
+        {
+            "shloka": {
+                "id": "SB_6_17_28",
+                "folder": "sb_6_canto"
+            },
+            "chunks": [
+                {
+                    "startMs": 285,
+                    "endMs": 3070
+                },
+                {
+                    "startMs": 3108,
+                    "endMs": 5530
+                },
+                {
+                    "startMs": 5910,
+                    "endMs": 8700
+                },
+                {
+                    "startMs": 8730,
+                    "endMs": 11020
+                }
+            ]
+        }
+    ]
+}

@@ -7,6 +7,7 @@ data class SetTrackTask(
     val id: String,
     val title: String,
     val folder: String,
+    val hasAudio: Boolean,
     val description: String = "",
     override val duration: Long = 0L,
 ) : Task {
@@ -18,5 +19,6 @@ data class SetTrackTask(
         id = shloka.id,
         title = shloka.title,
         folder = shloka.folder,
+        hasAudio = shloka.hasAudio
     )
 }

@@ -10,4 +10,5 @@ data class Shloka(
     val id: String = "",
     val title: String = "",
     val folder: String = "",
+    val hasAudio: Boolean = true,
 ): Parcelable

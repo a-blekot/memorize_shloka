@@ -280,7 +280,7 @@ internal class ListStoreFactory(
         Lists.values().map {
             ListPresentation(
                 id = it.id,
-                title = resolveListTitle(it.id),
+                title = resolveListShortTitle(it.id),
                 isSelected = deps.config.id == it.id
             )
         }

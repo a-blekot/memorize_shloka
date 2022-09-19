@@ -22,4 +22,5 @@ enum class PlaybackState {
     PLAYING,
     PAUSED,
     FORCE_PAUSED,
+    NO_AUDIO
 }

@@ -98,7 +98,7 @@ class ListComponentImpl(
     private fun ListConfig.toPlayConfig() =
         PlayConfig(
             week = getCurrentWeek(),
-            shlokas = list.filter { it.isSelected },
+            shlokas = list.filter { it.isSelected && it.shloka.hasAudio },
             repeats = getRepeats(),
             pauseAfterEach = getPause()
         )

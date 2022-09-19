@@ -28,6 +28,56 @@
         },
         {
             "shloka": {
+                "id": "SB_1_1_2",
+                "folder": "sb_1_canto",
+                "hasAudio": false
+            },
+            "chunks": [
+                {
+                    "startMs": 4663,
+                    "endMs": 10208
+                },
+                {
+                    "startMs": 10640,
+                    "endMs": 16080
+                },
+                {
+                    "startMs": 16580,
+                    "endMs": 22300
+                },
+                {
+                    "startMs": 22615,
+                    "endMs": 28250
+                }
+            ]
+        },
+        {
+            "shloka": {
+                "id": "SB_1_1_3",
+                "folder": "sb_1_canto",
+                "hasAudio": false
+            },
+            "chunks": [
+                {
+                    "startMs": 4663,
+                    "endMs": 10208
+                },
+                {
+                    "startMs": 10640,
+                    "endMs": 16080
+                },
+                {
+                    "startMs": 16580,
+                    "endMs": 22300
+                },
+                {
+                    "startMs": 22615,
+                    "endMs": 28250
+                }
+            ]
+        },
+        {
+            "shloka": {
                 "id": "SB_1_1_10",
                 "folder": "sb_1_canto"
             },
@@ -76,8 +126,83 @@
         },
         {
             "shloka": {
+                "id": "SB_1_2_7",
+                "folder": "sb_1_canto",
+                "hasAudio": false
+            },
+            "chunks": [
+                {
+                    "startMs": 150,
+                    "endMs": 2870
+                },
+                {
+                    "startMs": 2900,
+                    "endMs": 5550
+                },
+                {
+                    "startMs": 5900,
+                    "endMs": 8200
+                },
+                {
+                    "startMs": 8225,
+                    "endMs": 10500
+                }
+            ]
+        },
+        {
+            "shloka": {
                 "id": "SB_1_2_8",
                 "folder": "sb_1_canto"
+            },
+            "chunks": [
+                {
+                    "startMs": 150,
+                    "endMs": 2870
+                },
+                {
+                    "startMs": 2900,
+                    "endMs": 5550
+                },
+                {
+                    "startMs": 5900,
+                    "endMs": 8200
+                },
+                {
+                    "startMs": 8225,
+                    "endMs": 10500
+                }
+            ]
+        },
+        {
+            "shloka": {
+                "id": "SB_1_2_9",
+                "folder": "sb_1_canto",
+                "hasAudio": false
+            },
+            "chunks": [
+                {
+                    "startMs": 150,
+                    "endMs": 2870
+                },
+                {
+                    "startMs": 2900,
+                    "endMs": 5550
+                },
+                {
+                    "startMs": 5900,
+                    "endMs": 8200
+                },
+                {
+                    "startMs": 8225,
+                    "endMs": 10500
+                }
+            ]
+        },
+        {
+            "shloka": {
+                "id": "SB_1_2_10",
+                "folder": "sb_1_canto",
+                "hasAudio": false
             },
             "chunks": [
                 {
@@ -119,6 +244,81 @@
                 {
                     "startMs": 7750,
                     "endMs": 9900
+                }
+            ]
+        },
+        {
+            "shloka": {
+                "id": "SB_1_2_12",
+                "folder": "sb_1_canto",
+                "hasAudio": false
+            },
+            "chunks": [
+                {
+                    "startMs": 150,
+                    "endMs": 2870
+                },
+                {
+                    "startMs": 2900,
+                    "endMs": 5550
+                },
+                {
+                    "startMs": 5900,
+                    "endMs": 8200
+                },
+                {
+                    "startMs": 8225,
+                    "endMs": 10500
+                }
+            ]
+        },
+        {
+            "shloka": {
+                "id": "SB_1_2_13",
+                "folder": "sb_1_canto",
+                "hasAudio": false
+            },
+            "chunks": [
+                {
+                    "startMs": 150,
+                    "endMs": 2870
+                },
+                {
+                    "startMs": 2900,
+                    "endMs": 5550
+                },
+                {
+                    "startMs": 5900,
+                    "endMs": 8200
+                },
+                {
+                    "startMs": 8225,
+                    "endMs": 10500
+                }
+            ]
+        },
+        {
+            "shloka": {
+                "id": "SB_1_2_14",
+                "folder": "sb_1_canto",
+                "hasAudio": false
+            },
+            "chunks": [
+                {
+                    "startMs": 150,
+                    "endMs": 2870
+                },
+                {
+                    "startMs": 2900,
+                    "endMs": 5550
+                },
+                {
+                    "startMs": 5900,
+                    "endMs": 8200
+                },
+                {
+                    "startMs": 8225,
+                    "endMs": 10500
                 }
             ]
         },
@@ -174,6 +374,81 @@
             "shloka": {
                 "id": "SB_1_2_18",
                 "folder": "sb_1_canto"
+            },
+            "chunks": [
+                {
+                    "startMs": 200,
+                    "endMs": 3100
+                },
+                {
+                    "startMs": 3090,
+                    "endMs": 5730
+                },
+                {
+                    "startMs": 5900,
+                    "endMs": 8400
+                },
+                {
+                    "startMs": 8400,
+                    "endMs": 10880
+                }
+            ]
+        },
+        {
+            "shloka": {
+                "id": "SB_1_2_19",
+                "folder": "sb_1_canto",
+                "hasAudio": false
+            },
+            "chunks": [
+                {
+                    "startMs": 200,
+                    "endMs": 3100
+                },
+                {
+                    "startMs": 3090,
+                    "endMs": 5730
+                },
+                {
+                    "startMs": 5900,
+                    "endMs": 8400
+                },
+                {
+                    "startMs": 8400,
+                    "endMs": 10880
+                }
+            ]
+        },
+        {
+            "shloka": {
+                "id": "SB_1_2_20",
+                "folder": "sb_1_canto",
+                "hasAudio": false
+            },
+            "chunks": [
+                {
+                    "startMs": 200,
+                    "endMs": 3100
+                },
+                {
+                    "startMs": 3090,
+                    "endMs": 5730
+                },
+                {
+                    "startMs": 5900,
+                    "endMs": 8400
+                },
+                {
+                    "startMs": 8400,
+                    "endMs": 10880
+                }
+            ]
+        },
+        {
+            "shloka": {
+                "id": "SB_1_2_21",
+                "folder": "sb_1_canto",
+                "hasAudio": false
             },
             "chunks": [
                 {
@@ -268,6 +543,31 @@
         },
         {
             "shloka": {
+                "id": "SB_1_5_17",
+                "folder": "sb_1_canto",
+                "hasAudio": false
+            },
+            "chunks": [
+                {
+                    "startMs": 850,
+                    "endMs": 4255
+                },
+                {
+                    "startMs": 4380,
+                    "endMs": 7933
+                },
+                {
+                    "startMs": 8328,
+                    "endMs": 11900
+                },
+                {
+                    "startMs": 12000,
+                    "endMs": 15630
+                }
+            ]
+        },
+        {
+            "shloka": {
                 "id": "SB_1_5_18",
                 "folder": "sb_1_canto"
             },
@@ -335,6 +635,31 @@
                 {
                     "startMs": 8350,
                     "endMs": 10900
+                }
+            ]
+        },
+        {
+            "shloka": {
+                "id": "SB_1_8_18",
+                "folder": "sb_1_canto",
+                "hasAudio": false
+            },
+            "chunks": [
+                {
+                    "startMs": 300,
+                    "endMs": 3200
+                },
+                {
+                    "startMs": 3250,
+                    "endMs": 5630
+                },
+                {
+                    "startMs": 5850,
+                    "endMs": 8500
+                },
+                {
+                    "startMs": 8500,
+                    "endMs": 11000
                 }
             ]
         },
