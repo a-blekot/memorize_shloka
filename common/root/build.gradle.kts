@@ -22,6 +22,8 @@ kotlin {
                 implementation(projects.common.data)
                 implementation(projects.common.detailsApi)
                 implementation(projects.common.detailsImpl)
+                implementation(projects.common.donationsApi)
+                implementation(projects.common.donationsImpl)
                 implementation(projects.common.listApi)
                 implementation(projects.common.listImpl)
                 implementation(projects.common.playerApi)

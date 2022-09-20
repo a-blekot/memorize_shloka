@@ -31,6 +31,7 @@ import com.arkivanov.decompose.defaultComponentContext
 import com.arkivanov.mvikotlin.logging.store.LoggingStoreFactory
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import io.github.aakira.napier.Napier
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -61,14 +62,13 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        billingHelper = BillingHelperAndroid(this)
+        billingHelper = BillingHelperAndroid(this, this.lifecycleScope)
 
         val root = root(defaultComponentContext())
 
         setContent {
             AppTheme {
                 MainContent(root)
-//                MainContent(root, billingHelper)
             }
         }
         bindService()
@@ -78,7 +78,7 @@ class MainActivity : ComponentActivity() {
         super.onStart()
         Napier.d("ACTIVITY startService", tag = PLAYBACK_SERVICE.name)
 
-//        billingHelper?.checkUnconsumedPurchases()
+        billingHelper?.checkUnconsumedPurchases()
 
         try {
             startService(playbackServiceIntent)

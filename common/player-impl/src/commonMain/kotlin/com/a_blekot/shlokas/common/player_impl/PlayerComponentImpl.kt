@@ -44,14 +44,11 @@ class PlayerComponentImpl(
     override val flow: Value<PlayerState> = store.asValue()
 
     init {
-        Napier.d("playerBus = ${deps.playerBus}", tag="PlayerBus")
-
         store.labels
             .onEach(::handleLabel)
             .launchIn(scope)
 
         lifecycle.doOnDestroy {
-            Napier.d("playerBus = ${deps.playerBus}", tag="PlayerBus")
             deps.playerBus.update(StopTask)
         }
 

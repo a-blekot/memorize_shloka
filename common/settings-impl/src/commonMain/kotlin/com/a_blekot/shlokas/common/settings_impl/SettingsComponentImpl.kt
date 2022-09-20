@@ -54,4 +54,5 @@ class SettingsComponentImpl(
         }
     }
     override fun sendEmail() = output(SettingsOutput.Email)
+    override fun donations() = output(SettingsOutput.Donations)
 }

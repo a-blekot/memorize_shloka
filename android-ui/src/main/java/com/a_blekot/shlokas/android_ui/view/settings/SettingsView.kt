@@ -3,12 +3,10 @@ package com.a_blekot.shlokas.android_ui.view.settings
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Email
-import androidx.compose.material.icons.rounded.Info
-import androidx.compose.material.icons.rounded.PauseCircleOutline
-import androidx.compose.material.icons.rounded.Repeat
+import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.*
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
@@ -32,6 +30,7 @@ import com.a_blekot.shlokas.common.data.Locales.ru
 import com.a_blekot.shlokas.common.data.Week
 import com.a_blekot.shlokas.common.data.Week.*
 import com.a_blekot.shlokas.common.resources.MR.strings.label_autoplay
+import com.a_blekot.shlokas.common.resources.MR.strings.label_donations
 import com.a_blekot.shlokas.common.resources.MR.strings.label_feedback
 import com.a_blekot.shlokas.common.resources.MR.strings.label_four_lines
 import com.a_blekot.shlokas.common.resources.MR.strings.label_locale_en
@@ -61,127 +60,161 @@ fun SettingsView(component: SettingsComponent) {
             .fillMaxSize()
             .background(colorScheme.background)
     ) {
-        Column(
+        LazyColumn(
             verticalArrangement = Arrangement.spacedBy(paddingS),
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth().padding(horizontal = paddingS)
         ) {
+            item {
+                val repeats = remember { mutableStateOf(TextFieldValue(text = state.value.repeats.toString())) }
 
-            val repeats = remember { mutableStateOf(TextFieldValue(text = state.value.repeats.toString())) }
-
-            OutlinedTextField(
-                value = repeats.value,
-                onValueChange = {
-                    repeats.value = it
-                    component.setRepeats(it.text.toIntOrNull() ?: 1)
-                },
-                textStyle = typography.titleLarge,
-                maxLines = 1,
-                label = { Text(text = label_repeats.resolve(context)) },
-                colors = textFieldColors(),
-                placeholder = { Text(text = label_repeats_placeholder.resolve(context)) },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Rounded.Repeat,
-                        tint = colorScheme.primary,
-                        contentDescription = "Repeat"
-                    )
-                },
-                modifier = Modifier.fillMaxWidth().padding(top = paddingM)
-            )
-
-            val pause = remember { mutableStateOf(TextFieldValue(text = state.value.pause.toString())) }
-
-            OutlinedTextField(
-                value = pause.value,
-                onValueChange = {
-                    pause.value = it
-                    component.setPause(it.text.toLongOrNull() ?: 1)
-                },
-                textStyle = typography.titleLarge,
-                maxLines = 1,
-                label = { Text(text = label_pause.resolve(context)) },
-                colors = textFieldColors(),
-                placeholder = { Text(text = label_pause_placeholder.resolve(context)) },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Rounded.PauseCircleOutline,
-                        tint = colorScheme.primary,
-                        contentDescription = "Pause"
-                    )
-                },
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Weeks(state.value.week, modifier = Modifier.padding(top = paddingM)) {
-                component.setWeek(it.ordinal)
+                OutlinedTextField(
+                    value = repeats.value,
+                    onValueChange = {
+                        repeats.value = it
+                        component.setRepeats(it.text.toIntOrNull() ?: 1)
+                    },
+                    textStyle = typography.titleLarge,
+                    maxLines = 1,
+                    label = { Text(text = label_repeats.resolve(context)) },
+                    colors = textFieldColors(),
+                    placeholder = { Text(text = label_repeats_placeholder.resolve(context)) },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Rounded.Repeat,
+                            tint = colorScheme.primary,
+                            contentDescription = "Repeat"
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth().padding(top = paddingM)
+                )
             }
 
-            StandartRow(
-                horizontalArrangement = Arrangement.spacedBy(paddingM),
-            ) {
-                StandartCheckBox(state.value.isAutoplay) {
-                    component.setAutoplay(it)
+            item {
+                val pause = remember { mutableStateOf(TextFieldValue(text = state.value.pause.toString())) }
+
+                OutlinedTextField(
+                    value = pause.value,
+                    onValueChange = {
+                        pause.value = it
+                        component.setPause(it.text.toLongOrNull() ?: 1)
+                    },
+                    textStyle = typography.titleLarge,
+                    maxLines = 1,
+                    label = { Text(text = label_pause.resolve(context)) },
+                    colors = textFieldColors(),
+                    placeholder = { Text(text = label_pause_placeholder.resolve(context)) },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Rounded.PauseCircleOutline,
+                            tint = colorScheme.primary,
+                            contentDescription = "Pause"
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+
+            item {
+                Weeks(state.value.week, modifier = Modifier.padding(top = paddingM)) {
+                    component.setWeek(it.ordinal)
                 }
-
-                Text(
-                    text = label_autoplay.resolve(context),
-                    style = typography.titleLarge,
-                    color = colorScheme.primary,
-                    maxLines = 1,
-                )
             }
 
-            Divider(color = colorScheme.primary, thickness = Dimens.borderS)
-
-            Locale(state.value.locale, modifier = Modifier.padding(top = paddingM)) {
-                component.setLocale(it)
-            }
-
-            StandartRow(
-                horizontalArrangement = Arrangement.spacedBy(paddingM),
-                modifier = Modifier.clickable {
-                    infoIsVisible.value = true
-                    component.onShowTutorial()
-                }.padding(top = paddingM)
-            ) {
-                Icon(
-                    Icons.Rounded.Info,
-                    "Info",
-                    tint = colorScheme.primary,
-                    modifier = Modifier.size(Dimens.iconSizeL)
-                )
-
-                Text(
-                    text = label_show_tutorial.resolve(context),
-                    style = typography.titleLarge,
-                    color = colorScheme.primary,
-                    maxLines = 1,
-                )
-            }
-
-            StandartRow(
-                horizontalArrangement = Arrangement.spacedBy(paddingM),
-            ) {
-
-                Icon(
-                    Icons.Rounded.Email,
-                    "Email",
-                    tint = colorScheme.primary,
-                    modifier = Modifier.size(Dimens.iconSizeL).clickable {
-                        component.sendEmail()
+            item {
+                StandartRow(
+                    horizontalArrangement = Arrangement.spacedBy(paddingM),
+                ) {
+                    StandartCheckBox(state.value.isAutoplay) {
+                        component.setAutoplay(it)
                     }
-                )
 
-                Text(
-                    text = label_feedback.resolve(context),
-                    style = typography.titleLarge,
-                    color = colorScheme.primary,
-                    maxLines = 1,
+                    Text(
+                        text = label_autoplay.resolve(context),
+                        style = typography.titleLarge,
+                        color = colorScheme.primary,
+                        maxLines = 1,
+                    )
+                }
+            }
+
+            item {
+                Divider(color = colorScheme.primary, thickness = Dimens.borderS)
+            }
+
+            item {
+                Locale(state.value.locale, modifier = Modifier.padding(top = paddingM)) {
+                    component.setLocale(it)
+                }
+            }
+
+            item {
+                StandartRow(
+                    horizontalArrangement = Arrangement.spacedBy(paddingM),
+                    modifier = Modifier.clickable { component.donations() }.padding(top = paddingM)
+                ) {
+                    Icon(
+                        Icons.Rounded.VolunteerActivism,
+                        "donations",
+                        tint = colorScheme.primary,
+                        modifier = Modifier.size(Dimens.iconSizeL)
+                    )
+
+                    Text(
+                        text = label_donations.resolve(context),
+                        style = typography.titleLarge,
+                        color = colorScheme.primary,
+                        maxLines = 1,
+                    )
+                }
+            }
+
+            item {
+                StandartRow(
+                    horizontalArrangement = Arrangement.spacedBy(paddingM),
                     modifier = Modifier.clickable { component.sendEmail() }
-                )
+                ) {
+
+                    Icon(
+                        Icons.Rounded.Email,
+                        "Email",
+                        tint = colorScheme.primary,
+                        modifier = Modifier.size(Dimens.iconSizeL)
+                    )
+
+                    Text(
+                        text = label_feedback.resolve(context),
+                        style = typography.titleLarge,
+                        color = colorScheme.primary,
+                        maxLines = 1,
+                    )
+                }
+            }
+
+            item {
+                StandartRow(
+                    horizontalArrangement = Arrangement.spacedBy(paddingM),
+                    modifier = Modifier.clickable {
+                        infoIsVisible.value = true
+                        component.onShowTutorial()
+                    }
+                ) {
+                    Icon(
+                        Icons.Rounded.Info,
+                        "Info",
+                        tint = colorScheme.primary,
+                        modifier = Modifier.size(Dimens.iconSizeL)
+                    )
+
+                    Text(
+                        text = label_show_tutorial.resolve(context),
+                        style = typography.titleLarge,
+                        color = colorScheme.primary,
+                        maxLines = 1,
+                    )
+                }
             }
         }
 

@@ -6,10 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.MenuBook
-import androidx.compose.material.icons.rounded.PlayCircle
-import androidx.compose.material.icons.rounded.Settings
-import androidx.compose.material.icons.rounded.Share
+import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -110,6 +107,18 @@ private fun ButtonsRow(component: ListComponent, onListClick: () -> Unit, modifi
             Icon(
                 Icons.Rounded.Share,
                 "share",
+                tint = colorScheme.primary,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+
+        IconButton(
+            onClick = { component.donations() },
+            modifier = Modifier.size(iconSizeXL),
+        ) {
+            Icon(
+                Icons.Rounded.VolunteerActivism,
+                "donations",
                 tint = colorScheme.primary,
                 modifier = Modifier.fillMaxSize()
             )

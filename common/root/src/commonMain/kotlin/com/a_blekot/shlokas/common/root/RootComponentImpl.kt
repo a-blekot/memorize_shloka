@@ -28,6 +28,10 @@ import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
 import com.arkivanov.mvikotlin.core.store.StoreFactory
+import com.listentoprabhupada.common.donations_api.DonationsComponent
+import com.listentoprabhupada.common.donations_api.DonationsOutput
+import com.listentoprabhupada.common.donations_impl.DonationsComponentImpl
+import com.listentoprabhupada.common.donations_impl.DonationsDeps
 
 class RootComponentImpl internal constructor(
     componentContext: ComponentContext,
@@ -35,7 +39,8 @@ class RootComponentImpl internal constructor(
     private val list: (ComponentContext, Consumer<ListOutput>) -> ListComponent,
     private val player: (ComponentContext, config: PlayConfig, Consumer<PlayerOutput>) -> PlayerComponent,
     private val details: (ComponentContext, config: ShlokaConfig, Consumer<DetailsOutput>) -> DetailsComponent,
-    private val settings: (ComponentContext, Consumer<SettingsOutput>) -> SettingsComponent
+    private val settings: (ComponentContext, Consumer<SettingsOutput>) -> SettingsComponent,
+    private val donations: (ComponentContext, Consumer<DonationsOutput>) -> DonationsComponent,
 ) : RootComponent, ComponentContext by componentContext {
 
     constructor(
@@ -77,6 +82,14 @@ class RootComponentImpl internal constructor(
                 output = output
             )
         },
+        donations = { childContext, output ->
+            DonationsComponentImpl(
+                componentContext = childContext,
+                storeFactory = storeFactory,
+                deps = deps.run { DonationsDeps(analytics, billingHelper, dispatchers, stringResourceHandler) },
+                output = output
+            )
+        },
     )
 
     private val navigation = StackNavigation<Configuration>()
@@ -102,6 +115,8 @@ class RootComponentImpl internal constructor(
                 Details(details(componentContext, configuration.config, Consumer(::onDetailsOutput)))
             is Configuration.Settings ->
                 Settings(settings(componentContext, Consumer(::onSettingsOutput)))
+            is Configuration.Donations ->
+                Donations(donations(componentContext, Consumer(::onDonationsOutput)))
         }
 
     private fun onListOutput(output: ListOutput): Unit =
@@ -109,6 +124,7 @@ class RootComponentImpl internal constructor(
             is ListOutput.Play -> navigation.push(Configuration.Player(output.config))
             is ListOutput.Details -> navigation.push(Configuration.Details(output.config))
             is ListOutput.Settings -> navigation.push(Configuration.Settings)
+            is ListOutput.Donations -> navigation.push(Configuration.Donations)
             is ListOutput.ShareApp -> deps.onShareApp()
             is ListOutput.InappReview -> deps.onInappReview()
         }
@@ -131,6 +147,13 @@ class RootComponentImpl internal constructor(
     private fun onSettingsOutput(output: SettingsOutput) {
         when (output) {
             SettingsOutput.Email -> deps.onEmail()
+            SettingsOutput.Donations -> navigation.push(Configuration.Donations)
+        }
+    }
+
+    private fun onDonationsOutput(output: DonationsOutput) {
+        when (output) {
+            DonationsOutput.SuccessPurchase -> navigation.pop()
         }
     }
 
@@ -146,5 +169,8 @@ class RootComponentImpl internal constructor(
 
         @Parcelize
         object Settings : Configuration()
+
+        @Parcelize
+        object Donations : Configuration()
     }
 }

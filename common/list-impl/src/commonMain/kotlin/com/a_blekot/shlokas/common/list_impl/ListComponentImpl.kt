@@ -71,6 +71,7 @@ class ListComponentImpl(
     }
 
     override fun settings() = output(ListOutput.Settings)
+    override fun donations() = output(ListOutput.Donations)
     override fun shareApp() = output(ListOutput.ShareApp)
     override fun saveShloka(config: ShlokaConfig) = store.accept(SaveShloka(config))
     override fun onTutorialCompleted() = store.accept(TutorialCompleted)

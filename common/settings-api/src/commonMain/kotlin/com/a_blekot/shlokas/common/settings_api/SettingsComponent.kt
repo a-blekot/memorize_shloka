@@ -13,4 +13,5 @@ interface SettingsComponent {
     fun onShowTutorial() {}
     fun onTutorialCompleted() {}
     fun sendEmail() {}
+    fun donations() {}
 }

@@ -1,34 +1,49 @@
 package com.a_blekot.memorize_shloka.utils
 
 import android.app.Activity
+import com.a_blekot.shlokas.common.utils.billing.BillingEvent
+import com.a_blekot.shlokas.common.utils.billing.BillingEvent.PurchaseSuccess
 import com.a_blekot.shlokas.common.utils.billing.BillingHelper
-import com.a_blekot.shlokas.common.utils.billing.DonationProduct
+import com.a_blekot.shlokas.common.utils.billing.BillingOperation
+import com.a_blekot.shlokas.common.utils.billing.BillingOperation.*
+import com.a_blekot.shlokas.common.data.Donation
+import com.a_blekot.shlokas.common.data.getDonationLevel
 import com.android.billingclient.api.*
 import com.android.billingclient.api.BillingClient.BillingResponseCode
 import com.android.billingclient.api.BillingClient.ProductType
 import com.android.billingclient.api.BillingFlowParams.ProductDetailsParams
 import com.android.billingclient.api.Purchase.PurchaseState
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 
-class BillingHelperAndroid(private val activity: Activity) : BillingHelper {
+class BillingHelperAndroid(private val activity: Activity, private val scope: CoroutineScope) : BillingHelper {
 
     private var productDetailsList = emptyList<ProductDetails>()
 
     private val billingClient: BillingClient
 
+    private val _events = MutableSharedFlow<BillingEvent>()
+
     private val purchaseListener = PurchasesUpdatedListener { billingResult, purchasesList ->
         if (billingResult.isOk) {
             if (purchasesList == null) {
-                onPurchaseSuccess(null)
+                emitEvent(PurchaseSuccess(null))
             } else {
                 purchasesList.forEach(::processPurchase)
             }
+        } else {
+            emitEvent(BillingEvent.Error(UPDATE_LISTENER, billingResult.responseCode, billingResult.debugMessage))
         }
     }
 
     override val availableDonations
-        get() = productDetailsList.map {
-            DonationProduct(it.productId, it.title, it.oneTimePurchaseOfferDetails?.formattedPrice)
-        }
+        get() = productDetailsList
+            .mapNotNull { it.toDonation() }
+            .sortedBy { it.priceAmountMicros }
+
+    override val events = _events.asSharedFlow()
 
     init {
         billingClient = BillingClient.newBuilder(activity)
@@ -39,7 +54,7 @@ class BillingHelperAndroid(private val activity: Activity) : BillingHelper {
         getProductDetails()
     }
 
-    override fun purchase(donation: DonationProduct) {
+    override fun purchase(donation: Donation) {
         donation.toBillingFlowParams()?.let { billingFlowParams ->
             activity.runOnUiThread {
                 onConnected {
@@ -56,6 +71,8 @@ class BillingHelperAndroid(private val activity: Activity) : BillingHelper {
                     purchasesList.forEach {
                         processPurchase(it)
                     }
+                } else {
+                    emitError(CHECK_UNCONSUMED, billingResult)
                 }
             }
         }
@@ -66,6 +83,9 @@ class BillingHelperAndroid(private val activity: Activity) : BillingHelper {
             billingClient.queryProductDetailsAsync(getQueryProductDetailsParams()) { billingResult, productDetailsList ->
                 if (billingResult.isOk) {
                     this.productDetailsList = productDetailsList
+                    emitEvent(BillingEvent.DonationsLoaded(availableDonations))
+                } else {
+                    emitError(GET_PRODUCT_DETAILS, billingResult)
                 }
             }
         }
@@ -75,12 +95,13 @@ class BillingHelperAndroid(private val activity: Activity) : BillingHelper {
         if (purchase.isPurchased) {
             purchase.products.forEach { id ->
                 availableDonations
-                    .firstOrNull { it.productId == id }
-                    ?.let { onPurchaseSuccess(it) }
+                    .firstOrNull { it.donationLevel.productId == id }
+                    ?.let { emitEvent(PurchaseSuccess(it)) }
             }
 
             consumePurchase(purchase) { billingResult, purchaseToken ->
                 if (!billingResult.isOk) {
+                    emitError(CONSUME_PURCHASE, billingResult)
                     //implement retry logic or try to consume again in onResume()
                 }
             }
@@ -104,6 +125,7 @@ class BillingHelperAndroid(private val activity: Activity) : BillingHelper {
             }
 
             override fun onBillingServiceDisconnected() {
+                emitEvent(BillingEvent.Error(SERVER_DISCONNECTED))
                 // Try to restart the connection on the next request to
                 // Google Play by calling the startConnection() method.
             }
@@ -132,18 +154,18 @@ class BillingHelperAndroid(private val activity: Activity) : BillingHelper {
             .setProductType(ProductType.INAPP)
             .build()
 
-    private fun DonationProduct.toBillingFlowParams() =
+    private fun Donation.toBillingFlowParams() =
         toProductDetailsParamsList()?.let { list ->
             BillingFlowParams.newBuilder()
                 .setProductDetailsParamsList(list)
                 .build()
         }
 
-    private fun DonationProduct.toProductDetailsParamsList() =
+    private fun Donation.toProductDetailsParamsList() =
         toProductDetailsParams()?.let { productDetails -> listOf(productDetails) }
 
-    private fun DonationProduct.toProductDetailsParams() =
-        productDetailsList.firstOrNull { it.productId == productId }?.let {
+    private fun Donation.toProductDetailsParams() =
+        productDetailsList.firstOrNull { it.productId == donationLevel.productId }?.let {
             ProductDetailsParams.newBuilder()
                 .setProductDetails(it)
                 .build()
@@ -164,4 +186,22 @@ class BillingHelperAndroid(private val activity: Activity) : BillingHelper {
         get() = QueryPurchasesParams.newBuilder()
             .setProductType(ProductType.INAPP)
             .build()
+
+    private fun emitError(operation: BillingOperation, result: BillingResult) =
+        emitEvent(BillingEvent.Error(operation, result.responseCode, result.debugMessage))
+
+    private fun emitEvent(event: BillingEvent) =
+        scope.launch {
+            _events.emit(event)
+        }
+
+    private fun ProductDetails.toDonation(): Donation? {
+        val donationLevel = getDonationLevel(productId) ?: return null
+//            productId     name          title                           description                         formattedPrice
+//            donate_1_usd, Donate 1 USD, Donate 1 USD (Memorize Shloka), Support this app by donating 1 USD, UAH 47.99
+
+        return oneTimePurchaseOfferDetails?.run {
+            Donation(donationLevel, formattedPrice, priceAmountMicros)
+        }
+    }
 }
