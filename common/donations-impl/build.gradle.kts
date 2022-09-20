@@ -8,6 +8,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(projects.common.data)
                 implementation(projects.common.donationsApi)
                 implementation(projects.common.resources)
                 implementation(projects.common.utils)

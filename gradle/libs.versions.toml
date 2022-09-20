@@ -22,6 +22,7 @@ kotlinx_coroutines = "1.6.4"
 kotlinx_serialization = "1.3.2"
 ktlint = "10.2.1"
 ktor = "2.0.3"
+lottie-compose = "5.2.0"
 material = "1.0.0-alpha15"
 material-xml = "1.6.1"
 moko-resources = "0.20.1"
@@ -103,6 +104,8 @@ settings = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref
 test-common = { module = "org.jetbrains.kotlin:kotlin-test-common", version.ref = "kotlin" }
 test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 test-annotations = { module = "org.jetbrains.kotlin:kotlin-test-annotations-common", version.ref = "kotlin" }
+
+ui-lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie-compose" }
 
 [bundles]
 androidx-compose = ["androidx-activity-compose", "androidx-composeFoundation", "androidx-composeIcons", "androidx-composeMaterial", "androidx-composeUi", "androidx-composeUiTooling" ]

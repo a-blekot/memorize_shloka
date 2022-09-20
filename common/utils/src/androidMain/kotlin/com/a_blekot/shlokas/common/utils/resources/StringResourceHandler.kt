@@ -1,9 +1,10 @@
 package com.a_blekot.shlokas.common.utils.resources
 
 import android.content.Context
+import com.a_blekot.shlokas.common.data.DonationLevel
 import dev.icerock.moko.resources.desc.desc
 
-class AndroidStringResourceHandler(private val context: Context) : StringResourceHandler{
+class AndroidStringResourceHandler(private val context: Context) : StringResourceHandler {
 
     override fun resolveTitle(id: String) =
         versesMap[id]?.run {
@@ -43,4 +44,9 @@ class AndroidStringResourceHandler(private val context: Context) : StringResourc
         listsMap[id]?.run {
             shortTitle.desc().toString(context)
         } ?: throw IllegalArgumentException("unknown list config id: $id")
+
+    override fun resolveDonationTitle(level: DonationLevel) =
+        donationsMap[level]?.run {
+            desc().toString(context)
+        } ?: throw IllegalArgumentException("unknown donation level: $level")
 }

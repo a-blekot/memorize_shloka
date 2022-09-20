@@ -16,6 +16,7 @@ android {
 dependencies {
     implementation(projects.common.data)
     implementation(projects.common.detailsApi)
+    implementation(projects.common.donationsApi)
     implementation(projects.common.listApi)
     implementation(projects.common.playerApi)
     implementation(projects.common.settingsApi)
@@ -25,6 +26,8 @@ dependencies {
     implementation(libs.accompanist.insets)
     implementation(libs.decompose.decompose)
     implementation(libs.decompose.extCompose)
+    implementation(libs.ui.lottie.compose)
+
     debugImplementation(libs.napier.android.debug)
     releaseImplementation(libs.napier.android.release)
 }
