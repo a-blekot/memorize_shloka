@@ -1,4 +1,4 @@
-package com.a_blekot.memorize_shloka.utils
+package com.a_blekot.memorize_shloka.inapp
 
 import android.app.Activity
 import com.a_blekot.memorize_shloka.MainApp.Companion.app

@@ -23,6 +23,9 @@
     <string name="label_donate_25_usd">Goloka</string>
     <string name="label_donate">Donate</string>
 
+    <string name="label_restart">Restart</string>
+    <string name="label_update_is_ready">An update has just been downloaded</string>
+
     <string name="label_repeats_counter">Repeats</string>
     <string name="label_verses_counter">Verses</string>
 

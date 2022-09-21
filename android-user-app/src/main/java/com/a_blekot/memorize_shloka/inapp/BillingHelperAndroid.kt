@@ -1,4 +1,4 @@
-package com.a_blekot.memorize_shloka.utils
+package com.a_blekot.memorize_shloka.inapp
 
 import android.app.Activity
 import com.a_blekot.shlokas.common.utils.billing.BillingEvent
@@ -7,6 +7,7 @@ import com.a_blekot.shlokas.common.utils.billing.BillingHelper
 import com.a_blekot.shlokas.common.utils.billing.BillingOperation
 import com.a_blekot.shlokas.common.utils.billing.BillingOperation.*
 import com.a_blekot.shlokas.common.data.Donation
+import com.a_blekot.shlokas.common.data.DonationLevel
 import com.a_blekot.shlokas.common.data.getDonationLevel
 import com.android.billingclient.api.*
 import com.android.billingclient.api.BillingClient.BillingResponseCode
@@ -52,6 +53,10 @@ class BillingHelperAndroid(private val activity: Activity, private val scope: Co
             .build()
 
         getProductDetails()
+    }
+
+    override fun clean() {
+        billingClient.endConnection()
     }
 
     override fun purchase(donation: Donation) {
@@ -138,19 +143,14 @@ class BillingHelperAndroid(private val activity: Activity, private val scope: Co
             .build()
 
     private fun getProducts() =
-        listOf(
-            getProduct("donate_1_usd"),
-            getProduct("donate_2_usd"),
-            getProduct("donate_3_usd"),
-            getProduct("donate_5_usd"),
-            getProduct("donate_10_usd"),
-            getProduct("donate_25_usd"),
-        )
+        DonationLevel.values().map {
+            getProduct(it)
+        }
 
-    private fun getProduct(id: String) =
+    private fun getProduct(donationLevel: DonationLevel) =
         QueryProductDetailsParams.Product
             .newBuilder()
-            .setProductId(id)
+            .setProductId(donationLevel.productId)
             .setProductType(ProductType.INAPP)
             .build()
 

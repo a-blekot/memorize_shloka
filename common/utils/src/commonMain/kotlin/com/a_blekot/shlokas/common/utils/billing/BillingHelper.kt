@@ -7,6 +7,7 @@ interface BillingHelper {
     val availableDonations: List<Donation>
     val events: SharedFlow<BillingEvent>
 
+    fun clean() {}
     fun purchase(donation: Donation) {}
     fun checkUnconsumedPurchases() {}
 }

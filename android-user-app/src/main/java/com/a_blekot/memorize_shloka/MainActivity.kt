@@ -13,8 +13,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.a_blekot.memorize_shloka.MainApp.Companion.app
-import com.a_blekot.memorize_shloka.utils.BillingHelperAndroid
-import com.a_blekot.memorize_shloka.utils.showInappReview
+import com.a_blekot.memorize_shloka.inapp.BillingHelperAndroid
+import com.a_blekot.memorize_shloka.inapp.InappUpdater
+import com.a_blekot.memorize_shloka.inapp.showInappReview
 import com.a_blekot.shlokas.android_player.PlaybackService
 import com.a_blekot.shlokas.android_ui.theme.AppTheme
 import com.a_blekot.shlokas.common.root.RootComponent
@@ -31,7 +32,6 @@ import com.arkivanov.decompose.defaultComponentContext
 import com.arkivanov.mvikotlin.logging.store.LoggingStoreFactory
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import io.github.aakira.napier.Napier
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -59,10 +59,12 @@ class MainActivity : ComponentActivity() {
     private var isBound = false
     private var playbackService: PlaybackService? = null
     private var billingHelper: BillingHelper? = null
+    private var inappUpdater: InappUpdater? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         billingHelper = BillingHelperAndroid(this, this.lifecycleScope)
+        inappUpdater = InappUpdater(this)
 
         val root = root(defaultComponentContext())
 
@@ -74,11 +76,15 @@ class MainActivity : ComponentActivity() {
         bindService()
     }
 
+    override fun onDestroy() {
+        billingHelper?.clean()
+        inappUpdater?.clean()
+        super.onDestroy()
+    }
+
     override fun onStart() {
         super.onStart()
         Napier.d("ACTIVITY startService", tag = PLAYBACK_SERVICE.name)
-
-        billingHelper?.checkUnconsumedPurchases()
 
         try {
             startService(playbackServiceIntent)
@@ -90,6 +96,12 @@ class MainActivity : ComponentActivity() {
             // The app is in background, starting service is disallow
             Napier.d("Failed to start service (app is in background)", tag = PLAYBACK_SERVICE.name)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        billingHelper?.checkUnconsumedPurchases()
+        inappUpdater?.checkUpdate()
     }
 
     override fun onStop() {

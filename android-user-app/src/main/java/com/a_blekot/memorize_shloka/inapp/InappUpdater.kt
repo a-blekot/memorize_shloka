@@ -1,11 +1,9 @@
 package com.a_blekot.memorize_shloka.inapp
 
 import android.app.Activity
-import android.app.ProgressDialog.show
-import android.content.Context
-import android.util.Log
-import androidx.core.view.accessibility.AccessibilityEventCompat.setAction
 import com.a_blekot.memorize_shloka.R
+import com.a_blekot.shlokas.common.resources.MR.strings
+import com.a_blekot.shlokas.common.resources.resolve
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
@@ -18,22 +16,23 @@ import io.github.aakira.napier.Napier
 
 private const val UPDATE_REQUEST_CODE = 108_108
 
-class InappUpdater(val context: Activity) {
+class InappUpdater(private val activity: Activity) {
 
-    private val listener: InstallStateUpdatedListener = InstallStateUpdatedListener { installState ->
+    private var listener: InstallStateUpdatedListener? = InstallStateUpdatedListener { installState ->
         if (installState.installStatus() == DOWNLOADED) {
             Napier.d("An update has been downloaded", tag = "InappUpdater")
-            restartApp()
+            showSnackbarForCompleteUpdate()
         }
     }
 
     private val appUpdateManager: AppUpdateManager =
-        AppUpdateManagerFactory.create(context).apply {
-            registerListener(listener)
+        AppUpdateManagerFactory.create(activity).apply {
+            listener?.let { registerListener(it) }
         }
 
-    fun clear() {
-        appUpdateManager.unregisterListener(listener)
+    fun clean() {
+        listener?.let { appUpdateManager.unregisterListener(it) }
+        listener = null
     }
 
     fun checkUpdate() {
@@ -42,28 +41,29 @@ class InappUpdater(val context: Activity) {
             .addOnSuccessListener { appUpdateInfo ->
                 if (appUpdateInfo.flexibleUpdateAvailable()) {
                     Napier.d("Update available", tag = "InappUpdater")
-                    appUpdateManager.startUpdateFlowForResult(appUpdateInfo, FLEXIBLE, context, UPDATE_REQUEST_CODE)
+                    appUpdateManager.startUpdateFlowForResult(appUpdateInfo, FLEXIBLE, activity, UPDATE_REQUEST_CODE)
                 } else {
                     Napier.d("No updates", tag = "InappUpdater")
                 }
             }
     }
 
-    private fun showSnackbarForCompleteUpdate() {
-//        Snackbar.make(
-//            findViewById(R.id.activity_main_layout),
-//            "An update has just been downloaded.",
-//            Snackbar.LENGTH_INDEFINITE
-//        ).apply {
-//            setAction("RESTART") { restartApp() }
-//            setActionTextColor(resources.getColor(R.color.snackbar_action_text_color))
-//            show()
-//        }
+    fun showSnackbarForCompleteUpdate() {
+        Snackbar.make(
+            activity.window.decorView,
+            strings.label_update_is_ready.resolve(activity),
+            Snackbar.LENGTH_INDEFINITE
+        ).apply {
+            setBackgroundTint(activity.resources.getColor(R.color.colorPrimary))
+            setActionTextColor(activity.resources.getColor(R.color.colorAccent))
+            setAction(strings.label_restart.resolve(activity)) { restartApp() }
+            show()
+        }
     }
 
     private fun restartApp() =
         appUpdateManager.run {
-            unregisterListener(listener)
+            clean()
             completeUpdate()
         }
 

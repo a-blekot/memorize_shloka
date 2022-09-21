@@ -23,6 +23,9 @@
     <string name="label_donate_25_usd">Голока</string>
     <string name="label_donate">Пожертвуйте</string>
 
+    <string name="label_restart">Перезагрузить</string>
+    <string name="label_update_is_ready">Загрузка обновлений завершена</string>
+
     <string name="label_repeats_counter">Повторы</string>
     <string name="label_verses_counter">Стихи</string>
     <string name="label_repeat_mode">Режим повтора</string>
