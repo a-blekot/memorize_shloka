@@ -14,7 +14,7 @@ object InappReviewInteractor {
     }
 
     private fun onAppLaunch() =
-        getAppLaunchCount() in 3..4
+        getAppLaunchCount() % 5 == 0
 
     private fun onPlayCompleted() =
         playCompletedCount < playCompletedCount() && playCompletedCount() in 2..3
