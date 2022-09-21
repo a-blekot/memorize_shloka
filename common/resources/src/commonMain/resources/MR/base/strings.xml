@@ -8,6 +8,7 @@
     <string name="label_pause_placeholder">пауза между повторами, миллисекунды</string>
 
     <string name="label_show_tutorial">Показать инструкцию</string>
+    <string name="label_version">Версия:</string>
     <string name="label_feedback">Обратная связь</string>
     <string name="label_donations">Поддержать проект</string>
     <string name="label_sanskrit">Санскрит</string>

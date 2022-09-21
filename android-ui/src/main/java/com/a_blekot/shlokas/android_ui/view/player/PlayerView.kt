@@ -83,7 +83,8 @@ fun PlayerView(component: PlayerComponent) {
                     label_translation.resolve(context),
                     translation,
                     translationIsVisible,
-                    translationStyle
+                    translationStyle,
+                    TextAlign.Justify
                 )
             }
 

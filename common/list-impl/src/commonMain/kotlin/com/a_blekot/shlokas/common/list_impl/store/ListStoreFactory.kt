@@ -121,9 +121,10 @@ internal class ListStoreFactory(
         }
 
         private suspend fun showTutorialIfNeeded() {
-            if (shouldShowTutorial()) {
+            if (shouldShowTutorial() && !tutorialWasShownInThisSession) {
                 delay(TUTORIAL_DELAY_MS)
                 deps.analytics.tutorialOpen()
+                tutorialWasShownInThisSession = true
                 dispatch(Msg.ShowTutorial)
             }
         }

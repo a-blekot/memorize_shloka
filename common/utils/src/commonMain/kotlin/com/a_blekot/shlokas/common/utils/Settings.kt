@@ -27,6 +27,8 @@ private const val MAX_PAUSE = 10_000L
 
 private val settings = Settings()
 
+var tutorialWasShownInThisSession = false
+
 fun onAppLaunch() =
     getAppLaunchCount().let {
         settings.putInt(APP_LAUNCH_COUNT, it + 1)
