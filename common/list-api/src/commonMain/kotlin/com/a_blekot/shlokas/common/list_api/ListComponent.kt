@@ -1,5 +1,6 @@
 package com.a_blekot.shlokas.common.list_api
 
+import com.a_blekot.shlokas.common.data.ListId
 import com.a_blekot.shlokas.common.data.ShlokaConfig
 import com.arkivanov.decompose.value.Value
 
@@ -21,7 +22,7 @@ interface ListComponent {
     fun saveShloka(config: ShlokaConfig) {}
     fun onTutorialCompleted() {}
     fun onTutorialSkipped() {}
-    fun setList(id: String) {}
+    fun setList(type: ListId) {}
 
     fun onPreRatingAccepted() {}
     fun onPreRatingClosed() {}

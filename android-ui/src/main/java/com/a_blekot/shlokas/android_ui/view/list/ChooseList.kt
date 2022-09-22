@@ -20,13 +20,14 @@ import com.a_blekot.shlokas.android_ui.theme.Dimens.buttonHeight
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingM
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusM
 import com.a_blekot.shlokas.android_ui.theme.dialogBgColor
+import com.a_blekot.shlokas.common.data.ListId
 import com.a_blekot.shlokas.common.list_api.ListPresentation
 
 @Composable
 fun ChooseList(
     availableLists: List<ListPresentation>,
     modifier: Modifier = Modifier,
-    onSelected: (id: String) -> Unit
+    onSelected: (type: ListId) -> Unit
 ) {
     Box(
         modifier = modifier
@@ -49,7 +50,7 @@ fun ChooseList(
         ) {
             availableLists.forEach { list ->
                 ListButton(list.isSelected, list.title) {
-                    onSelected(list.id)
+                    onSelected(list.type)
                 }
             }
         }

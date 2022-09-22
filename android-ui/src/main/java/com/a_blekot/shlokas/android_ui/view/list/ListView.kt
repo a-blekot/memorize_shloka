@@ -48,9 +48,9 @@ fun ListView(component: ListComponent) {
         }
 
         if (menuIsVisible.value && state.value.availableLists.isNotEmpty()) {
-            ChooseList(state.value.availableLists, modifier = Modifier.fillMaxSize()) { id ->
+            ChooseList(state.value.availableLists, modifier = Modifier.fillMaxSize()) { type ->
                 menuIsVisible.value = false
-                component.setList(id)
+                component.setList(type)
             }
         }
 

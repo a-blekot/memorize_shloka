@@ -1,0 +1,731 @@
+{
+  "id": "SB_1",
+  "list": [
+    {
+      "shloka": {
+        "id": "SB_1_1_1"
+      },
+      "chunks": [
+        {
+          "startMs": 4663,
+          "endMs": 10208
+        },
+        {
+          "startMs": 10640,
+          "endMs": 16080
+        },
+        {
+          "startMs": 16580,
+          "endMs": 22300
+        },
+        {
+          "startMs": 22615,
+          "endMs": 28250
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_1_2",
+        "hasAudio": false
+      },
+      "chunks": [
+        {
+          "startMs": 4663,
+          "endMs": 10208
+        },
+        {
+          "startMs": 10640,
+          "endMs": 16080
+        },
+        {
+          "startMs": 16580,
+          "endMs": 22300
+        },
+        {
+          "startMs": 22615,
+          "endMs": 28250
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_1_3",
+        "hasAudio": false
+      },
+      "chunks": [
+        {
+          "startMs": 4663,
+          "endMs": 10208
+        },
+        {
+          "startMs": 10640,
+          "endMs": 16080
+        },
+        {
+          "startMs": 16580,
+          "endMs": 22300
+        },
+        {
+          "startMs": 22615,
+          "endMs": 28250
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_1_10"
+      },
+      "chunks": [
+        {
+          "startMs": 300,
+          "endMs": 3150
+        },
+        {
+          "startMs": 3200,
+          "endMs": 5900
+        },
+        {
+          "startMs": 6175,
+          "endMs": 8450
+        },
+        {
+          "startMs": 8500,
+          "endMs": 11200
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_2_6"
+      },
+      "chunks": [
+        {
+          "startMs": 100,
+          "endMs": 2650
+        },
+        {
+          "startMs": 2770,
+          "endMs": 5090
+        },
+        {
+          "startMs": 5250,
+          "endMs": 7450
+        },
+        {
+          "startMs": 7450,
+          "endMs": 10050
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_2_7",
+        "hasAudio": false
+      },
+      "chunks": [
+        {
+          "startMs": 150,
+          "endMs": 2870
+        },
+        {
+          "startMs": 2900,
+          "endMs": 5550
+        },
+        {
+          "startMs": 5900,
+          "endMs": 8200
+        },
+        {
+          "startMs": 8225,
+          "endMs": 10500
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_2_8"
+      },
+      "chunks": [
+        {
+          "startMs": 150,
+          "endMs": 2870
+        },
+        {
+          "startMs": 2900,
+          "endMs": 5550
+        },
+        {
+          "startMs": 5900,
+          "endMs": 8200
+        },
+        {
+          "startMs": 8225,
+          "endMs": 10500
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_2_9",
+        "hasAudio": false
+      },
+      "chunks": [
+        {
+          "startMs": 150,
+          "endMs": 2870
+        },
+        {
+          "startMs": 2900,
+          "endMs": 5550
+        },
+        {
+          "startMs": 5900,
+          "endMs": 8200
+        },
+        {
+          "startMs": 8225,
+          "endMs": 10500
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_2_10",
+        "hasAudio": false
+      },
+      "chunks": [
+        {
+          "startMs": 150,
+          "endMs": 2870
+        },
+        {
+          "startMs": 2900,
+          "endMs": 5550
+        },
+        {
+          "startMs": 5900,
+          "endMs": 8200
+        },
+        {
+          "startMs": 8225,
+          "endMs": 10500
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_2_11"
+      },
+      "chunks": [
+        {
+          "startMs": 150,
+          "endMs": 2450
+        },
+        {
+          "startMs": 2450,
+          "endMs": 5201
+        },
+        {
+          "startMs": 5400,
+          "endMs": 7650
+        },
+        {
+          "startMs": 7750,
+          "endMs": 9900
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_2_12",
+        "hasAudio": false
+      },
+      "chunks": [
+        {
+          "startMs": 150,
+          "endMs": 2870
+        },
+        {
+          "startMs": 2900,
+          "endMs": 5550
+        },
+        {
+          "startMs": 5900,
+          "endMs": 8200
+        },
+        {
+          "startMs": 8225,
+          "endMs": 10500
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_2_13",
+        "hasAudio": false
+      },
+      "chunks": [
+        {
+          "startMs": 150,
+          "endMs": 2870
+        },
+        {
+          "startMs": 2900,
+          "endMs": 5550
+        },
+        {
+          "startMs": 5900,
+          "endMs": 8200
+        },
+        {
+          "startMs": 8225,
+          "endMs": 10500
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_2_14",
+        "hasAudio": false
+      },
+      "chunks": [
+        {
+          "startMs": 150,
+          "endMs": 2870
+        },
+        {
+          "startMs": 2900,
+          "endMs": 5550
+        },
+        {
+          "startMs": 5900,
+          "endMs": 8200
+        },
+        {
+          "startMs": 8225,
+          "endMs": 10500
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_2_16"
+      },
+      "chunks": [
+        {
+          "startMs": 285,
+          "endMs": 3070
+        },
+        {
+          "startMs": 3108,
+          "endMs": 5530
+        },
+        {
+          "startMs": 5910,
+          "endMs": 8700
+        },
+        {
+          "startMs": 8730,
+          "endMs": 11020
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_2_17"
+      },
+      "chunks": [
+        {
+          "startMs": 400,
+          "endMs": 3250
+        },
+        {
+          "startMs": 3250,
+          "endMs": 5680
+        },
+        {
+          "startMs": 6050,
+          "endMs": 8450
+        },
+        {
+          "startMs": 8450,
+          "endMs": 10900
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_2_18"
+      },
+      "chunks": [
+        {
+          "startMs": 200,
+          "endMs": 3100
+        },
+        {
+          "startMs": 3090,
+          "endMs": 5730
+        },
+        {
+          "startMs": 5900,
+          "endMs": 8400
+        },
+        {
+          "startMs": 8400,
+          "endMs": 10880
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_2_19",
+        "hasAudio": false
+      },
+      "chunks": [
+        {
+          "startMs": 200,
+          "endMs": 3100
+        },
+        {
+          "startMs": 3090,
+          "endMs": 5730
+        },
+        {
+          "startMs": 5900,
+          "endMs": 8400
+        },
+        {
+          "startMs": 8400,
+          "endMs": 10880
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_2_20",
+        "hasAudio": false
+      },
+      "chunks": [
+        {
+          "startMs": 200,
+          "endMs": 3100
+        },
+        {
+          "startMs": 3090,
+          "endMs": 5730
+        },
+        {
+          "startMs": 5900,
+          "endMs": 8400
+        },
+        {
+          "startMs": 8400,
+          "endMs": 10880
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_2_21",
+        "hasAudio": false
+      },
+      "chunks": [
+        {
+          "startMs": 200,
+          "endMs": 3100
+        },
+        {
+          "startMs": 3090,
+          "endMs": 5730
+        },
+        {
+          "startMs": 5900,
+          "endMs": 8400
+        },
+        {
+          "startMs": 8400,
+          "endMs": 10880
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_3_28"
+      },
+      "chunks": [
+        {
+          "startMs": 250,
+          "endMs": 3000
+        },
+        {
+          "startMs": 2950,
+          "endMs": 5420
+        },
+        {
+          "startMs": 5680,
+          "endMs": 8400
+        },
+        {
+          "startMs": 8400,
+          "endMs": 10700
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_3_43"
+      },
+      "chunks": [
+        {
+          "startMs": 300,
+          "endMs": 2920
+        },
+        {
+          "startMs": 3000,
+          "endMs": 5750
+        },
+        {
+          "startMs": 6000,
+          "endMs": 8300
+        },
+        {
+          "startMs": 8280,
+          "endMs": 10870
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_5_11"
+      },
+      "chunks": [
+        {
+          "startMs": 660,
+          "endMs": 4240
+        },
+        {
+          "startMs": 4240,
+          "endMs": 7740
+        },
+        {
+          "startMs": 8000,
+          "endMs": 11440
+        },
+        {
+          "startMs": 11580,
+          "endMs": 15200
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_5_17",
+        "hasAudio": false
+      },
+      "chunks": [
+        {
+          "startMs": 850,
+          "endMs": 4255
+        },
+        {
+          "startMs": 4380,
+          "endMs": 7933
+        },
+        {
+          "startMs": 8328,
+          "endMs": 11900
+        },
+        {
+          "startMs": 12000,
+          "endMs": 15630
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_5_18"
+      },
+      "chunks": [
+        {
+          "startMs": 850,
+          "endMs": 4255
+        },
+        {
+          "startMs": 4380,
+          "endMs": 7933
+        },
+        {
+          "startMs": 8328,
+          "endMs": 11900
+        },
+        {
+          "startMs": 12000,
+          "endMs": 15630
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_7_6"
+      },
+      "chunks": [
+        {
+          "startMs": 300,
+          "endMs": 2800
+        },
+        {
+          "startMs": 2850,
+          "endMs": 5000
+        },
+        {
+          "startMs": 5150,
+          "endMs": 8000
+        },
+        {
+          "startMs": 8000,
+          "endMs": 10520
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_7_10"
+      },
+      "chunks": [
+        {
+          "startMs": 350,
+          "endMs": 2830
+        },
+        {
+          "startMs": 2880,
+          "endMs": 5500
+        },
+        {
+          "startMs": 5800,
+          "endMs": 8330
+        },
+        {
+          "startMs": 8350,
+          "endMs": 10900
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_8_18",
+        "hasAudio": false
+      },
+      "chunks": [
+        {
+          "startMs": 300,
+          "endMs": 3200
+        },
+        {
+          "startMs": 3250,
+          "endMs": 5630
+        },
+        {
+          "startMs": 5850,
+          "endMs": 8500
+        },
+        {
+          "startMs": 8500,
+          "endMs": 11000
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_8_26"
+      },
+      "chunks": [
+        {
+          "startMs": 300,
+          "endMs": 3200
+        },
+        {
+          "startMs": 3250,
+          "endMs": 5630
+        },
+        {
+          "startMs": 5850,
+          "endMs": 8500
+        },
+        {
+          "startMs": 8500,
+          "endMs": 11000
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_8_42"
+      },
+      "chunks": [
+        {
+          "startMs": 360,
+          "endMs": 2500
+        },
+        {
+          "startMs": 2500,
+          "endMs": 4700
+        },
+        {
+          "startMs": 5090,
+          "endMs": 7455
+        },
+        {
+          "startMs": 7470,
+          "endMs": 10150
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_13_10"
+      },
+      "chunks": [
+        {
+          "startMs": 370,
+          "endMs": 2700
+        },
+        {
+          "startMs": 2730,
+          "endMs": 5250
+        },
+        {
+          "startMs": 5580,
+          "endMs": 8180
+        },
+        {
+          "startMs": 8240,
+          "endMs": 11150
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_1_18_13"
+      },
+      "chunks": [
+        {
+          "startMs": 350,
+          "endMs": 2600
+        },
+        {
+          "startMs": 2600,
+          "endMs": 5300
+        },
+        {
+          "startMs": 5600,
+          "endMs": 7770
+        },
+        {
+          "startMs": 7800,
+          "endMs": 10500
+        }
+      ]
+    }
+  ]
+}

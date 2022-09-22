@@ -6,11 +6,10 @@ private const val EXT = ".json"
 
 @Serializable
 data class ListConfig(
-    val id: String = "",
+    val id: ListId,
     val title: String = "",
-    val folder: String = "",
     val list: List<ShlokaConfig> = emptyList(),
 ) {
     val fileName
-        get() = id + EXT
+        get() = id.id + EXT
 }

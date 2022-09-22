@@ -2,6 +2,7 @@ package com.a_blekot.shlokas.common.utils.resources
 
 import android.content.Context
 import com.a_blekot.shlokas.common.data.DonationLevel
+import com.a_blekot.shlokas.common.data.ListId
 import dev.icerock.moko.resources.desc.desc
 
 class AndroidStringResourceHandler(private val context: Context) : StringResourceHandler {
@@ -35,15 +36,15 @@ class AndroidStringResourceHandler(private val context: Context) : StringResourc
             descr.desc().toString(context)
         } ?: throw IllegalArgumentException("unknown shloka id: $id")
 
-    override fun resolveListTitle(id: String) =
-        listsMap[id]?.run {
+    override fun resolveListTitle(type: ListId) =
+        listsMap[type]?.run {
             title.desc().toString(context)
-        } ?: throw IllegalArgumentException("unknown list config id: $id")
+        } ?: throw IllegalArgumentException("unknown list config id: ${type.id}")
 
-    override fun resolveListShortTitle(id: String) =
-        listsMap[id]?.run {
+    override fun resolveListShortTitle(type: ListId) =
+        listsMap[type]?.run {
             shortTitle.desc().toString(context)
-        } ?: throw IllegalArgumentException("unknown list config id: $id")
+        } ?: throw IllegalArgumentException("unknown list config id: ${type.id}")
 
     override fun resolveDonationTitle(level: DonationLevel) =
         donationsMap[level]?.run {

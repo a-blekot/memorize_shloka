@@ -1,6 +1,7 @@
 package com.a_blekot.shlokas.common.list_impl
 
 import com.a_blekot.shlokas.common.data.ListConfig
+import com.a_blekot.shlokas.common.data.ListId
 import com.a_blekot.shlokas.common.data.PlayConfig
 import com.a_blekot.shlokas.common.data.ShlokaConfig
 import com.a_blekot.shlokas.common.list_api.ListComponent
@@ -76,7 +77,7 @@ class ListComponentImpl(
     override fun saveShloka(config: ShlokaConfig) = store.accept(SaveShloka(config))
     override fun onTutorialCompleted() = store.accept(TutorialCompleted)
     override fun onTutorialSkipped() = store.accept(TutorialSkipped)
-    override fun setList(id: String) = store.accept(SetList(id))
+    override fun setList(type: ListId) = store.accept(SetList(type))
 
     override fun onPreRatingAccepted() = store.accept(PreRatingAccepted)
     override fun onPreRatingClosed() = store.accept(PreRatingClosed)
@@ -91,7 +92,7 @@ class ListComponentImpl(
         store.state.config.run {
             val playConfig = this.toPlayConfig()
             if (playConfig.shlokas.isNotEmpty()) {
-                playListAnalytics(id, playConfig)
+                playListAnalytics(id.id, playConfig)
                 output(ListOutput.Play(playConfig))
             }
         }

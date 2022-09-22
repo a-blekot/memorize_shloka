@@ -1,10 +1,10 @@
 package com.a_blekot.shlokas.common.list_impl.store
 
 import com.a_blekot.shlokas.common.data.ListConfig
+import com.a_blekot.shlokas.common.data.ListId
 import com.a_blekot.shlokas.common.data.ShlokaConfig
 import com.a_blekot.shlokas.common.list_api.ListPresentation
 import com.a_blekot.shlokas.common.list_api.ListState
-import com.a_blekot.shlokas.common.list_api.Lists
 import com.a_blekot.shlokas.common.list_impl.ListDeps
 import com.a_blekot.shlokas.common.list_impl.store.ListIntent.*
 import com.a_blekot.shlokas.common.list_impl.store.ListStoreFactory.Action.LoadLastConfig
@@ -77,8 +77,8 @@ internal class ListStoreFactory(
             when (action) {
                 LoadLastConfig -> {
                     scope.launch(deps.dispatchers.io) {
-                        val id = getLastConfigId().ifBlank { Lists.SB_1.id }
-                        setList(id, onComplete = ::showTutorialIfNeeded)
+                        val type = getLastListId()
+                        setList(type, onComplete = ::showTutorialIfNeeded)
                     }
                 }
             }
@@ -94,7 +94,7 @@ internal class ListStoreFactory(
                 PreRatingClosed -> preRatingClosed()
                 TutorialCompleted -> tutorialCompleted()
                 TutorialSkipped -> tutorialSkipped()
-                is SetList -> scope.launch { setList(intent.id) }
+                is SetList -> scope.launch { setList(intent.type) }
                 is Title -> rename(getState().config.title, intent.title)
                 is Remove -> dispatch(Msg.RemoveShloka(intent.id))
                 is MoveUp -> dispatch(Msg.MoveUp(intent.id))
@@ -104,8 +104,8 @@ internal class ListStoreFactory(
             }
         }
 
-        private suspend fun setList(id: String, onComplete: suspend () -> Unit = {}) {
-            val config = readConfig(id, deps.configReader)
+        private suspend fun setList(type: ListId, onComplete: suspend () -> Unit = {}) {
+            val config = readConfig(type, deps.configReader)
             config?.let {
                 deps.config = config.updateList()
                 withContext(deps.dispatchers.main) {
@@ -222,7 +222,7 @@ internal class ListStoreFactory(
             }
 
         private fun ListState.setList(newConfig: ListConfig): ListState {
-            saveLastConfigId(newConfig.id)
+            saveLastListId(newConfig.id.id)
             return copy(
                 config = newConfig,
                 availableLists = availableLists(),
@@ -231,7 +231,7 @@ internal class ListStoreFactory(
         }
 
         private fun ListState.update(newConfig: ListConfig): ListState {
-            saveLastConfigId(newConfig.id)
+            saveLastListId(newConfig.id.id)
             return copy(
                 config = newConfig,
                 hasChanges = newConfig != deps.config,
@@ -278,11 +278,11 @@ internal class ListStoreFactory(
         }
 
     private fun availableLists() =
-        Lists.values().map {
+        ListId.values().map {
             ListPresentation(
-                id = it.id,
-                title = resolveListShortTitle(it.id),
-                isSelected = deps.config.id == it.id
+                type = it,
+                title = resolveListShortTitle(it),
+                isSelected = deps.config.id == it
             )
         }
 }

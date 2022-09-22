@@ -12,10 +12,7 @@ import com.a_blekot.shlokas.common.player_api.PlayerFeedback
 import com.a_blekot.shlokas.common.utils.resources.getAsset
 import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.source.MediaSource
-import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
-import com.google.android.exoplayer2.upstream.FileDataSource
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.launchIn
@@ -172,7 +169,7 @@ class Player(
     }
 
     private fun handleTask(task: Task) {
-        Napier.e("handleTask $task", tag = "AUDIO_PLAYER")
+        Napier.d("handleTask $task", tag = "AUDIO_PLAYER")
         currentTask = task
         when (task) {
             is SetTrackTask -> setTrack(task)
@@ -197,7 +194,6 @@ class Player(
         exoPlayer?.run {
             playWhenReady = false
             clearMediaItems()
-            Napier.e("STOP and CLEAR!!!!!!!!!!!!!", tag = "AUDIO_PLAYER")
         }
 
     private fun play(task: PlayTask) =
@@ -232,6 +228,7 @@ class Player(
 
     private fun SetTrackTask.toMediaItem(): MediaItem {
         val uri = Uri.parse("$ASSETS_PREFIX${getAsset(id)}")
+        Napier.d("SetTrack $uri", tag = "AUDIO_PLAYER")
 
         return MediaItem.fromUri(uri)
     }
@@ -242,3 +239,6 @@ class Player(
             .setTitle(title)
             .build()
 }
+
+//SetTrack asset:///SB_1/SB_1_1_1.mp3
+//SetTrack asset:///NI/NI_01.mp3

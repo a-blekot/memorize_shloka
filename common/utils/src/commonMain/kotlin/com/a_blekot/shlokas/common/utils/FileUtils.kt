@@ -1,6 +1,7 @@
 package com.a_blekot.shlokas.common.utils
 
 import com.a_blekot.shlokas.common.data.ListConfig
+import com.a_blekot.shlokas.common.data.ListId
 import com.a_blekot.shlokas.common.utils.resources.ConfigReader
 import io.github.aakira.napier.Napier
 import kotlinx.serialization.decodeFromString
@@ -24,16 +25,16 @@ fun writeToFile(config: ListConfig, filer: Filer): Boolean {
     return true
 }
 
-fun readConfig(configName: String, configReader: ConfigReader): ListConfig? =
+fun readConfig(type: ListId, configReader: ConfigReader): ListConfig? =
     try {
-        val text = configReader.readConfig(configName)
+        val text = configReader.readConfig(type)
         if (text.isBlank()) {
             null
         } else {
             json.decodeFromString<ListConfig>(text)
         }
     } catch (e: Throwable) {
-        Napier.e("config not found $configName")
+        Napier.e("config not found $type")
         null
     }
 

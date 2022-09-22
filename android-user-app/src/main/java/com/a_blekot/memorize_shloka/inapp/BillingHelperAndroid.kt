@@ -104,7 +104,7 @@ class BillingHelperAndroid(private val activity: Activity, private val scope: Co
                     ?.let { emitEvent(PurchaseSuccess(it)) }
             }
 
-            consumePurchase(purchase) { billingResult, purchaseToken ->
+            consumePurchase(purchase) { billingResult, _ ->
                 if (!billingResult.isOk) {
                     emitError(CONSUME_PURCHASE, billingResult)
                     //implement retry logic or try to consume again in onResume()

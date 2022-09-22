@@ -1,6 +1,7 @@
 package com.a_blekot.shlokas.common.utils
 
 import com.a_blekot.shlokas.common.data.Week
+import com.a_blekot.shlokas.common.data.toListType
 import com.russhwolf.settings.Settings
 
 private const val APP_LAUNCH_COUNT = "APP_LAUNCH_COUNT"
@@ -51,11 +52,11 @@ fun onPlayCompleted() =
         settings.putInt(PLAY_COMPLETED_COUNT, it + 1)
     }
 
-fun saveLastConfigId(id: String) =
+fun saveLastListId(id: String) =
     settings.putString(LAST_CONFIG_ID_KEY, id)
 
-fun getLastConfigId() =
-    settings.getString(LAST_CONFIG_ID_KEY)
+fun getLastListId() =
+    settings.getString(LAST_CONFIG_ID_KEY).toListType()
 
 fun saveAutoPlay(value: Boolean) =
     settings.putBoolean(AUTOPLAY_KEY, value)

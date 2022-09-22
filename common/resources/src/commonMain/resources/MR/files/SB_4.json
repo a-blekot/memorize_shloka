@@ -1,0 +1,76 @@
+{
+  "id": "SB_4",
+  "folder": "SB_4",
+  "list": [
+    {
+      "shloka": {
+        "id": "SB_4_3_23",
+        "hasAudio": false
+      },
+      "chunks": [
+        {
+          "startMs": 4663,
+          "endMs": 10208
+        },
+        {
+          "startMs": 10640,
+          "endMs": 16080
+        },
+        {
+          "startMs": 16580,
+          "endMs": 22300
+        },
+        {
+          "startMs": 22615,
+          "endMs": 28250
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_4_30_35"
+      },
+      "chunks": [
+        {
+          "startMs": 350,
+          "endMs": 3370
+        },
+        {
+          "startMs": 3370,
+          "endMs": 6060
+        },
+        {
+          "startMs": 6360,
+          "endMs": 8800
+        },
+        {
+          "startMs": 8860,
+          "endMs": 11500
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "SB_4_31_14"
+      },
+      "chunks": [
+        {
+          "startMs": 350,
+          "endMs": 3340
+        },
+        {
+          "startMs": 3340,
+          "endMs": 6600
+        },
+        {
+          "startMs": 7000,
+          "endMs": 10200
+        },
+        {
+          "startMs": 10200,
+          "endMs": 13350
+        }
+      ]
+    }
+  ]
+}

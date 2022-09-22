@@ -21,8 +21,8 @@ import com.a_blekot.shlokas.common.settings_api.SettingsOutput
 import com.a_blekot.shlokas.common.settings_impl.SettingsComponentImpl
 import com.a_blekot.shlokas.common.settings_impl.SettingsDeps
 import com.a_blekot.shlokas.common.utils.Consumer
+import com.a_blekot.shlokas.common.utils.getLastListId
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.decompose.router.*
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
@@ -54,7 +54,7 @@ class RootComponentImpl internal constructor(
             ListComponentImpl(
                 componentContext = childContext,
                 storeFactory = storeFactory,
-                deps = deps.run { ListDeps(ListConfig(), filer, configReader, stringResourceHandler, analytics, dispatchers) },
+                deps = deps.run { ListDeps(ListConfig(getLastListId()), filer, configReader, stringResourceHandler, analytics, dispatchers) },
                 output = output
             )
         },

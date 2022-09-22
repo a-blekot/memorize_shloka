@@ -1,5 +1,6 @@
 package com.a_blekot.shlokas.common.list_impl.store
 
+import com.a_blekot.shlokas.common.data.ListId
 import com.a_blekot.shlokas.common.data.ShlokaConfig
 
 sealed interface ListIntent {
@@ -11,7 +12,7 @@ sealed interface ListIntent {
     object PreRatingClosed : ListIntent
     object TutorialCompleted : ListIntent
     object TutorialSkipped : ListIntent
-    data class SetList(val id: String) : ListIntent
+    data class SetList(val type: ListId) : ListIntent
     data class Title(val title: String) : ListIntent
     data class Remove(val id: String) : ListIntent
     data class MoveUp(val id: String) : ListIntent

@@ -1,6 +1,7 @@
 package com.a_blekot.shlokas.common.utils.resources
 
 import com.a_blekot.shlokas.common.data.DonationLevel
+import com.a_blekot.shlokas.common.data.ListId
 
 interface StringResourceHandler {
     fun resolveTitle(id: String): String
@@ -9,7 +10,7 @@ interface StringResourceHandler {
     fun resolveWords(id: String): String
     fun resolveTranslation(id: String): String
     fun resolveDescription(id: String): String
-    fun resolveListTitle(id: String): String
-    fun resolveListShortTitle(id: String): String
+    fun resolveListTitle(type: ListId): String
+    fun resolveListShortTitle(type: ListId): String
     fun resolveDonationTitle(level: DonationLevel): String
 }
