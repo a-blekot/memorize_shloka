@@ -1,5 +1,6 @@
 package com.a_blekot.shlokas.android_ui.view.list
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -27,8 +28,13 @@ import com.a_blekot.shlokas.common.list_api.ListPresentation
 fun ChooseList(
     availableLists: List<ListPresentation>,
     modifier: Modifier = Modifier,
-    onSelected: (type: ListId) -> Unit
+    onSelected: (type: ListId) -> Unit,
+    onSkip: () -> Unit,
 ) {
+    BackHandler {
+        onSkip.invoke()
+    }
+
     Box(
         modifier = modifier
             .background(dialogBgColor)
