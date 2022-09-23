@@ -274,7 +274,7 @@ internal class ListStoreFactory(
 
     private fun shouldShowTutorial() =
         getAppLaunchCount().let {
-           it == 2 || it == 7 && !isTutorialCompleted()
+           (it == 3 || it == 7) && !isTutorialCompleted()
         }
 
     private fun availableLists() =
