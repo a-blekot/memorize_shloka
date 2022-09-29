@@ -19,9 +19,15 @@ fun checkLocale(systemLocale: String) {
 
 fun setAppLocale(locale: String) =
     when(locale) {
-        ru, uk, be, ka, kk -> setRussian()
+        uk -> setUkrainian()
+        ru, be, ka, kk -> setRussian()
         else -> setEnglish()
     }
+
+private fun setUkrainian() {
+    saveLocale(uk)
+    StringDesc.localeType = StringDesc.LocaleType.Custom(uk)
+}
 
 private fun setRussian() {
     saveLocale(ru)

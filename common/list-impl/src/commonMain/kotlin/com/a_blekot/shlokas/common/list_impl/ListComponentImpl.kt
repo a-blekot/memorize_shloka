@@ -1,9 +1,6 @@
 package com.a_blekot.shlokas.common.list_impl
 
-import com.a_blekot.shlokas.common.data.ListConfig
-import com.a_blekot.shlokas.common.data.ListId
-import com.a_blekot.shlokas.common.data.PlayConfig
-import com.a_blekot.shlokas.common.data.ShlokaConfig
+import com.a_blekot.shlokas.common.data.*
 import com.a_blekot.shlokas.common.list_api.ListComponent
 import com.a_blekot.shlokas.common.list_api.ListOutput
 import com.a_blekot.shlokas.common.list_api.ListState
@@ -57,17 +54,19 @@ class ListComponentImpl(
         store.init()
     }
 
+    override fun resolveDescription(id: ShlokaId): String =
+        deps.stringResourceHandler.resolveDescription(id)
     override fun add() = store.accept(Add)
     override fun save() = store.accept(Save)
-    override fun remove(id: String) = store.accept(Remove(id))
-    override fun moveUp(id: String) = store.accept(MoveUp(id))
-    override fun moveDown(id: String) = store.accept(MoveDown(id))
-    override fun select(id: String, isSelected: Boolean) = store.accept(Select(id, isSelected))
+    override fun remove(id: ShlokaId) = store.accept(Remove(id))
+    override fun moveUp(id: ShlokaId) = store.accept(MoveUp(id))
+    override fun moveDown(id: ShlokaId) = store.accept(MoveDown(id))
+    override fun select(id: ShlokaId, isSelected: Boolean) = store.accept(Select(id, isSelected))
     override fun details(config: ShlokaConfig) = output(ListOutput.Details(config))
     override fun play() = onPlay()
     override fun play(config: ShlokaConfig) {
         val playConfig = config.toPlayConfig()
-        playShlokaAnalytics(config.shloka.id, playConfig)
+        playShlokaAnalytics(config.shloka.id.id, playConfig)
         output(ListOutput.Play(playConfig))
     }
 

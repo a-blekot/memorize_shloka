@@ -1,5 +1,6 @@
 package com.a_blekot.shlokas.common.utils
 
+import com.a_blekot.shlokas.common.data.ShlokaId
 import com.a_blekot.shlokas.common.data.Week
 import com.a_blekot.shlokas.common.data.toListType
 import com.russhwolf.settings.Settings
@@ -113,11 +114,11 @@ fun getTutorialSkippCount() =
 fun weekFromOrdinal(ordinal: Int) =
     Week.values().firstOrNull { it.ordinal == ordinal } ?: Week.FIRST
 
-fun selectShloka(id: String, isSelected: Boolean) =
-    settings.putBoolean("$SHLOKA_SELECTED_KEY-$id", isSelected)
+fun selectShloka(id: ShlokaId, isSelected: Boolean) =
+    settings.putBoolean("$SHLOKA_SELECTED_KEY-${id.id}", isSelected)
 
-fun isSelected(id: String) =
-    settings.getBoolean("$SHLOKA_SELECTED_KEY-$id", true)
+fun isSelected(id: ShlokaId) =
+    settings.getBoolean("$SHLOKA_SELECTED_KEY-${id.id}", true)
 
 fun onPreRatingShown() =
     getPreRatingShownCount().let {

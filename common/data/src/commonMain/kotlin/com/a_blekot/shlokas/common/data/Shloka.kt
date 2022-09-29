@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Parcelize
 @Serializable
 data class Shloka(
-    val id: String = "",
+    val id: ShlokaId = ShlokaId.NONE,
     val title: String = "",
     val hasAudio: Boolean = true,
     val extra: Boolean = false,

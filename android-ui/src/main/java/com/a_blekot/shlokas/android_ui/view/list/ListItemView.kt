@@ -11,13 +11,22 @@ import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.a_blekot.shlokas.android_ui.BuildConfig
+import com.a_blekot.shlokas.android_ui.custom.SmallColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartCheckBox
+import com.a_blekot.shlokas.android_ui.custom.StandartColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartRow
 import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
+import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingXS
+import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingZero
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusS
 import com.a_blekot.shlokas.common.data.ShlokaConfig
 import com.a_blekot.shlokas.common.list_api.ListComponent
@@ -31,36 +40,46 @@ fun ListItemView(index: Int, config: ShlokaConfig, component: ListComponent, mod
                 color = colorScheme.primaryContainer.copy(alpha = 0.3f),
                 shape = RoundedCornerShape(radiusS)
             )
-            .padding(vertical = 10.dp)
+            .padding(vertical = paddingXS)
             .clickable { component.play(config) }
     ) {
-        Text(
-            "${index + 1})",
-            color = colorScheme.onPrimaryContainer,
-            style = typography.titleLarge
-        )
+        SmallColumn(
+            horizontalAlignment = Alignment.Start,
+            modifier = Modifier.weight(50f)
+        ) {
+            Text(
+                config.shloka.title,
+                overflow = TextOverflow.Ellipsis,
+                color = colorScheme.onPrimaryContainer,
+                style = typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                maxLines = 1,
+            )
 
-        Text(
-            config.shloka.title,
-            overflow = TextOverflow.Ellipsis,
-            color = colorScheme.onPrimaryContainer,
-            style = typography.titleLarge,
-            maxLines = 1
-        )
-
-        Spacer(modifier = Modifier.weight(1.0f))
-
-        if (!config.shloka.hasAudio) {
-            Icon(
-                Icons.Rounded.MusicOff,
-                "no audio available",
-                tint = colorScheme.onPrimaryContainer,
-                modifier = Modifier.size(Dimens.iconSizeL)
+            Text(
+                component.resolveDescription(config.shloka.id),
+                overflow = TextOverflow.Ellipsis,
+                color = colorScheme.onPrimaryContainer,
+                style = typography.titleLarge.copy(fontStyle = FontStyle.Italic),
+                maxLines = 1,
             )
         }
 
-        StandartCheckBox(config.isSelected, color = colorScheme.onPrimaryContainer) {
-            component.select(config.shloka.id, it)
+        SmallColumn(
+            verticalArrangement = Arrangement.spacedBy(paddingXS, Alignment.CenterVertically),
+            modifier = Modifier.weight(5f)
+        ) {
+            if (!config.shloka.hasAudio) {
+                Icon(
+                    Icons.Rounded.MusicOff,
+                    "no audio available",
+                    tint = colorScheme.onPrimaryContainer,
+                    modifier = Modifier.size(Dimens.iconSizeM)
+                )
+            }
+
+            StandartCheckBox(config.isSelected, color = colorScheme.onPrimaryContainer) {
+                component.select(config.shloka.id, it)
+            }
         }
     }
 }

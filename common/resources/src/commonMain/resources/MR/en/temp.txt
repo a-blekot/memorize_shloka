@@ -3,17 +3,37 @@
 — -></b></i> —
 
 
-<string name="words_SB_3_5_41"><![CDATA[<i><b>mārganti</b></i> — searching after;</br><br><i><b>yat</b></i> — as;</br><br><i><b>te</b></i> — Your;</br><br><i><b>mukha-padma</b></i> — lotuslike face;</br><br><i><b>nīḍaiḥ</b></i> — by those who have taken shelter of such a lotus flower;</br><br><i><b>chandaḥ</b></i> — Vedic hymns;</br><br><i><b>suparṇaiḥ</b></i> — by the wings;</br><br><i><b>ṛṣayaḥ</b></i> — the sages;</br><br><i><b>vivikte</b></i> — in clear mind;</br><br><i><b>yasya</b></i> — whose;</br><br><i><b>agha-marṣa-uda</b></i> — that which offers freedom from all reactions to sin;</br><br><i><b>sarit</b></i> — rivers;</br><br><i><b>varāyāḥ</b></i> — in the best;</br><br><i><b>padam padam</b></i> — in every step;</br><br><i><b>tīrtha-padaḥ</b></i> — one whose lotus feet are as good as a place of pilgrimage;</br><br><i><b>prapannāḥ</b></i> — taking shelter.]]></string>
-<string name="words_SB_3_9_11"><![CDATA[<i><b>tvam</b></i> — unto You;</br><br><i><b>bhakti-yoga</b></i> — in devotional service;</br><br><i><b>paribhāvita</b></i> — being one-hundred-percent engaged;</br><br><i><b>hṛt</b></i> — of the heart;</br><br><i><b>saroje</b></i> — on the lotus;</br><br><i><b>āsse</b></i> — You reside;</br><br><i><b>śruta-īkṣita</b></i> — seen through the ear;</br><br><i><b>pathaḥ</b></i> — the path;</br><br><i><b>nanu</b></i> — now;</br><br><i><b>nātha</b></i> — O my Lord;</br><br><i><b>puṁsām</b></i> — of the devotees;</br><br><i><b>yat-yat</b></i> — whichever;</br><br><i><b>dhiyā</b></i> — by meditating;</br><br><i><b>te</b></i> — Your;</br><br><i><b>urugāya</b></i> — O multiglorious;</br><br><i><b>vibhāvayanti</b></i> — they specifically think of;</br><br><i><b>tat-tat</b></i> — the very same;</br><br><i><b>vapuḥ</b></i> — transcendental form;</br><br><i><b>praṇayase</b></i> — do You manifest;</br><br><i><b>sat-anugrahāya</b></i> — to show Your causeless mercy.]]></string>
 
-<string name="words_SB_4_30_35"><![CDATA[<i><b>yatra</b></i></b></i> — where;</br><br><i><b>īḍyante</b></i> — are worshiped or discussed;</br><br><i><b>kathāḥ</b></i> — words;</br><br><i><b>mṛṣṭāḥ</b></i> — pure;</br><br><i><b>tṛṣṇāyāḥ</b></i> — of material hankerings;</br><br><i><b>praśamaḥ</b></i> — satisfaction;</br><br><i><b>yataḥ</b></i> — by which;</br><br><i><b>nirvairam</b></i> — nonenviousness;</br><br><i><b>yatra</b></i> — where;</br><br><i><b>bhūteṣu</b></i> — among living entities;</br><br><i><b>na</b></i> — not;</br><br><i><b>udvegaḥ</b></i> — fear;</br><br><i><b>yatra</b></i> — where;</br><br><i><b>kaścana</b></i> — any.]]></string>
-
-<string name="words_SB_5_12_12"><![CDATA[<i><b>rahūgaṇa</b></i> — O King Rahūgaṇa;</br><br><i><b>etat</b></i> — this knowledge;</br><br><i><b>tapasā</b></i> — by severe austerities and penances;</br><br><i><b>na yāti</b></i> — does not become revealed;</br><br><i><b>na</b></i> — not;</br><br><i><b>ca</b></i> — also;</br><br><i><b>ijyayā</b></i> — by a great arrangement for worshiping the Deity;</br><br><i><b>nirvapaṇāt</b></i> — or from finishing all material duties and accepting sannyāsa;</br><br><i><b>gṛhāt</b></i> — from ideal householder life;</br><br><i><b>vā</b></i> — or;</br><br><i><b>na</b></i> — nor;</br><br><i><b>chandasā</b></i> — by observing celibacy or studying Vedic literature;</br><br><i><b>na eva</b></i> — nor;</br><br><i><b>jala-agni-sūryaiḥ</b></i> — by severe austerities such as keeping oneself in water, in a burning fire or in the scorching sun;</br><br><i><b>vinā</b></i> — without;</br><br><i><b>mahat</b></i> — of the great devotees;</br><br><i><b>pāda-rajaḥ</b></i> — the dust of the lotus feet;</br><br><i><b>abhiṣekam</b></i> — smearing all over the body.]]></string>
-
-<string name="words_SB_5_18_12"><![CDATA[<i><b>yasya</b></i> — of whom;</br><br><i><b>asti</b></i> — there is;</br><br><i><b>bhaktiḥ</b></i> — devotional service;</br><br><i><b>bhagavati</b></i> — to the Supreme Personality of Godhead;</br><br><i><b>akiñcanā</b></i> — without any motive;</br><br><i><b>sarvaiḥ</b></i> — with all;</br><br><i><b>guṇaiḥ</b></i> — good qualities;</br><br><i><b>tatra</b></i> — there (in that person);</br><br><i><b>samāsate</b></i> — reside;</br><br><i><b>surāḥ</b></i> — all the demigods;</br><br><i><b>harau</b></i> — unto the Supreme Personality of Godhead;</br><br><i><b>abhaktasya</b></i> — of a person who is not devoted;</br><br><i><b>kutaḥ</b></i> — where;</br><br><i><b>mahat-guṇāḥ</b></i> — good qualities;</br><br><i><b>manorathena</b></i> — by mental speculation;</br><br><i><b>asati</b></i> — in the temporary material world;</br><br><i><b>dhāvataḥ</b></i> — who is running;</br><br><i><b>bahiḥ</b></i> — outside.]]></string>
-<string name="words_SB_6_3_31"><![CDATA[<i><b>tasmāt</b></i> — therefore;</br><br><i><b>saṅkīrtanam</b></i> — the congregational chanting of the holy name;</br><br><i><b>viṣṇoḥ</b></i> — of Lord Viṣṇu;</br><br><i><b>jagat-maṅgalam</b></i> — the most auspicious performance within this material world;</br><br><i><b>aṁhasām</b></i> — for sinful activities;</br><br><i><b>mahatām api</b></i> — even though very great;</br><br><i><b>kauravya</b></i> — O descendant of the Kuru family;</br><br><i><b>viddhi</b></i> — understand;</br><br><i><b>aikāntika</b></i> — the ultimate;</br><br><i><b>niṣkṛtam</b></i> — atonement.]]></string>
-<string name="words_SB_6_14_5"><![CDATA[<i><b>muktānām</b></i> — of those who are liberated during this life (who are unattached to the bodily comforts of society, friendship and love);</br><br><i><b>api</b></i> — even;</br><br><i><b>siddhānām</b></i> — who are perfect (because they understand the insignificance of bodily comforts);</br><br><i><b>nārāyaṇa-parāyaṇaḥ</b></i> — a person who has concluded that Nārāyaṇa is the Supreme;</br><br><i><b>su-durlabhaḥ</b></i> — very rarely found;</br><br><i><b>praśānta</b></i> — fully pacified;</br><br><i><b>ātmā</b></i> — whose mind;</br><br><i><b>koṭiṣu*</b></i> — out of millions and trillions;</br><br><i><b>api</b></i> — even;</br><br><i><b>mahā-mune</b></i> — O great sage.]]></string>
-
+verses.append("BG_1_1")
+verses.append("BG_2_7")
+verses.append("BG_2_13")
+verses.append("BG_3_27")
+verses.append("BG_4_2")
+verses.append("BG_4_8")
+verses.append("BG_4_9")
+verses.append("BG_4_34")
+verses.append("BG_5_29")
+verses.append("BG_6_47")
+verses.append("BG_7_14")
+verses.append("BG_8_5")
+verses.append("BG_9_2")
+verses.append("BG_9_14")
+verses.append("BG_9_26")
+verses.append("BG_9_27")
+verses.append("BG_10_8")
+verses.append("BG_10_9")
+verses.append("BG_10_10")
+verses.append("BG_10_11")
+verses.append("BG_13_22")
+verses.append("BG_14_4")
+verses.append("BG_14_26")
+verses.append("BG_15_7")
+verses.append("BG_15_15")
+verses.append("BG_18_54")
+verses.append("BG_18_55")
+verses.append("BG_18_61")
+verses.append("BG_18_64")
+verses.append("BG_18_65")
 ШБ 1.1.2
 ШБ 1.1.3
 ШБ 1.2.7
@@ -46,3 +66,61 @@
 ШБ 6.1.40
 ШБ 6.1.13-14
 ШБ 6.3.20-21
+
+
+
+verses.append(Verse("uk", "SB", 1, 1, 1))
+verses.append(Verse("uk", "SB", 1, 1, 2))
+verses.append(Verse("uk", "SB", 1, 1, 3))
+verses.append(Verse("uk", "SB", 1, 1, 10))
+verses.append(Verse("uk", "SB", 1, 2, 6))
+verses.append(Verse("uk", "SB", 1, 2, 7))
+verses.append(Verse("uk", "SB", 1, 2, 8))
+verses.append(Verse("uk", "SB", 1, 2, 9))
+verses.append(Verse("uk", "SB", 1, 2, 10))
+verses.append(Verse("uk", "SB", 1, 2, 11))
+verses.append(Verse("uk", "SB", 1, 2, 12))
+verses.append(Verse("uk", "SB", 1, 2, 13))
+verses.append(Verse("uk", "SB", 1, 2, 14))
+verses.append(Verse("uk", "SB", 1, 2, 16))
+verses.append(Verse("uk", "SB", 1, 2, 17))
+verses.append(Verse("uk", "SB", 1, 2, 18))
+verses.append(Verse("uk", "SB", 1, 2, 19))
+verses.append(Verse("uk", "SB", 1, 2, 20))
+verses.append(Verse("uk", "SB", 1, 2, 21))
+verses.append(Verse("uk", "SB", 1, 3, 28))
+verses.append(Verse("uk", "SB", 1, 3, 43))
+verses.append(Verse("uk", "SB", 1, 5, 11))
+verses.append(Verse("uk", "SB", 1, 5, 17))
+verses.append(Verse("uk", "SB", 1, 5, 18))
+verses.append(Verse("uk", "SB", 1, 7, 6))
+verses.append(Verse("uk", "SB", 1, 7, 10))
+verses.append(Verse("uk", "SB", 1, 8, 18))
+verses.append(Verse("uk", "SB", 1, 8, 26))
+verses.append(Verse("uk", "SB", 1, 8, 42))
+verses.append(Verse("uk", "SB", 1, 13, 10))
+verses.append(Verse("uk", "SB", 1, 18, 13))
+verses.append(Verse("uk", "SB", 2, 1, 5))
+verses.append(Verse("uk", "SB", 2, 1, 6))
+verses.append(Verse("uk", "SB", 2, 1, 11))
+verses.append(Verse("uk", "SB", 2, 3, 10))
+verses.append(Verse("uk", "SB", 2, 3, 17))
+verses.append(Verse("uk", "SB", 2, 3, 19))
+verses.append(Verse("uk", "SB", 2, 4, 18))
+verses.append(Verse("uk", "SB", 2, 9, 33))
+verses.append(Verse("uk", "SB", 2, 9, 34))
+verses.append(Verse("uk", "SB", 2, 9, 35))
+verses.append(Verse("uk", "SB", 2, 9, 36))
+verses.append(Verse("uk", "SB", 2, 10, 1))
+verses.append(Verse("uk", "SB", 3, 2, 23))
+verses.append(Verse("uk", "SB", 3, 5, 41))
+verses.append(Verse("uk", "SB", 3, 9, 11))
+verses.append(Verse("uk", "SB", 3, 25, 19))
+verses.append(Verse("uk", "SB", 3, 25, 20))
+verses.append(Verse("uk", "SB", 3, 25, 21))
+verses.append(Verse("uk", "SB", 3, 25, 25))
+verses.append(Verse("uk", "SB", 3, 29, "11-12"))
+verses.append(Verse("uk", "SB", 3, 29, 13))
+verses.append(Verse("uk", "SB", 3, 31, 1))
+verses.append(Verse("uk", "SB", 3, 33, 6))
+verses.append(Verse("uk", "SB", 3, 33, 7))

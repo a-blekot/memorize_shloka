@@ -94,6 +94,7 @@
     <string name="title_SB_5_canto">Śrīmad-Bhāgavatam\nFifth canto</string>
     <string name="title_SB_6_canto">Śrīmad-Bhāgavatam\nSixth canto</string>
     <string name="title_NI">Nectar of Instruction</string>
+    <string name="title_BG">Bhagavad-gītā</string>
     <string name="title_short_SB_1_canto">ŚB - First canto</string>
     <string name="title_short_SB_2_canto">ŚB - Second canto</string>
     <string name="title_short_SB_3_canto">ŚB - Third canto</string>
@@ -616,5 +617,185 @@
     <string name="words_BG_18_05"><![CDATA[<i><b>yajña</b></i> — of sacrifice;</br><br><i><b>dāna</b></i> — charity;</br><br><i><b>tapaḥ</b></i> — and penance;</br><br><i><b>karma</b></i> — activity;</br><br><i><b>na</b></i> — never;</br><br><i><b>tyājyam</b></i> — to be given up;</br><br><i><b>kāryam</b></i> — must be done;</br><br><i><b>eva</b></i> — certainly;</br><br><i><b>tat</b></i> — that;</br><br><i><b>yajñaḥ</b></i> — sacrifice;</br><br><i><b>dānam</b></i> — charity;</br><br><i><b>tapaḥ</b></i> — penance;</br><br><i><b>ca</b></i> — also;</br><br><i><b>eva</b></i> — certainly;</br><br><i><b>pāvanāni</b></i> — purifying;</br><br><i><b>manīṣiṇām</b></i> — even for the great souls.]]></string>
     <string name="trans_BG_18_05">Acts of sacrifice, charity and penance are not to be given up; they must be performed. Indeed, sacrifice, charity and penance purify even the great souls.</string>
     <string name="descr_BG_18_05">yajña-dāna-tapaḥ-karma</string>
+
+    <string name="title_BG_1_1">BG 1.1</string>
+    <string name="descr_BG_1_1">dharma-kṣetre kuru-kṣetre</string>
+    <string name="sansk_BG_1_1"><![CDATA[<i>dhṛtarāṣṭra uvāca<br>dharma-kṣetre kuru-kṣetre<br>samavetā yuyutsavaḥ<br>māmakāḥ pāṇḍavāś caiva<br>kim akurvata sañjaya</i>]]></string>
+    <string name="words_BG_1_1"><![CDATA[<i><b>dhṛtarāṣṭraḥuvāca</b></i> — King Dhṛtarāṣṭra said;</br><br><i><b>dharma-kṣetre</b></i> — in the place of pilgrimage;</br><br><i><b>kuru-kṣetre</b></i> — in the place named Kurukṣetra;</br><br><i><b>samavetāḥ</b></i> — assembled;</br><br><i><b>yuyutsavaḥ</b></i> — desiring to fight;</br><br><i><b>māmakāḥ</b></i> — my party (sons);</br><br><i><b>pāṇḍavāḥ</b></i> — the sons of Pāṇḍu;</br><br><i><b>ca</b></i> — and;</br><br><i><b>eva</b></i> — certainly;</br><br><i><b>kim</b></i> — what;</br><br><i><b>akurvata</b></i> — did they do;</br><br><i><b>sañjaya</b></i> — O Sañjaya.]]></string>
+    <string name="trans_BG_1_1">Dhṛtarāṣṭra said: O Sañjaya, after my sons and the sons of Pāṇḍu assembled in the place of pilgrimage at Kurukṣetra, desiring to fight, what did they do?</string>
+
+    <string name="title_BG_2_7">BG 2.7</string>
+    <string name="descr_BG_2_7">kārpaṇya-doṣopahata-svabhāvaḥ</string>
+    <string name="sansk_BG_2_7"><![CDATA[<i>kārpaṇya-doṣopahata-svabhāvaḥ<br>pṛcchāmi tvāṁ dharma-sammūḍha-cetāḥ<br>yac chreyaḥ syān niścitaṁ brūhi tan me<br>śiṣyas te ’haṁ śādhi māṁ tvāṁ prapannam</i>]]></string>
+    <string name="words_BG_2_7"><![CDATA[<i><b>kārpaṇya</b></i> — of miserliness;</br><br><i><b>doṣa</b></i> — by the weakness;</br><br><i><b>upahata</b></i> — being afflicted;</br><br><i><b>svabhāvaḥ</b></i> — characteristics;</br><br><i><b>pṛcchāmi</b></i> — I am asking;</br><br><i><b>tvām</b></i> — unto You;</br><br><i><b>dharma</b></i> — religion;</br><br><i><b>sammūḍha</b></i> — bewildered;</br><br><i><b>cetāḥ</b></i> — in heart;</br><br><i><b>yat</b></i> — what;</br><br><i><b>śreyaḥ</b></i> — all-good;</br><br><i><b>syāt</b></i> — may be;</br><br><i><b>niścitam</b></i> — confidently;</br><br><i><b>brūhi</b></i> — tell;</br><br><i><b>tat</b></i> — that;</br><br><i><b>me</b></i> — unto me;</br><br><i><b>śiṣyaḥ</b></i> — disciple;</br><br><i><b>te</b></i> — Your;</br><br><i><b>aham</b></i> — I am;</br><br><i><b>śādhi</b></i> — just instruct;</br><br><i><b>mām</b></i> — me;</br><br><i><b>tvām</b></i> — unto You;</br><br><i><b>prapannam</b></i> — surrendered.]]></string>
+    <string name="trans_BG_2_7">Now I am confused about my duty and have lost all composure because of miserly weakness. In this condition I am asking You to tell me for certain what is best for me. Now I am Your disciple, and a soul surrendered unto You. Please instruct me.</string>
+
+    <string name="title_BG_2_13">BG 2.13</string>
+    <string name="descr_BG_2_13">dehino ’smin yathā dehe</string>
+    <string name="sansk_BG_2_13"><![CDATA[<i>dehino ’smin yathā dehe<br>kaumāraṁ yauvanaṁ jarā<br>tathā dehāntara-prāptir<br>dhīras tatra na muhyati</i>]]></string>
+    <string name="words_BG_2_13"><![CDATA[<i><b>dehinaḥ</b></i> — of the embodied;</br><br><i><b>asmin</b></i> — in this;</br><br><i><b>yathā</b></i> — as;</br><br><i><b>dehe</b></i> — in the body;</br><br><i><b>kaumāram</b></i> — boyhood;</br><br><i><b>yauvanam</b></i> — youth;</br><br><i><b>jarā</b></i> — old age;</br><br><i><b>tathā</b></i> — similarly;</br><br><i><b>deha-antara</b></i> — of transference of the body;</br><br><i><b>prāptiḥ</b></i> — achievement;</br><br><i><b>dhīraḥ</b></i> — the sober;</br><br><i><b>tatra</b></i> — thereupon;</br><br><i><b>na</b></i> — never;</br><br><i><b>muhyati</b></i> — is deluded.]]></string>
+    <string name="trans_BG_2_13">As the embodied soul continuously passes, in this body, from boyhood to youth to old age, the soul similarly passes into another body at death. A sober person is not bewildered by such a change.</string>
+
+    <string name="title_BG_3_27">BG 3.27</string>
+    <string name="descr_BG_3_27">prakṛteḥ kriyamāṇāni</string>
+    <string name="sansk_BG_3_27"><![CDATA[<i>prakṛteḥ kriyamāṇāni<br>guṇaiḥ karmāṇi sarvaśaḥ<br>ahaṅkāra-vimūḍhātmā<br>kartāham iti manyate</i>]]></string>
+    <string name="words_BG_3_27"><![CDATA[<i><b>prakṛteḥ</b></i> — of material nature;</br><br><i><b>kriyamāṇāni</b></i> — being done;</br><br><i><b>guṇaiḥ</b></i> — by the modes;</br><br><i><b>karmāṇi</b></i> — activities;</br><br><i><b>sarvaśaḥ</b></i> — all kinds of;</br><br><i><b>ahaṅkāra-vimūḍha</b></i> — bewildered by false ego;</br><br><i><b>ātmā</b></i> — the spirit soul;</br><br><i><b>kartā</b></i> — doer;</br><br><i><b>aham</b></i> — I;</br><br><i><b>iti</b></i> — thus;</br><br><i><b>manyate</b></i> — he thinks.]]></string>
+    <string name="trans_BG_3_27">The spirit soul bewildered by the influence of false ego thinks himself the doer of activities that are in actuality carried out by the three modes of material nature.</string>
+
+    <string name="title_BG_4_2">BG 4.2</string>
+    <string name="descr_BG_4_2">evaṁ paramparā-prāptam</string>
+    <string name="sansk_BG_4_2"><![CDATA[<i>evaṁ paramparā-prāptam<br>imaṁ rājarṣayo viduḥ<br>sa kāleneha mahatā<br>yogo naṣṭaḥ paran-tapa</i>]]></string>
+    <string name="words_BG_4_2"><![CDATA[<i><b>evam</b></i> — thus;</br><br><i><b>paramparā</b></i> — by disciplic succession;</br><br><i><b>prāptam</b></i> — received;</br><br><i><b>imam</b></i> — this science;</br><br><i><b>rāja-ṛṣayaḥ</b></i> — the saintly kings;</br><br><i><b>viduḥ</b></i> — understood;</br><br><i><b>saḥ</b></i> — that knowledge;</br><br><i><b>kālena</b></i> — in the course of time;</br><br><i><b>iha</b></i> — in this world;</br><br><i><b>mahatā</b></i> — great;</br><br><i><b>yogaḥ</b></i> — the science of one’s relationship with the Supreme;</br><br><i><b>naṣṭaḥ</b></i> — scattered;</br><br><i><b>param-tapa</b></i> — O Arjuna, subduer of the enemies.]]></string>
+    <string name="trans_BG_4_2">This supreme science was thus received through the chain of disciplic succession, and the saintly kings understood it in that way. But in course of time the succession was broken, and therefore the science as it is appears to be lost.</string>
+
+    <string name="title_BG_4_8">BG 4.8</string>
+    <string name="descr_BG_4_8">paritrāṇāya sādhūnāṁ</string>
+    <string name="sansk_BG_4_8"><![CDATA[<i>paritrāṇāya sādhūnāṁ<br>vināśāya ca duṣkṛtām<br>dharma-saṁsthāpanārthāya<br>sambhavāmi yuge yuge</i>]]></string>
+    <string name="words_BG_4_8"><![CDATA[<i><b>paritrāṇāya</b></i> — for the deliverance;</br><br><i><b>sādhūnām</b></i> — of the devotees;</br><br><i><b>vināśāya</b></i> — for the annihilation;</br><br><i><b>ca</b></i> — and;</br><br><i><b>duṣkṛtām</b></i> — of the miscreants;</br><br><i><b>dharma</b></i> — principles of religion;</br><br><i><b>saṁsthāpana-arthāya</b></i> — to reestablish;</br><br><i><b>sambhavāmi</b></i> — I do appear;</br><br><i><b>yuge</b></i> — millennium;</br><br><i><b>yuge</b></i> — after millennium.]]></string>
+    <string name="trans_BG_4_8">To deliver the pious and to annihilate the miscreants, as well as to reestablish the principles of religion, I Myself appear, millennium after millennium.</string>
+
+    <string name="title_BG_4_9">BG 4.9</string>
+    <string name="descr_BG_4_9">janma karma ca me divyam</string>
+    <string name="sansk_BG_4_9"><![CDATA[<i>janma karma ca me divyam<br>evaṁ yo vetti tattvataḥ<br>tyaktvā dehaṁ punar janma<br>naiti mām eti so ’rjuna</i>]]></string>
+    <string name="words_BG_4_9"><![CDATA[<i><b>janma</b></i> — birth;</br><br><i><b>karma</b></i> — work;</br><br><i><b>ca</b></i> — also;</br><br><i><b>me</b></i> — of Mine;</br><br><i><b>divyam</b></i> — transcendental;</br><br><i><b>evam</b></i> — like this;</br><br><i><b>yaḥ</b></i> — anyone who;</br><br><i><b>vetti</b></i> — knows;</br><br><i><b>tattvataḥ</b></i> — in reality;</br><br><i><b>tyaktvā</b></i> — leaving aside;</br><br><i><b>deham</b></i> — this body;</br><br><i><b>punaḥ</b></i> — again;</br><br><i><b>janma</b></i> — birth;</br><br><i><b>na</b></i> — never;</br><br><i><b>eti</b></i> — does attain;</br><br><i><b>mām</b></i> — unto Me;</br><br><i><b>eti</b></i> — does attain;</br><br><i><b>saḥ</b></i> — he;</br><br><i><b>arjuna</b></i> — O Arjuna.]]></string>
+    <string name="trans_BG_4_9">One who knows the transcendental nature of My appearance and activities does not, upon leaving the body, take his birth again in this material world, but attains My eternal abode, O Arjuna.</string>
+
+    <string name="title_BG_4_34">BG 4.34</string>
+    <string name="descr_BG_4_34">tad viddhi praṇipātena</string>
+    <string name="sansk_BG_4_34"><![CDATA[<i>tad viddhi praṇipātena<br>paripraśnena sevayā<br>upadekṣyanti te jñānaṁ<br>jñāninas tattva-darśinaḥ</i>]]></string>
+    <string name="words_BG_4_34"><![CDATA[<i><b>tat</b></i> — that knowledge of different sacrifices;</br><br><i><b>viddhi</b></i> — try to understand;</br><br><i><b>praṇipātena</b></i> — by approaching a spiritual master;</br><br><i><b>paripraśnena</b></i> — by submissive inquiries;</br><br><i><b>sevayā</b></i> — by the rendering of service;</br><br><i><b>upadekṣyanti</b></i> — they will initiate;</br><br><i><b>te</b></i> — you;</br><br><i><b>jñānam</b></i> — into knowledge;</br><br><i><b>jñāninaḥ</b></i> — the self-realized;</br><br><i><b>tattva</b></i> — of the truth;</br><br><i><b>darśinaḥ</b></i> — seers.]]></string>
+    <string name="trans_BG_4_34">Just try to learn the truth by approaching a spiritual master. Inquire from him submissively and render service unto him. The self-realized souls can impart knowledge unto you because they have seen the truth.</string>
+
+    <string name="title_BG_5_29">BG 5.29</string>
+    <string name="descr_BG_5_29">bhoktāraṁ yajña-tapasāṁ</string>
+    <string name="sansk_BG_5_29"><![CDATA[<i>bhoktāraṁ yajña-tapasāṁ<br>sarva-loka-maheśvaram<br>suhṛdaṁ sarva-bhūtānāṁ<br>jñātvā māṁ śāntim ṛcchati</i>]]></string>
+    <string name="words_BG_5_29"><![CDATA[<i><b>bhoktāram</b></i> — the beneficiary;</br><br><i><b>yajña</b></i> — of sacrifices;</br><br><i><b>tapasām</b></i> — and penances and austerities;</br><br><i><b>sarva-loka</b></i> — of all planets and the demigods thereof;</br><br><i><b>mahā-īśvaram</b></i> — the Supreme Lord;</br><br><i><b>su-hṛdam</b></i> — the benefactor;</br><br><i><b>sarva</b></i> — of all;</br><br><i><b>bhūtānām</b></i> — the living entities;</br><br><i><b>jñātvā</b></i> — thus knowing;</br><br><i><b>mām</b></i> — Me (Lord Kṛṣṇa);</br><br><i><b>śāntim</b></i> — relief from material pangs;</br><br><i><b>ṛcchati</b></i> — one achieves.]]></string>
+    <string name="trans_BG_5_29">A person in full consciousness of Me, knowing Me to be the ultimate beneficiary of all sacrifices and austerities, the Supreme Lord of all planets and demigods, and the benefactor and well-wisher of all living entities, attains peace from the pangs of material miseries.</string>
+
+    <string name="title_BG_6_47">BG 6.47</string>
+    <string name="descr_BG_6_47">yoginām api sarveṣāṁ</string>
+    <string name="sansk_BG_6_47"><![CDATA[<i>yoginām api sarveṣāṁ<br>mad-gatenāntar-ātmanā<br>śraddhāvān bhajate yo māṁ<br>sa me yukta-tamo mataḥ</i>]]></string>
+    <string name="words_BG_6_47"><![CDATA[<i><b>yoginām</b></i> — of yogīs;</br><br><i><b>api</b></i> — also;</br><br><i><b>sarveṣām</b></i> — all types of;</br><br><i><b>mat-gatena</b></i> — abiding in Me, always thinking of Me;</br><br><i><b>antaḥ-ātmanā</b></i> — within himself;</br><br><i><b>śraddhā-vān</b></i> — in full faith;</br><br><i><b>bhajate</b></i> — renders transcendental loving service;</br><br><i><b>yaḥ</b></i> — one who;</br><br><i><b>mām</b></i> — to Me (the Supreme Lord);</br><br><i><b>saḥ</b></i> — he;</br><br><i><b>me</b></i> — by Me;</br><br><i><b>yukta-tamaḥ</b></i> — the greatest yogī;</br><br><i><b>mataḥ</b></i> — is considered.]]></string>
+    <string name="trans_BG_6_47">And of all yogīs, the one with great faith who always abides in Me, thinks of Me within himself and renders transcendental loving service to Me – he is the most intimately united with Me in yoga and is the highest of all. That is My opinion.</string>
+
+    <string name="title_BG_7_14">BG 7.14</string>
+    <string name="descr_BG_7_14">daivī hy eṣā guṇa-mayī</string>
+    <string name="sansk_BG_7_14"><![CDATA[<i>daivī hy eṣā guṇa-mayī<br>mama māyā duratyayā<br>mām eva ye prapadyante<br>māyām etāṁ taranti te</i>]]></string>
+    <string name="words_BG_7_14"><![CDATA[<i><b>daivī</b></i> — transcendental;</br><br><i><b>hi</b></i> — certainly;</br><br><i><b>eṣā</b></i> — this;</br><br><i><b>guṇa-mayī</b></i> — consisting of the three modes of material nature;</br><br><i><b>mama</b></i> — My;</br><br><i><b>māyā</b></i> — energy;</br><br><i><b>duratyayā</b></i> — very difficult to overcome;</br><br><i><b>mām</b></i> — unto Me;</br><br><i><b>eva</b></i> — certainly;</br><br><i><b>ye</b></i> — those who;</br><br><i><b>prapadyante</b></i> — surrender;</br><br><i><b>māyāmetām</b></i> — this illusory energy;</br><br><i><b>taranti</b></i> — overcome;</br><br><i><b>te</b></i> — they.]]></string>
+    <string name="trans_BG_7_14">This divine energy of Mine, consisting of the three modes of material nature, is difficult to overcome. But those who have surrendered unto Me can easily cross beyond it.</string>
+
+    <string name="title_BG_8_5">BG 8.5</string>
+    <string name="descr_BG_8_5">anta-kāle ca mām eva</string>
+    <string name="sansk_BG_8_5"><![CDATA[<i>anta-kāle ca mām eva<br>smaran muktvā kalevaram<br>yaḥ prayāti sa mad-bhāvaṁ<br>yāti nāsty atra saṁśayaḥ</i>]]></string>
+    <string name="words_BG_8_5"><![CDATA[<i><b>anta-kāle</b></i> — at the end of life;</br><br><i><b>ca</b></i> — also;</br><br><i><b>mām</b></i> — Me;</br><br><i><b>eva</b></i> — certainly;</br><br><i><b>smaran</b></i> — remembering;</br><br><i><b>muktvā</b></i> — quitting;</br><br><i><b>kalevaram</b></i> — the body;</br><br><i><b>yaḥ</b></i> — he who;</br><br><i><b>prayāti</b></i> — goes;</br><br><i><b>saḥ</b></i> — he;</br><br><i><b>mat-bhāvam</b></i> — My nature;</br><br><i><b>yāti</b></i> — achieves;</br><br><i><b>na</b></i> — not;</br><br><i><b>asti</b></i> — there is;</br><br><i><b>atra</b></i> — here;</br><br><i><b>saṁśayaḥ</b></i> — doubt.]]></string>
+    <string name="trans_BG_8_5">And whoever, at the end of his life, quits his body remembering Me alone at once attains My nature. Of this there is no doubt.</string>
+
+    <string name="title_BG_9_2">BG 9.2</string>
+    <string name="descr_BG_9_2">rāja-vidyā rāja-guhyaṁ</string>
+    <string name="sansk_BG_9_2"><![CDATA[<i>rāja-vidyā rāja-guhyaṁ<br>pavitram idam uttamam<br>pratyakṣāvagamaṁ dharmyaṁ<br>su-sukhaṁ kartum avyayam</i>]]></string>
+    <string name="words_BG_9_2"><![CDATA[<i><b>rāja-vidyā</b></i> — the king of education;</br><br><i><b>rāja-guhyam</b></i> — the king of confidential knowledge;</br><br><i><b>pavitram</b></i> — the purest;</br><br><i><b>idam</b></i> — this;</br><br><i><b>uttamam</b></i> — transcendental;</br><br><i><b>pratyakṣa</b></i> — by direct experience;</br><br><i><b>avagamam</b></i> — understood;</br><br><i><b>dharmyam</b></i> — the principle of religion;</br><br><i><b>su-sukham</b></i> — very happy;</br><br><i><b>kartum</b></i> — to execute;</br><br><i><b>avyayam</b></i> — everlasting.]]></string>
+    <string name="trans_BG_9_2">This knowledge is the king of education, the most secret of all secrets. It is the purest knowledge, and because it gives direct perception of the self by realization, it is the perfection of religion. It is everlasting, and it is joyfully performed.</string>
+
+    <string name="title_BG_9_14">BG 9.14</string>
+    <string name="descr_BG_9_14">satataṁ kīrtayanto māṁ</string>
+    <string name="sansk_BG_9_14"><![CDATA[<i>satataṁ kīrtayanto māṁ<br>yatantaś ca dṛḍha-vratāḥ<br>namasyantaś ca māṁ bhaktyā<br>nitya-yuktā upāsate</i>]]></string>
+    <string name="words_BG_9_14"><![CDATA[<i><b>satatam</b></i> — always;</br><br><i><b>kīrtayantaḥ</b></i> — chanting;</br><br><i><b>mām</b></i> — about Me;</br><br><i><b>yatantaḥ</b></i> — fully endeavoring;</br><br><i><b>ca</b></i> — also;</br><br><i><b>dṛḍha-vratāḥ</b></i> — with determination;</br><br><i><b>namasyantaḥ</b></i> — offering obeisances;</br><br><i><b>ca</b></i> — and;</br><br><i><b>mām</b></i> — Me;</br><br><i><b>bhaktyā</b></i> — in devotion;</br><br><i><b>nitya-yuktāḥ</b></i> — perpetually engaged;</br><br><i><b>upāsate</b></i> — worship.]]></string>
+    <string name="trans_BG_9_14">Always chanting My glories, endeavoring with great determination, bowing down before Me, these great souls perpetually worship Me with devotion.</string>
+
+    <string name="title_BG_9_26">BG 9.26</string>
+    <string name="descr_BG_9_26">patraṁ puṣpaṁ phalaṁ toyaṁ</string>
+    <string name="sansk_BG_9_26"><![CDATA[<i>patraṁ puṣpaṁ phalaṁ toyaṁ<br>yo me bhaktyā prayacchati<br>tad ahaṁ bhakty-upahṛtam<br>aśnāmi prayatātmanaḥ</i>]]></string>
+    <string name="words_BG_9_26"><![CDATA[<i><b>patram</b></i> — a leaf;</br><br><i><b>puṣpam</b></i> — a flower;</br><br><i><b>phalam</b></i> — a fruit;</br><br><i><b>toyam</b></i> — water;</br><br><i><b>yaḥ</b></i> — whoever;</br><br><i><b>me</b></i> — unto Me;</br><br><i><b>bhaktyā</b></i> — with devotion;</br><br><i><b>prayacchati</b></i> — offers;</br><br><i><b>tat</b></i> — that;</br><br><i><b>aham</b></i> — I;</br><br><i><b>bhakti-upahṛtam</b></i> — offered in devotion;</br><br><i><b>aśnāmi</b></i> — accept;</br><br><i><b>prayata-ātmanaḥ</b></i> — from one in pure consciousness.]]></string>
+    <string name="trans_BG_9_26">If one offers Me with love and devotion a leaf, a flower, a fruit or water, I will accept it.</string>
+
+    <string name="title_BG_9_27">BG 9.27</string>
+    <string name="descr_BG_9_27">yat karoṣi yad aśnāsi</string>
+    <string name="sansk_BG_9_27"><![CDATA[<i>yat karoṣi yad aśnāsi<br>yaj juhoṣi dadāsi yat<br>yat tapasyasi kaunteya<br>tat kuruṣva mad-arpaṇam</i>]]></string>
+    <string name="words_BG_9_27"><![CDATA[<i><b>yat</b></i> — whatever;</br><br><i><b>karoṣi</b></i> — you do;</br><br><i><b>yat</b></i> — whatever;</br><br><i><b>aśnāsi</b></i> — you eat;</br><br><i><b>yat</b></i> — whatever;</br><br><i><b>juhoṣi</b></i> — you offer;</br><br><i><b>dadāsi</b></i> — you give away;</br><br><i><b>yat</b></i> — whatever;</br><br><i><b>yat</b></i> — whatever;</br><br><i><b>tapasyasi</b></i> — austerities you perform;</br><br><i><b>kaunteya</b></i> — O son of Kuntī;</br><br><i><b>tat</b></i> — that;</br><br><i><b>kuruṣva</b></i> — do;</br><br><i><b>mat</b></i> — unto Me;</br><br><i><b>arpaṇam</b></i> — as an offering.]]></string>
+    <string name="trans_BG_9_27">Whatever you do, whatever you eat, whatever you offer or give away, and whatever austerities you perform – do that, O son of Kuntī, as an offering to Me.</string>
+
+    <string name="title_BG_10_8">BG 10.8</string>
+    <string name="descr_BG_10_8">ahaṁ sarvasya prabhavo</string>
+    <string name="sansk_BG_10_8"><![CDATA[<i>ahaṁ sarvasya prabhavo<br>mattaḥ sarvaṁ pravartate<br>iti matvā bhajante māṁ<br>budhā bhāva-samanvitāḥ</i>]]></string>
+    <string name="words_BG_10_8"><![CDATA[<i><b>aham</b></i> — I;</br><br><i><b>sarvasya</b></i> — of all;</br><br><i><b>prabhavaḥ</b></i> — the source of generation;</br><br><i><b>mattaḥ</b></i> — from Me;</br><br><i><b>sarvam</b></i> — everything;</br><br><i><b>pravartate</b></i> — emanates;</br><br><i><b>iti</b></i> — thus;</br><br><i><b>matvā</b></i> — knowing;</br><br><i><b>bhajante</b></i> — become devoted;</br><br><i><b>mām</b></i> — unto Me;</br><br><i><b>budhāḥ</b></i> — the learned;</br><br><i><b>bhāva-samanvitāḥ</b></i> — with great attention.]]></string>
+    <string name="trans_BG_10_8">I am the source of all spiritual and material worlds. Everything emanates from Me. The wise who perfectly know this engage in My devotional service and worship Me with all their hearts.</string>
+
+    <string name="title_BG_10_9">BG 10.9</string>
+    <string name="descr_BG_10_9">mac-cittā mad-gata-prāṇā</string>
+    <string name="sansk_BG_10_9"><![CDATA[<i>mac-cittā mad-gata-prāṇā<br>bodhayantaḥ parasparam<br>kathayantaś ca māṁ nityaṁ<br>tuṣyanti ca ramanti ca</i>]]></string>
+    <string name="words_BG_10_9"><![CDATA[<i><b>mat-cittāḥ</b></i> — their minds fully engaged in Me;</br><br><i><b>mat-gata-prāṇāḥ</b></i> — their lives devoted to Me;</br><br><i><b>bodhayantaḥ</b></i> — preaching;</br><br><i><b>parasparam</b></i> — among themselves;</br><br><i><b>kathayantaḥ</b></i> — talking;</br><br><i><b>ca</b></i> — also;</br><br><i><b>mām</b></i> — about Me;</br><br><i><b>nityam</b></i> — perpetually;</br><br><i><b>tuṣyanti</b></i> — become pleased;</br><br><i><b>ca</b></i> — also;</br><br><i><b>ramanti</b></i> — enjoy transcendental bliss;</br><br><i><b>ca</b></i> — also.]]></string>
+    <string name="trans_BG_10_9">The thoughts of My pure devotees dwell in Me, their lives are fully devoted to My service, and they derive great satisfaction and bliss from always enlightening one another and conversing about Me.</string>
+
+    <string name="title_BG_10_10">BG 10.10</string>
+    <string name="descr_BG_10_10">teṣāṁ satata-yuktānāṁ</string>
+    <string name="sansk_BG_10_10"><![CDATA[<i>teṣāṁ satata-yuktānāṁ<br>bhajatāṁ prīti-pūrvakam<br>dadāmi buddhi-yogaṁ taṁ<br>yena mām upayānti te</i>]]></string>
+    <string name="words_BG_10_10"><![CDATA[<i><b>teṣām</b></i> — unto them;</br><br><i><b>satata-yuktānām</b></i> — always engaged;</br><br><i><b>bhajatām</b></i> — in rendering devotional service;</br><br><i><b>prīti-pūrvakam</b></i> — in loving ecstasy;</br><br><i><b>dadāmi</b></i> — I give;</br><br><i><b>buddhi-yogam</b></i> — real intelligence;</br><br><i><b>tam</b></i> — that;</br><br><i><b>yena</b></i> — by which;</br><br><i><b>mām</b></i> — unto Me;</br><br><i><b>upayānti</b></i> — come;</br><br><i><b>te</b></i> — they.]]></string>
+    <string name="trans_BG_10_10">To those who are constantly devoted to serving Me with love, I give the understanding by which they can come to Me.</string>
+
+    <string name="title_BG_10_11">BG 10.11</string>
+    <string name="descr_BG_10_11">teṣām evānukampārtham</string>
+    <string name="sansk_BG_10_11"><![CDATA[<i>teṣām evānukampārtham<br>aham ajñāna-jaṁ tamaḥ<br>nāśayāmy ātma-bhāva-stho<br>jñāna-dīpena bhāsvatā</i>]]></string>
+    <string name="words_BG_10_11"><![CDATA[<i><b>teṣām</b></i> — for them;</br><br><i><b>eva</b></i> — certainly;</br><br><i><b>anukampā-artham</b></i> — to show special mercy;</br><br><i><b>aham</b></i> — I;</br><br><i><b>ajñāna-jam</b></i> — due to ignorance;</br><br><i><b>tamaḥ</b></i> — darkness;</br><br><i><b>nāśayāmi</b></i> — dispel;</br><br><i><b>ātma-bhāva</b></i> — within their hearts;</br><br><i><b>sthaḥ</b></i> — situated;</br><br><i><b>jñāna</b></i> — of knowledge;</br><br><i><b>dīpena</b></i> — with the lamp;</br><br><i><b>bhāsvatā</b></i> — glowing.]]></string>
+    <string name="trans_BG_10_11">To show them special mercy, I, dwelling in their hearts, destroy with the shining lamp of knowledge the darkness born of ignorance.</string>
+
+    <string name="title_BG_13_22">BG 13.22</string>
+    <string name="descr_BG_13_22">puruṣaḥ prakṛti-stho hi</string>
+    <string name="sansk_BG_13_22"><![CDATA[<i>puruṣaḥ prakṛti-stho hi<br>bhuṅkte prakṛti-jān guṇān<br>kāraṇaṁ guṇa-saṅgo ’sya<br>sad-asad-yoni-janmasu</i>]]></string>
+    <string name="words_BG_13_22"><![CDATA[<i><b>puruṣaḥ</b></i> — the living entity;</br><br><i><b>prakṛti-sthaḥ</b></i> — being situated in the material energy;</br><br><i><b>hi</b></i> — certainly;</br><br><i><b>bhuṅkte</b></i> — enjoys;</br><br><i><b>prakṛti-jān</b></i> — produced by the material nature;</br><br><i><b>guṇān</b></i> — the modes of nature;</br><br><i><b>kāraṇam</b></i> — the cause;</br><br><i><b>guṇa-saṅgaḥ</b></i> — the association with the modes of nature;</br><br><i><b>asya</b></i> — of the living entity;</br><br><i><b>sat-asat</b></i> — in good and bad;</br><br><i><b>yoni</b></i> — species of life;</br><br><i><b>janmasu</b></i> — in births.]]></string>
+    <string name="trans_BG_13_22">The living entity in material nature thus follows the ways of life, enjoying the three modes of nature. This is due to his association with that material nature. Thus he meets with good and evil among various species.</string>
+
+    <string name="title_BG_14_4">BG 14.4</string>
+    <string name="descr_BG_14_4">sarva-yoniṣu kaunteya</string>
+    <string name="sansk_BG_14_4"><![CDATA[<i>sarva-yoniṣu kaunteya<br>mūrtayaḥ sambhavanti yāḥ<br>tāsāṁ brahma mahad yonir<br>ahaṁ bīja-pradaḥ pitā</i>]]></string>
+    <string name="words_BG_14_4"><![CDATA[<i><b>sarva-yoniṣu</b></i> — in all species of life;</br><br><i><b>kaunteya</b></i> — O son of Kuntī;</br><br><i><b>mūrtayaḥ</b></i> — forms;</br><br><i><b>sambhavanti</b></i> — they appear;</br><br><i><b>yāḥ</b></i> — which;</br><br><i><b>tāsām</b></i> — of all of them;</br><br><i><b>brahma</b></i> — the supreme;</br><br><i><b>mahatyoniḥ</b></i> — source of birth in the material substance;</br><br><i><b>aham</b></i> — I;</br><br><i><b>bīja-pradaḥ</b></i> — the seed-giving;</br><br><i><b>pitā</b></i> — father.]]></string>
+    <string name="trans_BG_14_4">It should be understood that all species of life, O son of Kuntī, are made possible by birth in this material nature, and that I am the seed-giving father.</string>
+
+    <string name="title_BG_14_26">BG 14.26</string>
+    <string name="descr_BG_14_26">māṁ ca yo ’vyabhicāreṇa</string>
+    <string name="sansk_BG_14_26"><![CDATA[<i>māṁ ca yo ’vyabhicāreṇa<br>bhakti-yogena sevate<br>sa guṇān samatītyaitān<br>brahma-bhūyāya kalpate</i>]]></string>
+    <string name="words_BG_14_26"><![CDATA[<i><b>mām</b></i> — unto Me;</br><br><i><b>ca</b></i> — also;</br><br><i><b>yaḥ</b></i> — a person who;</br><br><i><b>avyabhicāreṇa</b></i> — without fail;</br><br><i><b>bhakti-yogena</b></i> — by devotional service;</br><br><i><b>sevate</b></i> — renders service;</br><br><i><b>saḥ</b></i> — he;</br><br><i><b>guṇān</b></i> — the modes of material nature;</br><br><i><b>samatītya</b></i> — transcending;</br><br><i><b>etān</b></i> — all these;</br><br><i><b>brahma-bhūyāya</b></i> — elevated to the Brahman platform;</br><br><i><b>kalpate</b></i> — becomes.]]></string>
+    <string name="trans_BG_14_26">One who engages in full devotional service, unfailing in all circumstances, at once transcends the modes of material nature and thus comes to the level of Brahman.</string>
+
+    <string name="title_BG_15_7">BG 15.7</string>
+    <string name="descr_BG_15_7">mamaivāṁśo jīva-loke</string>
+    <string name="sansk_BG_15_7"><![CDATA[<i>mamaivāṁśo jīva-loke<br>jīva-bhūtaḥ sanātanaḥ<br>manaḥ-ṣaṣṭhānīndriyāṇi<br>prakṛti-sthāni karṣati</i>]]></string>
+    <string name="words_BG_15_7"><![CDATA[<i><b>mama</b></i> — My;</br><br><i><b>eva</b></i> — certainly;</br><br><i><b>aṁśaḥ</b></i> — fragmental particle;</br><br><i><b>jīva-loke</b></i> — in the world of conditional life;</br><br><i><b>jīva-bhūtaḥ</b></i> — the conditioned living entity;</br><br><i><b>sanātanaḥ</b></i> — eternal;</br><br><i><b>manaḥ</b></i> — with the mind;</br><br><i><b>ṣaṣṭhāni</b></i> — the six;</br><br><i><b>indriyāṇi</b></i> — senses;</br><br><i><b>prakṛti</b></i> — in material nature;</br><br><i><b>sthāni</b></i> — situated;</br><br><i><b>karṣati</b></i> — is struggling hard.]]></string>
+    <string name="trans_BG_15_7">The living entities in this conditioned world are My eternal fragmental parts. Due to conditioned life, they are struggling very hard with the six senses, which include the mind.</string>
+
+    <string name="title_BG_15_15">BG 15.15</string>
+    <string name="descr_BG_15_15">sarvasya cāhaṁ hṛdi sanniviṣṭo</string>
+    <string name="sansk_BG_15_15"><![CDATA[<i>sarvasya cāhaṁ hṛdi sanniviṣṭo<br>mattaḥ smṛtir jñānam apohanaṁ ca<br>vedaiś ca sarvair aham eva vedyo<br>vedānta-kṛd veda-vid eva cāham</i>]]></string>
+    <string name="words_BG_15_15"><![CDATA[<i><b>sarvasya</b></i> — of all living beings;</br><br><i><b>ca</b></i> — and;</br><br><i><b>aham</b></i> — I;</br><br><i><b>hṛdi</b></i> — in the heart;</br><br><i><b>sanniviṣṭaḥ</b></i> — situated;</br><br><i><b>mattaḥ</b></i> — from Me;</br><br><i><b>smṛtiḥ</b></i> — remembrance;</br><br><i><b>jñānam</b></i> — knowledge;</br><br><i><b>apohanam</b></i> — forgetfulness;</br><br><i><b>ca</b></i> — and;</br><br><i><b>vedaiḥ</b></i> — by the Vedas;</br><br><i><b>ca</b></i> — also;</br><br><i><b>sarvaiḥ</b></i> — all;</br><br><i><b>aham</b></i> — I am;</br><br><i><b>eva</b></i> — certainly;</br><br><i><b>vedyaḥ</b></i> — knowable;</br><br><i><b>vedānta-kṛt</b></i> — the compiler of the Vedānta;</br><br><i><b>veda-vit</b></i> — the knower of the Vedas;</br><br><i><b>eva</b></i> — certainly;</br><br><i><b>ca</b></i> — and;</br><br><i><b>aham</b></i> — I.]]></string>
+    <string name="trans_BG_15_15">I am seated in everyone’s heart, and from Me come remembrance, knowledge and forgetfulness. By all the Vedas, I am to be known. Indeed, I am the compiler of Vedānta, and I am the knower of the Vedas.</string>
+
+    <string name="title_BG_18_54">BG 18.54</string>
+    <string name="descr_BG_18_54">brahma-bhūtaḥ prasannātmā</string>
+    <string name="sansk_BG_18_54"><![CDATA[<i>brahma-bhūtaḥ prasannātmā<br>na śocati na kāṅkṣati<br>samaḥ sarveṣu bhūteṣu<br>mad-bhaktiṁ labhate parām</i>]]></string>
+    <string name="words_BG_18_54"><![CDATA[<i><b>brahma-bhūtaḥ</b></i> — being one with the Absolute;</br><br><i><b>prasanna-ātmā</b></i> — fully joyful;</br><br><i><b>na</b></i> — never;</br><br><i><b>śocati</b></i> — laments;</br><br><i><b>na</b></i> — never;</br><br><i><b>kāṅkṣati</b></i> — desires;</br><br><i><b>samaḥ</b></i> — equally disposed;</br><br><i><b>sarveṣu</b></i> — to all;</br><br><i><b>bhūteṣu</b></i> — living entities;</br><br><i><b>mat-bhaktim</b></i> — My devotional service;</br><br><i><b>labhate</b></i> — gains;</br><br><i><b>parām</b></i> — transcendental.]]></string>
+    <string name="trans_BG_18_54">One who is thus transcendentally situated at once realizes the Supreme Brahman and becomes fully joyful. He never laments or desires to have anything. He is equally disposed toward every living entity. In that state he attains pure devotional service unto Me.</string>
+
+    <string name="title_BG_18_55">BG 18.55</string>
+    <string name="descr_BG_18_55">bhaktyā mām abhijānāti</string>
+    <string name="sansk_BG_18_55"><![CDATA[<i>bhaktyā mām abhijānāti<br>yāvān yaś cāsmi tattvataḥ<br>tato māṁ tattvato jñātvā<br>viśate tad-anantaram</i>]]></string>
+    <string name="words_BG_18_55"><![CDATA[<i><b>bhaktyā</b></i> — by pure devotional service;</br><br><i><b>mām</b></i> — Me;</br><br><i><b>abhijānāti</b></i> — one can know;</br><br><i><b>yāvān</b></i> — as much as;</br><br><i><b>yaḥcaasmi</b></i> — as I am;</br><br><i><b>tattvataḥ</b></i> — in truth;</br><br><i><b>tataḥ</b></i> — thereafter;</br><br><i><b>mām</b></i> — Me;</br><br><i><b>tattvataḥ</b></i> — in truth;</br><br><i><b>jñātvā</b></i> — knowing;</br><br><i><b>viśate</b></i> — he enters;</br><br><i><b>tat-anantaram</b></i> — thereafter.]]></string>
+    <string name="trans_BG_18_55">One can understand Me as I am, as the Supreme Personality of Godhead, only by devotional service. And when one is in full consciousness of Me by such devotion, he can enter into the kingdom of God.</string>
+
+    <string name="title_BG_18_61">BG 18.61</string>
+    <string name="descr_BG_18_61">īśvaraḥ sarva-bhūtānāṁ</string>
+    <string name="sansk_BG_18_61"><![CDATA[<i>īśvaraḥ sarva-bhūtānāṁ<br>hṛd-deśe ’rjuna tiṣṭhati<br>bhrāmayan sarva-bhūtāni<br>yantrārūḍhāni māyayā</i>]]></string>
+    <string name="words_BG_18_61"><![CDATA[<i><b>īśvaraḥ</b></i> — the Supreme Lord;</br><br><i><b>sarva-bhūtānām</b></i> — of all living entities;</br><br><i><b>hṛt-deśe</b></i> — in the location of the heart;</br><br><i><b>arjuna</b></i> — O Arjuna;</br><br><i><b>tiṣṭhati</b></i> — resides;</br><br><i><b>bhrāmayan</b></i> — causing to travel;</br><br><i><b>sarva-bhūtāni</b></i> — all living entities;</br><br><i><b>yantra</b></i> — on a machine;</br><br><i><b>ārūḍhani</b></i> — being placed;</br><br><i><b>māyayā</b></i> — under the spell of material energy.]]></string>
+    <string name="trans_BG_18_61">The Supreme Lord is situated in everyone’s heart, O Arjuna, and is directing the wanderings of all living entities, who are seated as on a machine, made of the material energy.</string>
+
+    <string name="title_BG_18_65">BG 18.65</string>
+    <string name="descr_BG_18_65">man-manā bhava mad-bhakto</string>
+    <string name="sansk_BG_18_65"><![CDATA[<i>man-manā bhava mad-bhakto<br>mad-yājī māṁ namaskuru<br>mām evaiṣyasi satyaṁ te<br>pratijāne priyo ’si me</i>]]></string>
+    <string name="words_BG_18_65"><![CDATA[<i><b>mat-manāḥ</b></i> — thinking of Me;</br><br><i><b>bhava</b></i> — just become;</br><br><i><b>mat-bhaktaḥ</b></i> — My devotee;</br><br><i><b>mat-yājī</b></i> — My worshiper;</br><br><i><b>mām</b></i> — unto Me;</br><br><i><b>namaskuru</b></i> — offer your obeisances;</br><br><i><b>mām</b></i> — unto Me;</br><br><i><b>eva</b></i> — certainly;</br><br><i><b>eṣyasi</b></i> — you will come;</br><br><i><b>satyam</b></i> — truly;</br><br><i><b>te</b></i> — to you;</br><br><i><b>pratijāne</b></i> — I promise;</br><br><i><b>priyaḥ</b></i> — dear;</br><br><i><b>asi</b></i> — you are;</br><br><i><b>me</b></i> — to Me.]]></string>
+    <string name="trans_BG_18_65">Always think of Me, become My devotee, worship Me and offer your homage unto Me. Thus you will come to Me without fail. I promise you this because you are My very dear friend.</string>
+
+    <string name="title_BG_18_66">BG 18.66</string>
+    <string name="descr_BG_18_66">sarva-dharmān parityajya</string>
+    <string name="sansk_BG_18_66"><![CDATA[<i>sarva-dharmān parityajya<br>mām ekaṁ śaraṇaṁ vraja<br>ahaṁ tvāṁ sarva-pāpebhyo<br>mokṣayiṣyāmi mā śucaḥ</i>]]></string>
+    <string name="words_BG_18_66"><![CDATA[<i><b>sarva-dharmān</b></i> — all varieties of religion;</br><br><i><b>parityajya</b></i> — abandoning;</br><br><i><b>mām</b></i> — unto Me;</br><br><i><b>ekam</b></i> — only;</br><br><i><b>śaraṇam</b></i> — for surrender;</br><br><i><b>vraja</b></i> — go;</br><br><i><b>aham</b></i> — I;</br><br><i><b>tvām</b></i> — you;</br><br><i><b>sarva</b></i> — all;</br><br><i><b>pāpebhyaḥ</b></i> — from sinful reactions;</br><br><i><b>mokṣayiṣyāmi</b></i> — will deliver;</br><br><i><b>mā</b></i> — do not;</br><br><i><b>śucaḥ</b></i> — worry.]]></string>
+    <string name="trans_BG_18_66">Abandon all varieties of religion and just surrender unto Me. I shall deliver you from all sinful reactions. Do not fear.</string>
 
 </resources>

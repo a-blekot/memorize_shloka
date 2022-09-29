@@ -5,13 +5,14 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 enum class ListId(val id: String) {
+    BG("BG"),
+    NI("NI"),
     SB_1("SB_1"),
     SB_2("SB_2"),
     SB_3("SB_3"),
     SB_4("SB_4"),
     SB_5("SB_5"),
     SB_6("SB_6"),
-    NI("NI"),
 }
 
 fun String.toListType() =

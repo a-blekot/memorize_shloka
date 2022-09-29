@@ -27,6 +27,7 @@ import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingZero
 import com.a_blekot.shlokas.android_ui.theme.textFieldColors
 import com.a_blekot.shlokas.common.data.Locales.en
 import com.a_blekot.shlokas.common.data.Locales.ru
+import com.a_blekot.shlokas.common.data.Locales.uk
 import com.a_blekot.shlokas.common.data.Week
 import com.a_blekot.shlokas.common.data.Week.*
 import com.a_blekot.shlokas.common.resources.MR.strings.label_autoplay
@@ -35,6 +36,7 @@ import com.a_blekot.shlokas.common.resources.MR.strings.label_feedback
 import com.a_blekot.shlokas.common.resources.MR.strings.label_four_lines
 import com.a_blekot.shlokas.common.resources.MR.strings.label_locale_en
 import com.a_blekot.shlokas.common.resources.MR.strings.label_locale_ru
+import com.a_blekot.shlokas.common.resources.MR.strings.label_locale_uk
 import com.a_blekot.shlokas.common.resources.MR.strings.label_one_line
 import com.a_blekot.shlokas.common.resources.MR.strings.label_pause
 import com.a_blekot.shlokas.common.resources.MR.strings.label_pause_placeholder
@@ -322,6 +324,22 @@ private fun Locale(locale: String, modifier: Modifier = Modifier, onChanged: (St
                 style = typography.titleLarge,
                 color = colorScheme.primary,
                 modifier = Modifier.clickable { onChanged(en) }
+            )
+        }
+
+        StandartRow(
+            padding = paddingZero,
+            horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start)
+        ) {
+            RadioButton(
+                selected = locale == uk,
+                onClick = { onChanged(uk) },
+            )
+            Text(
+                text = label_locale_uk.resolve(context),
+                style = typography.titleLarge,
+                color = colorScheme.primary,
+                modifier = Modifier.clickable { onChanged(uk) }
             )
         }
 
