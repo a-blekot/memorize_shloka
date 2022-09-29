@@ -86,7 +86,7 @@ class RootComponentImpl internal constructor(
             DonationsComponentImpl(
                 componentContext = childContext,
                 storeFactory = storeFactory,
-                deps = deps.run { DonationsDeps(analytics, billingHelper, dispatchers, stringResourceHandler) },
+                deps = deps.run { DonationsDeps(analytics, billingHelper, dispatchers, connectivityObserver, stringResourceHandler) },
                 output = output
             )
         },

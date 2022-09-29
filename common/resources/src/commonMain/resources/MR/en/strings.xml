@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
+    <string name="label_no_connection">No connection...</string>
     <string name="label_repeats">Repeats</string>
     <string name="label_pause">Pause</string>
     <string name="label_autoplay">Autoplay</string>
@@ -10,7 +11,7 @@
     <string name="label_show_tutorial">Show tutorial</string>
     <string name="label_version">Version:</string>
     <string name="label_feedback">Feedback</string>
-    <string name="label_donations">Support project</string>
+    <string name="label_donate">Donate</string>
     <string name="label_sanskrit">Sanskrit</string>
     <string name="label_words">Synonyms</string>
     <string name="label_translation">Translation</string>
@@ -22,7 +23,6 @@
     <string name="label_donate_5_usd">Dvārakā</string>
     <string name="label_donate_10_usd">Mathurā</string>
     <string name="label_donate_25_usd">Goloka</string>
-    <string name="label_donate">Donate</string>
 
     <string name="label_restart">Restart</string>
     <string name="label_update_is_ready">An update has just been downloaded</string>
@@ -612,11 +612,11 @@
     <string name="words_NI_11"><![CDATA[<i><b>kṛṣṇasya</b></i> — of Lord Śrī Kṛṣṇa;<br><i><b>uccaiḥ</b></i> — very highly;</br><br><i><b>praṇaya-vasatiḥ</b></i> — object of love;</br><br><i><b>preyasībhyaḥ</b></i> — out of the many lovable gopīs;</br><br><i><b>api</b></i> — certainly;</br><br><i><b>rādhā</b></i> — Śrīmatī Rādhārāṇī;</br><br><i><b>kuṇḍam</b></i> — lake;</br><br><i><b>ca</b></i> — also;</br><br><i><b>asyāḥ</b></i> — of Her;</br><br><i><b>munibhiḥ</b></i> — by great sages;</br><br><i><b>abhitaḥ</b></i> — in all respects;</br><br><i><b>tādṛk eva</b></i> — similarly;</br><br><i><b>vyadhāyi</b></i> — is described;</br><br><i><b>yat</b></i> — which;</br><br><i><b>preṣṭhaiḥ</b></i> — by the most advanced devotees;</br><br><i><b>api</b></i> — even;</br><br><i><b>alam</b></i> — enough;</br><br><i><b>asulabham</b></i> — difficult to obtain;</br><br><i><b>kim</b></i> — what;</br><br><i><b>punaḥ</b></i> — again;</br><br><i><b>bhakti-bhājām</b></i> — for persons engaged in devotional service;</br><br><i><b>tat</b></i> — that;</br><br><i><b>prema</b></i> — love of Godhead;</br><br><i><b>idam</b></i> — this;</br><br><i><b>sakṛt</b></i> — once;</br><br><i><b>api</b></i> — even;</br><br><i><b>saraḥ</b></i> — lake;</br><br><i><b>snātuḥ</b></i> — of one who has bathed;</br><br><i><b>āviṣkaroti</b></i> — arouses.]]></string>
     <string name="trans_NI_11">Of the many objects of favored delight and of all the lovable damsels of Vraja-bhūmi, Śrīmatī Rādhārāṇī is certainly the most treasured object of Kṛṣṇa’s love. And, in every respect, Her divine kuṇḍa is described by great sages as similarly dear to Him. Undoubtedly Rādhā-kuṇḍa is very rarely attained even by the great devotees; therefore it is even more difficult for ordinary devotees to attain. If one simply bathes once within those holy waters, one’s pure love of Kṛṣṇa is fully aroused.</string>
 
-    <string name="title_BG_18_05">BG 18.5</string>
-    <string name="sansk_BG_18_05"><![CDATA[<i>yajña-dāna-tapaḥ-karma<br>na tyājyaṁ kāryam eva tat<br>yajño dānaṁ tapaś caiva<br>pāvanāni manīṣiṇām</i>]]></string>
-    <string name="words_BG_18_05"><![CDATA[<i><b>yajña</b></i> — of sacrifice;</br><br><i><b>dāna</b></i> — charity;</br><br><i><b>tapaḥ</b></i> — and penance;</br><br><i><b>karma</b></i> — activity;</br><br><i><b>na</b></i> — never;</br><br><i><b>tyājyam</b></i> — to be given up;</br><br><i><b>kāryam</b></i> — must be done;</br><br><i><b>eva</b></i> — certainly;</br><br><i><b>tat</b></i> — that;</br><br><i><b>yajñaḥ</b></i> — sacrifice;</br><br><i><b>dānam</b></i> — charity;</br><br><i><b>tapaḥ</b></i> — penance;</br><br><i><b>ca</b></i> — also;</br><br><i><b>eva</b></i> — certainly;</br><br><i><b>pāvanāni</b></i> — purifying;</br><br><i><b>manīṣiṇām</b></i> — even for the great souls.]]></string>
-    <string name="trans_BG_18_05">Acts of sacrifice, charity and penance are not to be given up; they must be performed. Indeed, sacrifice, charity and penance purify even the great souls.</string>
-    <string name="descr_BG_18_05">yajña-dāna-tapaḥ-karma</string>
+    <string name="title_BG_18_5">BG 18.5</string>
+    <string name="sansk_BG_18_5"><![CDATA[<i>yajña-dāna-tapaḥ-karma<br>na tyājyaṁ kāryam eva tat<br>yajño dānaṁ tapaś caiva<br>pāvanāni manīṣiṇām</i>]]></string>
+    <string name="words_BG_18_5"><![CDATA[<i><b>yajña</b></i> — of sacrifice;</br><br><i><b>dāna</b></i> — charity;</br><br><i><b>tapaḥ</b></i> — and penance;</br><br><i><b>karma</b></i> — activity;</br><br><i><b>na</b></i> — never;</br><br><i><b>tyājyam</b></i> — to be given up;</br><br><i><b>kāryam</b></i> — must be done;</br><br><i><b>eva</b></i> — certainly;</br><br><i><b>tat</b></i> — that;</br><br><i><b>yajñaḥ</b></i> — sacrifice;</br><br><i><b>dānam</b></i> — charity;</br><br><i><b>tapaḥ</b></i> — penance;</br><br><i><b>ca</b></i> — also;</br><br><i><b>eva</b></i> — certainly;</br><br><i><b>pāvanāni</b></i> — purifying;</br><br><i><b>manīṣiṇām</b></i> — even for the great souls.]]></string>
+    <string name="trans_BG_18_5">Acts of sacrifice, charity and penance are not to be given up; they must be performed. Indeed, sacrifice, charity and penance purify even the great souls.</string>
+    <string name="descr_BG_18_5">yajña-dāna-tapaḥ-karma</string>
 
     <string name="title_BG_1_1">BG 1.1</string>
     <string name="descr_BG_1_1">dharma-kṣetre kuru-kṣetre</string>

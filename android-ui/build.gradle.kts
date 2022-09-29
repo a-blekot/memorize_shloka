@@ -19,8 +19,9 @@ dependencies {
     implementation(projects.common.donationsApi)
     implementation(projects.common.listApi)
     implementation(projects.common.playerApi)
-    implementation(projects.common.settingsApi)
     implementation(projects.common.resources)
+    implementation(projects.common.settingsApi)
+    implementation(projects.common.utils)
 
     implementation(libs.bundles.androidx.compose)
     implementation(libs.accompanist.insets)

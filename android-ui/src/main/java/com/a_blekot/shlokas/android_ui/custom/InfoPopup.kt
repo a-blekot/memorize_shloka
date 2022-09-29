@@ -103,7 +103,7 @@ fun InfoPopup(info: FtueInfo, modifier: Modifier = Modifier, onSkip: () -> Unit,
                 .clickable(true) {}
         ) {
             Text(
-                text = info.title.resolve(LocalContext.current),
+                text = resolveString(info.title),
                 color = colorScheme.primary,
                 style = typography.headlineLarge,
                 textAlign = TextAlign.Center,
@@ -168,7 +168,7 @@ private fun SkipButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = label_show_later.resolve(LocalContext.current),
+            text = resolveString(label_show_later),
             color = colorScheme.onPrimaryContainer,
             style = typography.headlineSmall,
             textAlign = TextAlign.Center,
@@ -221,7 +221,7 @@ private fun FtueInfoRow(index: Int, textRes: StringResource, modifier: Modifier 
     ) {
 
         Text(
-            text = textRes.resolve(LocalContext.current),
+            text = resolveString(textRes),
             color = colorScheme.onPrimaryContainer,
             style = typography.titleLarge,
         )
@@ -251,7 +251,7 @@ private fun ButtonsRow(
         }
 
         Text(
-            text = titleRes.resolve(LocalContext.current),
+            text = resolveString(titleRes),
             color = colorScheme.primary,
             style = typography.headlineSmall,
             textAlign = TextAlign.Center,

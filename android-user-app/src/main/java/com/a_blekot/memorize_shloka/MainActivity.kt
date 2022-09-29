@@ -24,6 +24,7 @@ import com.a_blekot.shlokas.common.root.RootDeps
 import com.a_blekot.shlokas.common.utils.AndroidFiler
 import com.a_blekot.shlokas.common.utils.LogTag.PLAYBACK_SERVICE
 import com.a_blekot.shlokas.common.utils.billing.BillingHelper
+import com.a_blekot.shlokas.common.utils.connectivity.ConnectivityObserverAndroid
 import com.a_blekot.shlokas.common.utils.dispatchers.dispatchers
 import com.a_blekot.shlokas.common.utils.resources.AndroidConfigReader
 import com.a_blekot.shlokas.common.utils.resources.AndroidStringResourceHandler
@@ -136,6 +137,7 @@ class MainActivity : ComponentActivity() {
             deps = RootDeps(
                 filer = AndroidFiler(this),
                 configReader = AndroidConfigReader(this),
+                connectivityObserver = ConnectivityObserverAndroid(applicationContext),
                 stringResourceHandler = AndroidStringResourceHandler(this),
                 billingHelper = billingHelper,
                 playerBus = app.playerBus,

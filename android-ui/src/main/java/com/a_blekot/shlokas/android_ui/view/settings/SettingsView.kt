@@ -31,7 +31,7 @@ import com.a_blekot.shlokas.common.data.Locales.uk
 import com.a_blekot.shlokas.common.data.Week
 import com.a_blekot.shlokas.common.data.Week.*
 import com.a_blekot.shlokas.common.resources.MR.strings.label_autoplay
-import com.a_blekot.shlokas.common.resources.MR.strings.label_donations
+import com.a_blekot.shlokas.common.resources.MR.strings.label_donate
 import com.a_blekot.shlokas.common.resources.MR.strings.label_feedback
 import com.a_blekot.shlokas.common.resources.MR.strings.label_four_lines
 import com.a_blekot.shlokas.common.resources.MR.strings.label_locale_en
@@ -165,7 +165,7 @@ fun SettingsView(component: SettingsComponent) {
                     )
 
                     Text(
-                        text = label_donations.resolve(context),
+                        text = label_donate.resolve(context),
                         style = typography.titleLarge,
                         color = colorScheme.primary,
                         maxLines = 1,

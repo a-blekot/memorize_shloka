@@ -62,19 +62,19 @@ fun PreRatingPopup(modifier: Modifier, onAccept: () -> Unit, onClose: () -> Unit
             verticalArrangement = Arrangement.spacedBy(paddingM)
         ) {
             Text(
-                text = label_prerating_title.resolve(LocalContext.current),
+                text = resolveString(label_prerating_title),
                 maxLines = 1,
                 style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold),
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                color = colorScheme.onPrimaryContainer,
                 modifier = Modifier.fillMaxWidth()
             )
             Text(
-                text = label_prerating_subtitle.resolve(LocalContext.current),
+                text = resolveString(label_prerating_subtitle),
                 maxLines = 1,
                 style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold),
                 textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                color = colorScheme.onPrimaryContainer,
                 modifier = Modifier.fillMaxWidth()
             )
 
@@ -130,11 +130,11 @@ private fun DialogButton(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = title.resolve(LocalContext.current),
+            text = resolveString(title),
             maxLines = 1,
             style = MaterialTheme.typography.headlineSmall,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onPrimaryContainer
+            color = colorScheme.onPrimaryContainer
         )
     }
 }
