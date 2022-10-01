@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 
 internal class DonationsStoreFactory(
     private val storeFactory: StoreFactory,
+    private val initialState: DonationsState,
     private val deps: DonationsDeps
 ) : StringResourceHandler by deps.stringResourceHandler{
 
@@ -25,7 +26,7 @@ internal class DonationsStoreFactory(
         object : DonationsStore, Store<DonationsIntent, DonationsState, DonationsLabel> by storeFactory.create(
             name = "DonationsStore",
             autoInit = false,
-            initialState = DonationsState(deps.billingHelper?.availableDonations?.loadTitles() ?: emptyList()),
+            initialState = initialState,
             bootstrapper = BootstrapperImpl(),
             executorFactory = { ExecutorImpl() },
             reducer = ReducerImpl

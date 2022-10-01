@@ -1,7 +1,10 @@
 package com.a_blekot.shlokas.common.player_api
 
 import com.a_blekot.shlokas.common.player_api.PlaybackState.IDLE
+import com.arkivanov.essenty.parcelable.Parcelable
+import com.arkivanov.essenty.parcelable.Parcelize
 
+@Parcelize
 data class PlayerState(
     val title: String = "",
     val sanskrit: String = "",
@@ -15,9 +18,10 @@ data class PlayerState(
     val totalShlokasCount: Int = 1,
     val totalDurationMs: Long = 0L,
     val isAutoplay: Boolean = true,
-)
+): Parcelable
 
-enum class PlaybackState {
+@Parcelize
+enum class PlaybackState: Parcelable {
     IDLE,
     PLAYING,
     PAUSED,

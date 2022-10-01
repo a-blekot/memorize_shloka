@@ -3,6 +3,7 @@ package com.a_blekot.shlokas.common.list_impl
 import com.a_blekot.shlokas.common.data.*
 import com.a_blekot.shlokas.common.list_api.ListComponent
 import com.a_blekot.shlokas.common.list_api.ListOutput
+import com.a_blekot.shlokas.common.list_api.ListPresentation
 import com.a_blekot.shlokas.common.list_api.ListState
 import com.a_blekot.shlokas.common.list_impl.store.ListIntent.*
 import com.a_blekot.shlokas.common.list_impl.store.ListLabel
@@ -19,6 +20,9 @@ import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlin.reflect.KClass
+
+private const val KEY_LIST_STATE = "KEY_LIST_STATE"
 
 class ListComponentImpl(
     componentContext: ComponentContext,
@@ -31,6 +35,7 @@ class ListComponentImpl(
         instanceKeeper.getStore {
             ListStoreFactory(
                 storeFactory = storeFactory,
+                initialState = stateKeeper.consume(KEY_LIST_STATE) ?: initialState(),
                 deps = deps,
             ).create()
         }
@@ -51,8 +56,17 @@ class ListComponentImpl(
             store.accept(CheckPreRating)
         }
 
-        store.init()
+        store.init(instanceKeeper)
+        stateKeeper.register(KEY_LIST_STATE) { store.state }
     }
+
+    private fun initialState() =
+        ListState(
+            deps.config,
+            availableLists = availableLists(),
+            locale = getLocale(),
+            shouldShowTutorial = false
+        )
 
     override fun resolveDescription(id: ShlokaId): String =
         deps.stringResourceHandler.resolveDescription(id)
@@ -124,4 +138,13 @@ class ListComponentImpl(
             shlokaId = id,
             repeats = config.repeats
         )
+
+    private fun availableLists() =
+        ListId.values().map {
+            ListPresentation(
+                type = it,
+                title = deps.stringResourceHandler.resolveListShortTitle(it),
+                isSelected = deps.config.id == it
+            )
+        }
 }

@@ -1,11 +1,8 @@
 package com.listentoprabhupada.common.donations_impl
 
 import com.a_blekot.shlokas.common.data.Donation
-import com.a_blekot.shlokas.common.utils.Consumer
-import com.a_blekot.shlokas.common.utils.asValue
+import com.a_blekot.shlokas.common.utils.*
 import com.a_blekot.shlokas.common.utils.billing.BillingEvent
-import com.a_blekot.shlokas.common.utils.getStore
-import com.a_blekot.shlokas.common.utils.lifecycleCoroutineScope
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.store.StoreFactory
@@ -22,6 +19,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
+private const val KEY_DONNATIONS_STATE = "KEY_DONNATIONS_STATE"
 
 class DonationsComponentImpl(
     componentContext: ComponentContext,
@@ -34,9 +32,13 @@ class DonationsComponentImpl(
         instanceKeeper.getStore {
             DonationsStoreFactory(
                 storeFactory = storeFactory,
+                initialState = stateKeeper.consume(KEY_DONNATIONS_STATE) ?: initialState,
                 deps = deps,
             ).create()
         }
+
+    private val initialState
+        get() = DonationsState(deps.billingHelper?.availableDonations?.loadTitles() ?: emptyList())
 
     private val scope: CoroutineScope = lifecycleCoroutineScope(deps.dispatchers.main)
 
@@ -47,7 +49,8 @@ class DonationsComponentImpl(
             .onEach(::handleLabel)
             .launchIn(scope)
 
-        store.init()
+        store.init(instanceKeeper)
+        stateKeeper.register(KEY_DONNATIONS_STATE) { store.state }
 
         observeBillingHelperEvents()
     }
@@ -82,4 +85,7 @@ class DonationsComponentImpl(
 
     private val BillingEvent.Error.logMsg
         get() = "operation: $operation, responseCode: $responseCode, msg: $msg"
+
+    private fun List<Donation>.loadTitles() =
+        map { it.copy(title = deps.stringResourceHandler.resolveDonationTitle(it.donationLevel)) }
 }

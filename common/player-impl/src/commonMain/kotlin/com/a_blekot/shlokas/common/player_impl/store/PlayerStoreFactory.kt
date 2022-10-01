@@ -1,6 +1,5 @@
 package com.a_blekot.shlokas.common.player_impl.store
 
-import com.a_blekot.shlokas.common.data.createTasks
 import com.a_blekot.shlokas.common.data.tasks.*
 import com.a_blekot.shlokas.common.player_api.PlaybackState.*
 import com.a_blekot.shlokas.common.player_api.PlayerFeedback
@@ -28,33 +27,23 @@ import kotlinx.coroutines.launch
 
 internal class PlayerStoreFactory(
     private val storeFactory: StoreFactory,
+    private val tasks: List<Task>,
+    private val durationMs: Long,
+    private val initialState: PlayerState,
     private val deps: PlayerDeps
 ) : StringResourceHandler by deps.stringResourceHandler {
 
     init {
+        Napier.d("PlayerStoreFactory init", tag = "PlayerStore")
         check(deps.config.shlokas.any { it.isSelected }) {
             "PlayConfig can't be empty!"
         }
     }
 
-    private val tasks = deps.config.createTasks()
-    private val durationMs = tasks.sumOf { it.duration }
-    private val firstShloka = deps.config.shlokas.first().shloka
-    private val initialState =
-        PlayerState(
-            title = resolveTitle(firstShloka.id),
-            sanskrit = resolveSanskrit(firstShloka.id),
-            words = resolveWords(firstShloka.id),
-            translation = resolveTranslation(firstShloka.id),
-            durationMs = durationMs,
-            totalRepeats = deps.config.repeats,
-            totalShlokasCount = deps.config.shlokas.filter { it.isSelected }.size,
-            totalDurationMs = durationMs,
-            isAutoplay = getAutoPlay()
-        )
+    fun create(): PlayerStore {
+        Napier.d("create()", tag = "PlayerStore")
 
-    fun create(): PlayerStore =
-        object : PlayerStore, Store<PlayerIntent, PlayerState, PlayerLabel> by storeFactory.create(
+        return object : PlayerStore, Store<PlayerIntent, PlayerState, PlayerLabel> by storeFactory.create(
             name = "PlayerStore",
             autoInit = false,
             initialState = initialState,
@@ -62,6 +51,7 @@ internal class PlayerStoreFactory(
             executorFactory = { ExecutorImpl() },
             reducer = ReducerImpl()
         ) {}
+    }
 
     sealed interface Action {
         object Start : Action
@@ -92,6 +82,7 @@ internal class PlayerStoreFactory(
             }
 
             scope.launch {
+                Napier.d("--playerBus = ${deps.playerBus}", tag = "PlayerStore")
                 deps.playerBus.observeFeedback()
                     .onEach {
                         Napier.d("PlayerFeedback", tag = "PlayerStore")
@@ -154,6 +145,7 @@ internal class PlayerStoreFactory(
         }
 
         suspend fun handleTask(task: Task) {
+            Napier.d("handleTask $task", tag = "PlayerStore")
             when (task) {
                 is PlayTask -> play(task)
                 is PauseTask -> pause(task)

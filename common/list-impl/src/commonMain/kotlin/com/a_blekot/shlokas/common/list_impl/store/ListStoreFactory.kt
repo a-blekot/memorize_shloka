@@ -25,6 +25,7 @@ private const val TUTORIAL_DELAY_MS = 1_000L
 
 internal class ListStoreFactory(
     private val storeFactory: StoreFactory,
+    private val initialState: ListState,
     private val deps: ListDeps
 ) : StringResourceHandler by deps.stringResourceHandler {
 
@@ -34,12 +35,7 @@ internal class ListStoreFactory(
         object : ListStore, Store<ListIntent, ListState, ListLabel> by storeFactory.create(
             name = "ListStore",
             autoInit = false,
-            initialState = ListState(
-                deps.config,
-                availableLists = availableLists(),
-                locale = getLocale(),
-                shouldShowTutorial = false
-            ),
+            initialState = initialState,
             bootstrapper = BootstrapperImpl(),
             executorFactory = { ExecutorImpl() },
             reducer = ReducerImpl()

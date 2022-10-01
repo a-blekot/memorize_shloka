@@ -54,8 +54,12 @@ fun PlayerView(component: PlayerComponent) {
 
     val isClosePlayerDialogVisible = remember { mutableStateOf(false) }
 
-    BackHandler(enabled = showClosePlayerDialog()) {
-        isClosePlayerDialogVisible.value = true
+    BackHandler {
+        if (showClosePlayerDialog()) {
+            isClosePlayerDialogVisible.value = true
+        } else {
+            component.stop()
+        }
     }
 
     Box(modifier = Modifier.fillMaxSize()) {

@@ -2,7 +2,6 @@ package com.a_blekot.shlokas.common.settings_impl.store
 
 import com.a_blekot.shlokas.common.data.Week
 import com.a_blekot.shlokas.common.settings_api.SettingsState
-import com.a_blekot.shlokas.common.settings_impl.SettingsDeps
 import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.*
 import com.a_blekot.shlokas.common.settings_impl.store.SettingsStoreFactory.Action.CeckFtue
 import com.a_blekot.shlokas.common.utils.*
@@ -15,16 +14,9 @@ import kotlinx.coroutines.launch
 
 internal class SettingsStoreFactory(
     private val storeFactory: StoreFactory,
-    private val deps: SettingsDeps
+    private val initialState: SettingsState,
 ) {
-    private val initialState
-        get() = SettingsState(
-            getRepeats(),
-            getPause(),
-            getCurrentWeek(),
-            getLocale(),
-            getAutoPlay(),
-        )
+
 
     fun create(): SettingsStore =
         object : SettingsStore, Store<SettingsIntent, SettingsState, SettingsLabel> by storeFactory.create(
