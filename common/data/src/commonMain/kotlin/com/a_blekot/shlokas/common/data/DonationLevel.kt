@@ -1,6 +1,10 @@
 package com.a_blekot.shlokas.common.data
 
-enum class DonationLevel(val productId: String) {
+import com.arkivanov.essenty.parcelable.Parcelable
+import com.arkivanov.essenty.parcelable.Parcelize
+
+@Parcelize
+enum class DonationLevel(val productId: String): Parcelable {
     USD_1("donate_1_usd"),
     USD_2("donate_2_usd"),
     USD_3("donate_3_usd"),

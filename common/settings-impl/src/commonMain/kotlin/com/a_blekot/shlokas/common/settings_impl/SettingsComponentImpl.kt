@@ -14,6 +14,8 @@ import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import kotlinx.coroutines.CoroutineScope
 
+private const val KEY_SETTINGS_STATE = "KEY_SETTINGS_STATE"
+
 class SettingsComponentImpl(
     componentContext: ComponentContext,
     storeFactory: StoreFactory,
@@ -25,11 +27,18 @@ class SettingsComponentImpl(
         instanceKeeper.getStore {
             SettingsStoreFactory(
                 storeFactory = storeFactory,
-                deps = deps,
+                initialState = stateKeeper.consume(KEY_SETTINGS_STATE) ?: initialState,
             ).create()
         }
 
-    private val scope: CoroutineScope = lifecycleCoroutineScope(deps.dispatchers.main)
+    private val initialState
+        get() = SettingsState(
+            getRepeats(),
+            getPause(),
+            getCurrentWeek(),
+            getLocale(),
+            getAutoPlay(),
+        )
 
     override val flow: Value<SettingsState> = store.asValue()
 
@@ -38,7 +47,8 @@ class SettingsComponentImpl(
 //            .onEach(::handleLabel)
 //            .launchIn(scope)
 
-        store.init()
+        store.init(instanceKeeper)
+        stateKeeper.register(KEY_SETTINGS_STATE) { store.state }
     }
 
     override fun setRepeats(value: Int) = store.accept(Repeats(value))

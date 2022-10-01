@@ -12,9 +12,9 @@ import com.a_blekot.shlokas.common.utils.cancelSafely
 import com.a_blekot.shlokas.common.player_api.PlayerBus
 import com.a_blekot.shlokas.common.utils.LogTag.PLAYBACK_SERVICE
 import io.github.aakira.napier.Napier
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.*
+
+private const val STOP_PLAYER_DELAY_MS = 10_000L
 
 class PlaybackService : Service(), Player.Listener {
 
@@ -47,7 +47,10 @@ class PlaybackService : Service(), Player.Listener {
             if (isPlaying) {
                 showNotification()
             } else {
-                stop()
+                playerScope.launch {
+                    delay(STOP_PLAYER_DELAY_MS)
+                    stop()
+                }
             }
         }
 

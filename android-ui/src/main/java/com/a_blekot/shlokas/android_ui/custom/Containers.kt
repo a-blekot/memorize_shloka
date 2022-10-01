@@ -37,11 +37,27 @@ fun StandartColumn(
     content: @Composable ColumnScope.() -> Unit
 ) =
     Column(
-        verticalArrangement = verticalArrangement,
-        horizontalAlignment = horizontalAlignment,
         modifier = modifier
             .fillMaxSize()
             .padding(padding),
+        verticalArrangement = verticalArrangement,
+        horizontalAlignment = horizontalAlignment,
+        content = content
+    )
+
+@Composable
+fun StandartLazyColumn(
+    modifier: Modifier = Modifier,
+    itemPadding: Dp = paddingXS,
+    horizontalAlignment: Alignment.Horizontal = Alignment.CenterHorizontally,
+    content: LazyListScope.() -> Unit
+) =
+    LazyColumn(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = horizontalScreenPadding),
+        verticalArrangement = Arrangement.spacedBy(itemPadding),
+        horizontalAlignment = horizontalAlignment,
         content = content
     )
 
@@ -59,21 +75,5 @@ fun SmallColumn(
         modifier = modifier
             .fillMaxWidth()
             .padding(padding),
-        content = content
-    )
-
-@Composable
-fun StandartLazyColumn(
-    modifier: Modifier = Modifier,
-    itemPadding: Dp = paddingXS,
-    horizontalAlignment: Alignment.Horizontal = Alignment.CenterHorizontally,
-    content: LazyListScope.() -> Unit
-) =
-    LazyColumn(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = horizontalScreenPadding),
-        verticalArrangement = Arrangement.spacedBy(itemPadding),
-        horizontalAlignment = horizontalAlignment,
         content = content
     )
