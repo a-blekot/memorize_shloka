@@ -19,6 +19,7 @@ private const val PRERATING_SHOWN_COUNT = "PRERATING_SHOWN_COUNT"
 private const val SHLOKA_SELECTED_KEY = "SHLOKA_SELECTED_KEY"
 private const val TUTORIAL_COMPLETED_KEY = "TUTORIAL_COMPLETED_KEY"
 private const val TUTORIAL_SKIPP_COUNT_KEY = "TUTORIAL_SKIPP_COUNT_KEY"
+private const val SHOW_CLOSE_PLAYER_DIALOG = "SHOW_CLOSE_PLAYER_DIALOG"
 
 private const val DEFAULT_REPEATS = 10
 private const val MAX_REPEATS = 16_108
@@ -135,3 +136,9 @@ fun onPreRatingClosed() =
 
 fun getPreRatingClosedCount() =
     settings.getInt(PRERATING_CLOSED_COUNT)
+
+fun showClosePlayerDialog() =
+    settings.getBoolean(SHOW_CLOSE_PLAYER_DIALOG, true)
+
+fun setShowClosePlayerDialog(show: Boolean) =
+    settings.putBoolean(SHOW_CLOSE_PLAYER_DIALOG, show)

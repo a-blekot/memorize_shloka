@@ -87,6 +87,13 @@
     <string name="label_prerating_accept">Sure!</string>
     <string name="label_prerating_close">Not now</string>
 
+    <string name="label_close_player_title">Stop audio player?</string>
+    <string name="label_close_player_subtitle">Progress will not be saved.</string>
+    <string name="label_close_player_stop">Stop</string>
+    <string name="label_close_player_continue">Continue</string>
+    <string name="label_do_not_show_again">Do not show again</string>
+    <string name="label_show_close_player_dialog">Ask before stop playback</string>
+
     <string name="title_SB_1_canto">Śrīmad-Bhāgavatam\nFirst canto</string>
     <string name="title_SB_2_canto">Śrīmad-Bhāgavatam\nSecond canto</string>
     <string name="title_SB_3_canto">Śrīmad-Bhāgavatam\nThird canto</string>

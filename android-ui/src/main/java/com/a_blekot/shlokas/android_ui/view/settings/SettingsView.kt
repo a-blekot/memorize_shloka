@@ -44,10 +44,13 @@ import com.a_blekot.shlokas.common.resources.MR.strings.label_repeat_mode
 import com.a_blekot.shlokas.common.resources.MR.strings.label_repeats
 import com.a_blekot.shlokas.common.resources.MR.strings.label_repeats_placeholder
 import com.a_blekot.shlokas.common.resources.MR.strings.label_select_locale
+import com.a_blekot.shlokas.common.resources.MR.strings.label_show_close_player_dialog
 import com.a_blekot.shlokas.common.resources.MR.strings.label_show_tutorial
 import com.a_blekot.shlokas.common.resources.MR.strings.label_two_lines
 import com.a_blekot.shlokas.common.resources.resolve
 import com.a_blekot.shlokas.common.settings_api.SettingsComponent
+import com.a_blekot.shlokas.common.utils.setShowClosePlayerDialog
+import com.a_blekot.shlokas.common.utils.showClosePlayerDialog
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -138,6 +141,25 @@ fun SettingsView(component: SettingsComponent) {
                         style = typography.titleLarge,
                         color = colorScheme.primary,
                         maxLines = 1,
+                    )
+                }
+            }
+
+            item {
+                StandartRow(
+                    horizontalArrangement = Arrangement.spacedBy(paddingM),
+                ) {
+                    val showClosePlayerDialog = remember { mutableStateOf(showClosePlayerDialog()) }
+
+                    StandartCheckBox(showClosePlayerDialog.value) {
+                        showClosePlayerDialog.value = it
+                        setShowClosePlayerDialog(it)
+                    }
+
+                    Text(
+                        text = label_show_close_player_dialog.resolve(context),
+                        style = typography.titleLarge,
+                        color = colorScheme.primary,
                     )
                 }
             }

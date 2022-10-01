@@ -24,12 +24,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.borderS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.buttonHeight
@@ -69,7 +66,6 @@ import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_9_2
 import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_about
 import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_metodics
 import com.a_blekot.shlokas.common.resources.MR.strings.tutorial_settings
-import com.a_blekot.shlokas.common.resources.resolve
 import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.StringResource
 
@@ -87,7 +83,7 @@ fun InfoPopup(info: FtueInfo, modifier: Modifier = Modifier, onSkip: () -> Unit,
 
     Box(
         modifier = modifier
-            .background(dialogBgColor)
+            .background(dialogBgColor())
             .focusable(true)
             .clickable(true) {},
         contentAlignment = Alignment.Center

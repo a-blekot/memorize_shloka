@@ -44,6 +44,13 @@
      <string name="label_prerating_accept">Звичайно!</string>
      <string name="label_prerating_close">Пізніше</string>
 
+     <string name="label_close_player_title">Зупинити аудіо плеєр?</string>
+     <string name="label_close_player_subtitle">Прогрес не буде збережено.</string>
+     <string name="label_close_player_stop">Зупинити</string>
+     <string name="label_close_player_continue">Продовжити</string>
+     <string name="label_do_not_show_again">Більше не показувати</string>
+     <string name="label_show_close_player_dialog">Питати перед виходом з плеєра</string>
+
      <string name="tutorial_about">Про застосунок</string>
      <string name="tutorial_metodics">Методика вивчення</string>
      <string name="tutorial_settings">Налаштування</string>

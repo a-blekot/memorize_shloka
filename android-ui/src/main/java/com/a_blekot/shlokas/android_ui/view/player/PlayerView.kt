@@ -1,6 +1,7 @@
 package com.a_blekot.shlokas.android_ui.view.player
 
 import HtmlText
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -44,51 +45,68 @@ import com.a_blekot.shlokas.common.resources.MR.strings.label_translation
 import com.a_blekot.shlokas.common.resources.MR.strings.label_verses_counter
 import com.a_blekot.shlokas.common.resources.MR.strings.label_words
 import com.a_blekot.shlokas.common.resources.resolve
+import com.a_blekot.shlokas.common.utils.showClosePlayerDialog
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 
 @Composable
 fun PlayerView(component: PlayerComponent) {
     val state = component.flow.subscribeAsState()
 
-    StandartColumn(
-        verticalArrangement = Arrangement.spacedBy(paddingS),
-        modifier = Modifier
-            .background(color = colorScheme.background)
-            .padding(paddingXS)
-            .border(
-                width = borderS,
-                color = colorScheme.primary,
-                shape = RoundedCornerShape(radiusM)
-            )
-    ) {
-        state.value.run {
-            TitleAndProgress(this, component)
+    val isClosePlayerDialogVisible = remember { mutableStateOf(false) }
 
-            HtmlText(
-                text = sanskrit,
-                color = colorScheme.primary,
-                style = typography.headlineSmall,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth().padding(horizontal = paddingXS)
-            )
+    BackHandler(enabled = showClosePlayerDialog()) {
+        isClosePlayerDialogVisible.value = true
+    }
 
-            val wordsAreVisible = remember { mutableStateOf(false) }
-            val translationIsVisible = remember { mutableStateOf(false) }
-            val context = LocalContext.current
-            val translationStyle = typography.titleLarge
-
-            StandartLazyColumn {
-                addFoldableView(label_words.resolve(context), words, wordsAreVisible, translationStyle)
-                addFoldableView(
-                    label_translation.resolve(context),
-                    translation,
-                    translationIsVisible,
-                    translationStyle,
-                    TextAlign.Justify
+    Box(modifier = Modifier.fillMaxSize()) {
+        StandartColumn(
+            verticalArrangement = Arrangement.spacedBy(paddingS),
+            modifier = Modifier
+                .background(color = colorScheme.background)
+                .padding(paddingXS)
+                .border(
+                    width = borderS,
+                    color = colorScheme.primary,
+                    shape = RoundedCornerShape(radiusM)
                 )
-            }
+        ) {
+            state.value.run {
+                TitleAndProgress(this, component)
 
-            Spacer(Modifier.weight(1.0f))
+                HtmlText(
+                    text = sanskrit,
+                    color = colorScheme.primary,
+                    style = typography.headlineSmall,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = paddingXS)
+                )
+
+                val wordsAreVisible = remember { mutableStateOf(false) }
+                val translationIsVisible = remember { mutableStateOf(false) }
+                val context = LocalContext.current
+                val translationStyle = typography.titleLarge
+
+                StandartLazyColumn {
+                    addFoldableView(label_words.resolve(context), words, wordsAreVisible, translationStyle)
+                    addFoldableView(
+                        label_translation.resolve(context),
+                        translation,
+                        translationIsVisible,
+                        translationStyle,
+                        TextAlign.Justify
+                    )
+                }
+
+                Spacer(Modifier.weight(1.0f))
+            }
+        }
+
+        if (isClosePlayerDialogVisible.value) {
+            ClosePlayerDialog(
+                modifier = Modifier.fillMaxSize(),
+                onStop = component::stop,
+                onContinue = { isClosePlayerDialogVisible.value = false }
+            )
         }
     }
 }

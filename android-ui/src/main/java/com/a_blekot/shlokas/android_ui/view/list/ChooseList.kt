@@ -37,7 +37,7 @@ fun ChooseList(
 
     Box(
         modifier = modifier
-            .background(dialogBgColor)
+            .background(dialogBgColor())
             .focusable(true)
             .clickable(true) {},
         contentAlignment = Alignment.Center

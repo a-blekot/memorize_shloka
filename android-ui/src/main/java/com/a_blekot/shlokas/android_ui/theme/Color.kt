@@ -1,9 +1,13 @@
 package com.a_blekot.shlokas.android_ui.theme
 
+import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 
-val dialogBgColor = Color(0x88000000)
+@Composable
+fun dialogBgColor() =
+    colorScheme.onBackground.copy(alpha = 0.5f)
 
 val md_theme_light_primary = Color(0xFF7A564A)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)

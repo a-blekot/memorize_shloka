@@ -12,6 +12,7 @@ import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -43,7 +44,7 @@ fun PreRatingPopup(modifier: Modifier, onAccept: () -> Unit, onClose: () -> Unit
 
     Box(
         modifier = modifier
-            .background(dialogBgColor)
+            .background(dialogBgColor())
             .focusable(true)
             .clickable(true) {},
         contentAlignment = Alignment.Center
@@ -53,7 +54,7 @@ fun PreRatingPopup(modifier: Modifier, onAccept: () -> Unit, onClose: () -> Unit
                 .padding(paddingM)
                 .fillMaxWidth()
                 .background(
-                    MaterialTheme.colorScheme.background,
+                    colorScheme.background,
                     shape = RoundedCornerShape(radiusM)
                 )
                 .padding(paddingM)
@@ -64,7 +65,7 @@ fun PreRatingPopup(modifier: Modifier, onAccept: () -> Unit, onClose: () -> Unit
             Text(
                 text = resolveString(label_prerating_title),
                 maxLines = 1,
-                style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold),
+                style = typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold),
                 textAlign = TextAlign.Center,
                 color = colorScheme.onPrimaryContainer,
                 modifier = Modifier.fillMaxWidth()
@@ -72,7 +73,7 @@ fun PreRatingPopup(modifier: Modifier, onAccept: () -> Unit, onClose: () -> Unit
             Text(
                 text = resolveString(label_prerating_subtitle),
                 maxLines = 1,
-                style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold),
+                style = typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold),
                 textAlign = TextAlign.Center,
                 color = colorScheme.onPrimaryContainer,
                 modifier = Modifier.fillMaxWidth()
@@ -105,36 +106,4 @@ private fun StarImage() {
         tint = colorScheme.primary,
         modifier = Modifier.size(iconSizeL)
     )
-}
-
-@Composable
-private fun DialogButton(
-    modifier: Modifier,
-    isSelected: Boolean,
-    title: StringResource,
-    onClick: () -> Unit
-) {
-    Box(
-        modifier = modifier
-            .height(buttonHeight)
-            .background(
-                color = if (isSelected) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent,
-                shape = RoundedCornerShape(radiusM)
-            )
-            .border(
-                width = borderS,
-                color = MaterialTheme.colorScheme.primary,
-                shape = RoundedCornerShape(radiusM)
-            )
-            .clickable { onClick.invoke() },
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = resolveString(title),
-            maxLines = 1,
-            style = MaterialTheme.typography.headlineSmall,
-            textAlign = TextAlign.Center,
-            color = colorScheme.onPrimaryContainer
-        )
-    }
 }

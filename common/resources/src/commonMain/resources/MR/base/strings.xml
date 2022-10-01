@@ -44,6 +44,13 @@
     <string name="label_prerating_accept">Конечно!</string>
     <string name="label_prerating_close">Позже</string>
 
+    <string name="label_close_player_title">Остановить аудио плеер?</string>
+    <string name="label_close_player_subtitle">Прогресс не будет сохранен.</string>
+    <string name="label_close_player_stop">Остановить</string>
+    <string name="label_close_player_continue">Продолжить</string>
+    <string name="label_do_not_show_again">Больше не показывать</string>
+    <string name="label_show_close_player_dialog">Спрашивать перед выходом из плеера</string>
+
     <string name="tutorial_about">О приложении</string>
     <string name="tutorial_metodics">Методика изучения</string>
     <string name="tutorial_settings">Настройки</string>
