@@ -152,70 +152,72 @@ fun SettingsView(component: SettingsComponent) {
                 }
             }
 
-            item {
-                StandartRow(
-                    horizontalArrangement = Arrangement.spacedBy(paddingM),
-                    modifier = Modifier.clickable { component.donations() }.padding(top = paddingM)
-                ) {
-                    Icon(
-                        Icons.Rounded.VolunteerActivism,
-                        "donations",
-                        tint = colorScheme.primary,
-                        modifier = Modifier.size(Dimens.iconSizeL)
-                    )
+            if(state.value.locale.isNotBlank()) {
+                item {
+                    StandartRow(
+                        horizontalArrangement = Arrangement.spacedBy(paddingM),
+                        modifier = Modifier.clickable { component.donations() }.padding(top = paddingM)
+                    ) {
+                        Icon(
+                            Icons.Rounded.VolunteerActivism,
+                            "donations",
+                            tint = colorScheme.primary,
+                            modifier = Modifier.size(Dimens.iconSizeL)
+                        )
 
-                    Text(
-                        text = label_donate.resolve(context),
-                        style = typography.titleLarge,
-                        color = colorScheme.primary,
-                        maxLines = 1,
-                    )
-                }
-            }
-
-            item {
-                StandartRow(
-                    horizontalArrangement = Arrangement.spacedBy(paddingM),
-                    modifier = Modifier.clickable { component.sendEmail() }
-                ) {
-
-                    Icon(
-                        Icons.Rounded.Email,
-                        "Email",
-                        tint = colorScheme.primary,
-                        modifier = Modifier.size(Dimens.iconSizeL)
-                    )
-
-                    Text(
-                        text = label_feedback.resolve(context),
-                        style = typography.titleLarge,
-                        color = colorScheme.primary,
-                        maxLines = 1,
-                    )
-                }
-            }
-
-            item {
-                StandartRow(
-                    horizontalArrangement = Arrangement.spacedBy(paddingM),
-                    modifier = Modifier.clickable {
-                        infoIsVisible.value = true
-                        component.onShowTutorial()
+                        Text(
+                            text = label_donate.resolve(context),
+                            style = typography.titleLarge,
+                            color = colorScheme.primary,
+                            maxLines = 1,
+                        )
                     }
-                ) {
-                    Icon(
-                        Icons.Rounded.Info,
-                        "Info",
-                        tint = colorScheme.primary,
-                        modifier = Modifier.size(Dimens.iconSizeL)
-                    )
+                }
 
-                    Text(
-                        text = label_show_tutorial.resolve(context),
-                        style = typography.titleLarge,
-                        color = colorScheme.primary,
-                        maxLines = 1,
-                    )
+                item {
+                    StandartRow(
+                        horizontalArrangement = Arrangement.spacedBy(paddingM),
+                        modifier = Modifier.clickable { component.sendEmail() }
+                    ) {
+
+                        Icon(
+                            Icons.Rounded.Email,
+                            "Email",
+                            tint = colorScheme.primary,
+                            modifier = Modifier.size(Dimens.iconSizeL)
+                        )
+
+                        Text(
+                            text = label_feedback.resolve(context),
+                            style = typography.titleLarge,
+                            color = colorScheme.primary,
+                            maxLines = 1,
+                        )
+                    }
+                }
+
+                item {
+                    StandartRow(
+                        horizontalArrangement = Arrangement.spacedBy(paddingM),
+                        modifier = Modifier.clickable {
+                            infoIsVisible.value = true
+                            component.onShowTutorial()
+                        }
+                    ) {
+                        Icon(
+                            Icons.Rounded.Info,
+                            "Info",
+                            tint = colorScheme.primary,
+                            modifier = Modifier.size(Dimens.iconSizeL)
+                        )
+
+                        Text(
+                            text = label_show_tutorial.resolve(context),
+                            style = typography.titleLarge,
+                            color = colorScheme.primary,
+                            maxLines = 1,
+                        )
+                    }
                 }
             }
         }

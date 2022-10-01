@@ -289,7 +289,8 @@
     <string name="trans_SB_1_18_13">The value of a moment’s association with the devotee of the Lord cannot even be compared to the attainment of heavenly planets or liberation from matter, and what to speak of worldly benedictions in the form of material prosperity, which are for those who are meant for death.</string>
 
     <string name="title_SB_2_1_5">ŚB 2.1.5</string>
-    <string name="sansk_SB_2_1_5"><![CDATA[<i>tasmād bhārata sarvātmā<br>bhagavān īśvaro hariḥ<br>śrotavyaḥ kīrtitavyaś ca<br>smartavyaś cecchatābhayam</i>]]></string>
+<!--    <string name="sansk_SB_2_1_5"><![CDATA[<i>tasmād bhārata sarvātmā<br>bhagavān īśvaro hariḥ<br>śrotavyaḥ kīrtitavyaś ca<br>smartavyaś cecchatābhayam</i>]]></string>-->
+    <string name="sansk_SB_2_1_5"><![CDATA[<div id="bb17792" class="r r-lang-en r-verse-text selected"><em><i>tasmād bhārata sarvātmā<br>bhagavān īśvaro hariḥ<br>śrotavyaḥ kīrtitavyaś ca<br>smartavyaś cecchatābhayam</i></em></div>]]></string>
     <string name="words_SB_2_1_5"><![CDATA[<i><b>tasmāt</b></i> — for this reason;</br><br><i><b>bhārata</b></i> — O descendant of Bharata;</br><br><i><b>sarvātmā</b></i> — the Supersoul;</br><br><i><b>bhagavān</b></i> — the Personality of Godhead;</br><br><i><b>īśvaraḥ</b></i> — the controller;</br><br><i><b>hariḥ</b></i> — the Lord, who vanquishes all miseries;</br><br><i><b>śrotavyaḥ</b></i> — is to be heard;</br><br><i><b>kīrtitavyaḥ</b></i> — to be glorified;</br><br><i><b>ca</b></i> — also;</br><br><i><b>smartavyaḥ</b></i> — to be remembered;</br><br><i><b>ca</b></i> — and;</br><br><i><b>icchatā</b></i> — of one who desires;</br><br><i><b>abhayam</b></i> — freedom.]]></string>
     <string name="trans_SB_2_1_5">O descendant of King Bharata, one who desires to be free from all miseries must hear about, glorify and also remember the Personality of Godhead, who is the Supersoul, the controller and the savior from all miseries.</string>
     <string name="descr_SB_2_1_5">tasmād bhārata sarvātmā</string>
@@ -635,6 +636,12 @@
     <string name="sansk_BG_2_13"><![CDATA[<i>dehino ’smin yathā dehe<br>kaumāraṁ yauvanaṁ jarā<br>tathā dehāntara-prāptir<br>dhīras tatra na muhyati</i>]]></string>
     <string name="words_BG_2_13"><![CDATA[<i><b>dehinaḥ</b></i> — of the embodied;</br><br><i><b>asmin</b></i> — in this;</br><br><i><b>yathā</b></i> — as;</br><br><i><b>dehe</b></i> — in the body;</br><br><i><b>kaumāram</b></i> — boyhood;</br><br><i><b>yauvanam</b></i> — youth;</br><br><i><b>jarā</b></i> — old age;</br><br><i><b>tathā</b></i> — similarly;</br><br><i><b>deha-antara</b></i> — of transference of the body;</br><br><i><b>prāptiḥ</b></i> — achievement;</br><br><i><b>dhīraḥ</b></i> — the sober;</br><br><i><b>tatra</b></i> — thereupon;</br><br><i><b>na</b></i> — never;</br><br><i><b>muhyati</b></i> — is deluded.]]></string>
     <string name="trans_BG_2_13">As the embodied soul continuously passes, in this body, from boyhood to youth to old age, the soul similarly passes into another body at death. A sober person is not bewildered by such a change.</string>
+
+    <string name="title_BG_2_27">BG 2.27 *</string>
+    <string name="descr_BG_2_27">jātasya hi dhruvo mṛtyur</string>
+    <string name="sansk_BG_2_27"><![CDATA[<i>jātasya hi dhruvo mṛtyur<br>dhruvaṁ janma mṛtasya ca<br>tasmād aparihārye ’rthe<br>na tvaṁ śocitum arhasi</i>]]></string>
+    <string name="words_BG_2_27"><![CDATA[<i><b>jātasya</b></i> — of one who has taken his birth;</br><br><i><b>hi</b></i> — certainly;</br><br><i><b>dhruvaḥ</b></i> — a fact;</br><br><i><b>mṛtyuḥ</b></i> — death;</br><br><i><b>dhruvam</b></i> — it is also a fact;</br><br><i><b>janma</b></i> — birth;</br><br><i><b>mṛtasya</b></i> — of the dead;</br><br><i><b>ca</b></i> — also;</br><br><i><b>tasmāt</b></i> — therefore;</br><br><i><b>aparihārye</b></i> — of that which is unavoidable;</br><br><i><b>arthe</b></i> — in the matter;</br><br><i><b>na</b></i> — do not;</br><br><i><b>tvam</b></i> — you;</br><br><i><b>śocitum</b></i> — to lament;</br><br><i><b>arhasi</b></i> — deserve.]]></string>
+    <string name="trans_BG_2_27">One who has taken his birth is sure to die, and after death one is sure to take birth again. Therefore, in the unavoidable discharge of your duty, you should not lament.</string>
 
     <string name="title_BG_3_27">BG 3.27</string>
     <string name="descr_BG_3_27">prakṛteḥ kriyamāṇāni</string>

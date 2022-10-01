@@ -1,6 +1,7 @@
 package com.a_blekot.shlokas.common.utils.resources
 
 import com.a_blekot.shlokas.common.data.ShlokaId.*
+import com.a_blekot.shlokas.common.resources.MR.assets.BG_
 import com.a_blekot.shlokas.common.resources.MR.assets.NI_
 import com.a_blekot.shlokas.common.resources.MR.assets.SB_1
 import com.a_blekot.shlokas.common.resources.MR.assets.SB_2
@@ -710,7 +711,7 @@ val versesMap =
                 words_BG_1_1,
                 trans_BG_1_1,
                 descr_BG_1_1,
-                //BG_.BG_1_1
+                BG_.BG_1_1
             ),
             BG_2_7 to Verse(
                 title_BG_2_7,
@@ -718,7 +719,7 @@ val versesMap =
                 words_BG_2_7,
                 trans_BG_2_7,
                 descr_BG_2_7,
-                //BG_.BG_2_7
+                BG_.BG_2_7
             ),
             BG_2_13 to Verse(
                 title_BG_2_13,
@@ -726,7 +727,15 @@ val versesMap =
                 words_BG_2_13,
                 trans_BG_2_13,
                 descr_BG_2_13,
-                //BG_.BG_2_13
+                BG_.BG_2_13
+            ),
+            BG_2_27 to Verse(
+                title_BG_2_27,
+                sansk_BG_2_27,
+                words_BG_2_27,
+                trans_BG_2_27,
+                descr_BG_2_27,
+                BG_.BG_2_27
             ),
             BG_3_27 to Verse(
                 title_BG_3_27,
@@ -734,7 +743,7 @@ val versesMap =
                 words_BG_3_27,
                 trans_BG_3_27,
                 descr_BG_3_27,
-                //BG_.BG_3_27
+                BG_.BG_3_27
             ),
             BG_4_2 to Verse(
                 title_BG_4_2,
@@ -742,7 +751,7 @@ val versesMap =
                 words_BG_4_2,
                 trans_BG_4_2,
                 descr_BG_4_2,
-                //BG_.BG_4_2
+                BG_.BG_4_2
             ),
             BG_4_8 to Verse(
                 title_BG_4_8,
@@ -750,7 +759,7 @@ val versesMap =
                 words_BG_4_8,
                 trans_BG_4_8,
                 descr_BG_4_8,
-                //BG_.BG_4_8
+                BG_.BG_4_8
             ),
             BG_4_9 to Verse(
                 title_BG_4_9,
@@ -758,7 +767,7 @@ val versesMap =
                 words_BG_4_9,
                 trans_BG_4_9,
                 descr_BG_4_9,
-                //BG_.BG_4_9
+                BG_.BG_4_9
             ),
             BG_4_34 to Verse(
                 title_BG_4_34,
@@ -766,7 +775,7 @@ val versesMap =
                 words_BG_4_34,
                 trans_BG_4_34,
                 descr_BG_4_34,
-                //BG_.BG_4_34
+                BG_.BG_4_34
             ),
             BG_5_29 to Verse(
                 title_BG_5_29,
@@ -774,7 +783,7 @@ val versesMap =
                 words_BG_5_29,
                 trans_BG_5_29,
                 descr_BG_5_29,
-                //BG_.BG_5_29
+                BG_.BG_5_29
             ),
             BG_6_47 to Verse(
                 title_BG_6_47,
@@ -782,7 +791,7 @@ val versesMap =
                 words_BG_6_47,
                 trans_BG_6_47,
                 descr_BG_6_47,
-                //BG_.BG_6_47
+                BG_.BG_6_47
             ),
             BG_7_14 to Verse(
                 title_BG_7_14,
@@ -790,7 +799,7 @@ val versesMap =
                 words_BG_7_14,
                 trans_BG_7_14,
                 descr_BG_7_14,
-                //BG_.BG_7_14
+                BG_.BG_7_14
             ),
             BG_8_5 to Verse(
                 title_BG_8_5,
@@ -798,7 +807,7 @@ val versesMap =
                 words_BG_8_5,
                 trans_BG_8_5,
                 descr_BG_8_5,
-                //BG_.BG_8_5
+                BG_.BG_8_5
             ),
             BG_9_2 to Verse(
                 title_BG_9_2,
@@ -806,7 +815,7 @@ val versesMap =
                 words_BG_9_2,
                 trans_BG_9_2,
                 descr_BG_9_2,
-                //BG_.BG_9_2
+                BG_.BG_9_2
             ),
             BG_9_14 to Verse(
                 title_BG_9_14,
@@ -814,7 +823,7 @@ val versesMap =
                 words_BG_9_14,
                 trans_BG_9_14,
                 descr_BG_9_14,
-                //BG_.BG_9_14
+                BG_.BG_9_14
             ),
             BG_9_26 to Verse(
                 title_BG_9_26,
@@ -822,7 +831,7 @@ val versesMap =
                 words_BG_9_26,
                 trans_BG_9_26,
                 descr_BG_9_26,
-                //BG_.BG_9_26
+                BG_.BG_9_26
             ),
             BG_9_27 to Verse(
                 title_BG_9_27,
@@ -830,7 +839,7 @@ val versesMap =
                 words_BG_9_27,
                 trans_BG_9_27,
                 descr_BG_9_27,
-                //BG_.BG_9_27
+                BG_.BG_9_27
             ),
             BG_10_8 to Verse(
                 title_BG_10_8,
@@ -838,7 +847,7 @@ val versesMap =
                 words_BG_10_8,
                 trans_BG_10_8,
                 descr_BG_10_8,
-                //BG_.BG_10_8
+                BG_.BG_10_8
             ),
             BG_10_9 to Verse(
                 title_BG_10_9,
@@ -846,7 +855,7 @@ val versesMap =
                 words_BG_10_9,
                 trans_BG_10_9,
                 descr_BG_10_9,
-                //BG_.BG_10_9
+                BG_.BG_10_9
             ),
             BG_10_10 to Verse(
                 title_BG_10_10,
@@ -854,7 +863,7 @@ val versesMap =
                 words_BG_10_10,
                 trans_BG_10_10,
                 descr_BG_10_10,
-                //BG_.BG_10_10
+                BG_.BG_10_10
             ),
             BG_10_11 to Verse(
                 title_BG_10_11,
@@ -862,7 +871,7 @@ val versesMap =
                 words_BG_10_11,
                 trans_BG_10_11,
                 descr_BG_10_11,
-                //BG_.BG_10_11
+                BG_.BG_10_11
             ),
             BG_13_22 to Verse(
                 title_BG_13_22,
@@ -870,7 +879,7 @@ val versesMap =
                 words_BG_13_22,
                 trans_BG_13_22,
                 descr_BG_13_22,
-                //BG_.BG_13_22
+                BG_.BG_13_22
             ),
             BG_14_4 to Verse(
                 title_BG_14_4,
@@ -878,7 +887,7 @@ val versesMap =
                 words_BG_14_4,
                 trans_BG_14_4,
                 descr_BG_14_4,
-                //BG_.BG_14_4
+                BG_.BG_14_4
             ),
             BG_14_26 to Verse(
                 title_BG_14_26,
@@ -886,7 +895,7 @@ val versesMap =
                 words_BG_14_26,
                 trans_BG_14_26,
                 descr_BG_14_26,
-                //BG_.BG_14_26
+                BG_.BG_14_26
             ),
             BG_15_7 to Verse(
                 title_BG_15_7,
@@ -894,7 +903,7 @@ val versesMap =
                 words_BG_15_7,
                 trans_BG_15_7,
                 descr_BG_15_7,
-                //BG_.BG_15_7
+                BG_.BG_15_7
             ),
             BG_15_15 to Verse(
                 title_BG_15_15,
@@ -902,7 +911,7 @@ val versesMap =
                 words_BG_15_15,
                 trans_BG_15_15,
                 descr_BG_15_15,
-                //BG_.BG_15_15
+                BG_.BG_15_15
             ),
             BG_18_54 to Verse(
                 title_BG_18_54,
@@ -910,7 +919,7 @@ val versesMap =
                 words_BG_18_54,
                 trans_BG_18_54,
                 descr_BG_18_54,
-                //BG_.BG_18_54
+                BG_.BG_18_54
             ),
             BG_18_55 to Verse(
                 title_BG_18_55,
@@ -918,7 +927,7 @@ val versesMap =
                 words_BG_18_55,
                 trans_BG_18_55,
                 descr_BG_18_55,
-                //BG_.BG_18_55
+                BG_.BG_18_55
             ),
             BG_18_61 to Verse(
                 title_BG_18_61,
@@ -926,7 +935,7 @@ val versesMap =
                 words_BG_18_61,
                 trans_BG_18_61,
                 descr_BG_18_61,
-                //BG_.BG_18_61
+                BG_.BG_18_61
             ),
             BG_18_65 to Verse(
                 title_BG_18_65,
@@ -934,7 +943,7 @@ val versesMap =
                 words_BG_18_65,
                 trans_BG_18_65,
                 descr_BG_18_65,
-                //BG_.BG_18_65
+                BG_.BG_18_65
             ),
             BG_18_66 to Verse(
                 title_BG_18_66,
@@ -942,7 +951,7 @@ val versesMap =
                 words_BG_18_66,
                 trans_BG_18_66,
                 descr_BG_18_66,
-                //BG_.BG_18_66
+                BG_.BG_18_66
             ),
         )
     }
