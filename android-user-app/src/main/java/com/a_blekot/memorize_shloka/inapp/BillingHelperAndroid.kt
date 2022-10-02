@@ -9,6 +9,7 @@ import com.a_blekot.shlokas.common.utils.billing.BillingOperation.*
 import com.a_blekot.shlokas.common.data.Donation
 import com.a_blekot.shlokas.common.data.DonationLevel
 import com.a_blekot.shlokas.common.data.getDonationLevel
+import com.a_blekot.shlokas.common.utils.connectivity.ConnectivityObserver
 import com.android.billingclient.api.*
 import com.android.billingclient.api.BillingClient.BillingResponseCode
 import com.android.billingclient.api.BillingClient.ProductType
@@ -17,9 +18,15 @@ import com.android.billingclient.api.Purchase.PurchaseState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
-class BillingHelperAndroid(private val activity: Activity, private val scope: CoroutineScope) : BillingHelper {
+class BillingHelperAndroid(
+    private val activity: Activity,
+    private val scope: CoroutineScope,
+    connectivityObserver: ConnectivityObserver,
+) : BillingHelper {
 
     private var productDetailsList = emptyList<ProductDetails>()
 
@@ -52,7 +59,9 @@ class BillingHelperAndroid(private val activity: Activity, private val scope: Co
             .setListener(purchaseListener)
             .build()
 
-        getProductDetails()
+        connectivityObserver.observe()
+            .onEach { handleConnectionStatus(it) }
+            .launchIn(scope)
     }
 
     override fun clean() {
@@ -135,6 +144,12 @@ class BillingHelperAndroid(private val activity: Activity, private val scope: Co
                 // Google Play by calling the startConnection() method.
             }
         })
+    }
+
+    private fun handleConnectionStatus(status: ConnectivityObserver.Status) {
+        if (status == ConnectivityObserver.Status.Available && availableDonations.isEmpty()) {
+            getProductDetails()
+        }
     }
 
     private fun getQueryProductDetailsParams() =

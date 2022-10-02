@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        billingHelper = BillingHelperAndroid(this, this.lifecycleScope)
+        billingHelper = BillingHelperAndroid(this, this.lifecycleScope, app.connectivityObserver)
         inappUpdater = InappUpdater(this)
 
         val root = root(defaultComponentContext())
@@ -137,7 +137,7 @@ class MainActivity : ComponentActivity() {
             deps = RootDeps(
                 filer = AndroidFiler(this),
                 configReader = AndroidConfigReader(this),
-                connectivityObserver = ConnectivityObserverAndroid(applicationContext),
+                connectivityObserver = app.connectivityObserver,
                 stringResourceHandler = AndroidStringResourceHandler(this),
                 billingHelper = billingHelper,
                 playerBus = app.playerBus,

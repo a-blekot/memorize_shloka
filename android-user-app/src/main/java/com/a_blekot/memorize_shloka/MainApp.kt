@@ -16,6 +16,8 @@ import com.a_blekot.shlokas.common.utils.analytics.Analytics
 import com.a_blekot.shlokas.common.utils.LogTag.LIFECYCLE_ACTIVITY
 import com.a_blekot.shlokas.common.utils.LogTag.LIFECYCLE_APP
 import com.a_blekot.shlokas.common.utils.checkLocale
+import com.a_blekot.shlokas.common.utils.connectivity.ConnectivityObserver
+import com.a_blekot.shlokas.common.utils.connectivity.ConnectivityObserverAndroid
 import com.a_blekot.shlokas.common.utils.dispatchers.dispatchers
 import com.a_blekot.shlokas.common.utils.onAppLaunch
 import com.google.firebase.crashlytics.FirebaseCrashlytics
@@ -33,6 +35,7 @@ class MainApp : Application() {
 
     lateinit var playerBus: PlayerBus
     lateinit var analytics: Analytics
+    lateinit var connectivityObserver: ConnectivityObserver
 
     private val lifecycleEventObserver = LifecycleEventObserver { _, event ->
         when (event) {
@@ -99,6 +102,7 @@ class MainApp : Application() {
         }
 
         app = this
+        connectivityObserver = ConnectivityObserverAndroid(this)
         playerBus = PlayerBusImpl(dispatchers())
         Napier.d("app.playerBus = $playerBus", tag="PlayerBus")
         onAppLaunch()
