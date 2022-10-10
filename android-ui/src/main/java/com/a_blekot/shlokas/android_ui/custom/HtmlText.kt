@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
@@ -154,7 +155,8 @@ fun HtmlText(
     maxLines: Int = Int.MAX_VALUE,
     inlineContent: Map<String, InlineTextContent> = mapOf(),
     onTextLayout: (TextLayoutResult) -> Unit = {},
-    style: TextStyle = LocalTextStyle.current
+    style: TextStyle = LocalTextStyle.current,
+    autoSize: Boolean = false
 ) {
     val annotatedString = if (SDK_INT <24) {
         Html.fromHtml(text)
@@ -165,8 +167,15 @@ fun HtmlText(
     val uriHandler = LocalUriHandler.current
     val layoutResult = remember { mutableStateOf<TextLayoutResult?>(null) }
 
+    var autoStyle = remember { mutableStateOf(style) }
+    var readyToDraw = remember { mutableStateOf(!autoSize) }
+
     Text(
-        modifier = modifier.pointerInput(Unit) {
+        modifier = modifier
+            .drawWithContent {
+                if (readyToDraw.value) drawContent()
+            }
+            .pointerInput(Unit) {
             detectTapGestures(onTap = { pos ->
                 layoutResult.value?.let { layoutResult ->
                     val position = layoutResult.getOffsetForPosition(pos)
@@ -191,14 +200,19 @@ fun HtmlText(
         textAlign = textAlign,
         lineHeight = lineHeight,
         overflow = overflow,
-        softWrap = softWrap,
+        softWrap = softWrap && !autoSize,
         maxLines = maxLines,
         inlineContent = inlineContent,
         onTextLayout = {
             layoutResult.value = it
+            if (autoSize && it.didOverflowWidth) {
+                autoStyle.value = autoStyle.value.copy(fontSize = autoStyle.value.fontSize * 0.9)
+            } else {
+                readyToDraw.value = true
+            }
             onTextLayout(it)
         },
-        style = style
+        style = autoStyle.value
     )
 }
 

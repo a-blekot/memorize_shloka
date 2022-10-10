@@ -11,11 +11,15 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
@@ -71,12 +75,20 @@ fun SmoothProgress(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
+            val initialTextStyle = typography.titleLarge
+            var textStyle = remember { mutableStateOf(initialTextStyle) }
+            var readyToDraw = remember { mutableStateOf(false) }
             Text(
                 text = "$current",
                 color = color,
-                style = MaterialTheme.typography.titleLarge,
+                style = textStyle.value,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+                softWrap = false,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .drawWithContent {
+                        if (readyToDraw.value) drawContent()
+                    }
             )
 
             Divider(
@@ -88,9 +100,21 @@ fun SmoothProgress(
             Text(
                 text = "$total",
                 color = color,
-                style = MaterialTheme.typography.titleLarge,
+                style = textStyle.value,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+                softWrap = false,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .drawWithContent {
+                        if (readyToDraw.value) drawContent()
+                    },
+                onTextLayout = {
+                    if (it.didOverflowWidth || it.didOverflowHeight) {
+                        textStyle.value = textStyle.value.copy(fontSize = textStyle.value.fontSize * 0.95)
+                    } else {
+                        readyToDraw.value = true
+                    }
+                }
             )
         }
     }

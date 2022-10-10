@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -15,11 +14,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.input.pointer.PointerEventType.Companion.Scroll
 import androidx.compose.ui.text.style.TextAlign
 import com.a_blekot.shlokas.android_ui.custom.*
@@ -41,11 +42,25 @@ fun ListView(component: ListComponent) {
 
             ButtonsRow(component, onListClick = { menuIsVisible.value = true })
 
+            val initialTextStyle = typography.headlineLarge
+            var textStyle = remember { mutableStateOf(initialTextStyle) }
+            var readyToDraw = remember { mutableStateOf(false) }
             Text(
                 state.value.config.title,
                 color = colorScheme.primary,
-                style = MaterialTheme.typography.headlineLarge,
-                textAlign = TextAlign.Center
+                style = textStyle.value,
+                softWrap = false,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.drawWithContent {
+                    if (readyToDraw.value) drawContent()
+                },
+                onTextLayout = {
+                    if (it.didOverflowWidth) {
+                        textStyle.value = textStyle.value.copy(fontSize = textStyle.value.fontSize * 0.9)
+                    } else {
+                        readyToDraw.value = true
+                    }
+                }
             )
 
             StandartColumn(

@@ -77,20 +77,24 @@ fun PlayerView(component: PlayerComponent) {
             state.value.run {
                 TitleAndProgress(this, component)
 
-                HtmlText(
-                    text = sanskrit,
-                    color = colorScheme.primary,
-                    style = typography.headlineSmall,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth().padding(horizontal = paddingXS)
-                )
-
                 val wordsAreVisible = remember { mutableStateOf(false) }
                 val translationIsVisible = remember { mutableStateOf(false) }
                 val context = LocalContext.current
                 val translationStyle = typography.titleLarge
 
                 StandartLazyColumn {
+
+                    item {
+                        HtmlText(
+                            text = sanskrit,
+                            color = colorScheme.primary,
+                            style = typography.headlineSmall,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.fillMaxWidth().padding(horizontal = paddingXS),
+//                    autoSize = true
+                        )
+                    }
+
                     addFoldableView(label_words.resolve(context), words, wordsAreVisible, translationStyle)
                     addFoldableView(
                         label_translation.resolve(context),
