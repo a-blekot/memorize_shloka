@@ -11,4 +11,5 @@ data class SettingsState(
     val week: Week,
     val locale: String,
     val isAutoplay: Boolean,
+    val showClosePlayerDialog: Boolean,
 ): Parcelable

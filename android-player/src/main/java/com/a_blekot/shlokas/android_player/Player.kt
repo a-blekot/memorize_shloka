@@ -10,13 +10,12 @@ import com.a_blekot.shlokas.common.data.tasks.*
 import com.a_blekot.shlokas.common.player_api.PlayerBus
 import com.a_blekot.shlokas.common.player_api.PlayerFeedback
 import com.a_blekot.shlokas.common.utils.resources.getAsset
+import com.a_blekot.shlokas.common.utils.resources.getAssetPath
 import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 
@@ -143,9 +142,7 @@ class Player(
     fun setPlayerBuss(playerBus: PlayerBus) {
         if (!this::playerBus.isInitialized || this.playerBus != playerBus) {
             this.playerBus = playerBus
-            playerBus.observeTasks()
-                .onEach { handleTask(it) }
-                .launchIn(playerScope)
+            playerBus.observeTasks(::handleTask, playerScope)
             Napier.d("Player::SET playerBus = $playerBus", tag = "PlayerBus")
         } else {
             Napier.d("Player::SAME playerBus = ${this.playerBus}", tag = "PlayerBus")
@@ -227,7 +224,7 @@ class Player(
     }
 
     private fun SetTrackTask.toMediaItem(): MediaItem {
-        val uri = Uri.parse("$ASSETS_PREFIX${getAsset(id)}")
+        val uri = Uri.parse("$ASSETS_PREFIX${getAssetPath(id)}")
         Napier.d("SetTrack $uri", tag = "AUDIO_PLAYER")
 
         return MediaItem.fromUri(uri)

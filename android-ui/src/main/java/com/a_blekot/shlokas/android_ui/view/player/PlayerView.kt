@@ -68,11 +68,6 @@ fun PlayerView(component: PlayerComponent) {
             modifier = Modifier
                 .background(color = colorScheme.background)
                 .padding(paddingXS)
-                .border(
-                    width = borderS,
-                    color = colorScheme.primary,
-                    shape = RoundedCornerShape(radiusM)
-                )
         ) {
             state.value.run {
                 TitleAndProgress(this, component)

@@ -79,11 +79,7 @@ internal class PlayerStoreFactory(
             }
 
             scope.launch {
-                deps.playerBus.observeFeedback()
-                    .onEach {
-                        dispatch(Feedback(it))
-                    }
-                    .launchIn(scope)
+                deps.playerBus.observeFeedback( { dispatch(Feedback(it)) }, scope)
             }
         }
     }

@@ -18,16 +18,18 @@ import com.a_blekot.memorize_shloka.inapp.InappUpdater
 import com.a_blekot.memorize_shloka.inapp.showInappReview
 import com.a_blekot.shlokas.android_player.PlaybackService
 import com.a_blekot.shlokas.android_ui.theme.AppTheme
-import com.a_blekot.shlokas.common.root.RootComponent
-import com.a_blekot.shlokas.common.root.RootComponentImpl
-import com.a_blekot.shlokas.common.root.RootDeps
+import com.a_blekot.shlokas.common.resources.MR.strings.email_body
+import com.a_blekot.shlokas.common.resources.MR.strings.email_title
+import com.a_blekot.shlokas.common.resources.resolve
 import com.a_blekot.shlokas.common.utils.AndroidFiler
 import com.a_blekot.shlokas.common.utils.LogTag.PLAYBACK_SERVICE
 import com.a_blekot.shlokas.common.utils.billing.BillingHelper
-import com.a_blekot.shlokas.common.utils.connectivity.ConnectivityObserverAndroid
 import com.a_blekot.shlokas.common.utils.dispatchers.dispatchers
 import com.a_blekot.shlokas.common.utils.resources.AndroidConfigReader
 import com.a_blekot.shlokas.common.utils.resources.AndroidStringResourceHandler
+import com.ablekot.shlokas.common.root.RootComponent
+import com.ablekot.shlokas.common.root.RootComponentImpl
+import com.ablekot.shlokas.common.root.RootDeps
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.defaultComponentContext
 import com.arkivanov.mvikotlin.logging.store.LoggingStoreFactory
@@ -75,11 +77,13 @@ class MainActivity : ComponentActivity() {
             }
         }
         bindService()
+        app.connectivityObserver.start()
     }
 
     override fun onDestroy() {
         billingHelper?.clean()
         inappUpdater?.clean()
+        app.connectivityObserver.stop()
         super.onDestroy()
     }
 
@@ -151,8 +155,11 @@ class MainActivity : ComponentActivity() {
 
     private fun sendEmail() {
         val intent = Intent(Intent.ACTION_SENDTO).apply {
+            val title = email_title.resolve(this@MainActivity)
+            val body = email_body.resolve(this@MainActivity)
+
             val uriText =
-                "mailto:aleksey.blekot@gmail.com?subject=Шлоки - обратная связь&body=Харе Кришна! Спасибо за приложение \uD83D\uDE07"
+                "mailto:aleksey.blekot@gmail.com?subject=$title&body=$body \uD83D\uDE07"
             data = Uri.parse(uriText)
         }
         if (intent.resolveActivity(packageManager) != null) {

@@ -34,7 +34,7 @@ fun readConfig(type: ListId, configReader: ConfigReader): ListConfig? =
             json.decodeFromString<ListConfig>(text)
         }
     } catch (e: Throwable) {
-        Napier.e("config not found $type")
+        Napier.e("config not found $type", throwable = e)
         null
     }
 

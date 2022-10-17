@@ -12,6 +12,8 @@ import com.a_blekot.shlokas.common.resources.MR.assets.SB_6
 import com.a_blekot.shlokas.common.resources.MR.strings
 import dev.icerock.moko.resources.AssetResource
 import dev.icerock.moko.resources.StringResource
+import dev.icerock.moko.resources.desc.Resource
+import dev.icerock.moko.resources.desc.StringDesc
 
 class Verse(
     val title: StringResource,
@@ -776,6 +778,14 @@ val versesMap =
                 trans_BG_4_34,
                 descr_BG_4_34,
                 BG_.BG_4_34
+            ),
+            BG_5_22 to Verse(
+                title_BG_5_22,
+                sansk_BG_5_22,
+                words_BG_5_22,
+                trans_BG_5_22,
+                descr_BG_5_22,
+                BG_.BG_5_22
             ),
             BG_5_29 to Verse(
                 title_BG_5_29,

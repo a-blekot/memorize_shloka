@@ -38,6 +38,7 @@ class SettingsComponentImpl(
             getCurrentWeek(),
             getLocale(),
             getAutoPlay(),
+            showClosePlayerDialog()
         )
 
     override val flow: Value<SettingsState> = store.asValue()
@@ -56,6 +57,7 @@ class SettingsComponentImpl(
     override fun setWeek(value: Int) = store.accept(Weeks(value))
     override fun setLocale(value: String) = store.accept(Locale(value))
     override fun setAutoplay(value: Boolean) = store.accept(Autoplay(value))
+    override fun setShowClosePlayerDialog(value: Boolean) = store.accept(ShowClosePlayerDialog(value))
     override fun onShowTutorial() = deps.analytics.tutorialSettings()
     override fun onTutorialCompleted() {
         if (!isTutorialCompleted()) {
@@ -64,5 +66,7 @@ class SettingsComponentImpl(
         }
     }
     override fun sendEmail() = output(SettingsOutput.Email)
+    override fun shareApp() = output(SettingsOutput.ShareApp)
     override fun donations() = output(SettingsOutput.Donations)
+    override fun back() = output(SettingsOutput.Back)
 }

@@ -68,5 +68,4 @@ dependencies {
 
     implementation(libs.play.core)
     implementation(libs.billing)
-    implementation(libs.material.xml)
 }

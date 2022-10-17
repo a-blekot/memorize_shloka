@@ -1,23 +1,15 @@
 package com.a_blekot.shlokas.android_ui.view.donations
 
 import HtmlText
-import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ExpandMore
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import com.a_blekot.shlokas.android_ui.R
 import com.a_blekot.shlokas.android_ui.custom.StandartColumn
@@ -27,16 +19,11 @@ import com.a_blekot.shlokas.android_ui.custom.resolveString
 import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingM
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
-import com.a_blekot.shlokas.android_ui.view.player.addFoldableView
 import com.a_blekot.shlokas.common.resources.MR.strings.label_donate
 import com.a_blekot.shlokas.common.resources.MR.strings.label_no_connection
-import com.a_blekot.shlokas.common.resources.MR.strings.label_translation
 import com.a_blekot.shlokas.common.resources.MR.strings.sansk_BG_18_5
-import com.a_blekot.shlokas.common.resources.MR.strings.trans_BG_18_5
 import com.a_blekot.shlokas.common.resources.MR.strings.title_BG_18_5
-import com.a_blekot.shlokas.common.resources.resolve
-import com.a_blekot.shlokas.common.utils.connectivity.ConnectivityObserver.Status.Lost
-import com.a_blekot.shlokas.common.utils.connectivity.ConnectivityObserver.Status.Unavailable
+import com.a_blekot.shlokas.common.resources.MR.strings.trans_BG_18_5
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
@@ -103,7 +90,7 @@ fun DonationsView(component: DonationsComponent) {
                 }
             }
 
-            if (state.value.connectionStatus == Unavailable || state.value.connectionStatus == Lost) {
+            if (!state.value.connectionStatus) {
                 StandartRow(
                     modifier = Modifier
                         .background(colorScheme.errorContainer)

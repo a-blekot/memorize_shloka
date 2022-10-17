@@ -38,6 +38,7 @@ internal class SettingsStoreFactory(
         data class Weeks(val value: Week) : Msg
         data class Locale(val value: String) : Msg
         data class Autoplay(val value: Boolean) : Msg
+        data class ShowClosePlayerDialog(val value: Boolean) : Msg
     }
 
     private inner class BootstrapperImpl : CoroutineBootstrapper<Action>() {
@@ -62,6 +63,7 @@ internal class SettingsStoreFactory(
                 is Weeks -> setWeek(intent.value)
                 is Locale -> setLocale(intent.value)
                 is Autoplay -> setAutoplay(intent.value)
+                is ShowClosePlayerDialog -> updateShowClosePlayerDialog(intent.value)
             }
         }
 
@@ -91,6 +93,11 @@ internal class SettingsStoreFactory(
             dispatch(Msg.Autoplay(value))
         }
 
+        private fun updateShowClosePlayerDialog(value: Boolean) {
+            setShowClosePlayerDialog(value)
+            dispatch(Msg.ShowClosePlayerDialog(value))
+        }
+
         private fun checkFtue() {
         }
     }
@@ -103,6 +110,7 @@ internal class SettingsStoreFactory(
                 is Msg.Weeks -> copy(week = msg.value)
                 is Msg.Locale -> copy(locale = msg.value)
                 is Msg.Autoplay -> copy(isAutoplay = msg.value)
+                is Msg.ShowClosePlayerDialog -> copy(showClosePlayerDialog = msg.value)
             }
     }
 }

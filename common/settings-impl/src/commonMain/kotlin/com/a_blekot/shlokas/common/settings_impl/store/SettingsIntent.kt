@@ -6,4 +6,5 @@ sealed interface SettingsIntent {
     data class Weeks(val value: Int) : SettingsIntent
     data class Locale(val value: String) : SettingsIntent
     data class Autoplay(val value: Boolean) : SettingsIntent
+    data class ShowClosePlayerDialog(val value: Boolean) : SettingsIntent
 }

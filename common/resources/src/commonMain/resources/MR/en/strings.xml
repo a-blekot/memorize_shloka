@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
+    <string name="email_title">Shlokas - feedback.</string>
+    <string name="email_body">Hare Krishna! Thank you for this application!</string>
+
     <string name="label_no_connection">No connection...</string>
     <string name="label_repeats">Repeats</string>
     <string name="label_pause">Pause</string>
@@ -11,6 +14,7 @@
     <string name="label_show_tutorial">Show tutorial</string>
     <string name="label_version">Version:</string>
     <string name="label_feedback">Feedback</string>
+    <string name="label_share_app">Share app</string>
     <string name="label_donate">Donate</string>
     <string name="label_sanskrit">Sanskrit</string>
     <string name="label_words">Synonyms</string>
@@ -679,6 +683,12 @@
     <string name="sansk_BG_4_34"><![CDATA[<i>tad viddhi praṇipātena<br>paripraśnena sevayā<br>upadekṣyanti te jñānaṁ<br>jñāninas tattva-darśinaḥ</i>]]></string>
     <string name="words_BG_4_34"><![CDATA[<i><b>tat</b></i> — that knowledge of different sacrifices;</br><br><i><b>viddhi</b></i> — try to understand;</br><br><i><b>praṇipātena</b></i> — by approaching a spiritual master;</br><br><i><b>paripraśnena</b></i> — by submissive inquiries;</br><br><i><b>sevayā</b></i> — by the rendering of service;</br><br><i><b>upadekṣyanti</b></i> — they will initiate;</br><br><i><b>te</b></i> — you;</br><br><i><b>jñānam</b></i> — into knowledge;</br><br><i><b>jñāninaḥ</b></i> — the self-realized;</br><br><i><b>tattva</b></i> — of the truth;</br><br><i><b>darśinaḥ</b></i> — seers.]]></string>
     <string name="trans_BG_4_34">Just try to learn the truth by approaching a spiritual master. Inquire from him submissively and render service unto him. The self-realized souls can impart knowledge unto you because they have seen the truth.</string>
+
+    <string name="title_BG_5_22">BG 5.22 *</string>
+    <string name="descr_BG_5_22">ye hi saṁsparśa-jā bhogā</string>
+    <string name="sansk_BG_5_22"><![CDATA[<i>ye hi saṁsparśa-jā bhogā<br>duḥkha-yonaya eva te<br>ādy-antavantaḥ kaunteya<br>na teṣu ramate budhaḥ</i>]]></string>
+    <string name="words_BG_5_22"><![CDATA[<i><b>ye</b></i> — those;</br><br><i><b>hi</b></i> — certainly;</br><br><i><b>saṁsparśa</b></i> — jāḥ</b></i> — by contact with the material senses;</br><br><i><b>bhogāḥ</b></i> — enjoyments;</br><br><i><b>duḥkha</b></i> — distress;</br><br><i><b>yonayaḥ</b></i> — sources of;</br><br><i><b>eva</b></i> — certainly;</br><br><i><b>te</b></i> — they are;</br><br><i><b>ādi</b></i> — beginning;</br><br><i><b>anta</b></i> — end;</br><br><i><b>vantaḥ</b></i> — subject to;</br><br><i><b>kaunteya</b></i> — O son of Kuntī;</br><br><i><b>na</b></i> — never;</br><br><i><b>teṣu</b></i> — in those;</br><br><i><b>ramate</b></i> — takes delight;</br><br><i><b>budhaḥ</b></i> — the intelligent person.]]></string>
+    <string name="trans_BG_5_22">An intelligent person does not take part in the sources of misery, which are due to contact with the material senses. O son of Kuntī, such pleasures have a beginning and an end, and so the wise man does not delight in them.</string>
 
     <string name="title_BG_5_29">BG 5.29</string>
     <string name="descr_BG_5_29">bhoktāraṁ yajña-tapasāṁ</string>

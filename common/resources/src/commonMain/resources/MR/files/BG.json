@@ -210,6 +210,29 @@
     },
     {
       "shloka": {
+        "id": "BG_5_22"
+      },
+      "chunks": [
+        {
+          "startMs": 100,
+          "endMs": 2900
+        },
+        {
+          "startMs": 2900,
+          "endMs": 5300
+        },
+        {
+          "startMs": 5300,
+          "endMs": 7950
+        },
+        {
+          "startMs": 8040,
+          "endMs": 10200
+        }
+      ]
+    },
+    {
+      "shloka": {
         "id": "BG_5_29"
       },
       "chunks": [

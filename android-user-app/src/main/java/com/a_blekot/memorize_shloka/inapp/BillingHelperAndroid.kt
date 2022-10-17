@@ -15,6 +15,7 @@ import com.android.billingclient.api.BillingClient.BillingResponseCode
 import com.android.billingclient.api.BillingClient.ProductType
 import com.android.billingclient.api.BillingFlowParams.ProductDetailsParams
 import com.android.billingclient.api.Purchase.PurchaseState
+import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -146,8 +147,10 @@ class BillingHelperAndroid(
         })
     }
 
-    private fun handleConnectionStatus(status: ConnectivityObserver.Status) {
-        if (status == ConnectivityObserver.Status.Available && availableDonations.isEmpty()) {
+    private fun handleConnectionStatus(available: Boolean) {
+        Napier.d("handleConnectionStatus = $available", tag = "BILLING")
+        if (available && availableDonations.isEmpty()) {
+            Napier.d("getProductDetails", tag = "BILLING")
             getProductDetails()
         }
     }
@@ -202,8 +205,10 @@ class BillingHelperAndroid(
             .setProductType(ProductType.INAPP)
             .build()
 
-    private fun emitError(operation: BillingOperation, result: BillingResult) =
+    private fun emitError(operation: BillingOperation, result: BillingResult) {
+        Napier.e("getProductDetails $operation ${result.responseCode} ${result.debugMessage}", tag = "BILLING")
         emitEvent(BillingEvent.Error(operation, result.responseCode, result.debugMessage))
+    }
 
     private fun emitEvent(event: BillingEvent) =
         scope.launch {

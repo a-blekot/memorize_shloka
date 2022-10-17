@@ -1,10 +1,10 @@
 package com.a_blekot.memorize_shloka.inapp
 
 import android.app.Activity
+import androidx.appcompat.app.AlertDialog
 import com.a_blekot.memorize_shloka.R
 import com.a_blekot.shlokas.common.resources.MR.strings
 import com.a_blekot.shlokas.common.resources.resolve
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -49,16 +49,13 @@ class InappUpdater(private val activity: Activity) {
     }
 
     fun showSnackbarForCompleteUpdate() {
-        Snackbar.make(
-            activity.window.decorView,
-            strings.label_update_is_ready.resolve(activity),
-            Snackbar.LENGTH_INDEFINITE
-        ).apply {
-            setBackgroundTint(activity.resources.getColor(R.color.colorPrimary))
-            setActionTextColor(activity.resources.getColor(R.color.colorAccent))
-            setAction(strings.label_restart.resolve(activity)) { restartApp() }
-            show()
-        }
+        AlertDialog.Builder(activity, R.style.AlertDialogStyle)
+            .setTitle(strings.label_update_is_ready.resolve(activity))
+            .setPositiveButton(strings.label_restart.resolve(activity)) { _, _ ->
+                restartApp()
+            }
+            .create()
+            .show()
     }
 
     private fun restartApp() =

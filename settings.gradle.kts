@@ -33,6 +33,7 @@ include(
     ":common:settings-api",
     ":common:settings-impl",
     ":common:utils",
+    ":common:utils-coroutines",
 )
 
 buildCache {

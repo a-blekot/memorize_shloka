@@ -5,9 +5,9 @@ import com.a_blekot.shlokas.android_ui.view.donations.DonationsView
 import com.a_blekot.shlokas.android_ui.view.list.ListView
 import com.a_blekot.shlokas.android_ui.view.player.PlayerView
 import com.a_blekot.shlokas.android_ui.view.settings.SettingsView
-import com.a_blekot.shlokas.common.root.RootComponent
-import com.a_blekot.shlokas.common.root.RootComponent.Child.*
-import com.a_blekot.shlokas.common.root.RootComponent.Child.List
+import com.ablekot.shlokas.common.root.RootComponent
+import com.ablekot.shlokas.common.root.RootComponent.Child.*
+import com.ablekot.shlokas.common.root.RootComponent.Child.List
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.fade

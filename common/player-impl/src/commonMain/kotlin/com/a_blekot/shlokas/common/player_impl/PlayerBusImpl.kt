@@ -7,7 +7,8 @@ import com.a_blekot.shlokas.common.utils.dispatchers.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
 
@@ -28,9 +29,15 @@ class PlayerBusImpl(
         scope.launch { playerFeedbackFlow.emit(feedback) }
     }
 
-    override fun observeTasks() =
-        playerTaskFlow.asSharedFlow()
+    override fun observeTasks(onEach: (Task) -> Unit, scope: CoroutineScope?) {
+        playerTaskFlow
+            .onEach { onEach(it) }
+            .launchIn(scope ?: this.scope)
+    }
 
-    override fun observeFeedback() =
-        playerFeedbackFlow.asSharedFlow()
+    override fun observeFeedback(onEach: (PlayerFeedback) -> Unit, scope: CoroutineScope?) {
+        playerFeedbackFlow
+            .onEach { onEach(it) }
+            .launchIn(scope ?: this.scope)
+    }
 }

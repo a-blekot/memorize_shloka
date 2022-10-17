@@ -1,0 +1,7 @@
+platform :ios, '14.0'
+
+target 'iosApp' do
+  #use_frameworks!
+  pod 'Reachability'
+
+end

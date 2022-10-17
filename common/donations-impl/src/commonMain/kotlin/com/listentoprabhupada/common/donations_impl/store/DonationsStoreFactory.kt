@@ -1,16 +1,14 @@
 package com.listentoprabhupada.common.donations_impl.store
 
 import com.a_blekot.shlokas.common.data.Donation
-import com.a_blekot.shlokas.common.utils.connectivity.ConnectivityObserver
 import com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineBootstrapper
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
-import com.listentoprabhupada.common.donations_impl.DonationsDeps
 import com.listentoprabhupada.common.donations_api.DonationsState
-import io.github.aakira.napier.Napier
+import com.listentoprabhupada.common.donations_impl.DonationsDeps
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -33,12 +31,12 @@ internal class DonationsStoreFactory(
         ) {}
 
     private sealed interface Action {
-        data class ConnectionChanged(val status: ConnectivityObserver.Status) : Action
+        data class ConnectionChanged(val status: Boolean) : Action
     }
 
     private sealed interface Msg {
         object ShowNamaste : Msg
-        data class ConnectionChanged(val status: ConnectivityObserver.Status) : Msg
+        data class ConnectionChanged(val available: Boolean) : Msg
         data class LoadingComplete(val donations: List<Donation>) : Msg
     }
 
@@ -79,7 +77,7 @@ internal class DonationsStoreFactory(
     private object ReducerImpl : Reducer<DonationsState, Msg> {
         override fun DonationsState.reduce(msg: Msg): DonationsState =
             when (msg) {
-                is Msg.ConnectionChanged -> copy(connectionStatus = msg.status)
+                is Msg.ConnectionChanged -> copy(connectionStatus = msg.available)
                 is Msg.LoadingComplete -> copy(donations = msg.donations)
                 Msg.ShowNamaste -> copy(showNamaste = true)
             }

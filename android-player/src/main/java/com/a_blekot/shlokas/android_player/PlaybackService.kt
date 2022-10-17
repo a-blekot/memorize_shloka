@@ -62,7 +62,7 @@ class PlaybackService : Service(), Player.Listener {
         return binder
     }
 
-    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Napier.d("onStartCommand", tag = PLAYBACK_SERVICE.name)
         return START_STICKY
     }

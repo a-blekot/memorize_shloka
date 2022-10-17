@@ -99,6 +99,7 @@ enum class ShlokaId(val id: String) {
     BG_4_8("BG_4_8"),
     BG_4_9("BG_4_9"),
     BG_4_34("BG_4_34"),
+    BG_5_22("BG_5_22"),
     BG_5_29("BG_5_29"),
     BG_6_47("BG_6_47"),
     BG_7_14("BG_7_14"),

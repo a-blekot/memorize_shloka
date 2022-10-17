@@ -10,9 +10,10 @@ billing = "5.0.0"
 canidropjetifier = "0.5"
 compose = "1.2.0"
 compose_compiler="1.2.0"
+connectivity-status="1.2.0"
 decompose = "0.8.0"
 detekt = "1.17.0"
-essenty = "0.2.2"
+essenty = "0.5.2"
 exoplayer = "2.18.0"
 firebase-bom = "30.3.1"
 google-services = "4.3.13"
@@ -62,6 +63,8 @@ androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", 
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle-runtime"}
 
 billing = { module = "com.android.billingclient:billing-ktx", version.ref = "billing"}
+
+connectivity-status = { module = "com.github.ln-12:multiplatform-connectivity-status", version.ref = "connectivity-status"}
 
 decompose-decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-extCompose = { module = "com.arkivanov.decompose:extensions-compose-jetpack", version.ref = "decompose" }

@@ -17,10 +17,10 @@ kotlin {
                 api(libs.moko.resources.compose)
             }
         }
-
     }
 }
 
 multiplatformResources {
+    iosBaseLocalizationRegion = "ru"
     multiplatformResourcesPackage = "com.a_blekot.shlokas.common.resources"
 }
