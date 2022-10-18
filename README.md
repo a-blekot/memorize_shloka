@@ -36,13 +36,12 @@ This app uses an ancient approach to memorizing Sanskrit verses (shlokas) from t
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/) (IOs)
 
 <img src="./screenshots/list.png" style="height: 50%; width:50%;"/>
-<img src="./screenshots/list.png" width=50% height=50%>
-<img src="https://raw.githubusercontent.com/a-blekot/memorize_shloka/master/screenshots/list.png" style="height: 100px; width:100px;"/>
-
-<img src="https://raw.githubusercontent.com/a-blekot/memorize_shloka/master/screenshots/choose_list.png" width=50% height=50%>
 
 
-<img src="https://raw.githubusercontent.com/a-blekot/memorize_shloka/master/screenshots/player.png" width=50% height=50%>
+<img src="./screenshots/choose_list.png" style="height: 50%; width:50%;"/>
 
 
-<img src="https://raw.githubusercontent.com/a-blekot/memorize_shloka/master/screenshots/settings.png" width=50% height=50%>
+<img src="./screenshots/player.png" style="height: 50%; width:50%;"/>
+
+
+<img src="./screenshots/settings.png" style="height: 50%; width:50%;"/>
