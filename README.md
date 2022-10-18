@@ -1,9 +1,9 @@
 # Memorize Shloka
-![Google play](https://play.google.com/store/apps/details?id=com.a_blekot.memorize_shloka)
-![App Store](https://apps.apple.com/us/app/memorize-shlokas/id6443863948)
-![Github](https://github.com/a-blekot/memorize_shloka)
+[Google play](https://play.google.com/store/apps/details?id=com.a_blekot.memorize_shloka)
+[App Store](https://apps.apple.com/us/app/memorize-shlokas/id6443863948)
+[Github](https://github.com/a-blekot/memorize_shloka)
 
-If I can be of assistance, please do not hesitate to ![contact me](aleksey.blekot@gmail.com)!
+If I can be of assistance, please do not hesitate to [contact me](aleksey.blekot@gmail.com)!
 
 # Android and IOs versions implemented
 
