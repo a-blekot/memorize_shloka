@@ -1,6 +1,7 @@
 # Memorize Shloka
 ![Google play](https://play.google.com/store/apps/details?id=com.a_blekot.memorize_shloka)
 ![App Store](https://apps.apple.com/us/app/memorize-shlokas/id6443863948)
+![Github](https://github.com/a-blekot/memorize_shloka)
 
 If I can be of assistance, please do not hesitate to ![contact me](aleksey.blekot@gmail.com)!
 
@@ -30,10 +31,14 @@ This app uses an ancient approach to memorizing Sanskrit verses (shlokas) from t
 - [JetpackCompose](https://developer.android.com/jetpack/compose) (Android)
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/) (IOs)
 
-![list](./screenshots/list.png)
 
-![choose list](./screenshots/choose_list.png)
+<img src="https://raw.githubusercontent.com/a-blekot/memorize_shloka/master/screenshots/list.png" width=50% height=50%>
 
-![player](./screenshots/player.png)
 
-![settings](./screenshots/settings.png)
+<img src="https://raw.githubusercontent.com/a-blekot/memorize_shloka/master/screenshots/choose_list.png" width=50% height=50%>
+
+
+<img src="https://raw.githubusercontent.com/a-blekot/memorize_shloka/master/screenshots/player.png" width=50% height=50%>
+
+
+<img src="https://raw.githubusercontent.com/a-blekot/memorize_shloka/master/screenshots/settings.png" width=50% height=50%>
