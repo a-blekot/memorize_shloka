@@ -35,9 +35,9 @@ This app uses an ancient approach to memorizing Sanskrit verses (shlokas) from t
 - [JetpackCompose](https://developer.android.com/jetpack/compose) (Android)
 - [SwiftUI](https://developer.apple.com/xcode/swiftui/) (IOs)
 
-
-<img src="https://raw.githubusercontent.com/a-blekot/memorize_shloka/master/screenshots/list.png" width=50% height=50%>
-
+<img src="./screenshots/list.png" style="height: 50%; width:50%;"/>
+<img src="./screenshots/list.png" width=50% height=50%>
+<img src="https://raw.githubusercontent.com/a-blekot/memorize_shloka/master/screenshots/list.png" style="height: 100px; width:100px;"/>
 
 <img src="https://raw.githubusercontent.com/a-blekot/memorize_shloka/master/screenshots/choose_list.png" width=50% height=50%>
 
