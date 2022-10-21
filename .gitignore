@@ -12,3 +12,6 @@
 build
 local.properties
 keystore.properties
+
+iosApp/iosApp/GoogleService-Info.plist
+android-user-app/google-services.json
