@@ -40,7 +40,7 @@ class NotificationsHandler: NSObject {
             self,
             selector: #selector(NotificationsHandler.handleInterruption),
             name: AVAudioSession.interruptionNotification,
-            object: audioSession
+            object: nil
         )
         
         NotificationCenter.default.addObserver(
@@ -96,10 +96,14 @@ class NotificationsHandler: NSObject {
     @objc class func handleInterruption(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
               let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
-              let type = AVAudioSession.InterruptionType(rawValue: typeValue) else { return }
+              let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
+                  return
+                  
+              }
         
         if type == .began {
             // Interruption began, take appropriate actions (save state, update user interface)
+            self.player.pause()
         }
         else if type == .ended {
             guard let optionsValue =
@@ -109,6 +113,7 @@ class NotificationsHandler: NSObject {
             let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
             if options.contains(.shouldResume) {
                 // Interruption Ended - playback should resume
+                self.player.play()
             }
         }
     }

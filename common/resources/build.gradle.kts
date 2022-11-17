@@ -2,7 +2,6 @@ plugins {
     id("android-library-convention")
     id("kotlin-multiplatform-convention")
     id("dev.icerock.mobile.multiplatform-resources")
-    kotlin("plugin.serialization")
 }
 
 kotlin {

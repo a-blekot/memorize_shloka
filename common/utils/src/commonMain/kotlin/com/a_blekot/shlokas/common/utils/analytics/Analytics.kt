@@ -23,7 +23,7 @@ fun Analytics.playList(listId: String, count: Int, repeats: Int) =
 
 fun Analytics.playShloka(shlokaId: String, repeats: Int) =
     logEvent(
-        AnalyticsEvent.PLAY_LIST,
+        AnalyticsEvent.PLAY_SHLOKA,
         mapOf(
             SHLOKA_ID.low to shlokaId,
             REPEATS.low to repeats,

@@ -120,9 +120,7 @@ class MainActivity : ComponentActivity() {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 delay(500L)
                 Napier.d("app.playerBus = ${app.playerBus}", tag = "PlayerBus")
-                if (applicationContext.bindService(playbackServiceIntent, serviceConnection, Context.BIND_IMPORTANT)) {
-                    isBound = true
-                }
+                isBound = applicationContext.bindService(playbackServiceIntent, serviceConnection, Context.BIND_IMPORTANT)
             }
         }
     }
@@ -148,6 +146,7 @@ class MainActivity : ComponentActivity() {
                 analytics = app.analytics,
                 dispatchers = dispatchers(),
                 onEmail = ::sendEmail,
+                onRateUs = ::rateUs,
                 onShareApp = ::shareApp,
                 onInappReview = ::inappReview,
             )
@@ -167,6 +166,10 @@ class MainActivity : ComponentActivity() {
         } else {
             Napier.e("No activity for $intent")
         }
+    }
+
+    private fun rateUs() {
+
     }
 
     private fun shareApp() {

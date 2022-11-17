@@ -203,7 +203,7 @@ class Player: NSObject, ObservableObject {
         player.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
     }
     
-    func updateNowPlaying(time: TimeInterval? = nil) {
+    func updateNowPlaying() {
         // Define Now Playing Info
         guard let currentItem = currentItem else { return }
         

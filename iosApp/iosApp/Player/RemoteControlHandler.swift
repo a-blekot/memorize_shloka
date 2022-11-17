@@ -64,74 +64,6 @@ class RemoteControlHandler {
             return checkSatatus(strongSelf)
         })
         
-        // next , prev
-        commandCenter.nextTrackCommand.addTarget( handler: {[weak self] (_) -> MPRemoteCommandHandlerStatus in
-            debugPrint("nextTrackCommand")
-            guard let strongSelf = self else {return .commandFailed}
-
-            return checkSatatus(strongSelf)
-        })
-        commandCenter.previousTrackCommand.addTarget( handler: {[weak self] (_) -> MPRemoteCommandHandlerStatus in
-            debugPrint("previousTrackCommand")
-            guard let strongSelf = self else {return .commandFailed}
-
-            return checkSatatus(strongSelf)
-        })
-
-        // seek fwd , seek bwd
-        commandCenter.seekForwardCommand.addTarget(handler: {[weak self] (_) -> MPRemoteCommandHandlerStatus in
-            debugPrint("seekForwardCommand")
-            guard let strongSelf = self else {return .commandFailed}
-
-            debugPrint("Seek forward ")
-            return .commandFailed
-        })
-        commandCenter.seekBackwardCommand.addTarget(handler: {[weak self] (_) -> MPRemoteCommandHandlerStatus in
-            debugPrint("seekBackwardCommand")
-            guard let strongSelf = self else {return .commandFailed}
-
-            debugPrint("Seek backward ")
-            return .commandFailed
-        })
-
-        // skip fwd , skip bwd
-        commandCenter.skipForwardCommand.addTarget(handler: {[weak self] (_) -> MPRemoteCommandHandlerStatus in
-            debugPrint("skipForwardCommand")
-            guard let strongSelf = self else {return .commandFailed}
-
-            return checkSatatus(strongSelf)
-        })
-        commandCenter.skipBackwardCommand.addTarget(handler: {[weak self] (_) -> MPRemoteCommandHandlerStatus in
-            debugPrint("skipBackwardCommand")
-            guard let strongSelf = self else {return .commandFailed}
-
-            return checkSatatus(strongSelf)
-        })
-
-        // playback rate
-        commandCenter.changePlaybackRateCommand.addTarget(handler: {[weak self] (_) -> MPRemoteCommandHandlerStatus in
-            debugPrint("changePlaybackRateCommand")
-            guard let strongSelf = self else {return .commandFailed}
-            
-            debugPrint("Change Rate ")
-            return .commandFailed
-        })
-        
-        // seek to position
-        commandCenter.changePlaybackPositionCommand.addTarget(handler: {[weak self] ( event) -> MPRemoteCommandHandlerStatus in
-            debugPrint("changePlaybackPositionCommand")
-            guard let strongSelf = self else {return .commandFailed}
-            
-            //   var playAfterSeek = strongSelf.status == .playing
-            // strongSelf.pause()
-            
-            let e = event as! MPChangePlaybackPositionCommandEvent
-            strongSelf.player.updateNowPlaying(time: e.positionTime)
-//             strongSelf.player.seek(toTime: e.positionTime)
-            return checkSatatus(strongSelf)
-            
-        })
-        
         // check status and return MPRemoteCommandHandlerStatus
         func checkSatatus(_ strongSelf: RemoteControlHandler) -> MPRemoteCommandHandlerStatus {
             if strongSelf.player.status != .none {
@@ -151,14 +83,20 @@ class RemoteControlHandler {
     }
     
     public func setCommandCenterMode(mode: RemoteControlMode) {
-        commandCenter.skipBackwardCommand.isEnabled = mode == .skip
-        commandCenter.skipForwardCommand.isEnabled = mode == .skip
+        commandCenter.skipBackwardCommand.isEnabled = false // mode == .skip
+        commandCenter.skipForwardCommand.isEnabled = false // mode == .skip
         
-        commandCenter.nextTrackCommand.isEnabled = mode == .nextprev
-        commandCenter.previousTrackCommand.isEnabled = mode == .nextprev
+        commandCenter.nextTrackCommand.isEnabled = false // mode == .nextprev
+        commandCenter.previousTrackCommand.isEnabled = false // mode == .nextprev
         
         commandCenter.seekForwardCommand.isEnabled = false
         commandCenter.seekBackwardCommand.isEnabled = false
+        commandCenter.changePlaybackPositionCommand.isEnabled = false
         commandCenter.changePlaybackRateCommand.isEnabled = false
+        
+        commandCenter.playCommand.isEnabled = true
+        commandCenter.pauseCommand.isEnabled = true
+        commandCenter.togglePlayPauseCommand.isEnabled = true
+        commandCenter.stopCommand.isEnabled = true
     }
 }

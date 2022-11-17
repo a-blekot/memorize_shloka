@@ -26,7 +26,6 @@ fun <T : Any> Store<*, T, *>.asValue(): Value<T> =
 fun Store<*, *, *>.init(instanceKeeper: InstanceKeeper) {
     Napier.d("init(instanceKeeper)", tag = "PlayerStore")
     if (instanceKeeper.get(key = this) == null) {
-        Napier.d("YOYOYO", tag = "PlayerStore")
         instanceKeeper.put(key = this, InitInstance)
         init()
     }

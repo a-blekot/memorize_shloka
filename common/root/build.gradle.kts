@@ -1,8 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
-import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
-import org.jetbrains.kotlin.gradle.tasks.FatFrameworkTask
-
 plugins {
     id("android-library-convention")
     id("kotlin-multiplatform-convention")
@@ -10,8 +5,6 @@ plugins {
 }
 
 kotlin {
-//    val xcf = XCFramework()
-
     listOf(
         iosX64(),
         iosArm64(),
@@ -20,7 +13,6 @@ kotlin {
         it.binaries{
             framework {
                 baseName = "Prabhupada"
-//                xcf.add(this)
 
                 export(projects.common.data)
                 export(projects.common.detailsApi)
@@ -81,37 +73,4 @@ kotlin {
             }
         }
     }
-
-    //Build tasks for fat frameworks
-//    val iosX64 = targets.getByName<KotlinNativeTarget>("iosX64")
-//    val iosArm64 = targets.getByName<KotlinNativeTarget>("iosArm64")
-//    val iosSimulatorArm64 = targets.getByName<KotlinNativeTarget>("iosSimulatorArm64")
-//
-//    val frameworkTargets = listOf(iosX64, iosArm64, iosSimulatorArm64).map { it.binaries.getFramework(DEBUG) }
-//
-//    tasks.register<FatFrameworkTask>("debugFatFramework") {
-//        group = "ios"
-//        baseName = "Prabhupada"
-//        description = "Builds a universal (fat) debug framework"
-//
-//        from(frameworkTargets)
-//    }
-}
-
-tasks.register<FatFrameworkTask>("debugFatFramework") {
-    group = "ios"
-    baseName = "Prabhupada"
-    description = "Builds a universal (fat) debug framework"
-
-    val targets = mapOf(
-        "iosX64" to kotlin.targets.getByName<KotlinNativeTarget>("iosX64"),
-//        "iosArm64" to kotlin.targets.getByName<KotlinNativeTarget>("iosArm64"),
-        "iosSimulatorArm64" to kotlin.targets.getByName<KotlinNativeTarget>("iosSimulatorArm64")
-    )
-
-    from(
-        targets.toList().map {
-            it.second.binaries.getFramework(DEBUG)
-        }
-    )
 }

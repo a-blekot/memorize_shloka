@@ -19,6 +19,7 @@ data class RootDeps(
     val analytics: Analytics,
     val dispatchers: DispatcherProvider,
     val onEmail: () -> Unit,
+    val onRateUs: () -> Unit,
     val onShareApp: () -> Unit,
     val onInappReview: () -> Unit
 )

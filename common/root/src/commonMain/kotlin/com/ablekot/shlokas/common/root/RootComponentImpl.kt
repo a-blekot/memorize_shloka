@@ -148,6 +148,7 @@ class RootComponentImpl internal constructor(
         when (output) {
             SettingsOutput.Email -> deps.onEmail()
             SettingsOutput.ShareApp -> deps.onShareApp()
+            SettingsOutput.RateUs -> deps.onRateUs()
             SettingsOutput.Donations -> navigation.push(Configuration.Donations)
             SettingsOutput.Back -> navigation.pop()
         }

@@ -3,7 +3,7 @@ package com.a_blekot.shlokas.common.settings_impl.store
 import com.a_blekot.shlokas.common.data.Week
 import com.a_blekot.shlokas.common.settings_api.SettingsState
 import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.*
-import com.a_blekot.shlokas.common.settings_impl.store.SettingsStoreFactory.Action.CeckFtue
+import com.a_blekot.shlokas.common.settings_impl.store.SettingsStoreFactory.Action.CheckFtue
 import com.a_blekot.shlokas.common.utils.*
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
@@ -29,7 +29,7 @@ internal class SettingsStoreFactory(
         ) {}
 
     sealed interface Action {
-        object CeckFtue : Action
+        object CheckFtue : Action
     }
 
     sealed interface Msg {
@@ -44,7 +44,7 @@ internal class SettingsStoreFactory(
     private inner class BootstrapperImpl : CoroutineBootstrapper<Action>() {
         override fun invoke() {
             scope.launch {
-                dispatch(CeckFtue)
+                dispatch(CheckFtue)
             }
         }
     }
@@ -52,7 +52,7 @@ internal class SettingsStoreFactory(
     private inner class ExecutorImpl : CoroutineExecutor<SettingsIntent, Action, SettingsState, Msg, SettingsLabel>() {
         override fun executeAction(action: Action, getState: () -> SettingsState) {
             when (action) {
-                CeckFtue -> checkFtue()
+                CheckFtue -> checkFtue()
             }
         }
 
