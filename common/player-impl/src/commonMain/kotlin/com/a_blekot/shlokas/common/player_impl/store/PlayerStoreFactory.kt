@@ -77,7 +77,7 @@ internal class PlayerStoreFactory(
             }
 
             scope.launch {
-                deps.playerBus.observeFeedback( { dispatch(Feedback(it)) }, scope)
+                deps.playerBus.observeFeedback({ dispatch(Feedback(it)) }, scope)
             }
         }
     }
@@ -85,7 +85,7 @@ internal class PlayerStoreFactory(
     private inner class ExecutorImpl : CoroutineExecutor<PlayerIntent, Action, PlayerState, Msg, PlayerLabel>() {
 
         private var playJob: Job? = null
-        private var currentPlayTask: PlayTask? = null
+        private var currentPlayTask: Task? = null
         private var iterator = tasks.iterator()
 
         override fun executeAction(action: Action, getState: () -> PlayerState) {
@@ -111,6 +111,7 @@ internal class PlayerStoreFactory(
         }
 
         private fun nextTask() {
+            Napier.d("iterator hasNext = ${iterator.hasNext()}", tag = "PlayerStore")
             if (iterator.hasNext()) {
                 Napier.d("nextTask", tag = "PlayerStore")
                 scope.launch {
@@ -137,6 +138,7 @@ internal class PlayerStoreFactory(
         suspend fun handleTask(task: Task) {
             when (task) {
                 is PlayTask -> play(task)
+                is PlayTranslationTask -> playTranslation(task)
                 is PauseTask -> pause(task)
                 is IdleTask -> idle(task)
                 is NoAudioTask -> noAudio(task)
@@ -163,6 +165,16 @@ internal class PlayerStoreFactory(
             }
         }
 
+        private fun playTranslation(task: PlayTranslationTask) =
+            task.copy(text = resolveTranslation(task.id)).let { task ->
+            currentPlayTask = task
+                task.run {
+                publish(PlayerTask(task))
+                dispatch(Msg.Play)
+                dispatch(Msg.NextRepeat(currentRepeat, duration))
+            }
+        }
+
         private fun forcePlay() =
             scope.launch {
                 currentPlayTask?.let {
@@ -177,6 +189,7 @@ internal class PlayerStoreFactory(
         }
 
         private suspend fun pause(task: PauseTask) {
+            Napier.d("pause $task", tag = "PlayerStore")
             publish(PlayerTask(task))
             dispatch(Msg.Pause)
             delay(task.duration)
@@ -206,8 +219,6 @@ internal class PlayerStoreFactory(
             task.run {
                 currentPlayTask = null
                 val title = resolveTitle(id)
-
-                deps.tts.play(resolveTranslation(id))
 
                 if (hasAudio) {
                     publish(

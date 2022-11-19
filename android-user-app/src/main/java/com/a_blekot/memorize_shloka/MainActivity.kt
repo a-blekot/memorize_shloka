@@ -143,13 +143,13 @@ class MainActivity : ComponentActivity() {
                 stringResourceHandler = AndroidStringResourceHandler(this),
                 billingHelper = billingHelper,
                 playerBus = app.playerBus,
-                tts = app.tts,
                 analytics = app.analytics,
                 dispatchers = dispatchers(),
                 onEmail = ::sendEmail,
                 onRateUs = ::rateUs,
                 onShareApp = ::shareApp,
                 onInappReview = ::inappReview,
+                onSelectTtsVoice = ::selectTtsVoice
             )
         )
 
@@ -170,7 +170,21 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun rateUs() {
+        val uri: Uri = Uri.parse("market://details?id=$packageName")
+        val goToMarket = Intent(Intent.ACTION_VIEW, uri)
+        // To count with Play market backstack, After pressing back button,
+        // to taken back to our application, we need to add following flags to intent.
+        goToMarket.addFlags(
+            Intent.FLAG_ACTIVITY_NO_HISTORY or
+                Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+        )
 
+        if (goToMarket.resolveActivity(packageManager) != null) {
+            startActivity(goToMarket)
+        } else {
+            Napier.e("No activity for $goToMarket")
+        }
     }
 
     private fun shareApp() {
@@ -179,6 +193,15 @@ class MainActivity : ComponentActivity() {
             putExtra(Intent.EXTRA_TEXT, "http://play.google.com/store/apps/details?id=$packageName")
         }
         Intent.createChooser(intent, "Share via")
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        } else {
+            Napier.e("No activity for $intent")
+        }
+    }
+
+    private fun selectTtsVoice() {
+        val intent = Intent("com.android.settings.TTS_SETTINGS")
         if (intent.resolveActivity(packageManager) != null) {
             startActivity(intent)
         } else {

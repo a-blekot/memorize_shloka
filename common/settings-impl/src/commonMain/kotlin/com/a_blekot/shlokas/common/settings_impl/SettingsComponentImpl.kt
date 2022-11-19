@@ -12,7 +12,6 @@ import com.a_blekot.shlokas.common.utils.analytics.tutorialSettings
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import kotlinx.coroutines.CoroutineScope
 
 private const val KEY_SETTINGS_STATE = "KEY_SETTINGS_STATE"
 
@@ -38,16 +37,13 @@ class SettingsComponentImpl(
             getCurrentWeek(),
             getLocale(),
             getAutoPlay(),
+            withTranslation(),
             showClosePlayerDialog()
         )
 
     override val flow: Value<SettingsState> = store.asValue()
 
     init {
-//        store.labels
-//            .onEach(::handleLabel)
-//            .launchIn(scope)
-
         store.init(instanceKeeper)
         stateKeeper.register(KEY_SETTINGS_STATE) { store.state }
     }
@@ -57,6 +53,7 @@ class SettingsComponentImpl(
     override fun setWeek(value: Int) = store.accept(Weeks(value))
     override fun setLocale(value: String) = store.accept(Locale(value))
     override fun setAutoplay(value: Boolean) = store.accept(Autoplay(value))
+    override fun setWithTranslation(value: Boolean) = store.accept(WithTranslation(value))
     override fun setShowClosePlayerDialog(value: Boolean) = store.accept(ShowClosePlayerDialog(value))
     override fun onShowTutorial() = deps.analytics.tutorialSettings()
     override fun onTutorialCompleted() {
@@ -67,6 +64,8 @@ class SettingsComponentImpl(
     }
     override fun sendEmail() = output(SettingsOutput.Email)
     override fun shareApp() = output(SettingsOutput.ShareApp)
+    override fun rateUs() = output(SettingsOutput.RateUs)
+    override fun selectTtsVoice() = output(SettingsOutput.SelectTtsVoice)
     override fun donations() = output(SettingsOutput.Donations)
     override fun back() = output(SettingsOutput.Back)
 }

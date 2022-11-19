@@ -1,5 +1,5 @@
 package com.a_blekot.shlokas.common.data.tasks
 
-interface Task {
+sealed interface Task {
     val duration: Long
 }

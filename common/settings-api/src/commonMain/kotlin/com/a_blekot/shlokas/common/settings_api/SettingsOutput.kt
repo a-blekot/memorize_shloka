@@ -4,6 +4,7 @@ sealed interface SettingsOutput {
     object Email: SettingsOutput
     object ShareApp: SettingsOutput
     object RateUs: SettingsOutput
+    object SelectTtsVoice: SettingsOutput
     object Donations: SettingsOutput
     object Back: SettingsOutput
 }

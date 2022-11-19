@@ -7,6 +7,7 @@
      <string name="label_repeats">Повтори</string>
      <string name="label_pause">Пауза</string>
      <string name="label_autoplay">Програвати автоматично</string>
+     <string name="label_with_translation">Повторювати переклад</string>
 
      <string name="label_repeats_placeholder">кількість повторів</string>
      <string name="label_pause_placeholder">пауза між повторами, міллісекунди</string>
@@ -15,6 +16,8 @@
      <string name="label_version">Версія:</string>
      <string name="label_feedback">Зворотній звʼязок</string>
      <string name="label_share_app">Поділитись застосунком</string>
+     <string name="label_rate_us">Оцініть застосунок</string>
+     <string name="label_select_tts_voice">Налаштування синтезу мови</string>
      <string name="label_donate">Підтримайте проект</string>
      <string name="label_sanskrit">Санскрит</string>
      <string name="label_words">Послівний переклад</string>

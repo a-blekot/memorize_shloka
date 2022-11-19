@@ -6,14 +6,18 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.speech.tts.TextToSpeech
+import android.speech.tts.UtteranceProgressListener
 import com.a_blekot.shlokas.common.data.tasks.*
 import com.a_blekot.shlokas.common.player_api.PlayerBus
 import com.a_blekot.shlokas.common.player_api.PlayerFeedback
+import com.a_blekot.shlokas.common.utils.getLocale
 import com.a_blekot.shlokas.common.utils.resources.getAssetPath
 import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import io.github.aakira.napier.Napier
+import java.util.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -65,6 +69,28 @@ class Player(
             Napier.e("onPlayerError", error, tag = "AUDIO_PLAYER")
         }
     }
+
+    private val ttsListener = object : UtteranceProgressListener() {
+        override fun onStart(id: String?) {}
+        override fun onDone(id: String?) = onTtsComplete(id)
+        override fun onError(id: String?) = onTtsComplete(id)
+    }
+
+    private val ttsInitListener = TextToSpeech.OnInitListener {
+        when (it) {
+            TextToSpeech.SUCCESS -> {
+                tts?.language = Locale.getDefault()
+                Napier.d("init SUCCESS ${Locale.getDefault()}", tag = "TTS")
+            }
+            TextToSpeech.ERROR -> {
+                shutDownTts()
+                Napier.d("init ERROR", tag = "TTS")
+            }
+        }
+    }
+
+
+    private var tts: TextToSpeech? = TextToSpeech(context, ttsInitListener)
 
     private var exoPlayer: ExoPlayer? = ExoPlayer.Builder(context)
         .build().apply {
@@ -154,6 +180,12 @@ class Player(
         exoPlayer = null
     }
 
+    private fun shutDownTts() {
+        tts?.stop()
+        tts?.shutdown()
+        tts = null
+    }
+
     fun showNotification() {
         Napier.d("showNotification", tag = "AUDIO_PLAYER")
         playerNotificationManager.setPlayer(exoPlayer)
@@ -170,8 +202,10 @@ class Player(
         when (task) {
             is SetTrackTask -> setTrack(task)
             is PlayTask -> play(task)
+            is PlayTranslationTask -> playTranslation(task)
             is PauseTask, IdleTask, NoAudioTask -> pause()
             is StopTask -> stop()
+            is ResetCounterTask -> {}
         }
     }
 
@@ -184,13 +218,19 @@ class Player(
 
     private fun pause() {
         exoPlayer?.playWhenReady = false
+        pauseTts()
     }
 
-    private fun stop() =
-        exoPlayer?.run {
-            playWhenReady = false
-            clearMediaItems()
+    private fun pauseTts() =
+        tts?.run {
+            setOnUtteranceProgressListener(null)
+            stop()
         }
+
+    private fun stop() {
+        pause()
+        exoPlayer?.clearMediaItems()
+    }
 
     private fun play(task: PlayTask) =
         exoPlayer?.run {
@@ -202,6 +242,23 @@ class Player(
             }
             Napier.d("play $task", tag = "AUDIO_PLAYER")
             playWhenReady = true
+        }
+
+    private fun playTranslation(task: PlayTranslationTask) =
+        task.run {
+            if (ttsIsNotAvailable(getLocale())) {
+                onTtsComplete(task.id.name)
+                return@run
+            }
+
+            pause()
+            tts?.run {
+                language = Locale(getLocale())
+                setSpeechRate(SPEECH_RATE)
+                setPitch(1.0f)
+                setOnUtteranceProgressListener(ttsListener)
+                speak(text, TextToSpeech.QUEUE_FLUSH, null, id.name)
+            }
         }
 
     private fun onPlaybackReady() {
@@ -222,6 +279,19 @@ class Player(
         }
     }
 
+    private fun onTtsComplete(id: String?) {
+        Napier.d("onTtsComplete", tag = "AUDIO_PLAYER")
+        val currentId = (currentTask as? PlayTranslationTask)?.id ?: return
+
+        if (currentId.name == id) {
+            Napier.d("PlayerFeedback.Ready", tag = "AUDIO_PLAYER")
+            playerBus.update(PlayerFeedback.Ready)
+        }
+    }
+
+    private fun ttsIsNotAvailable(locale: String) =
+        tts?.availableLanguages?.any { it.language == locale } != true
+
     private fun SetTrackTask.toMediaItem(): MediaItem {
         val uri = Uri.parse("$ASSETS_PREFIX${getAssetPath(id)}")
         Napier.d("SetTrack $uri", tag = "AUDIO_PLAYER")
@@ -238,6 +308,3 @@ class Player(
             .setTitle(title)
             .build()
 }
-
-//SetTrack asset:///SB_1/SB_1_1_1.mp3
-//SetTrack asset:///NI/NI_01.mp3

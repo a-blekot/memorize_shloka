@@ -7,6 +7,7 @@
     <string name="label_repeats">Repeats</string>
     <string name="label_pause">Pause</string>
     <string name="label_autoplay">Autoplay</string>
+    <string name="label_with_translation">Play translation</string>
 
     <string name="label_repeats_placeholder">repeats number</string>
     <string name="label_pause_placeholder">pause between repeats, in millis</string>
@@ -15,6 +16,8 @@
     <string name="label_version">Version:</string>
     <string name="label_feedback">Feedback</string>
     <string name="label_share_app">Share app</string>
+    <string name="label_rate_us">Rate us</string>
+    <string name="label_select_tts_voice">Text to speech settings</string>
     <string name="label_donate">Donate</string>
     <string name="label_sanskrit">Sanskrit</string>
     <string name="label_words">Synonyms</string>

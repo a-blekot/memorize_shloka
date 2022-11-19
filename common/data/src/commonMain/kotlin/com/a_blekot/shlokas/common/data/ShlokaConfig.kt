@@ -74,3 +74,15 @@ fun ShlokaConfig.createTasks(index: Int, week: Week, repeats: Int, pauseMs: Long
 
     return tasks
 }
+
+fun ShlokaConfig.createTranslationTasks(repeats: Int, pauseMs: Long): List<Task> {
+    val tasks = mutableListOf<Task>()
+
+    repeat(repeats) {
+        tasks.add(PlayTranslationTask(shloka.id, currentRepeat = it + 1))
+        if (it == repeats - 1) tasks.add(ResetCounterTask(pauseMs))
+        tasks.add(PauseTask(pauseMs))
+    }
+
+    return tasks
+}

@@ -48,6 +48,7 @@ class DetailsComponentImpl(
             getCurrentWeek(),
             listOf(config.copy(isSelected = true)),
             getRepeats(),
+            withTranslation(),
             getPause(),
         )
 }

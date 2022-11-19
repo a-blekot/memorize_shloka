@@ -10,11 +10,14 @@ interface SettingsComponent {
     fun setWeek(value: Int) {}
     fun setLocale(value: String) {}
     fun setAutoplay(value: Boolean) {}
+    fun setWithTranslation(value: Boolean) {}
     fun setShowClosePlayerDialog(value: Boolean) {}
     fun onShowTutorial() {}
     fun onTutorialCompleted() {}
     fun sendEmail() {}
     fun shareApp() {}
+    fun rateUs() {}
+    fun selectTtsVoice() {}
     fun donations() {}
     fun back() {}
 }

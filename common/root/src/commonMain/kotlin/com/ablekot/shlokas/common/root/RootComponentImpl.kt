@@ -62,7 +62,7 @@ class RootComponentImpl internal constructor(
             PlayerComponentImpl(
                 componentContext = childContext,
                 storeFactory = storeFactory,
-                deps = deps.run { PlayerDeps(config, playerBus, tts, stringResourceHandler, analytics, dispatchers) },
+                deps = deps.run { PlayerDeps(config, playerBus, stringResourceHandler, analytics, dispatchers) },
                 output = output
             )
         },
@@ -125,8 +125,8 @@ class RootComponentImpl internal constructor(
             is ListOutput.Details -> navigation.push(Configuration.Details(output.config))
             is ListOutput.Settings -> navigation.push(Configuration.Settings)
             is ListOutput.Donations -> navigation.push(Configuration.Donations)
-            is ListOutput.ShareApp -> deps.onShareApp()
-            is ListOutput.InappReview -> deps.onInappReview()
+            is ListOutput.ShareApp -> deps.onShareApp.invoke()
+            is ListOutput.InappReview -> deps.onInappReview.invoke()
         }
 
     private fun onPlayerOutput(output: PlayerOutput): Unit =
@@ -146,9 +146,10 @@ class RootComponentImpl internal constructor(
 
     private fun onSettingsOutput(output: SettingsOutput) {
         when (output) {
-            SettingsOutput.Email -> deps.onEmail()
-            SettingsOutput.ShareApp -> deps.onShareApp()
-            SettingsOutput.RateUs -> deps.onRateUs()
+            SettingsOutput.Email -> deps.onEmail.invoke()
+            SettingsOutput.ShareApp -> deps.onShareApp.invoke()
+            SettingsOutput.RateUs -> deps.onRateUs.invoke()
+            SettingsOutput.SelectTtsVoice -> deps.onSelectTtsVoice.invoke()
             SettingsOutput.Donations -> navigation.push(Configuration.Donations)
             SettingsOutput.Back -> navigation.pop()
         }

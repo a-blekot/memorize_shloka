@@ -21,6 +21,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import com.a_blekot.shlokas.android_ui.custom.*
 import com.a_blekot.shlokas.android_ui.theme.Dimens
+import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingM
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingZero
@@ -40,14 +41,17 @@ import com.a_blekot.shlokas.common.resources.MR.strings.label_locale_uk
 import com.a_blekot.shlokas.common.resources.MR.strings.label_one_line
 import com.a_blekot.shlokas.common.resources.MR.strings.label_pause
 import com.a_blekot.shlokas.common.resources.MR.strings.label_pause_placeholder
+import com.a_blekot.shlokas.common.resources.MR.strings.label_rate_us
 import com.a_blekot.shlokas.common.resources.MR.strings.label_repeat_mode
 import com.a_blekot.shlokas.common.resources.MR.strings.label_repeats
 import com.a_blekot.shlokas.common.resources.MR.strings.label_repeats_placeholder
 import com.a_blekot.shlokas.common.resources.MR.strings.label_select_locale
+import com.a_blekot.shlokas.common.resources.MR.strings.label_select_tts_voice
 import com.a_blekot.shlokas.common.resources.MR.strings.label_share_app
 import com.a_blekot.shlokas.common.resources.MR.strings.label_show_close_player_dialog
 import com.a_blekot.shlokas.common.resources.MR.strings.label_show_tutorial
 import com.a_blekot.shlokas.common.resources.MR.strings.label_two_lines
+import com.a_blekot.shlokas.common.resources.MR.strings.label_with_translation
 import com.a_blekot.shlokas.common.resources.resolve
 import com.a_blekot.shlokas.common.settings_api.SettingsComponent
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
@@ -148,6 +152,46 @@ fun SettingsView(component: SettingsComponent) {
                 StandartRow(
                     horizontalArrangement = Arrangement.spacedBy(paddingM),
                 ) {
+                    StandartCheckBox(state.value.withTranslation) {
+                        component.setWithTranslation(it)
+                    }
+
+                    Text(
+                        text = label_with_translation.resolve(context),
+                        style = typography.titleLarge,
+                        color = colorScheme.primary,
+                        maxLines = 1,
+                    )
+                }
+            }
+
+            item {
+                StandartRow(
+                    horizontalArrangement = Arrangement.spacedBy(paddingM),
+                    modifier = Modifier.clickable { component.selectTtsVoice() }
+                ) {
+
+                    Icon(
+                        Icons.Rounded.VolumeUp,
+                        "Text to speech settings",
+                        tint = colorScheme.primary,
+                        modifier = Modifier.size(iconSizeL)
+                    )
+
+                    Text(
+                        text = label_select_tts_voice.resolve(context),
+                        style = typography.titleLarge,
+                        color = colorScheme.primary,
+                        maxLines = 1,
+                    )
+                }
+            }
+
+
+            item {
+                StandartRow(
+                    horizontalArrangement = Arrangement.spacedBy(paddingM),
+                ) {
                     StandartCheckBox(state.value.showClosePlayerDialog) {
                         component.setShowClosePlayerDialog(it)
                     }
@@ -180,7 +224,7 @@ fun SettingsView(component: SettingsComponent) {
                             Icons.Rounded.VolunteerActivism,
                             "donations",
                             tint = colorScheme.primary,
-                            modifier = Modifier.size(Dimens.iconSizeL)
+                            modifier = Modifier.size(iconSizeL)
                         )
 
                         Text(
@@ -202,7 +246,7 @@ fun SettingsView(component: SettingsComponent) {
                             Icons.Rounded.Email,
                             "Email",
                             tint = colorScheme.primary,
-                            modifier = Modifier.size(Dimens.iconSizeL)
+                            modifier = Modifier.size(iconSizeL)
                         )
 
                         Text(
@@ -224,11 +268,33 @@ fun SettingsView(component: SettingsComponent) {
                             Icons.Rounded.Share,
                             "Share",
                             tint = colorScheme.primary,
-                            modifier = Modifier.size(Dimens.iconSizeL)
+                            modifier = Modifier.size(iconSizeL)
                         )
 
                         Text(
                             text = label_share_app.resolve(context),
+                            style = typography.titleLarge,
+                            color = colorScheme.primary,
+                            maxLines = 1,
+                        )
+                    }
+                }
+
+                item {
+                    StandartRow(
+                        horizontalArrangement = Arrangement.spacedBy(paddingM),
+                        modifier = Modifier.clickable { component.rateUs() }
+                    ) {
+
+                        Icon(
+                            Icons.Rounded.Star,
+                            "Rate us",
+                            tint = colorScheme.primary,
+                            modifier = Modifier.size(iconSizeL)
+                        )
+
+                        Text(
+                            text = label_rate_us.resolve(context),
                             style = typography.titleLarge,
                             color = colorScheme.primary,
                             maxLines = 1,
@@ -248,7 +314,7 @@ fun SettingsView(component: SettingsComponent) {
                             Icons.Rounded.Info,
                             "Info",
                             tint = colorScheme.primary,
-                            modifier = Modifier.size(Dimens.iconSizeL)
+                            modifier = Modifier.size(iconSizeL)
                         )
 
                         Text(

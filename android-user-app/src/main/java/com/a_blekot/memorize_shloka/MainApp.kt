@@ -3,16 +3,12 @@ package com.a_blekot.memorize_shloka
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
-import android.speech.tts.TextToSpeech.ERROR
-import android.speech.tts.TextToSpeech.SUCCESS
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.a_blekot.memorize_shloka.utils.AnalyticsAndroid
 import com.a_blekot.memorize_shloka.utils.AnalyticsAndroidDebug
 import com.a_blekot.memorize_shloka.utils.CrashlyticsAntilog
-import com.a_blekot.shlokas.common.player_api.CommonTextToSpeech
 import com.a_blekot.shlokas.common.player_api.PlayerBus
 import com.a_blekot.shlokas.common.player_impl.PlayerBusImpl
 import com.a_blekot.shlokas.common.utils.LogTag.LIFECYCLE_ACTIVITY
@@ -38,8 +34,6 @@ class MainApp : Application() {
     var currentActivity: Activity? = null
         private set
 
-    private var systemTts: TextToSpeech? = null
-    lateinit var tts: CommonTextToSpeech
     lateinit var playerBus: PlayerBus
     lateinit var analytics: Analytics
     lateinit var connectivityObserver: ConnectivityObserver
@@ -111,28 +105,7 @@ class MainApp : Application() {
         app = this
         connectivityObserver = ConnectivityObserverAndroid(this)
         playerBus = PlayerBusImpl(dispatchers())
-        initTts()
         Napier.d("app.playerBus = $playerBus", tag = "PlayerBus")
         onAppLaunch()
-    }
-
-    private fun initTts() {
-        systemTts = TextToSpeech(this) {
-            when (it) {
-                SUCCESS -> {
-                    systemTts?.language = Locale.getDefault()
-                    Napier.d("init SUCCESS ${Locale.getDefault()}", tag = "TTS")
-                }
-                ERROR -> {
-                    Napier.d("init ERROR", tag = "TTS")
-                }
-            }
-        }
-
-        tts = object: CommonTextToSpeech {
-            override fun play(text: String) {
-                systemTts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
-            }
-        }
     }
 }

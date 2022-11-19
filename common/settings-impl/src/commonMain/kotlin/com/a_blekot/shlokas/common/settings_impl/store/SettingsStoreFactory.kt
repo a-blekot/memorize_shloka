@@ -16,8 +16,6 @@ internal class SettingsStoreFactory(
     private val storeFactory: StoreFactory,
     private val initialState: SettingsState,
 ) {
-
-
     fun create(): SettingsStore =
         object : SettingsStore, Store<SettingsIntent, SettingsState, SettingsLabel> by storeFactory.create(
             name = "SettingsStore",
@@ -38,6 +36,7 @@ internal class SettingsStoreFactory(
         data class Weeks(val value: Week) : Msg
         data class Locale(val value: String) : Msg
         data class Autoplay(val value: Boolean) : Msg
+        data class WithTranslation(val value: Boolean) : Msg
         data class ShowClosePlayerDialog(val value: Boolean) : Msg
     }
 
@@ -63,6 +62,7 @@ internal class SettingsStoreFactory(
                 is Weeks -> setWeek(intent.value)
                 is Locale -> setLocale(intent.value)
                 is Autoplay -> setAutoplay(intent.value)
+                is WithTranslation -> setWithTranslation(intent.value)
                 is ShowClosePlayerDialog -> updateShowClosePlayerDialog(intent.value)
             }
         }
@@ -93,6 +93,11 @@ internal class SettingsStoreFactory(
             dispatch(Msg.Autoplay(value))
         }
 
+        private fun setWithTranslation(value: Boolean) {
+            saveWithTranslation(value)
+            dispatch(Msg.WithTranslation(value))
+        }
+
         private fun updateShowClosePlayerDialog(value: Boolean) {
             setShowClosePlayerDialog(value)
             dispatch(Msg.ShowClosePlayerDialog(value))
@@ -110,6 +115,7 @@ internal class SettingsStoreFactory(
                 is Msg.Weeks -> copy(week = msg.value)
                 is Msg.Locale -> copy(locale = msg.value)
                 is Msg.Autoplay -> copy(isAutoplay = msg.value)
+                is Msg.WithTranslation -> copy(withTranslation = msg.value)
                 is Msg.ShowClosePlayerDialog -> copy(showClosePlayerDialog = msg.value)
             }
     }
