@@ -14,6 +14,8 @@ val keystoreProperties = Properties()
 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 android {
+    namespace = "com.a_blekot.memorize_shloka"
+
     signingConfigs {
         maybeCreate( "config").apply {
             keyAlias = keystoreProperties.getProperty("keyAlias")

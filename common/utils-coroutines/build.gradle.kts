@@ -3,6 +3,10 @@ plugins {
     id("kotlin-multiplatform-convention")
 }
 
+android {
+    namespace = "com.a_blekot.shlokas.common.utils_coroutines"
+}
+
 kotlin {
     sourceSets {
         commonMain {

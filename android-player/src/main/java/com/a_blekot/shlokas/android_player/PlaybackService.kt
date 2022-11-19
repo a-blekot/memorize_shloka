@@ -6,6 +6,7 @@ import android.app.Service
 import android.content.Intent
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.os.Binder
+import android.os.Build
 import android.os.IBinder
 import android.os.PowerManager
 import com.a_blekot.shlokas.common.utils.cancelSafely
@@ -33,8 +34,7 @@ class PlaybackService : Service(), Player.Listener {
     fun onActivityStarted() {
         isActivityStarted = true
         Napier.d("onActivityStarted", tag = PLAYBACK_SERVICE.name)
-        stopForeground(true)
-        Napier.d("stopForeground", tag = PLAYBACK_SERVICE.name)
+        stopForeground()
         player?.hideNotification()
     }
 
@@ -97,8 +97,7 @@ class PlaybackService : Service(), Player.Listener {
             return
         }
         Napier.d("stop", tag = PLAYBACK_SERVICE.name)
-        stopForeground(true)
-        Napier.d("stopForeground", tag = PLAYBACK_SERVICE.name)
+        stopForeground()
 
         player?.release()
         player = null
@@ -126,4 +125,14 @@ class PlaybackService : Service(), Player.Listener {
             Napier.d("releaseWakeLock", tag = PLAYBACK_SERVICE.name)
             if (isHeld) release()
         }
+
+    private fun stopForeground() {
+        Napier.d("stopForeground", tag = PLAYBACK_SERVICE.name)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            stopForeground(STOP_FOREGROUND_REMOVE)
+        } else {
+            @Suppress("DEPRECATION")
+            stopForeground(true)
+        }
+    }
 }

@@ -143,6 +143,7 @@ class MainActivity : ComponentActivity() {
                 stringResourceHandler = AndroidStringResourceHandler(this),
                 billingHelper = billingHelper,
                 playerBus = app.playerBus,
+                tts = app.tts,
                 analytics = app.analytics,
                 dispatchers = dispatchers(),
                 onEmail = ::sendEmail,

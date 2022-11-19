@@ -9,7 +9,6 @@ import android.net.Uri
 import com.a_blekot.shlokas.common.data.tasks.*
 import com.a_blekot.shlokas.common.player_api.PlayerBus
 import com.a_blekot.shlokas.common.player_api.PlayerFeedback
-import com.a_blekot.shlokas.common.utils.resources.getAsset
 import com.a_blekot.shlokas.common.utils.resources.getAssetPath
 import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.Player
@@ -227,7 +226,10 @@ class Player(
         val uri = Uri.parse("$ASSETS_PREFIX${getAssetPath(id)}")
         Napier.d("SetTrack $uri", tag = "AUDIO_PLAYER")
 
-        return MediaItem.fromUri(uri)
+        return MediaItem.Builder()
+            .setUri(uri)
+            .setMediaMetadata(toMetaData())
+            .build()
     }
 
     private fun SetTrackTask.toMetaData() =

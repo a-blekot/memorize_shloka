@@ -1,11 +1,12 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.Framework.BitcodeEmbeddingMode.BITCODE
-
 plugins {
     id("android-library-convention")
     id("kotlin-multiplatform-convention")
     id("kotlin-parcelize")
     kotlin("plugin.serialization")
-//    kotlin("native.cocoapods")
+}
+
+android {
+    namespace = "com.a_blekot.shlokas.common.utils"
 }
 
 kotlin {
@@ -26,31 +27,4 @@ kotlin {
             }
         }
     }
-
-//    cocoapods {
-//        version = "1.0"
-//        name = "MyCocoaPod"
-//
-//        framework {
-//            // Required properties
-//            // Framework name configuration. Use this property instead of deprecated 'frameworkName'
-//            baseName = "Prabhupada"
-//
-////            // Optional properties
-////            // Dynamic framework support
-////            isStatic = false
-////
-////            transitiveExport = false // This is default.
-////            // Bitcode embedding
-////            embedBitcode(BITCODE)
-//        }
-//
-//        pod("Reachability") {
-//            version = "~> 4.0.1"
-//        }
-//
-//        // Maps custom Xcode configuration to NativeBuildType
-//        xcodeConfigurationToNativeBuildType["CUSTOM_DEBUG"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.DEBUG
-//        xcodeConfigurationToNativeBuildType["CUSTOM_RELEASE"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
-//    }
 }

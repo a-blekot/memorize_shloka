@@ -6,6 +6,10 @@ plugins {
     kotlin("plugin.serialization")
 }
 
+android {
+    namespace = "com.a_blekot.shlokas.android_player"
+}
+
 dependencies {
     implementation(projects.common.data)
     implementation(projects.common.utils)

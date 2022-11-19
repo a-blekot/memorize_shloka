@@ -4,6 +4,10 @@ plugins {
     id("kotlin-parcelize")
 }
 
+android {
+    namespace = "com.a_blekot.shlokas.common.settings_impl"
+}
+
 kotlin {
     sourceSets {
         commonMain {

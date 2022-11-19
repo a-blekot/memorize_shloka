@@ -62,7 +62,7 @@ class RootComponentImpl internal constructor(
             PlayerComponentImpl(
                 componentContext = childContext,
                 storeFactory = storeFactory,
-                deps = deps.run { PlayerDeps(config, playerBus, stringResourceHandler, analytics, dispatchers) },
+                deps = deps.run { PlayerDeps(config, playerBus, tts, stringResourceHandler, analytics, dispatchers) },
                 output = output
             )
         },

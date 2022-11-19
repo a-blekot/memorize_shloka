@@ -4,6 +4,10 @@ plugins {
     id("kotlin-parcelize")
 }
 
+android {
+    namespace = "com.ablekot.shlokas.common.root"
+}
+
 kotlin {
     listOf(
         iosX64(),

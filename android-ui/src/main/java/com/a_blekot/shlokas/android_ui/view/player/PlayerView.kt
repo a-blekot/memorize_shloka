@@ -3,7 +3,6 @@ package com.a_blekot.shlokas.android_ui.view.player
 import HtmlText
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyListScope
@@ -30,7 +29,6 @@ import com.a_blekot.shlokas.android_ui.custom.SmoothProgress
 import com.a_blekot.shlokas.android_ui.custom.StandartColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartLazyColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartRow
-import com.a_blekot.shlokas.android_ui.theme.Dimens.borderS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeXL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS

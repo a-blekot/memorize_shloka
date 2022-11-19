@@ -21,8 +21,6 @@ import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import io.github.aakira.napier.Napier
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 internal class PlayerStoreFactory(
@@ -208,6 +206,8 @@ internal class PlayerStoreFactory(
             task.run {
                 currentPlayTask = null
                 val title = resolveTitle(id)
+
+                deps.tts.play(resolveTranslation(id))
 
                 if (hasAudio) {
                     publish(

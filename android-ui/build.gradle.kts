@@ -8,6 +8,8 @@ plugins {
 }
 
 android {
+    namespace = "com.a_blekot.shlokas.android_ui"
+
     buildFeatures {
         compose = true
     }

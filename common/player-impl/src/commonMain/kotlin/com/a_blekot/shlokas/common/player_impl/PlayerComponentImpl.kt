@@ -1,7 +1,6 @@
 package com.a_blekot.shlokas.common.player_impl
 
 import com.a_blekot.shlokas.common.data.createTasks
-import com.a_blekot.shlokas.common.data.tasks.StopTask
 import com.a_blekot.shlokas.common.player_api.PlayerComponent
 import com.a_blekot.shlokas.common.player_api.PlayerOutput
 import com.a_blekot.shlokas.common.player_api.PlayerState
@@ -15,7 +14,6 @@ import com.a_blekot.shlokas.common.utils.*
 import com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.Value
-import com.arkivanov.essenty.lifecycle.doOnDestroy
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import io.github.aakira.napier.Napier

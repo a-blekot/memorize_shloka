@@ -1,5 +1,6 @@
 package com.ablekot.shlokas.common.root
 
+import com.a_blekot.shlokas.common.player_api.CommonTextToSpeech
 import com.a_blekot.shlokas.common.player_api.PlayerBus
 import com.a_blekot.shlokas.common.utils.analytics.Analytics
 import com.a_blekot.shlokas.common.utils.resources.ConfigReader
@@ -16,6 +17,7 @@ data class RootDeps(
     val stringResourceHandler: StringResourceHandler,
     val billingHelper: BillingHelper?,
     val playerBus: PlayerBus,
+    val tts: CommonTextToSpeech,
     val analytics: Analytics,
     val dispatchers: DispatcherProvider,
     val onEmail: () -> Unit,

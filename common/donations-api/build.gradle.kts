@@ -4,6 +4,10 @@ plugins {
     id("kotlin-parcelize")
 }
 
+android {
+    namespace = "com.listentoprabhupada.common.donations_api"
+}
+
 kotlin {
     sourceSets {
         commonMain {

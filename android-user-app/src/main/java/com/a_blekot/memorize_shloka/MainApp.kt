@@ -3,13 +3,16 @@ package com.a_blekot.memorize_shloka
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import androidx.compose.ui.text.intl.Locale
+import android.speech.tts.TextToSpeech
+import android.speech.tts.TextToSpeech.ERROR
+import android.speech.tts.TextToSpeech.SUCCESS
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.a_blekot.memorize_shloka.utils.AnalyticsAndroid
 import com.a_blekot.memorize_shloka.utils.AnalyticsAndroidDebug
 import com.a_blekot.memorize_shloka.utils.CrashlyticsAntilog
+import com.a_blekot.shlokas.common.player_api.CommonTextToSpeech
 import com.a_blekot.shlokas.common.player_api.PlayerBus
 import com.a_blekot.shlokas.common.player_impl.PlayerBusImpl
 import com.a_blekot.shlokas.common.utils.LogTag.LIFECYCLE_ACTIVITY
@@ -24,6 +27,7 @@ import com.a_blekot.shlokas.common.utils.onAppLaunch
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
+import java.util.*
 
 class MainApp : Application() {
     companion object {
@@ -34,18 +38,20 @@ class MainApp : Application() {
     var currentActivity: Activity? = null
         private set
 
+    private var systemTts: TextToSpeech? = null
+    lateinit var tts: CommonTextToSpeech
     lateinit var playerBus: PlayerBus
     lateinit var analytics: Analytics
     lateinit var connectivityObserver: ConnectivityObserver
 
     private val lifecycleEventObserver = LifecycleEventObserver { _, event ->
         when (event) {
-            Lifecycle.Event.ON_CREATE -> Napier.d( "APPLICATION ON_CREATE", tag = LIFECYCLE_APP.name)
-            Lifecycle.Event.ON_START -> Napier.d( "APPLICATION ON_START", tag = LIFECYCLE_APP.name)
-            Lifecycle.Event.ON_RESUME -> Napier.d( "APPLICATION ON_RESUME", tag = LIFECYCLE_APP.name)
-            Lifecycle.Event.ON_PAUSE -> Napier.d( "APPLICATION ON_PAUSE", tag = LIFECYCLE_APP.name)
-            Lifecycle.Event.ON_STOP -> Napier.d( "APPLICATION ON_STOP", tag = LIFECYCLE_APP.name)
-            Lifecycle.Event.ON_DESTROY -> Napier.d( "APPLICATION ON_DESTROY", tag = LIFECYCLE_APP.name)
+            Lifecycle.Event.ON_CREATE -> Napier.d("APPLICATION ON_CREATE", tag = LIFECYCLE_APP.name)
+            Lifecycle.Event.ON_START -> Napier.d("APPLICATION ON_START", tag = LIFECYCLE_APP.name)
+            Lifecycle.Event.ON_RESUME -> Napier.d("APPLICATION ON_RESUME", tag = LIFECYCLE_APP.name)
+            Lifecycle.Event.ON_PAUSE -> Napier.d("APPLICATION ON_PAUSE", tag = LIFECYCLE_APP.name)
+            Lifecycle.Event.ON_STOP -> Napier.d("APPLICATION ON_STOP", tag = LIFECYCLE_APP.name)
+            Lifecycle.Event.ON_DESTROY -> Napier.d("APPLICATION ON_DESTROY", tag = LIFECYCLE_APP.name)
             else -> {
                 /** do nothing **/
                 /** do nothing **/
@@ -55,31 +61,31 @@ class MainApp : Application() {
 
     private val activityLifecycleCallbacks = object : ActivityLifecycleCallbacks {
         override fun onActivityPaused(activity: Activity) {
-            Napier.d( "onActivityPaused", tag = LIFECYCLE_ACTIVITY.name)
+            Napier.d("onActivityPaused", tag = LIFECYCLE_ACTIVITY.name)
         }
 
         override fun onActivityStarted(activity: Activity) {
-            Napier.d( "onActivityStarted", tag = LIFECYCLE_ACTIVITY.name)
+            Napier.d("onActivityStarted", tag = LIFECYCLE_ACTIVITY.name)
         }
 
         override fun onActivityDestroyed(activity: Activity) {
-            Napier.d( "onActivityDestroyed", tag = LIFECYCLE_ACTIVITY.name)
+            Napier.d("onActivityDestroyed", tag = LIFECYCLE_ACTIVITY.name)
         }
 
         override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
-            Napier.d( "onActivitySaveInstanceState", tag = LIFECYCLE_ACTIVITY.name)
+            Napier.d("onActivitySaveInstanceState", tag = LIFECYCLE_ACTIVITY.name)
         }
 
         override fun onActivityStopped(activity: Activity) {
-            Napier.d( "onActivityStopped", tag = LIFECYCLE_ACTIVITY.name)
+            Napier.d("onActivityStopped", tag = LIFECYCLE_ACTIVITY.name)
         }
 
         override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
-            Napier.d( "onActivityCreated", tag = LIFECYCLE_ACTIVITY.name)
+            Napier.d("onActivityCreated", tag = LIFECYCLE_ACTIVITY.name)
         }
 
         override fun onActivityResumed(activity: Activity) {
-            Napier.d( "onActivityResumed", tag = LIFECYCLE_ACTIVITY.name)
+            Napier.d("onActivityResumed", tag = LIFECYCLE_ACTIVITY.name)
             currentActivity = activity
         }
     }
@@ -87,7 +93,7 @@ class MainApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        checkLocale(Locale.current.language)
+        checkLocale(Locale.getDefault().language)
 
         registerActivityLifecycleCallbacks(activityLifecycleCallbacks)
         ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleEventObserver)
@@ -105,7 +111,28 @@ class MainApp : Application() {
         app = this
         connectivityObserver = ConnectivityObserverAndroid(this)
         playerBus = PlayerBusImpl(dispatchers())
-        Napier.d("app.playerBus = $playerBus", tag="PlayerBus")
+        initTts()
+        Napier.d("app.playerBus = $playerBus", tag = "PlayerBus")
         onAppLaunch()
+    }
+
+    private fun initTts() {
+        systemTts = TextToSpeech(this) {
+            when (it) {
+                SUCCESS -> {
+                    systemTts?.language = Locale.getDefault()
+                    Napier.d("init SUCCESS ${Locale.getDefault()}", tag = "TTS")
+                }
+                ERROR -> {
+                    Napier.d("init ERROR", tag = "TTS")
+                }
+            }
+        }
+
+        tts = object: CommonTextToSpeech {
+            override fun play(text: String) {
+                systemTts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
+            }
+        }
     }
 }
