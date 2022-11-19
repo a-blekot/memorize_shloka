@@ -94,7 +94,7 @@ fun saveWithTranslation(value: Boolean) =
     settings.putBoolean(WITH_TRANSLATION, value)
 
 fun withTranslation() =
-    settings.getBoolean(WITH_TRANSLATION)
+    settings.getBoolean(WITH_TRANSLATION, defaultValue = true)
 
 fun savePause(pause: Long): Long {
     val savedValue = pause.coerceIn(MIN_PAUSE, MAX_PAUSE)

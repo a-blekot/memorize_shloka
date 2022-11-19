@@ -3,6 +3,7 @@ package com.a_blekot.shlokas.android_ui.theme
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Surface
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.darkColorScheme
@@ -76,6 +77,7 @@ fun AppTheme(
     Surface {
         MaterialTheme(
             colorScheme = if (useDarkTheme) DarkColors else LightColors,
+            typography = typography(),
             content = content
         )
     }

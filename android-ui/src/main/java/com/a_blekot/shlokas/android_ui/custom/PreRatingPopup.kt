@@ -15,8 +15,11 @@ import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -62,14 +65,32 @@ fun PreRatingPopup(modifier: Modifier, onAccept: () -> Unit, onClose: () -> Unit
                 .clickable(true) {},
             verticalArrangement = Arrangement.spacedBy(paddingM)
         ) {
+
+            val initialTextStyle = typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold)
+            val textStyle = remember { mutableStateOf(initialTextStyle) }
+            val readyToDraw = remember { mutableStateOf(false) }
+
             Text(
                 text = resolveString(label_prerating_title),
                 maxLines = 1,
-                style = typography.headlineMedium.copy(fontWeight = FontWeight.SemiBold),
+                style = textStyle.value,
                 textAlign = TextAlign.Center,
                 color = colorScheme.onPrimaryContainer,
-                modifier = Modifier.fillMaxWidth()
+                softWrap = false,
+                onTextLayout = {
+                    if (it.didOverflowWidth) {
+                        textStyle.value = textStyle.value.copy(fontSize = textStyle.value.fontSize * 0.9)
+                    } else {
+                        readyToDraw.value = true
+                    }
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .drawWithContent {
+                        if (readyToDraw.value) drawContent()
+                    },
             )
+
             Text(
                 text = resolveString(label_prerating_subtitle),
                 maxLines = 1,

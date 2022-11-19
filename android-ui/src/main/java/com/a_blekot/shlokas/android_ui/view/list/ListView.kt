@@ -43,8 +43,8 @@ fun ListView(component: ListComponent) {
             ButtonsRow(component, onListClick = { menuIsVisible.value = true })
 
             val initialTextStyle = typography.headlineLarge
-            var textStyle = remember { mutableStateOf(initialTextStyle) }
-            var readyToDraw = remember { mutableStateOf(false) }
+            val textStyle = remember { mutableStateOf(initialTextStyle) }
+            val readyToDraw = remember { mutableStateOf(false) }
             Text(
                 state.value.config.title,
                 color = colorScheme.primary,
