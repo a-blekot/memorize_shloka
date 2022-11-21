@@ -38,6 +38,7 @@
 		C698536628F962D7000CF70A /* ChooseListButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C698536528F962D7000CF70A /* ChooseListButton.swift */; };
 		C6A9CA6028F40DAC00222DBB /* ObservableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9CA5F28F40DAC00222DBB /* ObservableValue.swift */; };
 		C6A9CA6228F40DD200222DBB /* SimpleRouterState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9CA6128F40DD200222DBB /* SimpleRouterState.swift */; };
+		C6C9E8E2292B87F2007BADA9 /* PreRatingPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C9E8E1292B87F2007BADA9 /* PreRatingPopup.swift */; };
 		C6DC4E9D28F5493000012D2B /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DC4E9C28F5493000012D2B /* Mocks.swift */; };
 		C6DC4EA028F549D900012D2B /* StubRootComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DC4E9F28F549D900012D2B /* StubRootComponent.swift */; };
 		C6DC4EA228F54A1D00012D2B /* StubListComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DC4EA128F54A1D00012D2B /* StubListComponent.swift */; };
@@ -109,6 +110,7 @@
 		C698536528F962D7000CF70A /* ChooseListButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseListButton.swift; sourceTree = "<group>"; };
 		C6A9CA5F28F40DAC00222DBB /* ObservableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableValue.swift; sourceTree = "<group>"; };
 		C6A9CA6128F40DD200222DBB /* SimpleRouterState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleRouterState.swift; sourceTree = "<group>"; };
+		C6C9E8E1292B87F2007BADA9 /* PreRatingPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreRatingPopup.swift; sourceTree = "<group>"; };
 		C6DC4E9C28F5493000012D2B /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		C6DC4E9F28F549D900012D2B /* StubRootComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubRootComponent.swift; sourceTree = "<group>"; };
 		C6DC4EA128F54A1D00012D2B /* StubListComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubListComponent.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				C698535F28F8531B000CF70A /* ListItemView.swift */,
 				C698536328F9527D000CF70A /* ChooseList.swift */,
 				C698536528F962D7000CF70A /* ChooseListButton.swift */,
+				C6C9E8E1292B87F2007BADA9 /* PreRatingPopup.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				C698536228F94B3E000CF70A /* StandartCheckBox.swift in Sources */,
 				C6DC4EDF28F5516900012D2B /* Theme.swift in Sources */,
 				C6DC4ED728F5516900012D2B /* PeriodicTimeObserver.swift in Sources */,
+				C6C9E8E2292B87F2007BADA9 /* PreRatingPopup.swift in Sources */,
 				C698535928F7FA4A000CF70A /* AnyFlow.swift in Sources */,
 				C6DC4ECF28F5516900012D2B /* CornerRadius.swift in Sources */,
 				C698536028F8531B000CF70A /* ListItemView.swift in Sources */,

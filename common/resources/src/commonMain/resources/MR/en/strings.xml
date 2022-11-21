@@ -23,6 +23,7 @@
     <string name="label_words">Synonyms</string>
     <string name="label_translation">Translation</string>
     <string name="label_show_later">Show later</string>
+    <string name="label_text_copied">Text copied</string>
 
     <string name="label_donate_1_usd">Kailāsa</string>
     <string name="label_donate_2_usd">Vaikuṇṭha</string>
@@ -303,8 +304,7 @@
     <string name="trans_SB_1_18_13">The value of a moment’s association with the devotee of the Lord cannot even be compared to the attainment of heavenly planets or liberation from matter, and what to speak of worldly benedictions in the form of material prosperity, which are for those who are meant for death.</string>
 
     <string name="title_SB_2_1_5">ŚB 2.1.5</string>
-<!--    <string name="sansk_SB_2_1_5"><![CDATA[<i>tasmād bhārata sarvātmā<br>bhagavān īśvaro hariḥ<br>śrotavyaḥ kīrtitavyaś ca<br>smartavyaś cecchatābhayam</i>]]></string>-->
-    <string name="sansk_SB_2_1_5"><![CDATA[<div id="bb17792" class="r r-lang-en r-verse-text selected"><em><i>tasmād bhārata sarvātmā<br>bhagavān īśvaro hariḥ<br>śrotavyaḥ kīrtitavyaś ca<br>smartavyaś cecchatābhayam</i></em></div>]]></string>
+    <string name="sansk_SB_2_1_5"><![CDATA[<i>tasmād bhārata sarvātmā<br>bhagavān īśvaro hariḥ<br>śrotavyaḥ kīrtitavyaś ca<br>smartavyaś cecchatābhayam</i>]]></string>
     <string name="words_SB_2_1_5"><![CDATA[<i><b>tasmāt</b></i> — for this reason;</br><br><i><b>bhārata</b></i> — O descendant of Bharata;</br><br><i><b>sarvātmā</b></i> — the Supersoul;</br><br><i><b>bhagavān</b></i> — the Personality of Godhead;</br><br><i><b>īśvaraḥ</b></i> — the controller;</br><br><i><b>hariḥ</b></i> — the Lord, who vanquishes all miseries;</br><br><i><b>śrotavyaḥ</b></i> — is to be heard;</br><br><i><b>kīrtitavyaḥ</b></i> — to be glorified;</br><br><i><b>ca</b></i> — also;</br><br><i><b>smartavyaḥ</b></i> — to be remembered;</br><br><i><b>ca</b></i> — and;</br><br><i><b>icchatā</b></i> — of one who desires;</br><br><i><b>abhayam</b></i> — freedom.]]></string>
     <string name="trans_SB_2_1_5">O descendant of King Bharata, one who desires to be free from all miseries must hear about, glorify and also remember the Personality of Godhead, who is the Supersoul, the controller and the savior from all miseries.</string>
     <string name="descr_SB_2_1_5">tasmād bhārata sarvātmā</string>

@@ -1,8 +1,43 @@
 import SwiftUI
+import StoreKit
 import FirebaseCore
 import FirebaseCrashlytics
 import AVFoundation
 import Prabhupada
+
+class IosPlatform: Prabhupada.PlatformApi {
+    
+    let hasTts = false
+    let hasInappReview = true
+    
+    func onEmail() {}
+    func onRateUs() {
+        guard let urlReview = URL(string: "https://apps.apple.com/app/memorize-shlokas/id6443863948?action=write-review")
+            else { return }
+        UIApplication.shared.open(urlReview, options: [:], completionHandler: nil)
+    }
+    func onShareApp() {
+        guard let urlShare = URL(string: "https://apps.apple.com/app/memorize-shlokas/id6443863948") else { return }
+        let activityVC = UIActivityViewController(activityItems: [urlShare], applicationActivities: nil)
+        
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScenes = scenes.first as? UIWindowScene
+        let window = windowScenes?.windows.first
+        
+        window?.rootViewController?.present(activityVC, animated: true, completion: nil)
+        // UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+    }
+    func onInappReview() {
+    #if os(macOS)
+        SKStoreReviewController.requestReview()
+    #else
+        guard let scene = UIApplication.shared.foregroundActiveScene else { return }
+        SKStoreReviewController.requestReview(in: scene)
+    #endif
+        SettingsKt.onInappReviewShown()
+    }
+    func onSelectTtsVoice() {}
+}
 
 @main
 struct iOSApp: App {
@@ -19,27 +54,16 @@ struct iOSApp: App {
         self.player = Player(playerBus)
         self.deps = RootDeps(
             filer: IOsFiler(),
-            configReader: IOsConfigReader(),
-            connectivityObserver: ConnectivityObserverIOS(),
-            stringResourceHandler: IOsStringResourceHandler(),
-            billingHelper: nil,
-            playerBus: playerBus,
             analytics: AnalyticsIOs(),
+            playerBus: playerBus,
+            platformApi: IosPlatform(),
             dispatchers: DispatcherProviderImplKt.dispatchers(),
-            onEmail: {},
-            onShareApp: {
-                guard let urlShare = URL(string: "https://apps.apple.com/us/app/memorize-shlokas/id6443863948") else { return }
-                let activityVC = UIActivityViewController(activityItems: [urlShare], applicationActivities: nil)
-                
-                let scenes = UIApplication.shared.connectedScenes
-                let windowScenes = scenes.first as? UIWindowScene
-                let window = windowScenes?.windows.first
-                
-                window?.rootViewController?.present(activityVC, animated: true, completion: nil)
-                // UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
-            },
-            onInappReview: {}
+            configReader: IOsConfigReader(),
+            billingHelper: nil,
+            connectivityObserver: ConnectivityObserverIOS(),
+            stringResourceHandler: IOsStringResourceHandler()
         )
+        
     }
     
     var body: some Scene {
@@ -59,6 +83,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         application.beginReceivingRemoteControlEvents()
         FirebaseApp.configure()
+        LocaleKt.checkLocale(systemLocale: NSLocale.current.languageCode ?? "ru")
+        SettingsKt.onAppLaunch()
         
         if AppUtil.isInDebugMode {
             NapierProxyKt.doInitNapier(antilog: DebugAntilog.init(defaultTag: "IOS_DEBUG"))
@@ -88,5 +114,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+}
+
+extension UIApplication {
+    var foregroundActiveScene: UIWindowScene? {
+        connectedScenes
+            .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene
     }
 }

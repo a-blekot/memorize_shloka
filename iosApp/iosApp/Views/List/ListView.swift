@@ -108,6 +108,13 @@ struct ListView: View {
                     }
                 )
             }
+            
+            if (state.shouldShowPreRating) {
+                PreRatingPopup(
+                    onAccept: { component.onPreRatingAccepted() },
+                    onClose: { component.onPreRatingClosed() }
+                )
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

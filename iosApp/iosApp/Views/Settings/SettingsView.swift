@@ -33,14 +33,16 @@ struct SettingsView: View {
     @State private var isShowingMailView = false
     @State private var alertNoMail = false
     @State private var infoIsVisible = false
-    @State private var repeats: String = ""
-    @State private var pause: String = ""
+    @State private var repeats: String
+    @State private var pause: String
     
     let component: SettingsComponent
     
     init(_ component: SettingsComponent) {
         self.component = component
         self.state = ObservableValue(component.flow)
+        _repeats = State(initialValue: String(component.flow.value.repeats))
+        _pause = State(initialValue: String(component.flow.value.pause))
     }
     
     var body: some View {
@@ -60,66 +62,49 @@ struct SettingsView: View {
                         }
                         .padding(theme.dimens.paddingS)
                         .frame(maxWidth: .infinity)
+
+                    HStack {
+                        Image(systemName: "repeat")
+                            .font(theme.imageFontSmall)
+                        
+                        TextField(MR.strings().label_repeats_placeholder.resolve(), text: $repeats)
+                            .onSubmit {
+                                component.setRepeats(value: Int32(repeats) ?? 1)
+                            }
+                            .submitLabel(.done)
+                            .lineLimit(1)
+                            .disableAutocorrection(true)
+                            .onReceive(Just(repeats)) { newValue in
+                                let filtered = newValue.filter { "0123456789".contains($0) }.prefix(4)
+                                if filtered != newValue {
+                                    self.repeats = "\(filtered)"
+                                }
+                            }
+                            .frame(height: theme.dimens.buttonHeight)
+                    }
+                    .overlay(RoundedRectangle(cornerRadius: theme.dimens.radiusS).stroke(lineWidth: theme.dimens.borderS))
                     
                     HStack {
-                        HStack {
-                            Image(systemName: "repeat")
-                                .font(theme.imageFontSmall)
-                            
-                            TextField(MR.strings().label_repeats_placeholder.resolve(), text: $repeats)
-                                .onSubmit {
-                                    component.setRepeats(value: Int32(repeats) ?? 1)
-                                }
-                                .lineLimit(1)
-                                .keyboardType(.numberPad)
-                                .textInputAutocapitalization(.never)
-                                .disableAutocorrection(true)
-                                .onReceive(Just(repeats)) { newValue in
-                                    let filtered = newValue.filter { "0123456789".contains($0) }.prefix(4)
-                                    if filtered != newValue {
-                                        self.repeats = "\(filtered)"
-                                    }
-                                }
-                                .frame(height: theme.dimens.buttonHeight)
-                        }
-                        .overlay(RoundedRectangle(cornerRadius: theme.dimens.radiusS).stroke(lineWidth: theme.dimens.borderS))
+                        Image(systemName: "pause.circle")
+                            .font(theme.imageFontSmall)
                         
-                        Text("\(state.repeats)")
-                            .underline()
-                            .frame(width: 100)
-                            .font(theme.titleLarge)
+                        TextField(MR.strings().label_pause_placeholder.resolve(), text: $pause)
+                            .onSubmit {
+                                component.setPause(value: Int64(pause) ?? 500)
+                            }
                             .lineLimit(1)
-                    }
-                    
-                    HStack {
-                        HStack {
-                            Image(systemName: "pause.circle")
-                                .font(theme.imageFontSmall)
-                            
-                            TextField(MR.strings().label_pause_placeholder.resolve(), text: $pause)
-                                .onSubmit {
-                                    component.setPause(value: Int64(pause) ?? 500)
+                            .keyboardType(.numberPad)
+                            .textInputAutocapitalization(.never)
+                            .disableAutocorrection(true)
+                            .onReceive(Just(pause)) { newValue in
+                                let filtered = newValue.filter { "0123456789".contains($0) }.prefix(6)
+                                if filtered != newValue {
+                                    self.pause = "\(filtered)"
                                 }
-                                .lineLimit(1)
-                                .keyboardType(.numberPad)
-                                .textInputAutocapitalization(.never)
-                                .disableAutocorrection(true)
-                                .onReceive(Just(pause)) { newValue in
-                                    let filtered = newValue.filter { "0123456789".contains($0) }.prefix(6)
-                                    if filtered != newValue {
-                                        self.pause = "\(filtered)"
-                                    }
-                                }
-                                .frame(height: theme.dimens.buttonHeight)
-                        }
-                        .overlay(RoundedRectangle(cornerRadius: theme.dimens.radiusS).stroke(lineWidth: theme.dimens.borderS))
-                        
-                        Text("\(state.pause)")
-                            .underline()
-                            .frame(width: 100)
-                            .font(theme.titleLarge)
-                            .lineLimit(1)
+                            }
+                            .frame(height: theme.dimens.buttonHeight)
                     }
+                    .overlay(RoundedRectangle(cornerRadius: theme.dimens.radiusS).stroke(lineWidth: theme.dimens.borderS))
                     
                     WeekPicker(current: state.week) { week in
                         component.setWeek(value: week.ordinal)
@@ -207,6 +192,18 @@ struct SettingsView: View {
                         }
                         .onTapGesture {
                             component.shareApp()
+                        }
+
+                        HStack {
+                            Image(systemName: "star.fill")
+                                .font(theme.imageFontMedium)
+                                .frame(width: 40)
+
+                            Text(MR.strings().label_rate_us.resolve())
+                                .font(theme.titleLarge)
+                        }
+                        .onTapGesture {
+                            component.rateUs()
                         }
                         
                         HStack {

@@ -10,5 +10,5 @@ data class PlayTranslationTask(
     val text: String = "",
 ) : Task {
     override val duration
-        get() = (text.length * 80L / SPEECH_RATE).toLong()
+        get() = (text.length * 70L / SPEECH_RATE).toLong()
 }

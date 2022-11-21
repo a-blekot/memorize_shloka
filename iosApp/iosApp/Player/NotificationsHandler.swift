@@ -93,13 +93,10 @@ class NotificationsHandler: NSObject {
         debugPrint("headphonesConnected == \(headphonesConnected)")
     }
     
-    @objc class func handleInterruption(_ notification: Notification) {
+    @objc func handleInterruption(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
               let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
-              let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {
-                  return
-                  
-              }
+              let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {return}
         
         if type == .began {
             // Interruption began, take appropriate actions (save state, update user interface)
@@ -118,7 +115,7 @@ class NotificationsHandler: NSObject {
         }
     }
     
-    @objc class func handleAudioServiceReset(_ notification: Notification) {
+    @objc func handleAudioServiceReset(_ notification: Notification) {
         print("AudioServiceReset: \(notification)")
         //        * Dispose of orphaned audio objects (such as players, recorders, converters, or audio queues) and create new ones
         //        * Reset any internal audio states being tracked, including all properties of AVAudioSession

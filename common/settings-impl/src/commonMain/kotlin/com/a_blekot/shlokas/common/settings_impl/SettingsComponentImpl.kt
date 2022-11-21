@@ -62,10 +62,14 @@ class SettingsComponentImpl(
             setTutorialCompleted()
         }
     }
-    override fun sendEmail() = output(SettingsOutput.Email)
-    override fun shareApp() = output(SettingsOutput.ShareApp)
-    override fun rateUs() = output(SettingsOutput.RateUs)
-    override fun selectTtsVoice() = output(SettingsOutput.SelectTtsVoice)
+    override fun sendEmail() = deps.platformApi.onEmail()
+    override fun shareApp() = deps.platformApi.onShareApp()
+    override fun rateUs() = deps.platformApi.onRateUs()
+    override fun selectTtsVoice() {
+        if (deps.platformApi.hasTts) {
+            deps.platformApi.onSelectTtsVoice()
+        }
+    }
     override fun donations() = output(SettingsOutput.Donations)
     override fun back() = output(SettingsOutput.Back)
 }

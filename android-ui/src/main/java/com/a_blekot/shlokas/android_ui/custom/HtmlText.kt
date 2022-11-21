@@ -55,7 +55,8 @@ fun HtmlText(
     @StringRes textId: Int,
     urlSpanStyle: SpanStyle = SpanStyle(
         color = MaterialTheme.colorScheme.secondary,
-        textDecoration = TextDecoration.Underline),
+        textDecoration = TextDecoration.Underline
+    ),
     colorMapping: Map<Color, Color> = emptyMap(),
     color: Color = Color.Unspecified,
     fontSize: TextUnit = TextUnit.Unspecified,
@@ -139,7 +140,8 @@ fun HtmlText(
     text: String,
     urlSpanStyle: SpanStyle = SpanStyle(
         color = MaterialTheme.colorScheme.secondary,
-        textDecoration = TextDecoration.Underline),
+        textDecoration = TextDecoration.Underline
+    ),
     colorMapping: Map<Color, Color> = emptyMap(),
     color: Color = Color.Unspecified,
     fontSize: TextUnit = TextUnit.Unspecified,
@@ -158,7 +160,7 @@ fun HtmlText(
     style: TextStyle = LocalTextStyle.current,
     autoSize: Boolean = false
 ) {
-    val annotatedString = if (SDK_INT <24) {
+    val annotatedString = if (SDK_INT < 24) {
         Html.fromHtml(text)
     } else {
         Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY)
@@ -174,21 +176,21 @@ fun HtmlText(
         modifier = modifier
             .drawWithContent {
                 if (readyToDraw.value) drawContent()
-            }
-            .pointerInput(Unit) {
-            detectTapGestures(onTap = { pos ->
-                layoutResult.value?.let { layoutResult ->
-                    val position = layoutResult.getOffsetForPosition(pos)
-                    annotatedString.getStringAnnotations(position, position)
-                        .firstOrNull()
-                        ?.let { sa ->
-                            if (sa.tag == "url") { // NON-NLS
-                                uriHandler.openUri(sa.item)
-                            }
-                        }
-                }
-            })
-        },
+            },
+//            .pointerInput(Unit) {
+//                detectTapGestures(onTap = { pos ->
+//                    layoutResult.value?.let { layoutResult ->
+//                        val position = layoutResult.getOffsetForPosition(pos)
+//                        annotatedString.getStringAnnotations(position, position)
+//                            .firstOrNull()
+//                            ?.let { sa ->
+//                                if (sa.tag == "url") { // NON-NLS
+//                                    uriHandler.openUri(sa.item)
+//                                }
+//                            }
+//                    }
+//                })
+//            },
         text = annotatedString,
         color = color,
         fontSize = fontSize,
@@ -255,7 +257,11 @@ fun Spanned.toAnnotatedString(
         colorSpans.forEach { colorSpan ->
             val start = getSpanStart(colorSpan)
             val end = getSpanEnd(colorSpan)
-            addStyle(SpanStyle(color = colorMapping.getOrElse(Color(colorSpan.foregroundColor)) { Color(colorSpan.foregroundColor) }), start, end)
+            addStyle(
+                SpanStyle(color = colorMapping.getOrElse(Color(colorSpan.foregroundColor)) { Color(colorSpan.foregroundColor) }),
+                start,
+                end
+            )
         }
         styleSpans.forEach { styleSpan ->
             val start = getSpanStart(styleSpan)
@@ -263,7 +269,11 @@ fun Spanned.toAnnotatedString(
             when (styleSpan.style) {
                 Typeface.BOLD -> addStyle(SpanStyle(fontWeight = FontWeight.Bold), start, end)
                 Typeface.ITALIC -> addStyle(SpanStyle(fontStyle = FontStyle.Italic), start, end)
-                Typeface.BOLD_ITALIC -> addStyle(SpanStyle(fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic), start, end)
+                Typeface.BOLD_ITALIC -> addStyle(
+                    SpanStyle(fontWeight = FontWeight.Bold, fontStyle = FontStyle.Italic),
+                    start,
+                    end
+                )
             }
         }
         underlineSpans.forEach { underlineSpan ->

@@ -8,6 +8,4 @@ sealed interface ListOutput {
     data class Details(val config: ShlokaConfig): ListOutput
     object Settings: ListOutput
     object Donations: ListOutput
-    object ShareApp: ListOutput
-    object InappReview: ListOutput
 }

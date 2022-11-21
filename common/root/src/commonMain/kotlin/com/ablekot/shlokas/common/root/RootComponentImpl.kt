@@ -15,13 +15,13 @@ import com.a_blekot.shlokas.common.player_api.PlayerComponent
 import com.a_blekot.shlokas.common.player_api.PlayerOutput
 import com.a_blekot.shlokas.common.player_impl.PlayerComponentImpl
 import com.a_blekot.shlokas.common.player_impl.PlayerDeps
-import com.ablekot.shlokas.common.root.RootComponent.Child.*
 import com.a_blekot.shlokas.common.settings_api.SettingsComponent
 import com.a_blekot.shlokas.common.settings_api.SettingsOutput
 import com.a_blekot.shlokas.common.settings_impl.SettingsComponentImpl
 import com.a_blekot.shlokas.common.settings_impl.SettingsDeps
 import com.a_blekot.shlokas.common.utils.Consumer
 import com.a_blekot.shlokas.common.utils.getLastListId
+import com.ablekot.shlokas.common.root.RootComponent.Child.*
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
@@ -35,7 +35,6 @@ import com.listentoprabhupada.common.donations_impl.DonationsDeps
 
 class RootComponentImpl internal constructor(
     componentContext: ComponentContext,
-    private val deps: RootDeps,
     private val list: (ComponentContext, Consumer<ListOutput>) -> ListComponent,
     private val player: (ComponentContext, config: PlayConfig, Consumer<PlayerOutput>) -> PlayerComponent,
     private val details: (ComponentContext, config: ShlokaConfig, Consumer<DetailsOutput>) -> DetailsComponent,
@@ -49,12 +48,19 @@ class RootComponentImpl internal constructor(
         deps: RootDeps,
     ) : this(
         componentContext = componentContext,
-        deps = deps,
         list = { childContext, output ->
             ListComponentImpl(
                 componentContext = childContext,
                 storeFactory = storeFactory,
-                deps = deps.run { ListDeps(ListConfig(getLastListId()), filer, configReader, stringResourceHandler, analytics, dispatchers) },
+                deps = deps.run { ListDeps(
+                    filer,
+                    ListConfig(getLastListId()),
+                    analytics,
+                    platformApi,
+                    dispatchers,
+                    configReader,
+                    stringResourceHandler
+                ) },
                 output = output
             )
         },
@@ -78,7 +84,7 @@ class RootComponentImpl internal constructor(
             SettingsComponentImpl(
                 componentContext = childContext,
                 storeFactory = storeFactory,
-                deps = deps.run { SettingsDeps(analytics, dispatchers) },
+                deps = deps.run { SettingsDeps(analytics, platformApi, dispatchers) },
                 output = output
             )
         },
@@ -86,7 +92,12 @@ class RootComponentImpl internal constructor(
             DonationsComponentImpl(
                 componentContext = childContext,
                 storeFactory = storeFactory,
-                deps = deps.run { DonationsDeps(analytics, billingHelper, dispatchers, connectivityObserver, stringResourceHandler) },
+                deps = deps.run { DonationsDeps(
+                    analytics, billingHelper,
+                    dispatchers,
+                    connectivityObserver,
+                    stringResourceHandler
+                ) },
                 output = output
             )
         },
@@ -125,8 +136,6 @@ class RootComponentImpl internal constructor(
             is ListOutput.Details -> navigation.push(Configuration.Details(output.config))
             is ListOutput.Settings -> navigation.push(Configuration.Settings)
             is ListOutput.Donations -> navigation.push(Configuration.Donations)
-            is ListOutput.ShareApp -> deps.onShareApp.invoke()
-            is ListOutput.InappReview -> deps.onInappReview.invoke()
         }
 
     private fun onPlayerOutput(output: PlayerOutput): Unit =
@@ -146,10 +155,6 @@ class RootComponentImpl internal constructor(
 
     private fun onSettingsOutput(output: SettingsOutput) {
         when (output) {
-            SettingsOutput.Email -> deps.onEmail.invoke()
-            SettingsOutput.ShareApp -> deps.onShareApp.invoke()
-            SettingsOutput.RateUs -> deps.onRateUs.invoke()
-            SettingsOutput.SelectTtsVoice -> deps.onSelectTtsVoice.invoke()
             SettingsOutput.Donations -> navigation.push(Configuration.Donations)
             SettingsOutput.Back -> navigation.pop()
         }

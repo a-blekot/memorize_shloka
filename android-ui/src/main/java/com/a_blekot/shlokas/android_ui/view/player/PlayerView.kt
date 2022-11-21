@@ -1,9 +1,14 @@
 package com.a_blekot.shlokas.android_ui.view.player
 
 import HtmlText
+import android.content.Context
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,7 +26,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.ClipboardManager
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -30,15 +39,18 @@ import com.a_blekot.shlokas.android_ui.custom.StandartColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartLazyColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartRow
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeL
+import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeM
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeXL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingXS
+import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingZero
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusM
 import com.a_blekot.shlokas.common.player_api.PlaybackState
 import com.a_blekot.shlokas.common.player_api.PlaybackState.*
 import com.a_blekot.shlokas.common.player_api.PlayerComponent
 import com.a_blekot.shlokas.common.player_api.PlayerState
 import com.a_blekot.shlokas.common.resources.MR.strings.label_repeats_counter
+import com.a_blekot.shlokas.common.resources.MR.strings.label_text_copied
 import com.a_blekot.shlokas.common.resources.MR.strings.label_translation
 import com.a_blekot.shlokas.common.resources.MR.strings.label_verses_counter
 import com.a_blekot.shlokas.common.resources.MR.strings.label_words
@@ -46,6 +58,7 @@ import com.a_blekot.shlokas.common.resources.resolve
 import com.a_blekot.shlokas.common.utils.showClosePlayerDialog
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PlayerView(component: PlayerComponent) {
     val state = component.flow.subscribeAsState()
@@ -73,6 +86,7 @@ fun PlayerView(component: PlayerComponent) {
                 val wordsAreVisible = remember { mutableStateOf(false) }
                 val translationIsVisible = remember { mutableStateOf(false) }
                 val context = LocalContext.current
+                val clipboard = LocalClipboardManager.current
                 val translationStyle = typography.titleLarge
 
                 StandartLazyColumn {
@@ -83,7 +97,12 @@ fun PlayerView(component: PlayerComponent) {
                             color = colorScheme.primary,
                             style = typography.headlineSmall,
                             textAlign = TextAlign.Center,
-                            modifier = Modifier.fillMaxWidth().padding(horizontal = paddingXS),
+                            modifier = Modifier.fillMaxWidth()
+                                .padding(horizontal = paddingXS)
+                                .combinedClickable(
+                                    onLongClick = { copyToClipboard(context, clipboard, sanskrit.noHtmlTags()) },
+                                    onClick = { }
+                                ),
 //                    autoSize = true
                         )
                     }
@@ -153,6 +172,7 @@ private val PlaybackState.icon
         else -> Icons.Rounded.Pause
     }
 
+@OptIn(ExperimentalFoundationApi::class)
 fun LazyListScope.addFoldableView(
     title: String,
     text: String,
@@ -162,6 +182,9 @@ fun LazyListScope.addFoldableView(
 ) {
     if (text.isNotBlank()) {
         item {
+            val context = LocalContext.current
+            val clipboard = LocalClipboardManager.current
+
             FoldableView(
                 title = title,
                 color = colorScheme.secondaryContainer,
@@ -177,12 +200,17 @@ fun LazyListScope.addFoldableView(
                         .fillMaxWidth()
                         .padding(horizontal = paddingS)
                         .padding(bottom = paddingS)
+                        .combinedClickable(
+                            onLongClick = { copyToClipboard(context, clipboard, text.noHtmlTags()) },
+                            onClick = {}
+                        )
                 )
             }
         }
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TitleAndProgress(state: PlayerState, component: PlayerComponent, modifier: Modifier = Modifier) =
     state.run {
@@ -192,6 +220,7 @@ fun TitleAndProgress(state: PlayerState, component: PlayerComponent, modifier: M
             modifier = modifier.padding(horizontal = paddingXS).padding(top = paddingXS)
         ) {
             val context = LocalContext.current
+            val clipboard = LocalClipboardManager.current
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -211,19 +240,35 @@ fun TitleAndProgress(state: PlayerState, component: PlayerComponent, modifier: M
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = modifier.weight(1f)
             ) {
-                Text(
-                    text = title,
-                    color = colorScheme.primary,
-                    style = typography.headlineLarge,
-                    textAlign = TextAlign.Center,
-                    maxLines = 1,
+                StandartRow(
+                    modifier = Modifier.clickable { copyToClipboard(context, clipboard, state.copyAll()) },
+                    horizontalArrangement = Arrangement.Center,
+                    padding = paddingZero,
                 )
+                {
+                    Text(
+                        text = title,
+                        color = colorScheme.primary,
+                        style = typography.headlineLarge,
+                        textAlign = TextAlign.Center,
+                        maxLines = 1,
+                    )
+
+                    Icon(
+                        Icons.Rounded.ContentCopy,
+                        "Copy All",
+                        tint = colorScheme.primary,
+                        modifier = Modifier.size(iconSizeL)
+                    )
+                }
 
                 PlayPauseFAB(
                     playbackState = playbackState,
                     isAutoplay = isAutoplay,
                     component = component,
                 )
+
+
             }
 
             Column(
@@ -287,3 +332,16 @@ fun FoldableView(
         }
     }
 }
+
+private fun PlayerState.copyAll() =
+    "$title\n\n$sanskrit\n\n$words\n\n$translation".noHtmlTags()
+
+private fun copyToClipboard(context: Context, clipboard: ClipboardManager, text: String) {
+    clipboard.setText(AnnotatedString(text))
+    Toast.makeText(context, label_text_copied.resolve(context), Toast.LENGTH_LONG).show()
+}
+
+private fun String.noHtmlTags() =
+    this
+        .replace("<br>", "\n")
+        .replace(Regex("<(?:!|/?[a-zA-Z]+).*?/?>"), "")

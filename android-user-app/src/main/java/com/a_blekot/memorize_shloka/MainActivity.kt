@@ -18,6 +18,7 @@ import com.a_blekot.memorize_shloka.inapp.InappUpdater
 import com.a_blekot.memorize_shloka.inapp.showInappReview
 import com.a_blekot.shlokas.android_player.PlaybackService
 import com.a_blekot.shlokas.android_ui.theme.AppTheme
+import com.a_blekot.shlokas.common.data.PlatformApi
 import com.a_blekot.shlokas.common.resources.MR.strings.email_body
 import com.a_blekot.shlokas.common.resources.MR.strings.email_title
 import com.a_blekot.shlokas.common.resources.resolve
@@ -58,6 +59,17 @@ class MainActivity : ComponentActivity() {
     }
     private val playbackServiceIntent
         get() = Intent(this, PlaybackService::class.java)
+
+    private val platformApi = object: PlatformApi {
+        override val hasTts = true
+        override val hasInappReview = true
+
+        override fun onEmail() = this@MainActivity.sendEmail()
+        override fun onRateUs() = this@MainActivity.rateUs()
+        override fun onShareApp() = this@MainActivity.shareApp()
+        override fun onInappReview() = this@MainActivity.inappReview()
+        override fun onSelectTtsVoice() = this@MainActivity.selectTtsVoice()
+    }
 
     private var isBound = false
     private var playbackService: PlaybackService? = null
@@ -138,18 +150,14 @@ class MainActivity : ComponentActivity() {
             storeFactory = LoggingStoreFactory(DefaultStoreFactory()),
             deps = RootDeps(
                 filer = AndroidFiler(this),
+                analytics = app.analytics,
+                playerBus = app.playerBus,
+                platformApi = platformApi,
+                dispatchers = dispatchers(),
                 configReader = AndroidConfigReader(this),
+                billingHelper = billingHelper,
                 connectivityObserver = app.connectivityObserver,
                 stringResourceHandler = AndroidStringResourceHandler(this),
-                billingHelper = billingHelper,
-                playerBus = app.playerBus,
-                analytics = app.analytics,
-                dispatchers = dispatchers(),
-                onEmail = ::sendEmail,
-                onRateUs = ::rateUs,
-                onShareApp = ::shareApp,
-                onInappReview = ::inappReview,
-                onSelectTtsVoice = ::selectTtsVoice
             )
         )
 
