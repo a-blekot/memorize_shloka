@@ -159,8 +159,10 @@ class Player(
             }
     }
 
-    val isPlaying
-        get() = exoPlayer?.isPlaying == true
+    val isPlaying: Boolean
+        get() {
+            return exoPlayer?.isPlaying == true || currentTask !is StopTask
+        }
 
     lateinit var playerBus: PlayerBus
 

@@ -14,6 +14,7 @@ import Prabhupada
 class Player: NSObject, ObservableObject {
     private let audioSession = AVAudioSession.sharedInstance()
     private let player = AVPlayer()
+    private let tts = AVSpeechSynthesizer()
     
     private var remoteControlHandler: RemoteControlHandler? = nil
     private var notificationsHandler: NotificationsHandler? = nil
@@ -160,6 +161,7 @@ class Player: NSObject, ObservableObject {
         switch(task){
         case is SetTrackTask: setTrack((task as! SetTrackTask))
         case is PlayTask: play((task as! PlayTask))
+        case is PlayTranslationTask: playTranslation((task as! PlayTranslationTask))
         case is PauseTask, is IdleTask, is NoAudioTask: pause()
         case is StopTask: pause()
         default: debugPrint("default")
@@ -169,6 +171,12 @@ class Player: NSObject, ObservableObject {
     func pause() {
         debugPrint("IOs Player Pause")
         player.pause()
+        pauseTts()
+    }
+    
+    private func pauseTts() {
+        tts.delegate = nil
+        tts.stopSpeaking(at: .immediate)
     }
     
     func play() {
@@ -191,6 +199,47 @@ class Player: NSObject, ObservableObject {
         player.pause()
         seekTo(timeMs: task.startMs)
         player.play()
+    }
+    
+    func playTranslation(_ task: PlayTranslationTask) {
+        if (ttsIsNotAvailable(locale: SettingsKt.getLocale())) {
+            onTtsComplete(id: task.id.name)
+            return
+        }
+
+        pause()
+        
+        let utterance = TtsUtterance(id: task.id.name, text: task.text)
+        utterance.voice = getVoice(for: SettingsKt.getLocale())
+        utterance.rate = AVSpeechUtteranceDefaultSpeechRate * PlayTranslationTaskKt.SPEECH_RATE
+
+        tts.delegate = self
+        tts.speak(utterance)
+    }
+    
+    private func getVoice(for locale: String) -> AVSpeechSynthesisVoice? {
+        switch locale {
+        case "en": return AVSpeechSynthesisVoice(language: "en-US")
+        case "uk": return AVSpeechSynthesisVoice(language: "uk-UK")
+        default: return AVSpeechSynthesisVoice(language: "ru-RU")
+        }
+    }
+    
+    private func ttsIsNotAvailable(locale: String) -> Bool {
+        return AVSpeechSynthesisVoice
+            .speechVoices()
+            .first(where: { $0.language.contains(locale) }) == nil
+    }
+    
+    private func onTtsComplete(id: String) {
+        NapierProxyKt.d(message: "onTtsComplete", tag: "IOS_PLAYER")
+        guard let currentTask = currentTask as? PlayTranslationTask else {return}
+        let currentId = currentTask.id
+
+        if (currentId.name == id) {
+            NapierProxyKt.d(message: "PlayerFeedback.Ready", tag: "IOS_PLAYER")
+            playerBus.update(feedback: PlayerFeedbackReady())
+        }
     }
     
     func setTrack(_ task: SetTrackTask) {
@@ -254,5 +303,38 @@ extension Player {
     
     var currentItem: PlayerItem? {
         player.currentItem as? PlayerItem
+    }
+}
+
+class TtsUtterance : AVSpeechUtterance {
+    private var id: String
+    override var description: String {
+        get {
+            return id
+        }
+        set(newValue) {
+            id = newValue
+        }
+    }
+
+    init(id: String, text: String) {
+        self.id = id
+        super.init(string: text)
+    }
+    
+    required init?(coder: NSCoder) {
+        self.id = ""
+        super.init(coder: coder)
+    }
+}
+
+extension Player: AVSpeechSynthesizerDelegate {
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        onTtsComplete(id: utterance.description)
+    }
+    
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didCancel utterance: AVSpeechUtterance) {
+        onTtsComplete(id: utterance.description)
     }
 }

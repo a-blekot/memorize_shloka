@@ -152,6 +152,22 @@ fun SettingsView(component: SettingsComponent) {
                 StandartRow(
                     horizontalArrangement = Arrangement.spacedBy(paddingM),
                 ) {
+                    StandartCheckBox(state.value.showClosePlayerDialog) {
+                        component.setShowClosePlayerDialog(it)
+                    }
+
+                    Text(
+                        text = label_show_close_player_dialog.resolve(context),
+                        style = typography.titleLarge,
+                        color = colorScheme.primary,
+                    )
+                }
+            }
+
+            item {
+                StandartRow(
+                    horizontalArrangement = Arrangement.spacedBy(paddingM),
+                ) {
                     StandartCheckBox(state.value.withTranslation) {
                         component.setWithTranslation(it)
                     }
@@ -183,23 +199,6 @@ fun SettingsView(component: SettingsComponent) {
                         style = typography.titleLarge,
                         color = colorScheme.primary,
                         maxLines = 1,
-                    )
-                }
-            }
-
-
-            item {
-                StandartRow(
-                    horizontalArrangement = Arrangement.spacedBy(paddingM),
-                ) {
-                    StandartCheckBox(state.value.showClosePlayerDialog) {
-                        component.setShowClosePlayerDialog(it)
-                    }
-
-                    Text(
-                        text = label_show_close_player_dialog.resolve(context),
-                        style = typography.titleLarge,
-                        color = colorScheme.primary,
                     )
                 }
             }

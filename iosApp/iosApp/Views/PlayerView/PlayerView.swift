@@ -25,16 +25,16 @@ struct PlayerView: View {
     }
     
     var body: some View {
-        let state = state.value
+        let _ = debugPrint("PlayerView playbackState = \(state.value.playbackState) \(state.value.currentRepeat)")
         
         ZStack {
             VStack(alignment: .center, spacing: theme.dimens.paddingS) {
-                PlayerTitleAndProgress(state, component, $isClosePlayerDialogVisible)
+                PlayerTitleAndProgress(state.value, component, $isClosePlayerDialogVisible)
                     .environmentObject(theme)
                 
                 ScrollView {
                     VStack {
-                        Text(html: state.sanskrit, size: 24, color: theme.colors.primary)
+                        Text(html: state.value.sanskrit, size: 24, color: theme.colors.primary)
                             .font(theme.headlineSmall)
                             .allowsTightening(true)
                             .multilineTextAlignment(.center)
@@ -47,7 +47,7 @@ struct PlayerView: View {
                             textColor: theme.colors.onSecondaryContainer,
                             bgColor: theme.colors.secondaryContainer
                         ) {
-                            Text(html: state.words, size: 22, color: theme.colors.onSecondaryContainer)
+                            Text(html: state.value.words, size: 22, color: theme.colors.onSecondaryContainer)
                                 .font(theme.titleLarge)
                                 .padding(theme.dimens.paddingS)
                                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -58,7 +58,7 @@ struct PlayerView: View {
                             textColor: theme.colors.onSecondaryContainer,
                             bgColor: theme.colors.secondaryContainer
                         ) {
-                            Text(state.translation)
+                            Text(state.value.translation)
                                 .font(theme.titleLarge)
                                 .foregroundColor(theme.colors.onSecondaryContainer)
                                 .padding(.horizontal, theme.dimens.paddingS)

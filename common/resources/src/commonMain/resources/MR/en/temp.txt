@@ -4,123 +4,19 @@
 
 
 
-verses.append("BG_1_1")
-verses.append("BG_2_7")
-verses.append("BG_2_13")
-verses.append("BG_3_27")
-verses.append("BG_4_2")
-verses.append("BG_4_8")
-verses.append("BG_4_9")
-verses.append("BG_4_34")
-verses.append("BG_5_29")
-verses.append("BG_6_47")
-verses.append("BG_7_14")
-verses.append("BG_8_5")
-verses.append("BG_9_2")
-verses.append("BG_9_14")
-verses.append("BG_9_26")
-verses.append("BG_9_27")
-verses.append("BG_10_8")
-verses.append("BG_10_9")
-verses.append("BG_10_10")
-verses.append("BG_10_11")
-verses.append("BG_13_22")
-verses.append("BG_14_4")
-verses.append("BG_14_26")
-verses.append("BG_15_7")
-verses.append("BG_15_15")
-verses.append("BG_18_54")
-verses.append("BG_18_55")
-verses.append("BG_18_61")
-verses.append("BG_18_64")
-verses.append("BG_18_65")
-ШБ 1.1.2
-ШБ 1.1.3
-ШБ 1.2.7
-ШБ 1.2.9
-ШБ 1.2.10
-ШБ 1.2.12
-ШБ 1.2.13
-ШБ 1.2.14
-ШБ 1.2.19
-ШБ 1.2.20
-ШБ 1.2.21
-ШБ 1.5.17
-ШБ 1.8.18
-
-ШБ 3.2.23
-ШБ 3.25.19
-ШБ 3.25.20
-ШБ 3.25.21
-ШБ 3.25.25
-ШБ 3.29.11-12
-ШБ 3.29.13
-ШБ 3.31.1
-ШБ 3.33.6
-ШБ 3.33.7
-
-ШБ 4.3.23
-
-ШБ 5.5.5
-
-ШБ 6.1.40
-ШБ 6.1.13-14
-ШБ 6.3.20-21
 
 
 
-verses.append(Verse("uk", "SB", 1, 1, 1))
-verses.append(Verse("uk", "SB", 1, 1, 2))
-verses.append(Verse("uk", "SB", 1, 1, 3))
-verses.append(Verse("uk", "SB", 1, 1, 10))
-verses.append(Verse("uk", "SB", 1, 2, 6))
-verses.append(Verse("uk", "SB", 1, 2, 7))
-verses.append(Verse("uk", "SB", 1, 2, 8))
-verses.append(Verse("uk", "SB", 1, 2, 9))
-verses.append(Verse("uk", "SB", 1, 2, 10))
-verses.append(Verse("uk", "SB", 1, 2, 11))
-verses.append(Verse("uk", "SB", 1, 2, 12))
-verses.append(Verse("uk", "SB", 1, 2, 13))
-verses.append(Verse("uk", "SB", 1, 2, 14))
-verses.append(Verse("uk", "SB", 1, 2, 16))
-verses.append(Verse("uk", "SB", 1, 2, 17))
-verses.append(Verse("uk", "SB", 1, 2, 18))
-verses.append(Verse("uk", "SB", 1, 2, 19))
-verses.append(Verse("uk", "SB", 1, 2, 20))
-verses.append(Verse("uk", "SB", 1, 2, 21))
-verses.append(Verse("uk", "SB", 1, 3, 28))
-verses.append(Verse("uk", "SB", 1, 3, 43))
-verses.append(Verse("uk", "SB", 1, 5, 11))
-verses.append(Verse("uk", "SB", 1, 5, 17))
-verses.append(Verse("uk", "SB", 1, 5, 18))
-verses.append(Verse("uk", "SB", 1, 7, 6))
-verses.append(Verse("uk", "SB", 1, 7, 10))
-verses.append(Verse("uk", "SB", 1, 8, 18))
-verses.append(Verse("uk", "SB", 1, 8, 26))
-verses.append(Verse("uk", "SB", 1, 8, 42))
-verses.append(Verse("uk", "SB", 1, 13, 10))
-verses.append(Verse("uk", "SB", 1, 18, 13))
-verses.append(Verse("uk", "SB", 2, 1, 5))
-verses.append(Verse("uk", "SB", 2, 1, 6))
-verses.append(Verse("uk", "SB", 2, 1, 11))
-verses.append(Verse("uk", "SB", 2, 3, 10))
-verses.append(Verse("uk", "SB", 2, 3, 17))
-verses.append(Verse("uk", "SB", 2, 3, 19))
-verses.append(Verse("uk", "SB", 2, 4, 18))
-verses.append(Verse("uk", "SB", 2, 9, 33))
-verses.append(Verse("uk", "SB", 2, 9, 34))
-verses.append(Verse("uk", "SB", 2, 9, 35))
-verses.append(Verse("uk", "SB", 2, 9, 36))
-verses.append(Verse("uk", "SB", 2, 10, 1))
-verses.append(Verse("uk", "SB", 3, 2, 23))
-verses.append(Verse("uk", "SB", 3, 5, 41))
-verses.append(Verse("uk", "SB", 3, 9, 11))
-verses.append(Verse("uk", "SB", 3, 25, 19))
-verses.append(Verse("uk", "SB", 3, 25, 20))
-verses.append(Verse("uk", "SB", 3, 25, 21))
-verses.append(Verse("uk", "SB", 3, 25, 25))
-verses.append(Verse("uk", "SB", 3, 29, "11-12"))
-verses.append(Verse("uk", "SB", 3, 29, 13))
-verses.append(Verse("uk", "SB", 3, 31, 1))
-verses.append(Verse("uk", "SB", 3, 33, 6))
-verses.append(Verse("uk", "SB", 3, 33, 7))
+
+
+
+
+
+
+
+
+
+
+
+
+

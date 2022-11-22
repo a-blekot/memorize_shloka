@@ -5,7 +5,7 @@ import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
 import kotlinx.serialization.Serializable
 
-private const val CHUNKS_SIZE = 4
+private const val CHUNKS_SIZE = 4 // Could be 8 or even 5
 
 @Parcelize
 @Serializable
@@ -22,10 +22,6 @@ val ShlokaConfig.durationMs
     get() = chunks.sumOf { it.durationMs }
 
 fun ShlokaConfig.createTasks(index: Int, week: Week, repeats: Int, pauseMs: Long): List<Task> {
-    check(chunks.size == CHUNKS_SIZE) {
-        "Shloka should consist of four padas!"
-    }
-
     val tasks = mutableListOf<Task>()
     tasks.add(SetTrackTask(index, shloka))
 
@@ -48,27 +44,29 @@ fun ShlokaConfig.createTasks(index: Int, week: Week, repeats: Int, pauseMs: Long
         }
 
         Week.SECOND -> {
-            repeat(repeats) {
-                val chunk = chunks[0] + chunks[1]
-                tasks.add(PlayTask(chunk, it + 1))
-                if (it == repeats - 1) tasks.add(ResetCounterTask(pauseMs))
-                tasks.add(PauseTask(pauseMs))
-            }
-            repeat(repeats) {
-                val chunk = chunks[2] + chunks[3]
-                tasks.add(PlayTask(chunk, it + 1))
-                if (it == repeats - 1) tasks.add(ResetCounterTask(pauseMs))
-                tasks.add(PauseTask(pauseMs))
-            }
+            chunks
+                .windowed(2, 2, partialWindows = true)
+                .forEach { window ->
+                    repeat(repeats) {
+                        val chunk = window.first() + window.last()
+                        tasks.add(PlayTask(chunk, it + 1))
+                        if (it == repeats - 1) tasks.add(ResetCounterTask(pauseMs))
+                        tasks.add(PauseTask(pauseMs))
+                    }
+                }
         }
 
         Week.THIRD -> {
-            repeat(repeats) {
-                val chunk = chunks[0] + chunks[3]
-                tasks.add(PlayTask(chunk, it + 1))
-                if (it == repeats - 1) tasks.add(ResetCounterTask(pauseMs))
-                tasks.add(PauseTask(pauseMs))
-            }
+            chunks
+                .windowed(4, 4, partialWindows = true)
+                .forEach { window ->
+                    repeat(repeats) {
+                        val chunk = window.first() + window.last()
+                        tasks.add(PlayTask(chunk, it + 1))
+                        if (it == repeats - 1) tasks.add(ResetCounterTask(pauseMs))
+                        tasks.add(PauseTask(pauseMs))
+                    }
+                }
         }
     }
 

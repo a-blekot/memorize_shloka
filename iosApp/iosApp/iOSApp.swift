@@ -7,7 +7,7 @@ import Prabhupada
 
 class IosPlatform: Prabhupada.PlatformApi {
     
-    let hasTts = false
+    let hasTts = true
     let hasInappReview = true
     
     func onEmail() {}
@@ -36,7 +36,11 @@ class IosPlatform: Prabhupada.PlatformApi {
     #endif
         SettingsKt.onInappReviewShown()
     }
-    func onSelectTtsVoice() {}
+    func onSelectTtsVoice() {
+        guard let urlReview = URL(string: "App-prefs:root=General&path=ACCESSIBILITY/VOICEOVER/Speech")
+            else { return }
+        UIApplication.shared.open(urlReview, options: [:], completionHandler: nil)
+    }
 }
 
 @main

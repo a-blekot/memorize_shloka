@@ -2,7 +2,9 @@ package com.a_blekot.shlokas.common.utils.resources
 
 import com.a_blekot.shlokas.common.data.ShlokaId.*
 import com.a_blekot.shlokas.common.resources.MR.assets.BG_
+import com.a_blekot.shlokas.common.resources.MR.assets.ISO
 import com.a_blekot.shlokas.common.resources.MR.assets.NI_
+import com.a_blekot.shlokas.common.resources.MR.assets.NOD
 import com.a_blekot.shlokas.common.resources.MR.assets.SB_1
 import com.a_blekot.shlokas.common.resources.MR.assets.SB_2
 import com.a_blekot.shlokas.common.resources.MR.assets.SB_3
@@ -12,8 +14,6 @@ import com.a_blekot.shlokas.common.resources.MR.assets.SB_6
 import com.a_blekot.shlokas.common.resources.MR.strings
 import dev.icerock.moko.resources.AssetResource
 import dev.icerock.moko.resources.StringResource
-import dev.icerock.moko.resources.desc.Resource
-import dev.icerock.moko.resources.desc.StringDesc
 
 class Verse(
     val title: StringResource,
@@ -707,6 +707,346 @@ val versesMap =
                 descr_NI_11,
                 NI_.NI_11
             ),
+
+
+            ISO_00 to Verse(
+                title_ISO_00,
+                sansk_ISO_00,
+                words_ISO_00,
+                trans_ISO_00,
+                descr_ISO_00,
+                ISO.ISO_00
+            ),
+            ISO_01 to Verse(
+                title_ISO_01,
+                sansk_ISO_01,
+                words_ISO_01,
+                trans_ISO_01,
+                descr_ISO_01,
+                ISO.ISO_01
+            ),
+            ISO_02 to Verse(
+                title_ISO_02,
+                sansk_ISO_02,
+                words_ISO_02,
+                trans_ISO_02,
+                descr_ISO_02,
+                ISO.ISO_02
+            ),
+            ISO_03 to Verse(
+                title_ISO_03,
+                sansk_ISO_03,
+                words_ISO_03,
+                trans_ISO_03,
+                descr_ISO_03,
+                ISO.ISO_03
+            ),
+            ISO_04 to Verse(
+                title_ISO_04,
+                sansk_ISO_04,
+                words_ISO_04,
+                trans_ISO_04,
+                descr_ISO_04,
+                ISO.ISO_04
+            ),
+            ISO_05 to Verse(
+                title_ISO_05,
+                sansk_ISO_05,
+                words_ISO_05,
+                trans_ISO_05,
+                descr_ISO_05,
+                ISO.ISO_05
+            ),
+            ISO_06 to Verse(
+                title_ISO_06,
+                sansk_ISO_06,
+                words_ISO_06,
+                trans_ISO_06,
+                descr_ISO_06,
+                ISO.ISO_06
+            ),
+            ISO_07 to Verse(
+                title_ISO_07,
+                sansk_ISO_07,
+                words_ISO_07,
+                trans_ISO_07,
+                descr_ISO_07,
+                ISO.ISO_07
+            ),
+            ISO_08 to Verse(
+                title_ISO_08,
+                sansk_ISO_08,
+                words_ISO_08,
+                trans_ISO_08,
+                descr_ISO_08,
+                ISO.ISO_08
+            ),
+            ISO_09 to Verse(
+                title_ISO_09,
+                sansk_ISO_09,
+                words_ISO_09,
+                trans_ISO_09,
+                descr_ISO_09,
+                ISO.ISO_09
+            ),
+            ISO_10 to Verse(
+                title_ISO_10,
+                sansk_ISO_10,
+                words_ISO_10,
+                trans_ISO_10,
+                descr_ISO_10,
+                ISO.ISO_10
+            ),
+            ISO_11 to Verse(
+                title_ISO_11,
+                sansk_ISO_11,
+                words_ISO_11,
+                trans_ISO_11,
+                descr_ISO_11,
+                ISO.ISO_11
+            ),
+            ISO_12 to Verse(
+                title_ISO_12,
+                sansk_ISO_12,
+                words_ISO_12,
+                trans_ISO_12,
+                descr_ISO_12,
+                ISO.ISO_12
+            ),
+            ISO_13 to Verse(
+                title_ISO_13,
+                sansk_ISO_13,
+                words_ISO_13,
+                trans_ISO_13,
+                descr_ISO_13,
+                ISO.ISO_13
+            ),
+            ISO_14 to Verse(
+                title_ISO_14,
+                sansk_ISO_14,
+                words_ISO_14,
+                trans_ISO_14,
+                descr_ISO_14,
+                ISO.ISO_14
+            ),
+            ISO_15 to Verse(
+                title_ISO_15,
+                sansk_ISO_15,
+                words_ISO_15,
+                trans_ISO_15,
+                descr_ISO_15,
+                ISO.ISO_15
+            ),
+            ISO_16 to Verse(
+                title_ISO_16,
+                sansk_ISO_16,
+                words_ISO_16,
+                trans_ISO_16,
+                descr_ISO_16,
+                ISO.ISO_16
+            ),
+            ISO_17 to Verse(
+                title_ISO_17,
+                sansk_ISO_17,
+                words_ISO_17,
+                trans_ISO_17,
+                descr_ISO_17,
+                ISO.ISO_17
+            ),
+            ISO_18 to Verse(
+                title_ISO_18,
+                sansk_ISO_18,
+                words_ISO_18,
+                trans_ISO_18,
+                descr_ISO_18,
+                ISO.ISO_18
+            ),
+
+            NOD_1_1_1 to Verse(
+                title_NOD_1_1_1,
+                sansk_NOD_1_1_1,
+                words_NOD_1_1_1,
+                trans_NOD_1_1_1,
+                descr_NOD_1_1_1,
+                NOD.NOD_1_1_1
+            ),
+            NOD_1_1_11 to Verse(
+                title_NOD_1_1_11,
+                sansk_NOD_1_1_11,
+                words_NOD_1_1_11,
+                trans_NOD_1_1_11,
+                descr_NOD_1_1_11,
+                NOD.NOD_1_1_11
+            ),
+            NOD_1_1_12 to Verse(
+                title_NOD_1_1_12,
+                sansk_NOD_1_1_12,
+                words_NOD_1_1_12,
+                trans_NOD_1_1_12,
+                descr_NOD_1_1_12,
+                NOD.NOD_1_1_12
+            ),
+            NOD_1_1_17 to Verse(
+                title_NOD_1_1_17,
+                sansk_NOD_1_1_17,
+                words_NOD_1_1_17,
+                trans_NOD_1_1_17,
+                descr_NOD_1_1_17,
+                NOD.NOD_1_1_17
+            ),
+            NOD_1_1_23 to Verse(
+                title_NOD_1_1_23,
+                sansk_NOD_1_1_23,
+                words_NOD_1_1_23,
+                trans_NOD_1_1_23,
+                descr_NOD_1_1_23,
+                NOD.NOD_1_1_23
+            ),
+            NOD_1_2_2 to Verse(
+                title_NOD_1_2_2,
+                sansk_NOD_1_2_2,
+                words_NOD_1_2_2,
+                trans_NOD_1_2_2,
+                descr_NOD_1_2_2,
+                NOD.NOD_1_2_2
+            ),
+            NOD_1_2_6 to Verse(
+                title_NOD_1_2_6,
+                sansk_NOD_1_2_6,
+                words_NOD_1_2_6,
+                trans_NOD_1_2_6,
+                descr_NOD_1_2_6,
+                NOD.NOD_1_2_6
+            ),
+            NOD_1_2_8 to Verse(
+                title_NOD_1_2_8,
+                sansk_NOD_1_2_8,
+                words_NOD_1_2_8,
+                trans_NOD_1_2_8,
+                descr_NOD_1_2_8,
+                NOD.NOD_1_2_8
+            ),
+            NOD_1_2_15 to Verse(
+                title_NOD_1_2_15,
+                sansk_NOD_1_2_15,
+                words_NOD_1_2_15,
+                trans_NOD_1_2_15,
+                descr_NOD_1_2_15,
+//                NOD.NOD_1_2_15
+            ),
+            NOD_1_2_22 to Verse(
+                title_NOD_1_2_22,
+                sansk_NOD_1_2_22,
+                words_NOD_1_2_22,
+                trans_NOD_1_2_22,
+                descr_NOD_1_2_22,
+                NOD.NOD_1_2_22
+            ),
+            NOD_1_2_65 to Verse(
+                title_NOD_1_2_65,
+                sansk_NOD_1_2_65,
+                words_NOD_1_2_65,
+                trans_NOD_1_2_65,
+                descr_NOD_1_2_65,
+                NOD.NOD_1_2_65
+            ),
+            NOD_1_2_97 to Verse(
+                title_NOD_1_2_97,
+                sansk_NOD_1_2_97,
+                words_NOD_1_2_97,
+                trans_NOD_1_2_97,
+                descr_NOD_1_2_97,
+                NOD.NOD_1_2_97
+            ),
+            NOD_1_2_101 to Verse(
+                title_NOD_1_2_101,
+                sansk_NOD_1_2_101,
+                words_NOD_1_2_101,
+                trans_NOD_1_2_101,
+                descr_NOD_1_2_101,
+                NOD.NOD_1_2_101
+            ),
+            NOD_1_2_115 to Verse(
+                title_NOD_1_2_115,
+                sansk_NOD_1_2_115,
+                words_NOD_1_2_115,
+                trans_NOD_1_2_115,
+                descr_NOD_1_2_115,
+                NOD.NOD_1_2_115
+            ),
+            NOD_1_2_187 to Verse(
+                title_NOD_1_2_187,
+                sansk_NOD_1_2_187,
+                words_NOD_1_2_187,
+                trans_NOD_1_2_187,
+                descr_NOD_1_2_187,
+                NOD.NOD_1_2_187
+            ),
+            NOD_1_2_214 to Verse(
+                title_NOD_1_2_214,
+                sansk_NOD_1_2_214,
+                words_NOD_1_2_214,
+                trans_NOD_1_2_214,
+                descr_NOD_1_2_214,
+                NOD.NOD_1_2_214
+            ),
+            NOD_1_2_234 to Verse(
+                title_NOD_1_2_234,
+                sansk_NOD_1_2_234,
+                words_NOD_1_2_234,
+                trans_NOD_1_2_234,
+                descr_NOD_1_2_234,
+                NOD.NOD_1_2_234
+            ),
+            NOD_1_2_255 to Verse(
+                title_NOD_1_2_255,
+                sansk_NOD_1_2_255,
+                words_NOD_1_2_255,
+                trans_NOD_1_2_255,
+                descr_NOD_1_2_255,
+                NOD.NOD_1_2_255
+            ),
+            NOD_1_2_270 to Verse(
+                title_NOD_1_2_270,
+                sansk_NOD_1_2_270,
+                words_NOD_1_2_270,
+                trans_NOD_1_2_270,
+                descr_NOD_1_2_270,
+                NOD.NOD_1_2_270
+            ),
+            NOD_1_3_1 to Verse(
+                title_NOD_1_3_1,
+                sansk_NOD_1_3_1,
+                words_NOD_1_3_1,
+                trans_NOD_1_3_1,
+                descr_NOD_1_3_1,
+                NOD.NOD_1_3_1
+            ),
+            NOD_1_3_25_26 to Verse(
+                title_NOD_1_3_25_26,
+                sansk_NOD_1_3_25_26,
+                words_NOD_1_3_25_26,
+                trans_NOD_1_3_25_26,
+                descr_NOD_1_3_25_26,
+                NOD.NOD_1_3_25_26
+            ),
+            NOD_1_4_1 to Verse(
+                title_NOD_1_4_1,
+                sansk_NOD_1_4_1,
+                words_NOD_1_4_1,
+                trans_NOD_1_4_1,
+                descr_NOD_1_4_1,
+                NOD.NOD_1_4_1
+            ),
+            NOD_1_4_15_16 to Verse(
+                title_NOD_1_4_15_16,
+                sansk_NOD_1_4_15_16,
+                words_NOD_1_4_15_16,
+                trans_NOD_1_4_15_16,
+                descr_NOD_1_4_15_16,
+                NOD.NOD_1_4_15_16
+            ),
+
             BG_1_1 to Verse(
                 title_BG_1_1,
                 sansk_BG_1_1,
@@ -731,6 +1071,14 @@ val versesMap =
                 descr_BG_2_13,
                 BG_.BG_2_13
             ),
+            BG_2_20 to Verse(
+                title_BG_2_20,
+                sansk_BG_2_20,
+                words_BG_2_20,
+                trans_BG_2_20,
+                descr_BG_2_20,
+                BG_.BG_2_20
+            ),
             BG_2_27 to Verse(
                 title_BG_2_27,
                 sansk_BG_2_27,
@@ -738,6 +1086,14 @@ val versesMap =
                 trans_BG_2_27,
                 descr_BG_2_27,
                 BG_.BG_2_27
+            ),
+            BG_2_44 to Verse(
+                title_BG_2_44,
+                sansk_BG_2_44,
+                words_BG_2_44,
+                trans_BG_2_44,
+                descr_BG_2_44,
+                BG_.BG_2_44
             ),
             BG_3_27 to Verse(
                 title_BG_3_27,
@@ -803,6 +1159,15 @@ val versesMap =
                 descr_BG_6_47,
                 BG_.BG_6_47
             ),
+            BG_7_5 to Verse(
+                title_BG_7_5,
+                sansk_BG_7_5,
+                words_BG_7_5,
+                trans_BG_7_5,
+                descr_BG_7_5,
+                BG_.BG_7_5
+            ),
+
             BG_7_14 to Verse(
                 title_BG_7_14,
                 sansk_BG_7_14,
@@ -811,6 +1176,14 @@ val versesMap =
                 descr_BG_7_14,
                 BG_.BG_7_14
             ),
+            BG_7_19 to Verse(
+                title_BG_7_19,
+                sansk_BG_7_19,
+                words_BG_7_19,
+                trans_BG_7_19,
+                descr_BG_7_19,
+                BG_.BG_7_19
+            ),
             BG_8_5 to Verse(
                 title_BG_8_5,
                 sansk_BG_8_5,
@@ -818,6 +1191,14 @@ val versesMap =
                 trans_BG_8_5,
                 descr_BG_8_5,
                 BG_.BG_8_5
+            ),
+            BG_8_16 to Verse(
+                title_BG_8_16,
+                sansk_BG_8_16,
+                words_BG_8_16,
+                trans_BG_8_16,
+                descr_BG_8_16,
+                BG_.BG_8_16
             ),
             BG_9_2 to Verse(
                 title_BG_9_2,
@@ -835,6 +1216,14 @@ val versesMap =
                 descr_BG_9_14,
                 BG_.BG_9_14
             ),
+            BG_9_25 to Verse(
+                title_BG_9_25,
+                sansk_BG_9_25,
+                words_BG_9_25,
+                trans_BG_9_25,
+                descr_BG_9_25,
+                BG_.BG_9_25
+            ),
             BG_9_26 to Verse(
                 title_BG_9_26,
                 sansk_BG_9_26,
@@ -850,6 +1239,14 @@ val versesMap =
                 trans_BG_9_27,
                 descr_BG_9_27,
                 BG_.BG_9_27
+            ),
+            BG_9_29 to Verse(
+                title_BG_9_29,
+                sansk_BG_9_29,
+                words_BG_9_29,
+                trans_BG_9_29,
+                descr_BG_9_29,
+                BG_.BG_9_29
             ),
             BG_10_8 to Verse(
                 title_BG_10_8,

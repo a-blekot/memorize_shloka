@@ -72,6 +72,29 @@
     },
     {
       "shloka": {
+        "id": "BG_2_20"
+      },
+      "chunks": [
+        {
+          "startMs": 200,
+          "endMs": 3570
+        },
+        {
+          "startMs": 3570,
+          "endMs": 7500
+        },
+        {
+          "startMs": 7500,
+          "endMs": 11233
+        },
+        {
+          "startMs": 11233,
+          "endMs": 14600
+        }
+      ]
+    },
+    {
+      "shloka": {
         "id": "BG_2_27"
       },
       "chunks": [
@@ -90,6 +113,29 @@
         {
           "startMs": 8600,
           "endMs": 11300
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "BG_2_44"
+      },
+      "chunks": [
+        {
+          "startMs": 100,
+          "endMs": 3150
+        },
+        {
+          "startMs": 3150,
+          "endMs": 5640
+        },
+        {
+          "startMs": 5640,
+          "endMs": 8000
+        },
+        {
+          "startMs": 8120,
+          "endMs": 10500
         }
       ]
     },
@@ -279,6 +325,29 @@
     },
     {
       "shloka": {
+        "id": "BG_7_5"
+      },
+      "chunks": [
+        {
+          "startMs": 100,
+          "endMs": 2400
+        },
+        {
+          "startMs": 2430,
+          "endMs": 4850
+        },
+        {
+          "startMs": 4850,
+          "endMs": 7490
+        },
+        {
+          "startMs": 7490,
+          "endMs": 9700
+        }
+      ]
+    },
+    {
+      "shloka": {
         "id": "BG_7_14"
       },
       "chunks": [
@@ -302,6 +371,29 @@
     },
     {
       "shloka": {
+        "id": "BG_7_19"
+      },
+      "chunks": [
+        {
+          "startMs": 100,
+          "endMs": 2650
+        },
+        {
+          "startMs": 2730,
+          "endMs": 5350
+        },
+        {
+          "startMs": 5350,
+          "endMs": 7550
+        },
+        {
+          "startMs": 7600,
+          "endMs": 10060
+        }
+      ]
+    },
+    {
+      "shloka": {
         "id": "BG_8_5"
       },
       "chunks": [
@@ -320,6 +412,29 @@
         {
           "startMs": 7620,
           "endMs": 10400
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "BG_8_16"
+      },
+      "chunks": [
+        {
+          "startMs": 100,
+          "endMs": 2550
+        },
+        {
+          "startMs": 2585,
+          "endMs": 4700
+        },
+        {
+          "startMs": 4700,
+          "endMs": 6850
+        },
+        {
+          "startMs": 6850,
+          "endMs": 9000
         }
       ]
     },
@@ -371,6 +486,29 @@
     },
     {
       "shloka": {
+        "id": "BG_9_25"
+      },
+      "chunks": [
+        {
+          "startMs": 100,
+          "endMs": 2780
+        },
+        {
+          "startMs": 2820,
+          "endMs": 5560
+        },
+        {
+          "startMs": 5560,
+          "endMs": 8350
+        },
+        {
+          "startMs": 8440,
+          "endMs": 11100
+        }
+      ]
+    },
+    {
+      "shloka": {
         "id": "BG_9_26"
       },
       "chunks": [
@@ -412,6 +550,29 @@
         {
           "startMs": 7100,
           "endMs": 9500
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "BG_9_29"
+      },
+      "chunks": [
+        {
+          "startMs": 100,
+          "endMs": 2420
+        },
+        {
+          "startMs": 2470,
+          "endMs": 5100
+        },
+        {
+          "startMs": 5100,
+          "endMs": 7580
+        },
+        {
+          "startMs": 7630,
+          "endMs": 10070
         }
       ]
     },

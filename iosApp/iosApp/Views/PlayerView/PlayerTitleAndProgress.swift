@@ -14,15 +14,15 @@ struct PlayerTitleAndProgress: View {
     
     let state: PlayerState
     let component: PlayerComponent
-    @Binding var isClosePlayerDialogVisible: Bool
     
-    init(_ state: PlayerState, _ component: PlayerComponent, _ isClosePlayerDialogVisible: Binding<Bool>) {
+    init(_ state: PlayerState, _ component: PlayerComponent,) {
         self.state = state
         self.component = component
-        self._isClosePlayerDialogVisible = isClosePlayerDialogVisible
     }
     
     var body: some View {
+        let _ = debugPrint("!! playbackState = \(state.playbackState)")
+        
         HStack(alignment: .center, spacing: theme.dimens.paddingS) {
             VStack(alignment: .center) {
                 SmoothProgress(

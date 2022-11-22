@@ -111,24 +111,47 @@ struct SettingsView: View {
                     }
                     .environmentObject(theme)
                     
-                    HStack {
-                        StandartCheckBox(state.isAutoplay, theme.colors.primary) { isSelected in
-                            component.setAutoplay(value: isSelected)
+                    Group {
+                        HStack {
+                            StandartCheckBox(state.isAutoplay, theme.colors.primary) { isSelected in
+                                component.setAutoplay(value: isSelected)
+                            }
+                            
+                            Text(MR.strings().label_autoplay.resolve())
+                                .lineLimit(1)
+                                .font(theme.titleLarge)
+                        }
+                        .padding(.top, theme.dimens.paddingM)
+                        
+                        HStack(alignment: .top) {
+                            StandartCheckBox(state.showClosePlayerDialog, theme.colors.primary) { isSelected in
+                                component.setShowClosePlayerDialog(value: isSelected)
+                            }
+                            
+                            Text(MR.strings().label_show_close_player_dialog.resolve())
+                                .font(theme.titleLarge)
                         }
                         
-                        Text(MR.strings().label_autoplay.resolve())
-                            .lineLimit(1)
-                            .font(theme.titleLarge)
-                    }
-                    .padding(.top, theme.dimens.paddingM)
-                    
-                    HStack(alignment: .top) {
-                        StandartCheckBox(state.showClosePlayerDialog, theme.colors.primary) { isSelected in
-                            component.setShowClosePlayerDialog(value: isSelected)
+                        HStack(alignment: .top) {
+                            StandartCheckBox(state.withTranslation, theme.colors.primary) { isSelected in
+                                component.setWithTranslation(value: isSelected)
+                            }
+                            
+                            Text(MR.strings().label_with_translation.resolve())
+                                .font(theme.titleLarge)
                         }
                         
-                        Text(MR.strings().label_show_close_player_dialog.resolve())
-                            .font(theme.titleLarge)
+                        HStack {
+                            Image(systemName: "speaker.wave.2.fill")
+                                .font(theme.imageFontSmall)
+//                                .frame(width: 40)
+                            
+                            Text(MR.strings().label_select_tts_voice.resolve())
+                                .font(theme.titleLarge)
+                        }
+                        .onTapGesture {
+                            component.selectTtsVoice()
+                        }
                     }
                     
                     Divider()

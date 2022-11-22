@@ -17,6 +17,7 @@ struct PlayPauseButton: View {
     let component: PlayerComponent
     
     var body: some View {
+        
         Image(systemName: getIcon(for: state))
             .frame(width: theme.dimens.iconSizeL, height: theme.dimens.iconSizeL)
             .font(theme.imageFontMedium)
@@ -25,11 +26,13 @@ struct PlayPauseButton: View {
             .background(theme.colors.secondaryContainer)
             .cornerRadius(theme.dimens.radiusM)
             .onTapGesture {
+                let _ = debugPrint("onTap playbackState = \(state)")
                 switch(state){
                 case .playing: component.forcePause()
                 case .idle: if(!isAutoplay) { component.forcePlay() }
                 case .noAudio: component.forcePlay()
                 case .forcePaused: component.forcePlay()
+                case .paused: debugPrint("paused")
                 default: debugPrint("paused")
                 }
             }
