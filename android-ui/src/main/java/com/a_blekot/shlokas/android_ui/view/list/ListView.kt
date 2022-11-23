@@ -63,8 +63,8 @@ fun ListView(component: ListComponent) {
                     .padding(horizontal = horizontalScreenPadding)
                     .verticalScroll(rememberScrollState()),
             ) {
-                state.value.config.list.forEachIndexed { index, config ->
-                    ListItemView(index, config, component)
+                state.value.config.list.forEach { config ->
+                    ListItemView(config, component)
                 }
             }
 //

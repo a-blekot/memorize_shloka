@@ -11,7 +11,6 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		C60B317728F96978001AB927 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60B317628F96978001AB927 /* PlayerView.swift */; };
-		C60B317928F97077001AB927 /* HtmlText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60B317828F97077001AB927 /* HtmlText.swift */; };
 		C60B317B28F9710F001AB927 /* StubPlayerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60B317A28F9710F001AB927 /* StubPlayerComponent.swift */; };
 		C60B318028F98491001AB927 /* FoldableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60B317F28F98491001AB927 /* FoldableView.swift */; };
 		C60B318228F98AE1001AB927 /* PlayerTitleAndProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60B318128F98AE1001AB927 /* PlayerTitleAndProgress.swift */; };
@@ -36,6 +35,7 @@
 		C698536228F94B3E000CF70A /* StandartCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C698536128F94B3E000CF70A /* StandartCheckBox.swift */; };
 		C698536428F9527D000CF70A /* ChooseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C698536328F9527D000CF70A /* ChooseList.swift */; };
 		C698536628F962D7000CF70A /* ChooseListButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C698536528F962D7000CF70A /* ChooseListButton.swift */; };
+		C6A88901292E57030009DF1F /* MarkdownText.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A88900292E57030009DF1F /* MarkdownText.swift */; };
 		C6A9CA6028F40DAC00222DBB /* ObservableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9CA5F28F40DAC00222DBB /* ObservableValue.swift */; };
 		C6A9CA6228F40DD200222DBB /* SimpleRouterState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A9CA6128F40DD200222DBB /* SimpleRouterState.swift */; };
 		C6C9E8E2292B87F2007BADA9 /* PreRatingPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6C9E8E1292B87F2007BADA9 /* PreRatingPopup.swift */; };
@@ -84,7 +84,6 @@
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C60B317628F96978001AB927 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
-		C60B317828F97077001AB927 /* HtmlText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlText.swift; sourceTree = "<group>"; };
 		C60B317A28F9710F001AB927 /* StubPlayerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubPlayerComponent.swift; sourceTree = "<group>"; };
 		C60B317F28F98491001AB927 /* FoldableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldableView.swift; sourceTree = "<group>"; };
 		C60B318128F98AE1001AB927 /* PlayerTitleAndProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTitleAndProgress.swift; sourceTree = "<group>"; };
@@ -108,6 +107,7 @@
 		C698536128F94B3E000CF70A /* StandartCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandartCheckBox.swift; sourceTree = "<group>"; };
 		C698536328F9527D000CF70A /* ChooseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseList.swift; sourceTree = "<group>"; };
 		C698536528F962D7000CF70A /* ChooseListButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseListButton.swift; sourceTree = "<group>"; };
+		C6A88900292E57030009DF1F /* MarkdownText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownText.swift; sourceTree = "<group>"; };
 		C6A9CA5F28F40DAC00222DBB /* ObservableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableValue.swift; sourceTree = "<group>"; };
 		C6A9CA6128F40DD200222DBB /* SimpleRouterState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleRouterState.swift; sourceTree = "<group>"; };
 		C6C9E8E1292B87F2007BADA9 /* PreRatingPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreRatingPopup.swift; sourceTree = "<group>"; };
@@ -229,7 +229,6 @@
 			isa = PBXGroup;
 			children = (
 				C60B317628F96978001AB927 /* PlayerView.swift */,
-				C60B317828F97077001AB927 /* HtmlText.swift */,
 				C60B317F28F98491001AB927 /* FoldableView.swift */,
 				C60B318128F98AE1001AB927 /* PlayerTitleAndProgress.swift */,
 				C60B318328F98D8D001AB927 /* PlayPauseButton.swift */,
@@ -301,6 +300,7 @@
 				C698535828F7FA4A000CF70A /* AnyFlow.swift */,
 				C640959528FC7E160057A634 /* CrashlyticsLog.swift */,
 				C640959728FC83C90057A634 /* AppUtil.swift */,
+				C6A88900292E57030009DF1F /* MarkdownText.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -452,7 +452,6 @@
 				C698535E28F85209000CF70A /* ListView.swift in Sources */,
 				C6DC4ED928F5516900012D2B /* PlayerStatus.swift in Sources */,
 				C6DC4EDD28F5516900012D2B /* TimeUtils.swift in Sources */,
-				C60B317928F97077001AB927 /* HtmlText.swift in Sources */,
 				C6DC4ED428F5516900012D2B /* RemoteControlMode.swift in Sources */,
 				C6DC4ECB28F5516900012D2B /* ComponentHolder.swift in Sources */,
 				C6DC4ECE28F5516900012D2B /* FavoriteButton.swift in Sources */,
@@ -471,6 +470,7 @@
 				C6DC4ED828F5516900012D2B /* Defaults.swift in Sources */,
 				C6DC4EA228F54A1D00012D2B /* StubListComponent.swift in Sources */,
 				C6A9CA6228F40DD200222DBB /* SimpleRouterState.swift in Sources */,
+				C6A88901292E57030009DF1F /* MarkdownText.swift in Sources */,
 				C6DC4EA028F549D900012D2B /* StubRootComponent.swift in Sources */,
 				C60B317728F96978001AB927 /* PlayerView.swift in Sources */,
 				C6DC4EC628F5516900012D2B /* RootView.swift in Sources */,
@@ -623,7 +623,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -653,7 +653,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",

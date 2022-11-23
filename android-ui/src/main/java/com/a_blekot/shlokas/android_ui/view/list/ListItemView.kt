@@ -32,18 +32,19 @@ import com.a_blekot.shlokas.common.data.ShlokaConfig
 import com.a_blekot.shlokas.common.list_api.ListComponent
 
 @Composable
-fun ListItemView(index: Int, config: ShlokaConfig, component: ListComponent, modifier: Modifier = Modifier) {
+fun ListItemView(config: ShlokaConfig, component: ListComponent, modifier: Modifier = Modifier) {
     StandartRow(
         horizontalArrangement = Arrangement.spacedBy(paddingS),
+        padding = 2.dp,
         modifier = modifier
             .background(
                 color = colorScheme.primaryContainer.copy(alpha = 0.3f),
                 shape = RoundedCornerShape(radiusS)
             )
-            .padding(vertical = paddingXS)
             .clickable { component.play(config) }
     ) {
         SmallColumn(
+            verticalArrangement = Arrangement.spacedBy(paddingZero),
             horizontalAlignment = Alignment.Start,
             modifier = Modifier.weight(50f)
         ) {
@@ -65,7 +66,7 @@ fun ListItemView(index: Int, config: ShlokaConfig, component: ListComponent, mod
         }
 
         SmallColumn(
-            verticalArrangement = Arrangement.spacedBy(paddingXS, Alignment.CenterVertically),
+            verticalArrangement = Arrangement.spacedBy(2.dp, Alignment.CenterVertically),
             modifier = Modifier.weight(5f)
         ) {
             if (!config.shloka.hasAudio) {

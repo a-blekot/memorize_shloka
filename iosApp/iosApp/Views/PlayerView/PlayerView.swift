@@ -15,7 +15,7 @@ struct PlayerView: View {
     @ObservedObject
     private var state: ObservableValue<PlayerState>
     
-    let component: PlayerComponent
+    private let component: PlayerComponent
     
     @State var isClosePlayerDialogVisible = false
     
@@ -25,32 +25,35 @@ struct PlayerView: View {
     }
     
     var body: some View {
-        let _ = debugPrint("PlayerView playbackState = \(state.value.playbackState) \(state.value.currentRepeat)")
+        let state = state.value
+        let _ = debugPrint("PlayerView ## \(state.playbackState) \(state.currentRepeat)")
         
         ZStack {
             VStack(alignment: .center, spacing: theme.dimens.paddingS) {
-                PlayerTitleAndProgress(state.value, component, $isClosePlayerDialogVisible)
+                PlayerTitleAndProgress(state, component, $isClosePlayerDialogVisible)
                     .environmentObject(theme)
-                
+ 
                 ScrollView {
                     VStack {
-                        Text(html: state.value.sanskrit, size: 24, color: theme.colors.primary)
+                        Text(state.sanskrit.toMarkdown())
                             .font(theme.headlineSmall)
                             .allowsTightening(true)
                             .multilineTextAlignment(.center)
                             .minimumScaleFactor(0.8)
                             .frame(maxWidth: .infinity, alignment: .center)
                             .padding(.horizontal, theme.dimens.paddingXS)
+                            .foregroundColor(theme.colors.primary)
 
                         FoldableView(
                             title: "Synonyms",
                             textColor: theme.colors.onSecondaryContainer,
                             bgColor: theme.colors.secondaryContainer
                         ) {
-                            Text(html: state.value.words, size: 22, color: theme.colors.onSecondaryContainer)
+                            Text(state.words.toMarkdown())
                                 .font(theme.titleLarge)
                                 .padding(theme.dimens.paddingS)
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundColor(theme.colors.onSecondaryContainer)
                         }
                         
                         FoldableView(
@@ -58,7 +61,7 @@ struct PlayerView: View {
                             textColor: theme.colors.onSecondaryContainer,
                             bgColor: theme.colors.secondaryContainer
                         ) {
-                            Text(state.value.translation)
+                            Text(state.translation)
                                 .font(theme.titleLarge)
                                 .foregroundColor(theme.colors.onSecondaryContainer)
                                 .padding(.horizontal, theme.dimens.paddingS)

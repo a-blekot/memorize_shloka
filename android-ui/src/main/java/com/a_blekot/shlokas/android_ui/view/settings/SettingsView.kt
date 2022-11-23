@@ -19,11 +19,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.unit.dp
 import com.a_blekot.shlokas.android_ui.custom.*
 import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingM
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
+import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingXS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingZero
 import com.a_blekot.shlokas.android_ui.theme.textFieldColors
 import com.a_blekot.shlokas.common.data.Locales.en
@@ -69,7 +71,7 @@ fun SettingsView(component: SettingsComponent) {
             .background(colorScheme.background)
     ) {
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(paddingS),
+            verticalArrangement = Arrangement.spacedBy(2.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth().padding(horizontal = paddingS)
         ) {
@@ -126,13 +128,14 @@ fun SettingsView(component: SettingsComponent) {
             }
 
             item {
-                Weeks(state.value.week, modifier = Modifier.padding(top = paddingM)) {
+                Weeks(state.value.week) {
                     component.setWeek(it.ordinal)
                 }
             }
 
             item {
                 StandartRow(
+                    padding = paddingZero,
                     horizontalArrangement = Arrangement.spacedBy(paddingM),
                 ) {
                     StandartCheckBox(state.value.isAutoplay) {
@@ -150,6 +153,7 @@ fun SettingsView(component: SettingsComponent) {
 
             item {
                 StandartRow(
+                    padding = paddingZero,
                     horizontalArrangement = Arrangement.spacedBy(paddingM),
                 ) {
                     StandartCheckBox(state.value.showClosePlayerDialog) {
@@ -166,6 +170,7 @@ fun SettingsView(component: SettingsComponent) {
 
             item {
                 StandartRow(
+                    padding = paddingZero,
                     horizontalArrangement = Arrangement.spacedBy(paddingM),
                 ) {
                     StandartCheckBox(state.value.withTranslation) {
@@ -183,6 +188,7 @@ fun SettingsView(component: SettingsComponent) {
 
             item {
                 StandartRow(
+                    padding = paddingZero,
                     horizontalArrangement = Arrangement.spacedBy(paddingM),
                     modifier = Modifier.clickable { component.selectTtsVoice() }
                 ) {
@@ -208,12 +214,12 @@ fun SettingsView(component: SettingsComponent) {
             }
 
             item {
-                Locale(state.value.locale, modifier = Modifier.padding(top = paddingM)) {
+                Locale(state.value.locale) {
                     component.setLocale(it)
                 }
             }
 
-            if(state.value.locale.isNotBlank()) {
+            if (state.value.locale.isNotBlank()) {
                 item {
                     StandartRow(
                         horizontalArrangement = Arrangement.spacedBy(paddingM),
@@ -345,6 +351,7 @@ private fun Weeks(week: Week, modifier: Modifier = Modifier, onChanged: (Week) -
     val context = LocalContext.current
 
     SmallColumn(
+        verticalArrangement = Arrangement.spacedBy(paddingZero),
         modifier = modifier
     ) {
 
@@ -409,6 +416,7 @@ private fun Locale(locale: String, modifier: Modifier = Modifier, onChanged: (St
     val context = LocalContext.current
 
     SmallColumn(
+        verticalArrangement = Arrangement.spacedBy(paddingZero),
         modifier = modifier
     ) {
 

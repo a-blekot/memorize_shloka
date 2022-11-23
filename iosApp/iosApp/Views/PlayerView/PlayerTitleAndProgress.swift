@@ -12,16 +12,18 @@ import Prabhupada
 struct PlayerTitleAndProgress: View {
     @EnvironmentObject var theme: Theme
     
-    let state: PlayerState
-    let component: PlayerComponent
+    private let state: PlayerState
+    private let component: PlayerComponent
+    @Binding private var isClosePlayerDialogVisible: Bool
     
-    init(_ state: PlayerState, _ component: PlayerComponent,) {
+    init(_ state: PlayerState, _ component: PlayerComponent, _ isClosePlayerDialogVisible: Binding<Bool>) {
         self.state = state
         self.component = component
+        self._isClosePlayerDialogVisible = isClosePlayerDialogVisible
     }
     
     var body: some View {
-        let _ = debugPrint("!! playbackState = \(state.playbackState)")
+        let _ = debugPrint("ChildView  ## \(state.playbackState) \(state.currentRepeat)")
         
         HStack(alignment: .center, spacing: theme.dimens.paddingS) {
             VStack(alignment: .center) {

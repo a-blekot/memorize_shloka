@@ -33,6 +33,7 @@ struct ChooseList: View {
                     ChooseListButton(list.title, list.isSelected)
                         .environmentObject(theme)
                         .onTapGesture {
+                            let _ = debugPrint("list.type \(list.type)")
                             onSelected(list.type)
                         }
                 }

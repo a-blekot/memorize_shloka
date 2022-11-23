@@ -27,7 +27,9 @@ struct SettingsView: View {
     @EnvironmentObject var theme: Theme
     
     @ObservedObject
-    private var state: ObservableValue<SettingsState>
+    private var observableState: ObservableValue<SettingsState>
+    
+    private var state: SettingsState { observableState.value }
     
     @State private var mailResult: Result<MFMailComposeResult, Error>? = nil
     @State private var isShowingMailView = false
@@ -40,14 +42,12 @@ struct SettingsView: View {
     
     init(_ component: SettingsComponent) {
         self.component = component
-        self.state = ObservableValue(component.flow)
+        self.observableState = ObservableValue(component.flow)
         _repeats = State(initialValue: String(component.flow.value.repeats))
         _pause = State(initialValue: String(component.flow.value.pause))
     }
     
     var body: some View {
-        let state = state.value
-        
         ZStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: theme.dimens.paddingXS) {
