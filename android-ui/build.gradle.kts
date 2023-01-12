@@ -26,7 +26,7 @@ dependencies {
     implementation(projects.common.utils)
 
     implementation(libs.bundles.androidx.compose)
-    implementation(libs.accompanist.insets)
+    implementation(libs.accompanist.systemuicontroller)
     implementation(libs.decompose.decompose)
     implementation(libs.decompose.extCompose)
     implementation(libs.ui.lottie.compose)

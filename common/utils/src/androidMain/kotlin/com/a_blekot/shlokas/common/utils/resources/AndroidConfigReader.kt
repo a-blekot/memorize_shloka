@@ -5,6 +5,7 @@ import com.a_blekot.shlokas.common.data.ListId
 import com.a_blekot.shlokas.common.resources.MR.files.BG
 import com.a_blekot.shlokas.common.resources.MR.files.ISO
 import com.a_blekot.shlokas.common.resources.MR.files.NI
+import com.a_blekot.shlokas.common.resources.MR.files.NK
 import com.a_blekot.shlokas.common.resources.MR.files.NOD
 import com.a_blekot.shlokas.common.resources.MR.files.SB_1
 import com.a_blekot.shlokas.common.resources.MR.files.SB_2
@@ -20,6 +21,7 @@ class AndroidConfigReader(private val context: Context): ConfigReader {
             ListId.BG -> readFileResource(BG)
             ListId.ISO -> readFileResource(ISO)
             ListId.NI -> readFileResource(NI)
+            ListId.NK -> readFileResource(NK)
             ListId.NOD -> readFileResource(NOD)
             ListId.SB_1 -> readFileResource(SB_1)
             ListId.SB_2 -> readFileResource(SB_2)

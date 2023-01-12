@@ -20,7 +20,6 @@ import io.github.aakira.napier.Napier
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlin.reflect.KClass
 
 private const val KEY_LIST_STATE = "KEY_LIST_STATE"
 

@@ -78,12 +78,19 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        billingHelper = BillingHelperAndroid(this, this.lifecycleScope, app.connectivityObserver)
+        billingHelper = BillingHelperAndroid(
+            activity = this,
+            scope = this.lifecycleScope,
+            dispatcherProvider = dispatchers(),
+            connectivityObserver = app.connectivityObserver
+        )
         inappUpdater = InappUpdater(this)
 
         val root = root(defaultComponentContext())
 
+//        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
+//            TransparentSystemBars()
             AppTheme {
                 MainContent(root)
             }

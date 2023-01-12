@@ -4,6 +4,7 @@ import com.a_blekot.shlokas.common.data.ShlokaId.*
 import com.a_blekot.shlokas.common.resources.MR.assets.BG_
 import com.a_blekot.shlokas.common.resources.MR.assets.ISO
 import com.a_blekot.shlokas.common.resources.MR.assets.NI_
+import com.a_blekot.shlokas.common.resources.MR.assets.NK_
 import com.a_blekot.shlokas.common.resources.MR.assets.NOD
 import com.a_blekot.shlokas.common.resources.MR.assets.SB_1
 import com.a_blekot.shlokas.common.resources.MR.assets.SB_2
@@ -707,8 +708,254 @@ val versesMap =
                 descr_NI_11,
                 NI_.NI_11
             ),
-
-
+            NK_01 to Verse(
+                title_NK_01,
+                sansk_NK_01,
+                words_NK_01,
+                trans_NK_01,
+                descr_NK_01,
+                NK_.NK_01
+            ),
+            NK_02 to Verse(
+                title_NK_02,
+                sansk_NK_02,
+                words_NK_02,
+                trans_NK_02,
+                descr_NK_02,
+                NK_.NK_02
+            ),
+            NK_03 to Verse(
+                title_NK_03,
+                sansk_NK_03,
+                words_NK_03,
+                trans_NK_03,
+                descr_NK_03,
+                NK_.NK_03
+            ),
+            NK_04 to Verse(
+                title_NK_04,
+                sansk_NK_04,
+                words_NK_04,
+                trans_NK_04,
+                descr_NK_04,
+                NK_.NK_04
+            ),
+            NK_05 to Verse(
+                title_NK_05,
+                sansk_NK_05,
+                words_NK_05,
+                trans_NK_05,
+                descr_NK_05,
+                NK_.NK_05
+            ),
+            NK_06 to Verse(
+                title_NK_06,
+                sansk_NK_06,
+                words_NK_06,
+                trans_NK_06,
+                descr_NK_06,
+                NK_.NK_06
+            ),
+            NK_07 to Verse(
+                title_NK_07,
+                sansk_NK_07,
+                words_NK_07,
+                trans_NK_07,
+                descr_NK_07,
+                NK_.NK_07
+            ),
+            NK_08 to Verse(
+                title_NK_08,
+                sansk_NK_08,
+                words_NK_08,
+                trans_NK_08,
+                descr_NK_08,
+                NK_.NK_08
+            ),
+            NK_09 to Verse(
+                title_NK_09,
+                sansk_NK_09,
+                words_NK_09,
+                trans_NK_09,
+                descr_NK_09,
+                NK_.NK_09
+            ),
+            NK_10 to Verse(
+                title_NK_10,
+                sansk_NK_10,
+                words_NK_10,
+                trans_NK_10,
+                descr_NK_10,
+                NK_.NK_10
+            ),
+            NK_11 to Verse(
+                title_NK_11,
+                sansk_NK_11,
+                words_NK_11,
+                trans_NK_11,
+                descr_NK_11,
+                NK_.NK_11
+            ),
+            NK_12 to Verse(
+                title_NK_12,
+                sansk_NK_12,
+                words_NK_12,
+                trans_NK_12,
+                descr_NK_12,
+                NK_.NK_12
+            ),
+            NK_13 to Verse(
+                title_NK_13,
+                sansk_NK_13,
+                words_NK_13,
+                trans_NK_13,
+                descr_NK_13,
+                NK_.NK_13
+            ),
+            NK_14 to Verse(
+                title_NK_14,
+                sansk_NK_14,
+                words_NK_14,
+                trans_NK_14,
+                descr_NK_14,
+                NK_.NK_14
+            ),
+            NK_15 to Verse(
+                title_NK_15,
+                sansk_NK_15,
+                words_NK_15,
+                trans_NK_15,
+                descr_NK_15,
+                NK_.NK_15
+            ),
+            NK_16 to Verse(
+                title_NK_16,
+                sansk_NK_16,
+                words_NK_16,
+                trans_NK_16,
+                descr_NK_16,
+                NK_.NK_16
+            ),
+            NK_17 to Verse(
+                title_NK_17,
+                sansk_NK_17,
+                words_NK_17,
+                trans_NK_17,
+                descr_NK_17,
+                NK_.NK_17
+            ),
+            NK_18 to Verse(
+                title_NK_18,
+                sansk_NK_18,
+                words_NK_18,
+                trans_NK_18,
+                descr_NK_18,
+                NK_.NK_18
+            ),
+            NK_19 to Verse(
+                title_NK_19,
+                sansk_NK_19,
+                words_NK_19,
+                trans_NK_19,
+                descr_NK_19,
+                NK_.NK_19
+            ),
+            NK_20 to Verse(
+                title_NK_20,
+                sansk_NK_20,
+                words_NK_20,
+                trans_NK_20,
+                descr_NK_20,
+                NK_.NK_20
+            ),
+            NK_21 to Verse(
+                title_NK_21,
+                sansk_NK_21,
+                words_NK_21,
+                trans_NK_21,
+                descr_NK_21,
+                NK_.NK_21
+            ),
+            NK_22 to Verse(
+                title_NK_22,
+                sansk_NK_22,
+                words_NK_22,
+                trans_NK_22,
+                descr_NK_22,
+                NK_.NK_22
+            ),
+            NK_23 to Verse(
+                title_NK_23,
+                sansk_NK_23,
+                words_NK_23,
+                trans_NK_23,
+                descr_NK_23,
+                NK_.NK_23
+            ),
+            NK_24 to Verse(
+                title_NK_24,
+                sansk_NK_24,
+                words_NK_24,
+                trans_NK_24,
+                descr_NK_24,
+                NK_.NK_24
+            ),
+            NK_25 to Verse(
+                title_NK_25,
+                sansk_NK_25,
+                words_NK_25,
+                trans_NK_25,
+                descr_NK_25,
+                NK_.NK_25
+            ),
+            NK_26 to Verse(
+                title_NK_26,
+                sansk_NK_26,
+                words_NK_26,
+                trans_NK_26,
+                descr_NK_26,
+                NK_.NK_26
+            ),
+            NK_27 to Verse(
+                title_NK_27,
+                sansk_NK_27,
+                words_NK_27,
+                trans_NK_27,
+                descr_NK_27,
+                NK_.NK_27
+            ),
+            NK_28 to Verse(
+                title_NK_28,
+                sansk_NK_28,
+                words_NK_28,
+                trans_NK_28,
+                descr_NK_28,
+                NK_.NK_28
+            ),
+            NK_29 to Verse(
+                title_NK_29,
+                sansk_NK_29,
+                words_NK_29,
+                trans_NK_29,
+                descr_NK_29,
+                NK_.NK_29
+            ),
+            NK_30 to Verse(
+                title_NK_30,
+                sansk_NK_30,
+                words_NK_30,
+                trans_NK_30,
+                descr_NK_30,
+                NK_.NK_30
+            ),
+            NK_31 to Verse(
+                title_NK_31,
+                sansk_NK_31,
+                words_NK_31,
+                trans_NK_31,
+                descr_NK_31,
+                NK_.NK_31
+            ),
             ISO_00 to Verse(
                 title_ISO_00,
                 sansk_ISO_00,
@@ -1279,6 +1526,14 @@ val versesMap =
                 trans_BG_10_11,
                 descr_BG_10_11,
                 BG_.BG_10_11
+            ),
+            BG_11_55 to Verse(
+                title_BG_11_55,
+                sansk_BG_11_55,
+                words_BG_11_55,
+                trans_BG_11_55,
+                descr_BG_11_55,
+                BG_.BG_11_55
             ),
             BG_13_22 to Verse(
                 title_BG_13_22,

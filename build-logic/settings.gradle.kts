@@ -15,5 +15,3 @@ dependencyResolutionManagement {
 rootProject.name = "build-logic"
 include("convention-plugins")
 
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-

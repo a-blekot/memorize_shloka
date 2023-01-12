@@ -63,7 +63,7 @@ struct iOSApp: App {
             platformApi: IosPlatform(),
             dispatchers: DispatcherProviderImplKt.dispatchers(),
             configReader: IOsConfigReader(),
-            billingHelper: nil,
+            billingHelper: BillingHelperIOs(),
             connectivityObserver: ConnectivityObserverIOS(),
             stringResourceHandler: IOsStringResourceHandler()
         )
@@ -95,6 +95,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         } else {
             NapierProxyKt.doInitNapier(antilog: CrashlyticsAntilog())
         }
+        
         return true
     }
     

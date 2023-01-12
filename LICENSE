@@ -1,52 +1,4 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
-
-@a-blekot
-a-blekot
-/
-memorize_shloka
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-memorize_shloka/LICENSE
-a-blekot/memorize_shloka is licensed under the
-
-Apache License 2.0
-A permissive license whose main conditions require preservation of copyright and license notices. Contributors provide an express grant of patent rights. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
-
-Permissions
- Commercial use
- Modification
- Distribution
- Patent use
- Private use
-Limitations
- Trademark use
- Liability
- Warranty
-Conditions
- License and copyright notice
- State changes
-This is not legal advice. Learn more about repository licenses.
-@a-blekot
-a-blekot Initial commit
-Latest commit efc950a 2 minutes ago
- History
- 1 contributor
-201 lines (169 sloc)  11.1 KB
-
-                                 Apache License
+                                Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
 
@@ -247,18 +199,3 @@ Latest commit efc950a 2 minutes ago
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-You have no unread notifications

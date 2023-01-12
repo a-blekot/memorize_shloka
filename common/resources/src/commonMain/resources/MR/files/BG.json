@@ -338,10 +338,10 @@
         },
         {
           "startMs": 4850,
-          "endMs": 7490
+          "endMs": 7450
         },
         {
-          "startMs": 7490,
+          "startMs": 7430,
           "endMs": 9700
         }
       ]
@@ -665,6 +665,29 @@
         {
           "startMs": 8200,
           "endMs": 11000
+        }
+      ]
+    },
+    {
+      "shloka": {
+        "id": "BG_11_55"
+      },
+      "chunks": [
+        {
+          "startMs": 100,
+          "endMs": 2650
+        },
+        {
+          "startMs": 2720,
+          "endMs": 5550
+        },
+        {
+          "startMs": 5550,
+          "endMs": 8160
+        },
+        {
+          "startMs": 8250,
+          "endMs": 10700
         }
       ]
     },

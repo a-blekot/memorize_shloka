@@ -14,7 +14,7 @@ let MS_IN_SECOND_64: Int64 = 1000
 let MS_IN_SECOND: Int32 = 1000
 let SEEK_TIME = CMTime(value: 10, timescale: 1)
 
-//extension PlayerState {
+//extension PlayerState {Utils
 //    var displayedTime: String {
 //        "\(TimeInterval(timeMs/MS_IN_SECOND_64).hoursMinutesSeconds()) / \(TimeInterval(durationMs/MS_IN_SECOND_64).hoursMinutesSeconds())"
 //    }

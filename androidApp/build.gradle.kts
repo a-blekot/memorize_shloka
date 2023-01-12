@@ -19,7 +19,6 @@ dependencies {
     implementation(projects.common.root)
     implementation(projects.common.utils)
 
-    implementation(libs.accompanist.insets)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.lifecycle.process)
     implementation(libs.androidx.lifecycle.runtime)

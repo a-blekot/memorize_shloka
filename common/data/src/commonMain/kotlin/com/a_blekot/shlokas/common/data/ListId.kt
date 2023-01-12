@@ -10,6 +10,7 @@ import kotlinx.serialization.Serializable
 enum class ListId(val id: String): Parcelable {
     BG("BG"),
     NI("NI"),
+    NK("NK"),
     ISO("ISO"),
     NOD("NOD"),
     SB_1("SB_1"),

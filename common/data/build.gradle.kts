@@ -13,7 +13,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(libs.decompose.decompose)
+                implementation(libs.essenty.parcelable)
                 implementation(libs.kotlinx.serialization.json)
             }
         }

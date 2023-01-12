@@ -1,10 +1,7 @@
 package com.a_blekot.shlokas.android_ui.view.details
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -24,21 +21,20 @@ import androidx.compose.ui.unit.dp
 import com.a_blekot.shlokas.android_ui.theme.textFieldColors
 import com.a_blekot.shlokas.common.data.Chunk
 import com.a_blekot.shlokas.common.details_api.DetailsComponent
-import com.google.accompanist.insets.LocalWindowInsets
 import kotlinx.coroutines.delay
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun ChunkView(index: Int, chunk: Chunk, component: DetailsComponent, modifier: Modifier = Modifier) {
     val relocationRequester = remember { BringIntoViewRequester() }
-    var focused = remember { mutableStateOf(false) }
-    val ime = LocalWindowInsets.current.ime
+    val focused = remember { mutableStateOf(false) }
+    val isImeVisible = WindowInsets.isImeVisible
 
     LaunchedEffect(focused) {
         if (focused.value) {
             var done = false
             while (!done) {
-                if (ime.isVisible && !ime.animationInProgress) {
+                if (isImeVisible) {
                     relocationRequester.bringIntoView()
                     done = true
                 }
