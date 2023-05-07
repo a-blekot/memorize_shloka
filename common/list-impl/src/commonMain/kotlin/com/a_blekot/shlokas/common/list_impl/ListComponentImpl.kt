@@ -63,7 +63,7 @@ class ListComponentImpl(
         ListState(
             deps.config,
             availableLists = availableLists(),
-            locale = getLocale(),
+            locale = locale,
             shouldShowTutorial = false
         )
 
@@ -115,22 +115,22 @@ class ListComponentImpl(
 
     private fun ListConfig.toPlayConfig() =
         PlayConfig(
-            week = getCurrentWeek(),
+            week = currentWeek,
             shlokas = list.filter { it.isSelected && it.shloka.hasAudio },
-            repeats = getRepeats(),
-            withSanskrit = withSanskrit(),
-            withTranslation = withTranslation(),
-            pauseAfterEach = getPause()
+            repeats = repeats,
+            withSanskrit = withSanskrit,
+            withTranslation = withTranslation,
+            pauseAfterEach = pause,
         )
 
     private fun ShlokaConfig.toPlayConfig() =
         PlayConfig(
-            week = getCurrentWeek(),
+            week = currentWeek,
             shlokas = listOf(copy(isSelected = true)),
-            repeats = getRepeats(),
-            withSanskrit = withSanskrit(),
-            withTranslation = withTranslation(),
-            pauseAfterEach = getPause(),
+            repeats = repeats,
+            withSanskrit = withSanskrit,
+            withTranslation = withTranslation,
+            pauseAfterEach = pause,
         )
 
     private fun playListAnalytics(id: String, config: PlayConfig) =

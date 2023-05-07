@@ -9,8 +9,8 @@ import com.a_blekot.shlokas.common.data.Locales.uk
 import dev.icerock.moko.resources.desc.StringDesc
 
 fun checkLocale(systemLocale: String) {
-    if (getLocale().isNotBlank()) {
-        setAppLocale(getLocale())
+    if (locale.isNotBlank()) {
+        setAppLocale(locale)
         return // means that locale already selected by user
     }
 
@@ -25,16 +25,16 @@ fun setAppLocale(locale: String) =
     }
 
 private fun setUkrainian() {
-    saveLocale(uk)
+    locale = uk
     StringDesc.localeType = StringDesc.LocaleType.Custom(uk)
 }
 
 private fun setRussian() {
-    saveLocale(ru)
+    locale = ru
     StringDesc.localeType = StringDesc.LocaleType.Custom(ru)
 }
 
 private fun setEnglish() {
-    saveLocale(en)
+    locale = en
     StringDesc.localeType = StringDesc.LocaleType.Custom(en)
 }

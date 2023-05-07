@@ -70,18 +70,18 @@ internal class SettingsStoreFactory(
         }
 
         private fun setRepeats(value: Int) {
-            val savedValue = saveRepeats(value) // coerce in range
-            dispatch(Msg.Repeats(savedValue))
+            repeats = value // coerce in range
+            dispatch(Msg.Repeats(repeats))
         }
 
         private fun setPause(value: Long) {
-            val savedValue = savePause(value) // coerce in range
-            dispatch(Msg.Pause(savedValue))
+            pause = value // coerce in range
+            dispatch(Msg.Pause(pause))
         }
 
         private fun setWeek(value: Int) {
             val week = weekFromOrdinal(value)
-            saveCurrentWeek(week)
+            currentWeek = week
             dispatch(Msg.Weeks(week))
         }
 
@@ -91,22 +91,22 @@ internal class SettingsStoreFactory(
         }
 
         private fun setAutoplay(value: Boolean) {
-            saveAutoPlay(value)
+            autoPlay = value
             dispatch(Msg.Autoplay(value))
         }
 
         private fun setWithSanskrit(value: Boolean) {
-            saveWithSanskrit(value)
+            withSanskrit = value
             dispatch(Msg.WithSanskrit(value))
         }
 
         private fun setWithTranslation(value: Boolean) {
-            saveWithTranslation(value)
+            withTranslation = value
             dispatch(Msg.WithTranslation(value))
         }
 
         private fun updateShowClosePlayerDialog(value: Boolean) {
-            setShowClosePlayerDialog(value)
+            showClosePlayerDialog = value
             dispatch(Msg.ShowClosePlayerDialog(value))
         }
 

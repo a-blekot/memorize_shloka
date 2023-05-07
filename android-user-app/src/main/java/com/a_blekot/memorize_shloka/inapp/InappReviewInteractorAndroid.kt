@@ -2,7 +2,7 @@ package com.a_blekot.memorize_shloka.inapp
 
 import android.app.Activity
 import com.a_blekot.memorize_shloka.MainApp.Companion.app
-import com.a_blekot.shlokas.common.utils.onInappReviewShown
+import com.a_blekot.shlokas.common.utils.inappReviewShown
 import com.google.android.play.core.review.ReviewManagerFactory
 import io.github.aakira.napier.Napier
 
@@ -14,7 +14,7 @@ fun showInappReview(activity: Activity, onNext: () -> Unit = {}) {
             val reviewInfo = request.result
             reviewManager.launchReviewFlow(activity, reviewInfo).apply {
                 addOnCompleteListener {
-                    onInappReviewShown()
+                    inappReviewShown = true
                     onNext()
                 }
             }

@@ -3,7 +3,11 @@ package com.a_blekot.shlokas.common.utils
 import com.a_blekot.shlokas.common.data.ShlokaId
 import com.a_blekot.shlokas.common.data.Week
 import com.a_blekot.shlokas.common.data.toListType
-import com.russhwolf.settings.Settings
+import com.a_blekot.shlokas.common.utils.IntDelegate
+import com.russhwolf.settings.*
+import com.russhwolf.settings.int
+import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
 
 private const val APP_LAUNCH_COUNT = "APP_LAUNCH_COUNT"
 private const val AUTOPLAY_KEY = "AUTOPLAY_KEY"
@@ -20,6 +24,8 @@ private const val SHLOKA_SELECTED_KEY = "SHLOKA_SELECTED_KEY"
 private const val TUTORIAL_COMPLETED_KEY = "TUTORIAL_COMPLETED_KEY"
 private const val TUTORIAL_SKIPP_COUNT_KEY = "TUTORIAL_SKIPP_COUNT_KEY"
 private const val SHOW_CLOSE_PLAYER_DIALOG = "SHOW_CLOSE_PLAYER_DIALOG"
+private const val ALLOW_SWIPE_ON_PLAYER = "ALLOW_SWIPE_ON_PLAYER"
+private const val WITH_SANSKRIT = "WITH_SANSKRIT"
 private const val WITH_TRANSLATION = "WITH_TRANSLATION"
 
 private const val DEFAULT_REPEATS = 10
@@ -33,91 +39,46 @@ private val settings = Settings()
 
 var tutorialWasShownInThisSession = false
 
+var appLaunchCount: Int by settings.int(APP_LAUNCH_COUNT, 0)
+
 fun onAppLaunch() =
-    getAppLaunchCount().let {
-        settings.putInt(APP_LAUNCH_COUNT, it + 1)
-    }
+    appLaunchCount.let { appLaunchCount = it + 1 }
 
-fun getAppLaunchCount() =
-    settings.getInt(APP_LAUNCH_COUNT)
+var inappReviewShown: Boolean by settings.boolean(INAPP_REVIEW_SHOWN, false)
 
-fun inappReviewShown() =
-    settings.getBoolean(INAPP_REVIEW_SHOWN)
-
-fun onInappReviewShown() =
-    settings.putBoolean(INAPP_REVIEW_SHOWN, true)
-
-fun playCompletedCount() =
-    settings.getInt(PLAY_COMPLETED_COUNT)
+var playCompletedCount: Int by settings.int(PLAY_COMPLETED_COUNT, 0)
 
 fun onPlayCompleted() =
-    playCompletedCount().let {
-        settings.putInt(PLAY_COMPLETED_COUNT, it + 1)
+    playCompletedCount.let {
+        playCompletedCount = it + 1
     }
 
 fun saveLastListId(id: String) =
     settings.putString(LAST_CONFIG_ID_KEY, id)
 
 fun getLastListId() =
-    settings.getString(LAST_CONFIG_ID_KEY).toListType()
+    settings.getString(LAST_CONFIG_ID_KEY, "").toListType()
 
-fun saveAutoPlay(value: Boolean) =
-    settings.putBoolean(AUTOPLAY_KEY, value)
+var autoPlay: Boolean by settings.boolean(AUTOPLAY_KEY, false)
 
-fun getAutoPlay() =
-    settings.getBoolean(AUTOPLAY_KEY, false)
+var currentWeek: Week
+    get() = weekFromOrdinal(settings.getInt(CURRENT_WEEK, 0))
+    set(value) = settings.putInt(CURRENT_WEEK, value.ordinal)
 
-fun saveCurrentWeek(week: Week) =
-    settings.putInt(CURRENT_WEEK, week.ordinal)
+var locale: String by settings.string(LOCALE_KEY, "")
 
-fun getCurrentWeek() =
-    settings.getInt(CURRENT_WEEK).let {
-        weekFromOrdinal(it)
-    }
+var repeats: Int by settings.int(CURRENT_REPEATS, DEFAULT_REPEATS, 1, MAX_REPEATS)
+var pause: Long by settings.long(PAUSE_AFTER_EACH, DEFAULT_PAUSE, MIN_PAUSE, MAX_PAUSE)
 
-fun saveLocale(locale: String) =
-    settings.putString(LOCALE_KEY, locale)
+var withSanskrit: Boolean by settings.boolean(WITH_SANSKRIT, true)
+var withTranslation: Boolean by settings.boolean(WITH_TRANSLATION, true)
 
-fun getLocale() =
-    settings.getString(LOCALE_KEY)
+var isTutorialCompleted: Boolean by settings.boolean(TUTORIAL_COMPLETED_KEY, true)
 
-fun saveRepeats(repeats: Int): Int {
-    val savedValue = repeats.coerceIn(1, MAX_REPEATS)
-    settings.putInt(CURRENT_REPEATS, savedValue)
-    return savedValue
-}
-
-fun getRepeats() =
-    settings.getInt(CURRENT_REPEATS, DEFAULT_REPEATS).coerceIn(1, MAX_REPEATS)
-
-fun saveWithTranslation(value: Boolean) =
-    settings.putBoolean(WITH_TRANSLATION, value)
-
-fun withTranslation() =
-    settings.getBoolean(WITH_TRANSLATION, defaultValue = true)
-
-fun savePause(pause: Long): Long {
-    val savedValue = pause.coerceIn(MIN_PAUSE, MAX_PAUSE)
-    settings.putLong(PAUSE_AFTER_EACH, savedValue)
-    return savedValue
-}
-
-fun getPause() =
-    settings.getLong(PAUSE_AFTER_EACH, DEFAULT_PAUSE)
-
-fun isTutorialCompleted() =
-    settings.getBoolean(TUTORIAL_COMPLETED_KEY)
-
-fun setTutorialCompleted() =
-    settings.putBoolean(TUTORIAL_COMPLETED_KEY, true)
+var tutorialSkippCount: Int by settings.int(TUTORIAL_SKIPP_COUNT_KEY, 0)
 
 fun onTutorialSkipped() =
-    getTutorialSkippCount().let {
-        settings.putInt(TUTORIAL_SKIPP_COUNT_KEY, it + 1)
-    }
-
-fun getTutorialSkippCount() =
-    settings.getInt(TUTORIAL_SKIPP_COUNT_KEY)
+    tutorialSkippCount.let { tutorialSkippCount = it + 1 }
 
 fun weekFromOrdinal(ordinal: Int) =
     Week.values().firstOrNull { it.ordinal == ordinal } ?: Week.FIRST
@@ -128,24 +89,83 @@ fun selectShloka(id: ShlokaId, isSelected: Boolean) =
 fun isSelected(id: ShlokaId) =
     settings.getBoolean("$SHLOKA_SELECTED_KEY-${id.id}", true)
 
-fun onPreRatingShown() =
-    getPreRatingShownCount().let {
-        settings.putInt(PRERATING_SHOWN_COUNT, it + 1)
-    }
+var preRatingShownCount: Int by settings.int(PRERATING_SHOWN_COUNT, 0)
+var preRatingClosedCount: Int by settings.int(PRERATING_CLOSED_COUNT, 0)
 
-fun getPreRatingShownCount() =
-    settings.getInt(PRERATING_SHOWN_COUNT)
+fun onPreRatingShown() =
+    preRatingShownCount.let { preRatingShownCount = it + 1 }
 
 fun onPreRatingClosed() =
-    getPreRatingClosedCount().let {
-        settings.putInt(PRERATING_CLOSED_COUNT, it + 1)
+    preRatingClosedCount.let { preRatingClosedCount = it + 1 }
+
+var showClosePlayerDialog: Boolean by settings.boolean(SHOW_CLOSE_PLAYER_DIALOG, true)
+var allowSwipeOnPlayer: Boolean by settings.boolean(ALLOW_SWIPE_ON_PLAYER, true)
+
+fun Settings.int(
+    key: String? = null,
+    defaultValue: Int,
+    minValue: Int,
+    maxValue: Int
+): ReadWriteProperty<Any?, Int> =
+    IntDelegate(
+        settings = this,
+        key = key,
+        defaultValue = defaultValue,
+        minValue = minValue,
+        maxValue = maxValue,
+    )
+
+fun Settings.long(
+    key: String? = null,
+    defaultValue: Long,
+    minValue: Long,
+    maxValue: Long
+): ReadWriteProperty<Any?, Long> =
+    LongDelegate(
+        settings = this,
+        key = key,
+        defaultValue = defaultValue,
+        minValue = minValue,
+        maxValue = maxValue,
+    )
+
+private class IntDelegate(
+    private val settings: Settings,
+    key: String?,
+    private val defaultValue: Int,
+    private val minValue: Int,
+    private val maxValue: Int,
+) : OptionalKeyDelegate<Int>(key) {
+    override fun getValue(key: String): Int =
+        settings[key, defaultValue].coerceIn(minValue, maxValue)
+
+    override fun setValue(key: String, value: Int) {
+        settings[key] = value.coerceIn(minValue, maxValue)
     }
+}
 
-fun getPreRatingClosedCount() =
-    settings.getInt(PRERATING_CLOSED_COUNT)
+private class LongDelegate(
+    private val settings: Settings,
+    key: String?,
+    private val defaultValue: Long,
+    private val minValue: Long,
+    private val maxValue: Long,
+) : OptionalKeyDelegate<Long>(key) {
+    override fun getValue(key: String): Long =
+        settings[key, defaultValue].coerceIn(minValue, maxValue)
 
-fun showClosePlayerDialog() =
-    settings.getBoolean(SHOW_CLOSE_PLAYER_DIALOG, true)
+    override fun setValue(key: String, value: Long) {
+        settings[key] = value.coerceIn(minValue, maxValue)
+    }
+}
 
-fun setShowClosePlayerDialog(show: Boolean) =
-    settings.putBoolean(SHOW_CLOSE_PLAYER_DIALOG, show)
+private abstract class OptionalKeyDelegate<T>(private val key: String?) : ReadWriteProperty<Any?, T> {
+
+    abstract fun getValue(key: String): T
+    abstract fun setValue(key: String, value: T)
+
+    override fun getValue(thisRef: Any?, property: KProperty<*>): T = getValue(key ?: property.name)
+    override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
+        setValue(key ?: property.name, value)
+    }
+}

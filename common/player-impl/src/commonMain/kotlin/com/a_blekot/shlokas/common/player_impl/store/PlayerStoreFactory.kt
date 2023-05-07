@@ -10,7 +10,7 @@ import com.a_blekot.shlokas.common.player_impl.store.PlayerLabel.PlayerTask
 import com.a_blekot.shlokas.common.player_impl.store.PlayerStoreFactory.Action.Feedback
 import com.a_blekot.shlokas.common.player_impl.store.PlayerStoreFactory.Action.Start
 import com.a_blekot.shlokas.common.utils.analytics.playCompleted
-import com.a_blekot.shlokas.common.utils.getAutoPlay
+import com.a_blekot.shlokas.common.utils.autoPlay
 import com.a_blekot.shlokas.common.utils.onPlayCompleted
 import com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
 import com.arkivanov.mvikotlin.core.store.Reducer
@@ -207,7 +207,7 @@ internal class PlayerStoreFactory(
         }
 
         private fun idle(task: IdleTask) {
-            if (getAutoPlay()) {
+            if (autoPlay) {
                 nextTask()
             } else {
                 publish(PlayerTask(task))

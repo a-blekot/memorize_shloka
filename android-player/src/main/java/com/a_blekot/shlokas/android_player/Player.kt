@@ -11,7 +11,7 @@ import android.speech.tts.UtteranceProgressListener
 import com.a_blekot.shlokas.common.data.tasks.*
 import com.a_blekot.shlokas.common.player_api.PlayerBus
 import com.a_blekot.shlokas.common.player_api.PlayerFeedback
-import com.a_blekot.shlokas.common.utils.getLocale
+import com.a_blekot.shlokas.common.utils.locale
 import com.a_blekot.shlokas.common.utils.resources.getAssetPath
 import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.Player
@@ -248,14 +248,14 @@ class Player(
 
     private fun playTranslation(task: PlayTranslationTask) =
         task.run {
-            if (ttsIsNotAvailable(getLocale())) {
+            if (ttsIsNotAvailable(locale)) {
                 onTtsComplete(task.id.name)
                 return@run
             }
 
             pause()
             tts?.run {
-                language = Locale(getLocale())
+                language = Locale(locale)
                 setSpeechRate(SPEECH_RATE)
                 setPitch(1.0f)
                 setOnUtteranceProgressListener(ttsListener)

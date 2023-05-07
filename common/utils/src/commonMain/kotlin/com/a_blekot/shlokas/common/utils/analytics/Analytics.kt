@@ -2,10 +2,10 @@ package com.a_blekot.shlokas.common.utils.analytics
 
 import com.a_blekot.shlokas.common.utils.analytics.AnalyticsEvent.TUTORIAL_OPEN
 import com.a_blekot.shlokas.common.utils.analytics.AnalyticsParam.*
-import com.a_blekot.shlokas.common.utils.getAppLaunchCount
-import com.a_blekot.shlokas.common.utils.getPreRatingClosedCount
-import com.a_blekot.shlokas.common.utils.getPreRatingShownCount
-import com.a_blekot.shlokas.common.utils.getTutorialSkippCount
+import com.a_blekot.shlokas.common.utils.appLaunchCount
+import com.a_blekot.shlokas.common.utils.preRatingClosedCount
+import com.a_blekot.shlokas.common.utils.preRatingShownCount
+import com.a_blekot.shlokas.common.utils.tutorialSkippCount
 
 interface Analytics {
     fun logEvent(event: AnalyticsEvent, params: Map<String, Any>? = null)
@@ -43,7 +43,7 @@ fun Analytics.playCompleted(count: Int, repeats: Int, durationSec: Long) =
 fun Analytics.preratingShown() =
     logEvent(
         AnalyticsEvent.PRERATING_SHOWN,
-        mapOf(COUNT.low to getPreRatingShownCount())
+        mapOf(COUNT.low to preRatingShownCount)
     )
 
 fun Analytics.preratingAccepted() =
@@ -54,13 +54,13 @@ fun Analytics.preratingAccepted() =
 fun Analytics.preratingClosed() =
     logEvent(
         AnalyticsEvent.PRERATING_CLOSED,
-        mapOf(COUNT.low to getPreRatingClosedCount())
+        mapOf(COUNT.low to preRatingClosedCount)
     )
 
 fun Analytics.tutorialOpen() =
     logEvent(
         TUTORIAL_OPEN,
-        mapOf(LAUNCH_COUNT.low to getAppLaunchCount())
+        mapOf(LAUNCH_COUNT.low to appLaunchCount)
     )
 
 fun Analytics.tutorialSettings() =
@@ -69,7 +69,7 @@ fun Analytics.tutorialSettings() =
 fun Analytics.tutorialSkip() =
     logEvent(
         AnalyticsEvent.TUTORIAL_SKIP,
-        mapOf(COUNT.low to getTutorialSkippCount())
+        mapOf(COUNT.low to tutorialSkippCount)
     )
 
 fun Analytics.tutorialComplete(screen: AnalyticsScreen) =

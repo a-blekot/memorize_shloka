@@ -4,7 +4,6 @@ import com.a_blekot.shlokas.common.data.createTasks
 import com.a_blekot.shlokas.common.player_api.PlayerComponent
 import com.a_blekot.shlokas.common.player_api.PlayerOutput
 import com.a_blekot.shlokas.common.player_api.PlayerState
-import com.a_blekot.shlokas.common.player_impl.store.PlayerIntent
 import com.a_blekot.shlokas.common.player_impl.store.PlayerIntent.*
 import com.a_blekot.shlokas.common.player_impl.store.PlayerLabel
 import com.a_blekot.shlokas.common.player_impl.store.PlayerStoreFactory
@@ -42,7 +41,7 @@ class PlayerComponentImpl(
             totalRepeats = deps.config.repeats,
             totalShlokasCount = deps.config.shlokas.filter { it.isSelected }.size,
             totalDurationMs = durationMs,
-            isAutoplay = getAutoPlay()
+            isAutoplay = autoPlay
         )
 
     private val store =

@@ -32,14 +32,14 @@ class SettingsComponentImpl(
 
     private val initialState
         get() = SettingsState(
-            repeats = getRepeats(),
-            pause = getPause(),
-            week = getCurrentWeek(),
-            locale = getLocale(),
-            isAutoplay = getAutoPlay(),
-            withSanskrit = withSanskrit(),
-            withTranslation = withTranslation(),
-            showClosePlayerDialog = showClosePlayerDialog()
+            repeats = repeats,
+            pause = pause,
+            week = currentWeek,
+            locale = locale,
+            isAutoplay = autoPlay,
+            withSanskrit = withSanskrit,
+            withTranslation = withTranslation,
+            showClosePlayerDialog = showClosePlayerDialog
         )
 
     override val flow: Value<SettingsState> = store.asValue()
@@ -59,9 +59,9 @@ class SettingsComponentImpl(
     override fun setShowClosePlayerDialog(value: Boolean) = store.accept(ShowClosePlayerDialog(value))
     override fun onShowTutorial() = deps.analytics.tutorialSettings()
     override fun onTutorialCompleted() {
-        if (!isTutorialCompleted()) {
+        if (!isTutorialCompleted) {
             deps.analytics.tutorialComplete(AnalyticsScreen.SETTINGS)
-            setTutorialCompleted()
+            isTutorialCompleted = true
         }
     }
     override fun sendEmail() = deps.platformApi.onEmail()

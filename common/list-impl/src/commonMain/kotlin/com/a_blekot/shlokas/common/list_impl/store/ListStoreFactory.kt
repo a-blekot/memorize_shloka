@@ -29,7 +29,7 @@ internal class ListStoreFactory(
     private val deps: ListDeps
 ) : StringResourceHandler by deps.stringResourceHandler {
 
-    private var locale = getLocale()
+    private var lastLocale = locale
 
     fun create(): ListStore =
         object : ListStore, Store<ListIntent, ListState, ListLabel> by storeFactory.create(
@@ -127,8 +127,8 @@ internal class ListStoreFactory(
         }
 
         private fun checkLocale(config: ListConfig) {
-            if (locale != getLocale()) {
-                locale = getLocale()
+            if (lastLocale != locale) {
+                lastLocale = locale
                 deps.config = config.updateList()
                 dispatch(Msg.Update(deps.config))
             }
@@ -153,7 +153,7 @@ internal class ListStoreFactory(
         }
 
         private fun tutorialCompleted() {
-            setTutorialCompleted()
+            isTutorialCompleted = true
             deps.analytics.tutorialComplete(AnalyticsScreen.LIST)
             dispatch(Msg.TutorialCompleted)
         }
@@ -270,8 +270,8 @@ internal class ListStoreFactory(
     }
 
     private fun shouldShowTutorial() =
-        getAppLaunchCount().let {
-           (it == 3 || it == 7) && !isTutorialCompleted()
+        appLaunchCount.let {
+           (it == 3 || it == 7) && !isTutorialCompleted
         }
 
     private fun availableLists() =

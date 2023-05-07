@@ -28,7 +28,7 @@ import com.a_blekot.shlokas.common.resources.MR.strings.label_close_player_stop
 import com.a_blekot.shlokas.common.resources.MR.strings.label_close_player_subtitle
 import com.a_blekot.shlokas.common.resources.MR.strings.label_close_player_title
 import com.a_blekot.shlokas.common.resources.MR.strings.label_do_not_show_again
-import com.a_blekot.shlokas.common.utils.setShowClosePlayerDialog
+import com.a_blekot.shlokas.common.utils.showClosePlayerDialog
 
 @Composable
 fun ClosePlayerDialog(modifier: Modifier, onStop: () -> Unit, onContinue: () -> Unit) {
@@ -78,7 +78,7 @@ fun ClosePlayerDialog(modifier: Modifier, onStop: () -> Unit, onContinue: () -> 
 
                 StandartCheckBox(doNotShowAgain.value) {
                     doNotShowAgain.value = it
-                    setShowClosePlayerDialog(!it)
+                    showClosePlayerDialog = !it
                 }
 
                 Text(

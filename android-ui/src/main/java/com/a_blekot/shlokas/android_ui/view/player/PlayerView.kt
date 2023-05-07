@@ -2,7 +2,6 @@ package com.a_blekot.shlokas.android_ui.view.player
 
 import HtmlText
 import android.content.Context
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -10,7 +9,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.*
@@ -44,7 +42,6 @@ import com.a_blekot.shlokas.android_ui.custom.StandartColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartLazyColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartRow
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeL
-import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeM
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeXL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingXS
@@ -72,7 +69,7 @@ fun PlayerView(component: PlayerComponent) {
     val isClosePlayerDialogVisible = remember { mutableStateOf(false) }
 
     BackHandler {
-        if (showClosePlayerDialog()) {
+        if (showClosePlayerDialog) {
             isClosePlayerDialogVisible.value = true
         } else {
             component.stop()
@@ -83,7 +80,7 @@ fun PlayerView(component: PlayerComponent) {
         StandartColumn(
             verticalArrangement = Arrangement.spacedBy(paddingS),
             modifier = Modifier
-                .background(color = Color.Red)
+                .background(color = colorScheme.background)
                 .padding(paddingXS)
                 .draggable(
                     orientation = Orientation.Horizontal,

@@ -1,23 +1,23 @@
 package com.a_blekot.shlokas.common.utils
 
 private var wasShownInCurrentSession: Boolean = false
-private var playCompletedCount = playCompletedCount()
+private var playCompleted = playCompletedCount
 
 object InappReviewInteractor {
     fun check(showDialog: () -> Unit) {
         when {
             wasShownInCurrentSession -> return
-            inappReviewShown() -> return
+            inappReviewShown -> return
             onAppLaunch() -> show(showDialog)
             onPlayCompleted() -> show(showDialog)
         }
     }
 
     private fun onAppLaunch() =
-        getAppLaunchCount() % 5 == 0
+        appLaunchCount % 5 == 0
 
     private fun onPlayCompleted() =
-        playCompletedCount < playCompletedCount() && playCompletedCount() in 2..3
+        playCompleted < playCompletedCount && playCompletedCount in 2..3
 
     private fun show(showDialog: () -> Unit) {
         wasShownInCurrentSession = true
