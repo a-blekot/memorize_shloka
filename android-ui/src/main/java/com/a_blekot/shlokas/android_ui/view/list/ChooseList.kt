@@ -1,10 +1,8 @@
 package com.a_blekot.shlokas.android_ui.view.list
 
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.focusable
+import androidx.compose.foundation.*
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -13,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import com.a_blekot.shlokas.android_ui.custom.SmallColumn
@@ -45,11 +44,10 @@ fun ChooseList(
         SmallColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(
-                    colorScheme.background,
-                    shape = RoundedCornerShape(radiusM)
-                )
+                .clip(shape = RoundedCornerShape(radiusM))
+                .background(colorScheme.background)
                 .padding(paddingM)
+                .verticalScroll(rememberScrollState())
                 .focusable(true)
                 .clickable(true) {},
             verticalArrangement = Arrangement.spacedBy(paddingM)
@@ -73,9 +71,9 @@ private fun ListButton(
         modifier = Modifier
             .fillMaxWidth()
             .height(buttonHeight)
+            .clip(shape = RoundedCornerShape(radiusM))
             .background(
                 color = if (isSelected) colorScheme.secondaryContainer else Color.Transparent,
-                shape = RoundedCornerShape(radiusM)
             )
             .border(
                 width = borderS,

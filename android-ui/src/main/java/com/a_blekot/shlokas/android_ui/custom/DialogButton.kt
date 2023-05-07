@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import com.a_blekot.shlokas.android_ui.theme.Dimens.borderS
@@ -29,9 +30,9 @@ fun DialogButton(
     Box(
         modifier = modifier
             .height(buttonHeight)
+            .clip(shape = RoundedCornerShape(radiusM))
             .background(
                 color = if (isSelected) colorScheme.secondaryContainer else Color.Transparent,
-                shape = RoundedCornerShape(radiusM)
             )
             .border(
                 width = borderS,

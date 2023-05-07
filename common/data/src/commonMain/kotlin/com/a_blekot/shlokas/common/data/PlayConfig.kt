@@ -12,6 +12,7 @@ data class PlayConfig(
     val week: Week,
     val shlokas: List<ShlokaConfig>,
     val repeats: Int,
+    val withSanskrit: Boolean,
     val withTranslation: Boolean,
     val pauseAfterEach: Long
 ) : Parcelable
@@ -22,7 +23,13 @@ fun PlayConfig.createTasks(): List<Task> {
     shlokas
         .filter { it.isSelected }
         .forEachIndexed { i, shlokaConfig ->
-            val list = shlokaConfig.createTasks(i + 1, week, repeats, pauseAfterEach)
+            val list = shlokaConfig.createTasks(
+                index = i + 1,
+                week = week,
+                repeats = repeats,
+                pauseMs = pauseAfterEach,
+                withSanskrit = withSanskrit,
+            )
             tasks.addAll(list)
 
             if (withTranslation) {

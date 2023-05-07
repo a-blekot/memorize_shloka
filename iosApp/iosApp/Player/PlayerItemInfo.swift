@@ -8,13 +8,4 @@
 
 import Foundation
 
-struct PlayerItemInfo: Equatable {
-    let id: String
-    let title: String
-    let description: String
-    let duration: Int64
-    
-    public static func == (lhs: PlayerItemInfo, rhs: PlayerItemInfo) -> Bool {
-        return lhs.id == rhs.id
-    }
-}
+

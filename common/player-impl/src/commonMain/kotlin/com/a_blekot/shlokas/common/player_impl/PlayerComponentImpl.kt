@@ -4,10 +4,8 @@ import com.a_blekot.shlokas.common.data.createTasks
 import com.a_blekot.shlokas.common.player_api.PlayerComponent
 import com.a_blekot.shlokas.common.player_api.PlayerOutput
 import com.a_blekot.shlokas.common.player_api.PlayerState
-import com.a_blekot.shlokas.common.player_impl.store.PlayerIntent.ForcePause
-import com.a_blekot.shlokas.common.player_impl.store.PlayerIntent.ForcePlay
-import com.a_blekot.shlokas.common.player_impl.store.PlayerIntent.Restart
-import com.a_blekot.shlokas.common.player_impl.store.PlayerIntent.Stop
+import com.a_blekot.shlokas.common.player_impl.store.PlayerIntent
+import com.a_blekot.shlokas.common.player_impl.store.PlayerIntent.*
 import com.a_blekot.shlokas.common.player_impl.store.PlayerLabel
 import com.a_blekot.shlokas.common.player_impl.store.PlayerStoreFactory
 import com.a_blekot.shlokas.common.utils.*
@@ -76,6 +74,9 @@ class PlayerComponentImpl(
     override fun forcePause() = store.accept(ForcePause)
     override fun restart() = store.accept(Restart)
     override fun stop() = store.accept(Stop)
+
+    override fun prev() = store.accept(Prev)
+    override fun next() = store.accept(Next)
 
     private fun handleLabel(label: PlayerLabel) {
         when (label) {

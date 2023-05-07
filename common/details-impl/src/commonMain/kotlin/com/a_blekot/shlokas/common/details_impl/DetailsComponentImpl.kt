@@ -1,12 +1,10 @@
 package com.a_blekot.shlokas.common.details_impl
 
 import com.a_blekot.shlokas.common.data.PlayConfig
-import com.a_blekot.shlokas.common.data.ShlokaConfig
 
 import com.a_blekot.shlokas.common.details_api.DetailsComponent
 import com.a_blekot.shlokas.common.details_api.DetailsOutput
 import com.a_blekot.shlokas.common.details_api.DetailsState
-import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent
 import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.*
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.Value
@@ -45,10 +43,11 @@ class DetailsComponentImpl(
 
     private fun DetailsState.toPlayConfig() =
         PlayConfig(
-            getCurrentWeek(),
-            listOf(config.copy(isSelected = true)),
-            getRepeats(),
-            withTranslation(),
-            getPause(),
+            week = getCurrentWeek(),
+            shlokas = listOf(config.copy(isSelected = true)),
+            repeats = getRepeats(),
+            withSanskrit = withSanskrit(),
+            withTranslation = withTranslation(),
+            pauseAfterEach = getPause(),
         )
 }

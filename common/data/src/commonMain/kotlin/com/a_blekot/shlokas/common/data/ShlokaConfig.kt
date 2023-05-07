@@ -13,7 +13,7 @@ data class ShlokaConfig(
     val shloka: Shloka = Shloka(),
     val chunks: List<Chunk> = defaultChunks,
     val isSelected: Boolean = true
-): Parcelable
+) : Parcelable
 
 val defaultChunks
     get() = MutableList(CHUNKS_SIZE) { Chunk() }
@@ -21,15 +21,20 @@ val defaultChunks
 val ShlokaConfig.durationMs
     get() = chunks.sumOf { it.durationMs }
 
-fun ShlokaConfig.createTasks(index: Int, week: Week, repeats: Int, pauseMs: Long): List<Task> {
+fun ShlokaConfig.createTasks(
+    index: Int,
+    week: Week,
+    repeats: Int,
+    pauseMs: Long,
+    withSanskrit: Boolean,
+): List<Task> {
     val tasks = mutableListOf<Task>()
     tasks.add(SetTrackTask(index, shloka))
 
-    if (!shloka.hasAudio) {
-        tasks.add(NoAudioTask)
-        return tasks
-    } else {
-        tasks.add(IdleTask)
+    when {
+        !withSanskrit -> return tasks.apply { add(IdleTask) }
+        !shloka.hasAudio -> return tasks.apply { add(NoAudioTask) }
+        else -> tasks.add(IdleTask)
     }
 
     when (week) {

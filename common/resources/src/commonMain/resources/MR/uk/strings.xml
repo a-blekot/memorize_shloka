@@ -7,6 +7,7 @@
      <string name="label_repeats">Повтори</string>
      <string name="label_pause">Пауза</string>
      <string name="label_autoplay">Програвати автоматично</string>
+     <string name="label_with_sanskrit">Повторювати санскрит</string>
      <string name="label_with_translation">Повторювати переклад</string>
 
      <string name="label_repeats_placeholder">кількість повторів</string>
@@ -108,6 +109,7 @@
      <string name="title_SB_5_canto">Шрı̄мад-Бга̄ґаватам\nПʼятая пісня</string>
      <string name="title_SB_6_canto">Шрı̄мад-Бга̄ґаватам\nШоста пісня</string>
      <string name="title_NI">Нектар Настанов</string>
+     <string name="title_NK">Нр̣сімха-кавача</string>
      <string name="title_BG">Бгаґавад-ґı̄та̄</string>
      <string name="title_ISO">Ш́рı̄ Īш́опанішад</string>
      <string name="title_NOD">Нектар Відданості</string>

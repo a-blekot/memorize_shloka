@@ -101,7 +101,17 @@ internal class PlayerStoreFactory(
                 ForcePause -> forcePause()
                 Restart -> start()
                 Stop -> stop()
+                Prev -> prev()
+                Next -> next()
             }
+        }
+
+        private fun prev() {
+            Napier.d("prev", tag = "PlayerStore")
+        }
+
+        private fun next() {
+            Napier.d("next", tag = "PlayerStore")
         }
 
         private fun start() {

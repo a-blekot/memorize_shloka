@@ -9,4 +9,7 @@ interface PlayerComponent {
     fun forcePause() {}
     fun restart() {}
     fun stop() {}
+
+    fun prev() {}
+    fun next() {}
 }

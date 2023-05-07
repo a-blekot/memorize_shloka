@@ -36,6 +36,7 @@ internal class SettingsStoreFactory(
         data class Weeks(val value: Week) : Msg
         data class Locale(val value: String) : Msg
         data class Autoplay(val value: Boolean) : Msg
+        data class WithSanskrit(val value: Boolean) : Msg
         data class WithTranslation(val value: Boolean) : Msg
         data class ShowClosePlayerDialog(val value: Boolean) : Msg
     }
@@ -62,6 +63,7 @@ internal class SettingsStoreFactory(
                 is Weeks -> setWeek(intent.value)
                 is Locale -> setLocale(intent.value)
                 is Autoplay -> setAutoplay(intent.value)
+                is WithSanskrit -> setWithSanskrit(intent.value)
                 is WithTranslation -> setWithTranslation(intent.value)
                 is ShowClosePlayerDialog -> updateShowClosePlayerDialog(intent.value)
             }
@@ -93,6 +95,11 @@ internal class SettingsStoreFactory(
             dispatch(Msg.Autoplay(value))
         }
 
+        private fun setWithSanskrit(value: Boolean) {
+            saveWithSanskrit(value)
+            dispatch(Msg.WithSanskrit(value))
+        }
+
         private fun setWithTranslation(value: Boolean) {
             saveWithTranslation(value)
             dispatch(Msg.WithTranslation(value))
@@ -115,6 +122,7 @@ internal class SettingsStoreFactory(
                 is Msg.Weeks -> copy(week = msg.value)
                 is Msg.Locale -> copy(locale = msg.value)
                 is Msg.Autoplay -> copy(isAutoplay = msg.value)
+                is Msg.WithSanskrit -> copy(withSanskrit = msg.value)
                 is Msg.WithTranslation -> copy(withTranslation = msg.value)
                 is Msg.ShowClosePlayerDialog -> copy(showClosePlayerDialog = msg.value)
             }

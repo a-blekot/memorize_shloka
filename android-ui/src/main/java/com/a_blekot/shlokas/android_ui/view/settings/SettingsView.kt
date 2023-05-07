@@ -53,6 +53,7 @@ import com.a_blekot.shlokas.common.resources.MR.strings.label_share_app
 import com.a_blekot.shlokas.common.resources.MR.strings.label_show_close_player_dialog
 import com.a_blekot.shlokas.common.resources.MR.strings.label_show_tutorial
 import com.a_blekot.shlokas.common.resources.MR.strings.label_two_lines
+import com.a_blekot.shlokas.common.resources.MR.strings.label_with_sanskrit
 import com.a_blekot.shlokas.common.resources.MR.strings.label_with_translation
 import com.a_blekot.shlokas.common.resources.resolve
 import com.a_blekot.shlokas.common.settings_api.SettingsComponent
@@ -61,7 +62,7 @@ import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsView(component: SettingsComponent) {
-    val state = component.flow.subscribeAsState()
+    val state = component.flow.subscribeAsState().value
     val infoIsVisible = remember { mutableStateOf(false) }
     val context = LocalContext.current
 
@@ -76,7 +77,7 @@ fun SettingsView(component: SettingsComponent) {
             modifier = Modifier.fillMaxWidth().padding(horizontal = paddingS)
         ) {
             item {
-                val repeats = remember { mutableStateOf(TextFieldValue(text = state.value.repeats.toString())) }
+                val repeats = remember { mutableStateOf(TextFieldValue(text = state.repeats.toString())) }
 
                 OutlinedTextField(
                     value = repeats.value,
@@ -102,7 +103,7 @@ fun SettingsView(component: SettingsComponent) {
             }
 
             item {
-                val pause = remember { mutableStateOf(TextFieldValue(text = state.value.pause.toString())) }
+                val pause = remember { mutableStateOf(TextFieldValue(text = state.pause.toString())) }
 
                 OutlinedTextField(
                     value = pause.value,
@@ -128,7 +129,7 @@ fun SettingsView(component: SettingsComponent) {
             }
 
             item {
-                Weeks(state.value.week) {
+                Weeks(state.week) {
                     component.setWeek(it.ordinal)
                 }
             }
@@ -138,7 +139,7 @@ fun SettingsView(component: SettingsComponent) {
                     padding = paddingZero,
                     horizontalArrangement = Arrangement.spacedBy(paddingM),
                 ) {
-                    StandartCheckBox(state.value.isAutoplay) {
+                    StandartCheckBox(state.isAutoplay) {
                         component.setAutoplay(it)
                     }
 
@@ -156,7 +157,7 @@ fun SettingsView(component: SettingsComponent) {
                     padding = paddingZero,
                     horizontalArrangement = Arrangement.spacedBy(paddingM),
                 ) {
-                    StandartCheckBox(state.value.showClosePlayerDialog) {
+                    StandartCheckBox(state.showClosePlayerDialog) {
                         component.setShowClosePlayerDialog(it)
                     }
 
@@ -173,7 +174,25 @@ fun SettingsView(component: SettingsComponent) {
                     padding = paddingZero,
                     horizontalArrangement = Arrangement.spacedBy(paddingM),
                 ) {
-                    StandartCheckBox(state.value.withTranslation) {
+                    StandartCheckBox(state.withSanskrit) {
+                        component.setWithSanskrit(it)
+                    }
+
+                    Text(
+                        text = label_with_sanskrit.resolve(context),
+                        style = typography.titleLarge,
+                        color = colorScheme.primary,
+                        maxLines = 1,
+                    )
+                }
+            }
+
+            item {
+                StandartRow(
+                    padding = paddingZero,
+                    horizontalArrangement = Arrangement.spacedBy(paddingM),
+                ) {
+                    StandartCheckBox(state.withTranslation) {
                         component.setWithTranslation(it)
                     }
 
@@ -214,12 +233,12 @@ fun SettingsView(component: SettingsComponent) {
             }
 
             item {
-                Locale(state.value.locale) {
+                Locale(state.locale) {
                     component.setLocale(it)
                 }
             }
 
-            if (state.value.locale.isNotBlank()) {
+            if (state.locale.isNotBlank()) {
                 item {
                     StandartRow(
                         horizontalArrangement = Arrangement.spacedBy(paddingM),
@@ -334,7 +353,7 @@ fun SettingsView(component: SettingsComponent) {
         }
 
         if (infoIsVisible.value) {
-            InfoPopup(ftueInfo(state.value.locale),
+            InfoPopup(ftueInfo(state.locale),
                 modifier = Modifier.fillMaxSize(),
                 onSkip = { infoIsVisible.value = false },
                 onComplete = {

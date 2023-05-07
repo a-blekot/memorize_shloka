@@ -118,6 +118,7 @@ class ListComponentImpl(
             week = getCurrentWeek(),
             shlokas = list.filter { it.isSelected && it.shloka.hasAudio },
             repeats = getRepeats(),
+            withSanskrit = withSanskrit(),
             withTranslation = withTranslation(),
             pauseAfterEach = getPause()
         )
@@ -127,6 +128,7 @@ class ListComponentImpl(
             week = getCurrentWeek(),
             shlokas = listOf(copy(isSelected = true)),
             repeats = getRepeats(),
+            withSanskrit = withSanskrit(),
             withTranslation = withTranslation(),
             pauseAfterEach = getPause(),
         )

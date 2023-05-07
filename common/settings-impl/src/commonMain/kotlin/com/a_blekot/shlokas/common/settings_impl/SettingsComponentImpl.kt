@@ -32,13 +32,14 @@ class SettingsComponentImpl(
 
     private val initialState
         get() = SettingsState(
-            getRepeats(),
-            getPause(),
-            getCurrentWeek(),
-            getLocale(),
-            getAutoPlay(),
-            withTranslation(),
-            showClosePlayerDialog()
+            repeats = getRepeats(),
+            pause = getPause(),
+            week = getCurrentWeek(),
+            locale = getLocale(),
+            isAutoplay = getAutoPlay(),
+            withSanskrit = withSanskrit(),
+            withTranslation = withTranslation(),
+            showClosePlayerDialog = showClosePlayerDialog()
         )
 
     override val flow: Value<SettingsState> = store.asValue()
@@ -53,6 +54,7 @@ class SettingsComponentImpl(
     override fun setWeek(value: Int) = store.accept(Weeks(value))
     override fun setLocale(value: String) = store.accept(Locale(value))
     override fun setAutoplay(value: Boolean) = store.accept(Autoplay(value))
+    override fun setWithSanskrit(value: Boolean) = store.accept(WithSanskrit(value))
     override fun setWithTranslation(value: Boolean) = store.accept(WithTranslation(value))
     override fun setShowClosePlayerDialog(value: Boolean) = store.accept(ShowClosePlayerDialog(value))
     override fun onShowTutorial() = deps.analytics.tutorialSettings()

@@ -7,6 +7,7 @@
     <string name="label_repeats">Repeats</string>
     <string name="label_pause">Pause</string>
     <string name="label_autoplay">Autoplay</string>
+    <string name="label_with_sanskrit">Play sanskrit</string>
     <string name="label_with_translation">Play translation</string>
 
     <string name="label_repeats_placeholder">repeats number</string>
@@ -109,6 +110,7 @@
     <string name="title_SB_5_canto">Śrīmad-Bhāgavatam\nFifth canto</string>
     <string name="title_SB_6_canto">Śrīmad-Bhāgavatam\nSixth canto</string>
     <string name="title_NI">Nectar of Instruction</string>
+    <string name="title_NK">Nrisimha-kavacha</string>
     <string name="title_BG">Bhagavad-gītā</string>
     <string name="title_ISO">Śrī Īśopaniṣad</string>
     <string name="title_NOD">Nectar of Devotion</string>

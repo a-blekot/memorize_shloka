@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -27,6 +28,7 @@ import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingXS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingZero
+import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusM
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusS
 import com.a_blekot.shlokas.common.data.ShlokaConfig
 import com.a_blekot.shlokas.common.list_api.ListComponent
@@ -37,9 +39,9 @@ fun ListItemView(config: ShlokaConfig, component: ListComponent, modifier: Modif
         horizontalArrangement = Arrangement.spacedBy(paddingS),
         padding = 2.dp,
         modifier = modifier
+            .clip(shape = RoundedCornerShape(radiusM))
             .background(
                 color = colorScheme.primaryContainer.copy(alpha = 0.3f),
-                shape = RoundedCornerShape(radiusS)
             )
             .clickable { component.play(config) }
     ) {

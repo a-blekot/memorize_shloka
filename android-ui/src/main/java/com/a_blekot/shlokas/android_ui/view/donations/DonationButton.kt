@@ -11,6 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import com.a_blekot.shlokas.android_ui.custom.StandartRow
 import com.a_blekot.shlokas.android_ui.theme.Dimens
@@ -23,9 +24,9 @@ fun DonationButton(donation: Donation, purchase: () -> Unit = {}) {
     StandartRow(
         horizontalArrangement = Arrangement.spacedBy(paddingS),
         modifier = Modifier
+            .clip(shape = RoundedCornerShape(Dimens.radiusS))
             .background(
                 color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                shape = RoundedCornerShape(Dimens.radiusS)
             )
             .padding(horizontal = paddingS)
             .clickable { purchase.invoke() },

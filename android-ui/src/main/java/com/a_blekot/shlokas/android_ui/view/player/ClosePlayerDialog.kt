@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import com.a_blekot.shlokas.android_ui.custom.*
@@ -46,9 +47,9 @@ fun ClosePlayerDialog(modifier: Modifier, onStop: () -> Unit, onContinue: () -> 
             modifier = Modifier
                 .padding(Dimens.paddingM)
                 .fillMaxWidth()
+                .clip(shape = RoundedCornerShape(Dimens.radiusM))
                 .background(
                     colorScheme.background,
-                    shape = RoundedCornerShape(Dimens.radiusM)
                 )
                 .padding(Dimens.paddingS)
                 .focusable(true)

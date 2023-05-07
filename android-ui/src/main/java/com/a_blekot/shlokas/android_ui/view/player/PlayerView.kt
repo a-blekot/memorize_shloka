@@ -2,13 +2,17 @@ package com.a_blekot.shlokas.android_ui.view.player
 
 import HtmlText
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.gestures.draggable
+import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -25,6 +29,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.ClipboardManager
@@ -57,6 +62,7 @@ import com.a_blekot.shlokas.common.resources.MR.strings.label_words
 import com.a_blekot.shlokas.common.resources.resolve
 import com.a_blekot.shlokas.common.utils.showClosePlayerDialog
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
+import io.github.aakira.napier.Napier
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -77,8 +83,18 @@ fun PlayerView(component: PlayerComponent) {
         StandartColumn(
             verticalArrangement = Arrangement.spacedBy(paddingS),
             modifier = Modifier
-                .background(color = colorScheme.background)
+                .background(color = Color.Red)
                 .padding(paddingXS)
+                .draggable(
+                    orientation = Orientation.Horizontal,
+                    state = rememberDraggableState { },
+                    onDragStopped = { velocity ->
+                        when {
+                            velocity > 5_000 -> component.next()
+                            velocity < -5_000 -> component.prev()
+                        }
+                    }
+                ),
         ) {
             state.value.run {
                 TitleAndProgress(this, component)
@@ -300,7 +316,10 @@ fun FoldableView(
     Column(
         verticalArrangement = Arrangement.spacedBy(paddingXS),
         horizontalAlignment = Alignment.Start,
-        modifier = modifier.fillMaxWidth().background(color = color, shape = RoundedCornerShape(paddingS))
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(shape = RoundedCornerShape(paddingS))
+            .background(color = color)
     ) {
         StandartRow(
             horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start),

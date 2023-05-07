@@ -131,6 +131,15 @@ struct SettingsView: View {
                             Text(MR.strings().label_show_close_player_dialog.resolve())
                                 .font(theme.titleLarge)
                         }
+
+                        HStack(alignment: .top) {
+                            StandartCheckBox(state.withSanskrit, theme.colors.primary) { isSelected in
+                                component.setWithSanskrit(value: isSelected)
+                            }
+
+                            Text(MR.strings().label_with_sanskrit.resolve())
+                                .font(theme.titleLarge)
+                        }
                         
                         HStack(alignment: .top) {
                             StandartCheckBox(state.withTranslation, theme.colors.primary) { isSelected in

@@ -5,4 +5,6 @@ sealed interface PlayerIntent {
     object ForcePause : PlayerIntent
     object Restart : PlayerIntent
     object Stop : PlayerIntent
+    object Prev : PlayerIntent
+    object Next : PlayerIntent
 }

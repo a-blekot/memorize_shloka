@@ -8,6 +8,7 @@
     <string name="label_repeats">Повторы</string>
     <string name="label_pause">Пауза</string>
     <string name="label_autoplay">Проигрывать автоматически</string>
+    <string name="label_with_sanskrit">Повторять санскрит</string>
     <string name="label_with_translation">Повторять перевод</string>
 
     <string name="label_repeats_placeholder">количество повторов</string>

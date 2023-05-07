@@ -10,6 +10,7 @@ interface SettingsComponent {
     fun setWeek(value: Int) {}
     fun setLocale(value: String) {}
     fun setAutoplay(value: Boolean) {}
+    fun setWithSanskrit(value: Boolean) {}
     fun setWithTranslation(value: Boolean) {}
     fun setShowClosePlayerDialog(value: Boolean) {}
     fun onShowTutorial() {}
