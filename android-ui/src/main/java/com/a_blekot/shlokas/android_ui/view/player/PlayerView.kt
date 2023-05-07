@@ -36,11 +36,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.a_blekot.shlokas.android_ui.custom.SmoothProgress
 import com.a_blekot.shlokas.android_ui.custom.StandartColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartLazyColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartRow
+import com.a_blekot.shlokas.android_ui.theme.AppTheme
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeXL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
@@ -59,7 +61,8 @@ import com.a_blekot.shlokas.common.resources.MR.strings.label_words
 import com.a_blekot.shlokas.common.resources.resolve
 import com.a_blekot.shlokas.common.utils.showClosePlayerDialog
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
-import io.github.aakira.napier.Napier
+import com.arkivanov.decompose.value.MutableValue
+import com.arkivanov.decompose.value.Value
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -361,3 +364,29 @@ private fun String.noHtmlTags() =
     this
         .replace("<br>", "\n")
         .replace(Regex("<(?:!|/?[a-zA-Z]+).*?/?>"), "")
+
+@Preview
+@Composable
+private fun PlayerPreview() {
+    val component = object : PlayerComponent {
+        override val flow = MutableValue(
+            PlayerState(
+                title = "БГ 1.1",
+                sanskrit = "<i>дхр̣тара̄шт̣ра ува̄ча<br>дхарма-кшетре куру-кшетре<br>самавета̄ йуйутсавах̣<br>ма̄мака̄х̣ па̄н̣д̣ава̄ш́ чаива<br>ким акурвата сан̃джайа</i>",
+                words = "<i><b>дхр̣тара̄шт̣рах̣ ува̄ча</b></i> — царь Дхритараштра сказал;</br><br><i><b>дхарма-кшетре</b></i> — в месте паломничества;</br><br><i><b>куру-кшетре</b></i> — в месте под названием Курукшетра;</br><br><i><b>самавета̄х̣</b></i> — собравшиеся;</br><br><i><b>йуйутсавах̣</b></i> — желающие вступить в бой;</br><br><i><b>ма̄мака̄х̣</b></i> — те, кто на моей стороне (мои сыновья);</br><br><i><b>па̄н̣д̣ава̄х̣</b></i> — сыновья Панду;</br><br><i><b>ча</b></i> — и;</br><br><i><b>эва</b></i> — безусловно;</br><br><i><b>ким</b></i> — что;</br><br><i><b>акурвата</b></i> — сделали;</br><br><i><b>сан̃джайа</b></i> — о Санджая.",
+                translation = "Дхритараштра спросил: О Санджая, что стали делать мои сыновья и сыновья Панду, когда, горя желанием вступить в бой, собрались в месте паломничества, на поле Курукшетра?",
+                durationMs = 10_000L,
+                playbackState = PLAYING,
+                currentRepeat = 1,
+                totalRepeats = 10,
+                currentShlokaIndex = 2,
+                totalShlokasCount = 10,
+                totalDurationMs = 100_000L,
+                isAutoplay = true,
+            )
+        )
+    }
+    AppTheme {
+        PlayerView(component)
+    }
+}
