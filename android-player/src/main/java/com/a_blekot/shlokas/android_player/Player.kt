@@ -211,12 +211,13 @@ class Player(
         }
     }
 
-    private fun setTrack(task: SetTrackTask) =
+    private fun setTrack(task: SetTrackTask) {
+        pause()
         exoPlayer?.apply {
-            playWhenReady = false
             setMediaItem(task.toMediaItem())
             prepare()
         }
+    }
 
     private fun pause() {
         exoPlayer?.playWhenReady = false
