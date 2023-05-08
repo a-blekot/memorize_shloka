@@ -34,7 +34,7 @@ class SettingsComponentImpl(
         get() = SettingsState(
             repeats = repeats,
             pause = pause,
-            week = currentWeek,
+            repeatMode = repeatMode,
             locale = locale,
             isAutoplay = autoPlay,
             withSanskrit = withSanskrit,
@@ -51,7 +51,7 @@ class SettingsComponentImpl(
 
     override fun setRepeats(value: Int) = store.accept(Repeats(value))
     override fun setPause(value: Long) = store.accept(Pause(value))
-    override fun setWeek(value: Int) = store.accept(Weeks(value))
+    override fun setRepeatMode(value: Int) = store.accept(RepeatMode(value))
     override fun setLocale(value: String) = store.accept(Locale(value))
     override fun setAutoplay(value: Boolean) = store.accept(Autoplay(value))
     override fun setWithSanskrit(value: Boolean) = store.accept(WithSanskrit(value))

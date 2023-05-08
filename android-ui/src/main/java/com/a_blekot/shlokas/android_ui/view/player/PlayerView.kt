@@ -29,7 +29,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
@@ -62,7 +61,6 @@ import com.a_blekot.shlokas.common.resources.resolve
 import com.a_blekot.shlokas.common.utils.showClosePlayerDialog
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.arkivanov.decompose.value.MutableValue
-import com.arkivanov.decompose.value.Value
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

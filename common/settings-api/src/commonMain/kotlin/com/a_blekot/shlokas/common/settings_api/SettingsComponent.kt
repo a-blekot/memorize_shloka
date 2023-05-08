@@ -7,7 +7,7 @@ interface SettingsComponent {
 
     fun setRepeats(value: Int) {}
     fun setPause(value: Long) {}
-    fun setWeek(value: Int) {}
+    fun setRepeatMode(value: Int) {}
     fun setLocale(value: String) {}
     fun setAutoplay(value: Boolean) {}
     fun setWithSanskrit(value: Boolean) {}

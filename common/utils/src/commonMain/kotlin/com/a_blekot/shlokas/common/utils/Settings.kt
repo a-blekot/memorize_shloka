@@ -1,9 +1,8 @@
 package com.a_blekot.shlokas.common.utils
 
 import com.a_blekot.shlokas.common.data.ShlokaId
-import com.a_blekot.shlokas.common.data.Week
+import com.a_blekot.shlokas.common.data.RepeatMode
 import com.a_blekot.shlokas.common.data.toListType
-import com.a_blekot.shlokas.common.utils.IntDelegate
 import com.russhwolf.settings.*
 import com.russhwolf.settings.int
 import kotlin.properties.ReadWriteProperty
@@ -12,7 +11,7 @@ import kotlin.reflect.KProperty
 private const val APP_LAUNCH_COUNT = "APP_LAUNCH_COUNT"
 private const val AUTOPLAY_KEY = "AUTOPLAY_KEY"
 private const val CURRENT_REPEATS = "CURRENT_REPEATS"
-private const val CURRENT_WEEK = "CURRENT_WEEK"
+private const val REPEAT_MODE = "CURRENT_WEEK"
 private const val INAPP_REVIEW_SHOWN = "INAPP_REVIEW_SHOWN"
 private const val LAST_CONFIG_ID_KEY = "LAST_CONFIG_NAME_KEY"
 private const val LOCALE_KEY = "LOCALE_KEY"
@@ -61,9 +60,9 @@ fun getLastListId() =
 
 var autoPlay: Boolean by settings.boolean(AUTOPLAY_KEY, false)
 
-var currentWeek: Week
-    get() = weekFromOrdinal(settings.getInt(CURRENT_WEEK, 0))
-    set(value) = settings.putInt(CURRENT_WEEK, value.ordinal)
+var repeatMode: RepeatMode
+    get() = RepeatMode.fromOrdinal(settings.getInt(REPEAT_MODE, 0))
+    set(value) = settings.putInt(REPEAT_MODE, value.ordinal)
 
 var locale: String by settings.string(LOCALE_KEY, "")
 
@@ -79,9 +78,6 @@ var tutorialSkippCount: Int by settings.int(TUTORIAL_SKIPP_COUNT_KEY, 0)
 
 fun onTutorialSkipped() =
     tutorialSkippCount.let { tutorialSkippCount = it + 1 }
-
-fun weekFromOrdinal(ordinal: Int) =
-    Week.values().firstOrNull { it.ordinal == ordinal } ?: Week.FIRST
 
 fun selectShloka(id: ShlokaId, isSelected: Boolean) =
     settings.putBoolean("$SHLOKA_SELECTED_KEY-${id.id}", isSelected)

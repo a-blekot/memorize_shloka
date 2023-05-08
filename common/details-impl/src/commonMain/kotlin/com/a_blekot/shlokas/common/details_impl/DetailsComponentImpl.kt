@@ -43,7 +43,7 @@ class DetailsComponentImpl(
 
     private fun DetailsState.toPlayConfig() =
         PlayConfig(
-            week = currentWeek,
+            repeatMode = repeatMode,
             shlokas = listOf(config.copy(isSelected = true)),
             repeats = repeats,
             withSanskrit = withSanskrit,

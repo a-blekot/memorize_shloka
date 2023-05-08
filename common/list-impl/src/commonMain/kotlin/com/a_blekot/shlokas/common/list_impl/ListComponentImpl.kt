@@ -115,7 +115,7 @@ class ListComponentImpl(
 
     private fun ListConfig.toPlayConfig() =
         PlayConfig(
-            week = currentWeek,
+            repeatMode = repeatMode,
             shlokas = list.filter { it.isSelected && it.shloka.hasAudio },
             repeats = repeats,
             withSanskrit = withSanskrit,
@@ -125,7 +125,7 @@ class ListComponentImpl(
 
     private fun ShlokaConfig.toPlayConfig() =
         PlayConfig(
-            week = currentWeek,
+            repeatMode = repeatMode,
             shlokas = listOf(copy(isSelected = true)),
             repeats = repeats,
             withSanskrit = withSanskrit,

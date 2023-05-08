@@ -23,7 +23,7 @@ val ShlokaConfig.durationMs
 
 fun ShlokaConfig.createTasks(
     index: Int,
-    week: Week,
+    repeatMode: RepeatMode,
     repeats: Int,
     pauseMs: Long,
     withSanskrit: Boolean,
@@ -37,8 +37,8 @@ fun ShlokaConfig.createTasks(
         else -> tasks.add(IdleTask)
     }
 
-    when (week) {
-        Week.FIRST -> {
+    when (repeatMode) {
+        RepeatMode.ONE_LINE -> {
             chunks.forEach { chunk ->
                 repeat(repeats) {
                     tasks.add(PlayTask(chunk, it + 1))
@@ -48,7 +48,7 @@ fun ShlokaConfig.createTasks(
             }
         }
 
-        Week.SECOND -> {
+        RepeatMode.TWO_LINES -> {
             chunks
                 .windowed(2, 2, partialWindows = true)
                 .forEach { window ->
@@ -61,7 +61,7 @@ fun ShlokaConfig.createTasks(
                 }
         }
 
-        Week.THIRD -> {
+        RepeatMode.FOUR_LINES -> {
             chunks
                 .windowed(4, 4, partialWindows = true)
                 .forEach { window ->

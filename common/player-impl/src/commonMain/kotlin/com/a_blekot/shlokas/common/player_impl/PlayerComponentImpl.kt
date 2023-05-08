@@ -71,7 +71,6 @@ class PlayerComponentImpl(
 
     override fun forcePlay() = store.accept(ForcePlay)
     override fun forcePause() = store.accept(ForcePause)
-    override fun restart() = store.accept(Restart)
     override fun stop() = store.accept(Stop)
 
     override fun prev() = store.accept(Prev)

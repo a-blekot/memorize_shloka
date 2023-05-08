@@ -9,7 +9,7 @@ import com.arkivanov.essenty.parcelable.Parcelize
 
 @Parcelize
 data class PlayConfig(
-    val week: Week,
+    val repeatMode: RepeatMode,
     val shlokas: List<ShlokaConfig>,
     val repeats: Int,
     val withSanskrit: Boolean,
@@ -25,7 +25,7 @@ fun PlayConfig.createTasks(): List<Task> {
         .forEachIndexed { i, shlokaConfig ->
             val list = shlokaConfig.createTasks(
                 index = i + 1,
-                week = week,
+                repeatMode = repeatMode,
                 repeats = repeats,
                 pauseMs = pauseAfterEach,
                 withSanskrit = withSanskrit,

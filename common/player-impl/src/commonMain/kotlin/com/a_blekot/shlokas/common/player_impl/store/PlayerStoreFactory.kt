@@ -99,7 +99,6 @@ internal class PlayerStoreFactory(
             when (intent) {
                 ForcePlay -> forcePlay()
                 ForcePause -> forcePause()
-                Restart -> start()
                 Stop -> stop()
                 Prev -> prev()
                 Next -> next()
@@ -255,22 +254,6 @@ internal class PlayerStoreFactory(
             dispatch(Msg.ResetCounter(task.duration))
             nextTask()
         }
-
-//        private fun playbackStarted() =
-//            (currentTask as? PlayTask)?.run {
-//                Napier.w("PlayerFeedback.Started", tag = "PlayerStore")
-//                scope.launch {
-//                    var timeMs = absoluteStartMs
-//                    val endTimeMs = timeMs + duration
-//
-//                    while (endTimeMs > timeMs) {
-//                        dispatch(Msg.Time(timeMs))
-//                        val interval = TIMER_INTERVAL_MS.coerceAtMost(endTimeMs - timeMs)
-//                        delay(interval)
-//                        timeMs += interval
-//                    }
-//                }
-//            }
     }
 
     private inner class ReducerImpl : Reducer<PlayerState, Msg> {

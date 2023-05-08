@@ -1,6 +1,6 @@
 package com.a_blekot.shlokas.common.settings_impl.store
 
-import com.a_blekot.shlokas.common.data.Week
+import com.a_blekot.shlokas.common.data.RepeatMode
 import com.a_blekot.shlokas.common.settings_api.SettingsState
 import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.*
 import com.a_blekot.shlokas.common.settings_impl.store.SettingsStoreFactory.Action.CheckFtue
@@ -33,7 +33,7 @@ internal class SettingsStoreFactory(
     sealed interface Msg {
         data class Repeats(val value: Int) : Msg
         data class Pause(val value: Long) : Msg
-        data class Weeks(val value: Week) : Msg
+        data class RepeatMode(val value: com.a_blekot.shlokas.common.data.RepeatMode) : Msg
         data class Locale(val value: String) : Msg
         data class Autoplay(val value: Boolean) : Msg
         data class WithSanskrit(val value: Boolean) : Msg
@@ -60,7 +60,7 @@ internal class SettingsStoreFactory(
             when (intent) {
                 is Repeats -> setRepeats(intent.value)
                 is Pause -> setPause(intent.value)
-                is Weeks -> setWeek(intent.value)
+                is SettingsIntent.RepeatMode -> setRepeatMode(intent.value)
                 is Locale -> setLocale(intent.value)
                 is Autoplay -> setAutoplay(intent.value)
                 is WithSanskrit -> setWithSanskrit(intent.value)
@@ -79,10 +79,10 @@ internal class SettingsStoreFactory(
             dispatch(Msg.Pause(pause))
         }
 
-        private fun setWeek(value: Int) {
-            val week = weekFromOrdinal(value)
-            currentWeek = week
-            dispatch(Msg.Weeks(week))
+        private fun setRepeatMode(value: Int) {
+            val result = RepeatMode.fromOrdinal(value)
+            repeatMode = result
+            dispatch(Msg.RepeatMode(result))
         }
 
         private fun setLocale(value: String) {
@@ -119,7 +119,7 @@ internal class SettingsStoreFactory(
             when (msg) {
                 is Msg.Repeats -> copy(repeats = msg.value)
                 is Msg.Pause -> copy(pause = msg.value)
-                is Msg.Weeks -> copy(week = msg.value)
+                is Msg.RepeatMode -> copy(repeatMode = msg.value)
                 is Msg.Locale -> copy(locale = msg.value)
                 is Msg.Autoplay -> copy(isAutoplay = msg.value)
                 is Msg.WithSanskrit -> copy(withSanskrit = msg.value)
