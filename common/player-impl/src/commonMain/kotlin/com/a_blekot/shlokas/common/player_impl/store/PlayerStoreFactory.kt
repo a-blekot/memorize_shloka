@@ -1,5 +1,6 @@
 package com.a_blekot.shlokas.common.player_impl.store
 
+import com.a_blekot.shlokas.common.data.speed
 import com.a_blekot.shlokas.common.data.tasks.*
 import com.a_blekot.shlokas.common.player_api.PlaybackState.*
 import com.a_blekot.shlokas.common.player_api.PlayerFeedback
@@ -13,6 +14,7 @@ import com.a_blekot.shlokas.common.utils.analytics.playCompleted
 import com.a_blekot.shlokas.common.utils.autoPlay
 import com.a_blekot.shlokas.common.utils.onPlayCompleted
 import com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
+import com.a_blekot.shlokas.common.utils.speed
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
@@ -152,13 +154,13 @@ internal class PlayerStoreFactory(
             Napier.d("feedback $feedback", tag = "PlayerStore")
             when (feedback) {
                 PlayerFeedback.Ready -> nextTask()
-                is PlayerFeedback.Started -> handlePlaybackStarted(feedback.durationMs)
+                is PlayerFeedback.Started -> handlePlaybackStarted(feedback)
             }
         }
 
-        private fun handlePlaybackStarted(durationMs: Long) {
+        private fun handlePlaybackStarted(feedback: PlayerFeedback.Started) {
             playJob = scope.launch(deps.dispatchers.default) {
-                delay(durationMs)
+                delay(feedback.durationMs.speed(speed))
                 nextTask() // next task is Pause or Stop
             }
         }
@@ -189,7 +191,7 @@ internal class PlayerStoreFactory(
                 currentPlayTask = task
                 publish(PlayerTask(task))
                 dispatch(Msg.Play)
-                dispatch(Msg.NextRepeat(currentRepeat, duration))
+                dispatch(Msg.NextRepeat(currentRepeat, duration.speed(speed)))
             }
 
         private fun playTranslation(task: PlayTranslationTask) =
@@ -197,7 +199,7 @@ internal class PlayerStoreFactory(
                 currentPlayTask = task
                 publish(PlayerTask(task))
                 dispatch(Msg.Play)
-                dispatch(Msg.NextRepeat(currentRepeat, duration))
+                dispatch(Msg.NextRepeat(currentRepeat, duration.speed(speed)))
             }
 
         private fun forcePlay() =
@@ -217,7 +219,7 @@ internal class PlayerStoreFactory(
             Napier.d("pause $task", tag = "PlayerStore")
             publish(PlayerTask(task))
             dispatch(Msg.Pause)
-            delay(task.duration)
+            delay(task.duration.speed(speed))
             nextTask()
         }
 
@@ -267,7 +269,7 @@ internal class PlayerStoreFactory(
             }
 
         private fun resetCounter(task: ResetCounterTask) {
-            dispatch(Msg.ResetCounter(task.duration))
+            dispatch(Msg.ResetCounter(task.duration.speed(speed)))
             nextTask()
         }
     }
@@ -295,6 +297,7 @@ internal class PlayerStoreFactory(
                     words = msg.words,
                     translation = msg.translation,
                     currentShlokaIndex = msg.index,
+                    playbackState = IDLE,
                 )
             }
     }

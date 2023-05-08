@@ -26,6 +26,7 @@ private const val SHOW_CLOSE_PLAYER_DIALOG = "SHOW_CLOSE_PLAYER_DIALOG"
 private const val ALLOW_SWIPE_ON_PLAYER = "ALLOW_SWIPE_ON_PLAYER"
 private const val WITH_SANSKRIT = "WITH_SANSKRIT"
 private const val WITH_TRANSLATION = "WITH_TRANSLATION"
+private const val SPEED = "SPEED"
 
 private const val DEFAULT_REPEATS = 10
 private const val MAX_REPEATS = 16_108
@@ -68,6 +69,7 @@ var locale: String by settings.string(LOCALE_KEY, "")
 
 var repeats: Int by settings.int(CURRENT_REPEATS, DEFAULT_REPEATS, 1, MAX_REPEATS)
 var pause: Long by settings.long(PAUSE_AFTER_EACH, DEFAULT_PAUSE, MIN_PAUSE, MAX_PAUSE)
+var speed: Float by settings.float(SPEED, 2.5f, 0.5f, 2.5f)
 
 var withSanskrit: Boolean by settings.boolean(WITH_SANSKRIT, true)
 var withTranslation: Boolean by settings.boolean(WITH_TRANSLATION, true)
@@ -96,72 +98,3 @@ fun onPreRatingClosed() =
 
 var showClosePlayerDialog: Boolean by settings.boolean(SHOW_CLOSE_PLAYER_DIALOG, true)
 var allowSwipeOnPlayer: Boolean by settings.boolean(ALLOW_SWIPE_ON_PLAYER, true)
-
-fun Settings.int(
-    key: String? = null,
-    defaultValue: Int,
-    minValue: Int,
-    maxValue: Int
-): ReadWriteProperty<Any?, Int> =
-    IntDelegate(
-        settings = this,
-        key = key,
-        defaultValue = defaultValue,
-        minValue = minValue,
-        maxValue = maxValue,
-    )
-
-fun Settings.long(
-    key: String? = null,
-    defaultValue: Long,
-    minValue: Long,
-    maxValue: Long
-): ReadWriteProperty<Any?, Long> =
-    LongDelegate(
-        settings = this,
-        key = key,
-        defaultValue = defaultValue,
-        minValue = minValue,
-        maxValue = maxValue,
-    )
-
-private class IntDelegate(
-    private val settings: Settings,
-    key: String?,
-    private val defaultValue: Int,
-    private val minValue: Int,
-    private val maxValue: Int,
-) : OptionalKeyDelegate<Int>(key) {
-    override fun getValue(key: String): Int =
-        settings[key, defaultValue].coerceIn(minValue, maxValue)
-
-    override fun setValue(key: String, value: Int) {
-        settings[key] = value.coerceIn(minValue, maxValue)
-    }
-}
-
-private class LongDelegate(
-    private val settings: Settings,
-    key: String?,
-    private val defaultValue: Long,
-    private val minValue: Long,
-    private val maxValue: Long,
-) : OptionalKeyDelegate<Long>(key) {
-    override fun getValue(key: String): Long =
-        settings[key, defaultValue].coerceIn(minValue, maxValue)
-
-    override fun setValue(key: String, value: Long) {
-        settings[key] = value.coerceIn(minValue, maxValue)
-    }
-}
-
-private abstract class OptionalKeyDelegate<T>(private val key: String?) : ReadWriteProperty<Any?, T> {
-
-    abstract fun getValue(key: String): T
-    abstract fun setValue(key: String, value: T)
-
-    override fun getValue(thisRef: Any?, property: KProperty<*>): T = getValue(key ?: property.name)
-    override fun setValue(thisRef: Any?, property: KProperty<*>, value: T) {
-        setValue(key ?: property.name, value)
-    }
-}

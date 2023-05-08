@@ -13,6 +13,7 @@ import com.a_blekot.shlokas.common.player_api.PlayerBus
 import com.a_blekot.shlokas.common.player_api.PlayerFeedback
 import com.a_blekot.shlokas.common.utils.locale
 import com.a_blekot.shlokas.common.utils.resources.getAssetPath
+import com.a_blekot.shlokas.common.utils.speed
 import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
@@ -214,6 +215,7 @@ class Player(
     private fun setTrack(task: SetTrackTask) {
         pause()
         exoPlayer?.apply {
+            setPlaybackSpeed(speed)
             setMediaItem(task.toMediaItem())
             prepare()
         }
@@ -257,7 +259,7 @@ class Player(
             pause()
             tts?.run {
                 language = Locale(locale)
-                setSpeechRate(SPEECH_RATE)
+                setSpeechRate(SPEECH_RATE * speed)
                 setPitch(1.0f)
                 setOnUtteranceProgressListener(ttsListener)
                 speak(text, TextToSpeech.QUEUE_FLUSH, null, id.name)

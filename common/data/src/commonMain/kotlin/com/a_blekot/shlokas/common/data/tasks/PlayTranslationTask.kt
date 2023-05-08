@@ -1,6 +1,7 @@
 package com.a_blekot.shlokas.common.data.tasks
 
 import com.a_blekot.shlokas.common.data.ShlokaId
+import com.a_blekot.shlokas.common.data.speed
 
 const val SPEECH_RATE = 0.8f
 
@@ -10,5 +11,5 @@ data class PlayTranslationTask(
     val text: String = "",
 ) : Task {
     override val duration
-        get() = (text.length * 60L / SPEECH_RATE).toLong()
+        get() = (text.length * 60L).speed(SPEECH_RATE)
 }

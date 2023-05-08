@@ -1,6 +1,7 @@
 package com.a_blekot.shlokas.common.player_impl
 
 import com.a_blekot.shlokas.common.data.createTasks
+import com.a_blekot.shlokas.common.data.speed
 import com.a_blekot.shlokas.common.data.tasks.PlayTranslationTask
 import com.a_blekot.shlokas.common.player_api.PlayerComponent
 import com.a_blekot.shlokas.common.player_api.PlayerOutput
@@ -35,7 +36,11 @@ class PlayerComponentImpl(
             it
         }
     }
-    private val durationMs = tasks.sumOf { it.duration }
+    private val durationMs = run {
+        val result = tasks.sumOf { it.duration }.speed(speed)
+        Napier.d("duration = $result", tag = "DUDUDU")
+        result
+    }
     private val startShloka = deps.config.startShloka?.shloka ?: deps.config.shlokas.first().shloka
 
     private val initialState =

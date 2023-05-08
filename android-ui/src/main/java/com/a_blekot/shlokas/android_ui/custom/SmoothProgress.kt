@@ -1,9 +1,7 @@
 package com.a_blekot.shlokas.android_ui.custom
 
-import android.util.Half.toFloat
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -23,14 +21,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import com.a_blekot.shlokas.android_ui.theme.Dimens.borderS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
+import com.a_blekot.shlokas.common.player_api.PlaybackState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
 fun SmoothProgress(
+    prev: Int,
     current: Int,
     total: Int,
     durationMs: Long,
+    resetOnState: List<PlaybackState>,
+    playbackState: PlaybackState,
     modifier: Modifier = Modifier,
     color: Color = colorScheme.primary,
     bgColor: Color = colorScheme.background,
@@ -39,26 +41,31 @@ fun SmoothProgress(
 ) {
     val currentProgress = remember { Animatable(0f) }
 
-    LaunchedEffect(current, durationMs) {
+    LaunchedEffect(current, durationMs, playbackState) {
         launch {
-            val resetDuration = 100
-            currentProgress.animateTo(
-                targetValue = (current - 1).coerceAtLeast(0).toFloat() / total,
-                animationSpec = tween(
-                    durationMillis = resetDuration,
-                    easing = LinearEasing,
-                )
-            )
+            val resetDuration = 20
 
-            delay(resetDuration.toLong())
-
-            currentProgress.animateTo(
-                targetValue = current.toFloat() / total,
-                animationSpec = tween(
-                    durationMillis = durationMs.toInt() - resetDuration,
-                    easing = LinearEasing,
+            if (playbackState in resetOnState) {
+                currentProgress.animateTo(
+                    targetValue = prev.toFloat() / total,
+                    animationSpec = tween(
+                        durationMillis = resetDuration,
+                        easing = LinearEasing,
+                    )
                 )
-            )
+            }
+
+            delay(resetDuration.toLong() * 2)
+
+            if (playbackState == PlaybackState.PLAYING) {
+                currentProgress.animateTo(
+                    targetValue = current.toFloat() / total,
+                    animationSpec = tween(
+                        durationMillis = durationMs.toInt() - resetDuration,
+                        easing = LinearEasing,
+                    )
+                )
+            }
         }
     }
 

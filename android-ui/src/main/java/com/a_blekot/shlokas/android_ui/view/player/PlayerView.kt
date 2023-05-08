@@ -179,6 +179,35 @@ private fun PlayPauseFAB(
     }
 }
 
+@Composable
+private fun Button(
+    isNext: Boolean,
+    component: PlayerComponent,
+    modifier: Modifier = Modifier
+) {
+    IconButton(
+        onClick = {
+            when {
+                isNext -> component.next()
+                else -> component.prev()
+            }
+        },
+        modifier = modifier
+            .size(iconSizeXL)
+            .background(
+                color = colorScheme.secondaryContainer,
+                shape = RoundedCornerShape(radiusM)
+            )
+    ) {
+        Icon(
+            if (isNext) Icons.Rounded.SkipNext else Icons.Rounded.SkipPrevious,
+            if (isNext) "Next" else "Previous",
+            tint = colorScheme.onPrimaryContainer,
+            modifier = Modifier.fillMaxSize()
+        )
+    }
+}
+
 private val PlaybackState.icon
     get() = when (this) {
         IDLE, FORCE_PAUSED -> Icons.Rounded.PlayArrow
@@ -239,7 +268,15 @@ fun TitleAndProgress(state: PlayerState, component: PlayerComponent, modifier: M
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                SmoothProgress(currentRepeat, totalRepeats, durationMs, modifier.size(70.dp))
+                SmoothProgress(
+                    prev = (currentRepeat - 1).coerceAtLeast(0),
+                    current= currentRepeat,
+                    total = totalRepeats,
+                    durationMs = durationMs,
+                    resetOnState = listOf(PLAYING, FORCE_PAUSED),
+                    playbackState = state.playbackState,
+                    modifier = modifier.size(70.dp)
+                )
 
                 Text(
                     text = label_repeats_counter.resolve(context),
@@ -276,20 +313,40 @@ fun TitleAndProgress(state: PlayerState, component: PlayerComponent, modifier: M
                     )
                 }
 
-                PlayPauseFAB(
-                    playbackState = playbackState,
-                    isAutoplay = isAutoplay,
-                    component = component,
-                )
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(paddingS)
+                ) {
+                    Button(
+                        isNext = false,
+                        component = component
+                    )
 
+                    PlayPauseFAB(
+                        playbackState = playbackState,
+                        isAutoplay = isAutoplay,
+                        component = component,
+                    )
 
+                    Button(
+                        isNext = true,
+                        component = component
+                    )
+                }
             }
 
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 val verseDuration = totalDurationMs / totalShlokasCount
-                SmoothProgress(currentShlokaIndex, totalShlokasCount, verseDuration, modifier = modifier.size(70.dp))
+                SmoothProgress(
+                    prev = (currentShlokaIndex - 1).coerceAtLeast(0),
+                    current= currentShlokaIndex,
+                    total = totalShlokasCount,
+                    durationMs = verseDuration,
+                    resetOnState = listOf(IDLE),
+                    playbackState = state.playbackState,
+                    modifier = modifier.size(70.dp)
+                )
 
                 Text(
                     text = label_verses_counter.resolve(context),
