@@ -111,7 +111,7 @@ internal class PlayerStoreFactory(
 
         private fun prev(state: PlayerState) {
             Napier.d("prev", tag = "PlayerStore")
-            val index = tasks.firstBefore(taskIndex) { it is SetTrackTask && it.index != state.currentShlokaIndex}
+            val index = tasks.firstBefore(taskIndex) { it is SetTrackTask && it.index != state.currentShlokaIndex }
             if (index != -1) {
                 taskIndex = index
                 nextTask()
@@ -184,23 +184,20 @@ internal class PlayerStoreFactory(
             }
         }
 
-        private fun play(task: PlayTask) {
-            currentPlayTask = task
-            publish(PlayerTask(task))
-            dispatch(Msg.Play)
+        private fun play(task: PlayTask) =
             task.run {
+                currentPlayTask = task
+                publish(PlayerTask(task))
+                dispatch(Msg.Play)
                 dispatch(Msg.NextRepeat(currentRepeat, duration))
             }
-        }
 
         private fun playTranslation(task: PlayTranslationTask) =
-            task.copy(text = resolveTranslation(task.id)).let { task ->
+            task.run {
                 currentPlayTask = task
-                task.run {
-                    publish(PlayerTask(task))
-                    dispatch(Msg.Play)
-                    dispatch(Msg.NextRepeat(currentRepeat, duration))
-                }
+                publish(PlayerTask(task))
+                dispatch(Msg.Play)
+                dispatch(Msg.NextRepeat(currentRepeat, duration))
             }
 
         private fun forcePlay() =

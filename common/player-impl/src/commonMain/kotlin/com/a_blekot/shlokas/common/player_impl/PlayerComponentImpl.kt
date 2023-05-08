@@ -1,6 +1,7 @@
 package com.a_blekot.shlokas.common.player_impl
 
 import com.a_blekot.shlokas.common.data.createTasks
+import com.a_blekot.shlokas.common.data.tasks.PlayTranslationTask
 import com.a_blekot.shlokas.common.player_api.PlayerComponent
 import com.a_blekot.shlokas.common.player_api.PlayerOutput
 import com.a_blekot.shlokas.common.player_api.PlayerState
@@ -27,7 +28,13 @@ class PlayerComponentImpl(
     private val output: Consumer<PlayerOutput>
 ) : PlayerComponent, ComponentContext by componentContext, StringResourceHandler by deps.stringResourceHandler {
 
-    private val tasks = deps.config.createTasks()
+    private val tasks = deps.config.createTasks().map {
+        if (it is PlayTranslationTask) {
+            it.copy(text = resolveTranslation(it.id))
+        } else {
+            it
+        }
+    }
     private val durationMs = tasks.sumOf { it.duration }
     private val startShloka = deps.config.startShloka?.shloka ?: deps.config.shlokas.first().shloka
 

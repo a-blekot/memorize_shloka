@@ -1,5 +1,7 @@
 package com.a_blekot.shlokas.android_ui.custom
 
+import android.util.Half.toFloat
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -9,14 +11,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
@@ -25,6 +23,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import com.a_blekot.shlokas.android_ui.theme.Dimens.borderS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun SmoothProgress(
@@ -37,13 +37,30 @@ fun SmoothProgress(
     borderColor: Color = colorScheme.secondaryContainer,
     strokeWidth: Dp = borderS
 ) {
-    val currentProgress: Float by animateFloatAsState(
-        targetValue = current.toFloat() / total,
-        animationSpec = tween(
-            durationMillis = durationMs.toInt(),
-            easing = LinearEasing,
-        )
-    )
+    val currentProgress = remember { Animatable(0f) }
+
+    LaunchedEffect(current, durationMs) {
+        launch {
+            val resetDuration = 100
+            currentProgress.animateTo(
+                targetValue = (current - 1).coerceAtLeast(0).toFloat() / total,
+                animationSpec = tween(
+                    durationMillis = resetDuration,
+                    easing = LinearEasing,
+                )
+            )
+
+            delay(resetDuration.toLong())
+
+            currentProgress.animateTo(
+                targetValue = current.toFloat() / total,
+                animationSpec = tween(
+                    durationMillis = durationMs.toInt() - resetDuration,
+                    easing = LinearEasing,
+                )
+            )
+        }
+    }
 
     Box(
         contentAlignment = Alignment.Center,
@@ -65,7 +82,7 @@ fun SmoothProgress(
         )
 
         CircularProgressIndicator(
-            progress = currentProgress,
+            progress = currentProgress.value,
             modifier = Modifier.fillMaxSize(),
             color = color,
             strokeWidth = strokeWidth
@@ -76,8 +93,8 @@ fun SmoothProgress(
             verticalArrangement = Arrangement.Center
         ) {
             val initialTextStyle = typography.titleLarge
-            var textStyle = remember { mutableStateOf(initialTextStyle) }
-            var readyToDraw = remember { mutableStateOf(false) }
+            val textStyle = remember { mutableStateOf(initialTextStyle) }
+            val readyToDraw = remember { mutableStateOf(false) }
             Text(
                 text = "$current",
                 color = color,
