@@ -29,19 +29,20 @@ class PlayerComponentImpl(
 
     private val tasks = deps.config.createTasks()
     private val durationMs = tasks.sumOf { it.duration }
-    private val firstShloka = deps.config.shlokas.first().shloka
+    private val startShloka = deps.config.startShloka?.shloka ?: deps.config.shlokas.first().shloka
 
     private val initialState =
         PlayerState(
-            title = resolveTitle(firstShloka.id),
-            sanskrit = resolveSanskrit(firstShloka.id),
-            words = resolveWords(firstShloka.id),
-            translation = resolveTranslation(firstShloka.id),
+            title = resolveTitle(startShloka.id),
+            sanskrit = resolveSanskrit(startShloka.id),
+            words = resolveWords(startShloka.id),
+            translation = resolveTranslation(startShloka.id),
             durationMs = durationMs,
             totalRepeats = deps.config.repeats,
             totalShlokasCount = deps.config.shlokas.filter { it.isSelected }.size,
             totalDurationMs = durationMs,
-            isAutoplay = autoPlay
+            isAutoplay = autoPlay,
+            startShloka = deps.config.startShloka,
         )
 
     private val store =

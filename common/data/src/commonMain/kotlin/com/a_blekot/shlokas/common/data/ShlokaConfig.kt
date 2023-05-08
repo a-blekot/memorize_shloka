@@ -30,6 +30,7 @@ fun ShlokaConfig.createTasks(
 ): List<Task> {
     val tasks = mutableListOf<Task>()
     tasks.add(SetTrackTask(index, shloka))
+    tasks.add(ResetCounterTask(pauseMs))
 
     when {
         !withSanskrit -> return tasks.apply { add(IdleTask) }

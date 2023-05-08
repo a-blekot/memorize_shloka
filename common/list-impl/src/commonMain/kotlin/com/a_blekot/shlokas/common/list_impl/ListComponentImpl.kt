@@ -69,6 +69,7 @@ class ListComponentImpl(
 
     override fun resolveDescription(id: ShlokaId): String =
         deps.stringResourceHandler.resolveDescription(id)
+
     override fun add() = store.accept(Add)
     override fun save() = store.accept(Save)
     override fun remove(id: ShlokaId) = store.accept(Remove(id))
@@ -77,11 +78,7 @@ class ListComponentImpl(
     override fun select(id: ShlokaId, isSelected: Boolean) = store.accept(Select(id, isSelected))
     override fun details(config: ShlokaConfig) = output(ListOutput.Details(config))
     override fun play() = onPlay()
-    override fun play(config: ShlokaConfig) {
-        val playConfig = config.toPlayConfig()
-        playShlokaAnalytics(config.shloka.id.id, playConfig)
-        output(ListOutput.Play(playConfig))
-    }
+    override fun play(config: ShlokaConfig) = onPlay(config)
 
     override fun settings() = output(ListOutput.Settings)
     override fun donations() = output(ListOutput.Donations)
@@ -104,34 +101,39 @@ class ListComponentImpl(
         }
     }
 
-    private fun onPlay() =
+    private fun onPlay(startShloka: ShlokaConfig? = null) =
         store.state.config.run {
-            val playConfig = this.toPlayConfig()
+            val playConfig = this.toPlayConfig(startShloka)
             if (playConfig.shlokas.isNotEmpty()) {
+                startShloka?.let {
+                    playShlokaAnalytics(startShloka.shloka.id.id, playConfig)
+                }
                 playListAnalytics(id.id, playConfig)
                 output(ListOutput.Play(playConfig))
             }
         }
 
-    private fun ListConfig.toPlayConfig() =
-        PlayConfig(
-            repeatMode = repeatMode,
-            shlokas = list.filter { it.isSelected && it.shloka.hasAudio },
-            repeats = repeats,
-            withSanskrit = withSanskrit,
-            withTranslation = withTranslation,
-            pauseAfterEach = pause,
-        )
-
-    private fun ShlokaConfig.toPlayConfig() =
-        PlayConfig(
-            repeatMode = repeatMode,
-            shlokas = listOf(copy(isSelected = true)),
-            repeats = repeats,
-            withSanskrit = withSanskrit,
-            withTranslation = withTranslation,
-            pauseAfterEach = pause,
-        )
+    private fun ListConfig.toPlayConfig(startShloka: ShlokaConfig? = null) =
+        list
+            .map {
+                if (it.shloka.id == startShloka?.shloka?.id) {
+                    it.copy(isSelected = true)
+                } else {
+                    it
+                }
+            }
+            .filter { (it.isSelected && it.shloka.hasAudio) || it.shloka.id == startShloka?.shloka?.id }
+            .let { shlokas ->
+                PlayConfig(
+                    repeatMode = repeatMode,
+                    shlokas = shlokas,
+                    startShloka = startShloka,
+                    repeats = repeats,
+                    withSanskrit = withSanskrit,
+                    withTranslation = withTranslation,
+                    pauseAfterEach = pause,
+                )
+            }
 
     private fun playListAnalytics(id: String, config: PlayConfig) =
         deps.analytics.playList(

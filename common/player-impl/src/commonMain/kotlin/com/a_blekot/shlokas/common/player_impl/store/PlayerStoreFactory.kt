@@ -33,7 +33,10 @@ internal class PlayerStoreFactory(
 
     init {
         check(deps.config.shlokas.any { it.isSelected }) {
-            "PlayConfig can't be empty!"
+            "PlayerStoreFactory: PlayConfig can't be empty!"
+        }
+        check(tasks.isNotEmpty()) {
+            "PlayerStoreFactory: tasks can't be empty!"
         }
     }
 
@@ -54,6 +57,7 @@ internal class PlayerStoreFactory(
     }
 
     sealed interface Msg {
+        object StartShlokaConsumed : Msg
         object Play : Msg
         object Pause : Msg
         object ForcePause : Msg
@@ -84,13 +88,13 @@ internal class PlayerStoreFactory(
 
     private inner class ExecutorImpl : CoroutineExecutor<PlayerIntent, Action, PlayerState, Msg, PlayerLabel>() {
 
+        private var taskIndex = 0
         private var playJob: Job? = null
         private var currentPlayTask: Task? = null
-        private var iterator = tasks.iterator()
 
         override fun executeAction(action: Action, getState: () -> PlayerState) {
             when (action) {
-                Start -> start()
+                Start -> start(getState())
                 is Feedback -> feedback(action.feedback)
             }
         }
@@ -100,31 +104,46 @@ internal class PlayerStoreFactory(
                 ForcePlay -> forcePlay()
                 ForcePause -> forcePause()
                 Stop -> stop()
-                Prev -> prev()
+                Prev -> prev(getState())
                 Next -> next()
             }
         }
 
-        private fun prev() {
+        private fun prev(state: PlayerState) {
             Napier.d("prev", tag = "PlayerStore")
+            val index = tasks.firstBefore(taskIndex) { it is SetTrackTask && it.index != state.currentShlokaIndex}
+            if (index != -1) {
+                taskIndex = index
+                nextTask()
+            }
         }
 
         private fun next() {
             Napier.d("next", tag = "PlayerStore")
+            val index = tasks.firstAfter(taskIndex) { it is SetTrackTask }
+            if (index != -1) {
+                taskIndex = index
+                nextTask()
+            }
         }
 
-        private fun start() {
+        private fun start(state: PlayerState) {
             Napier.d("tasks = $tasks", tag = "TASKS")
-            iterator = tasks.iterator()
+            val index = state.startShloka?.shloka?.id?.let { startShlokaId ->
+                tasks.indexOfFirst { it is SetTrackTask && it.id == startShlokaId }
+            }?.takeIf { it != -1 }
+            dispatch(Msg.StartShlokaConsumed)
+            taskIndex = index ?: 0
             nextTask()
         }
 
         private fun nextTask() {
-            Napier.d("iterator hasNext = ${iterator.hasNext()}", tag = "PlayerStore")
-            if (iterator.hasNext()) {
+            playJob?.cancel()
+            Napier.d("taskIndex = $taskIndex (from ${tasks.lastIndex})", tag = "PlayerStore")
+            if (taskIndex <= tasks.lastIndex) {
                 Napier.d("nextTask", tag = "PlayerStore")
                 scope.launch {
-                    handleTask(iterator.next())
+                    handleTask(tasks[taskIndex++])
                 }
             }
         }
@@ -176,13 +195,13 @@ internal class PlayerStoreFactory(
 
         private fun playTranslation(task: PlayTranslationTask) =
             task.copy(text = resolveTranslation(task.id)).let { task ->
-            currentPlayTask = task
+                currentPlayTask = task
                 task.run {
-                publish(PlayerTask(task))
-                dispatch(Msg.Play)
-                dispatch(Msg.NextRepeat(currentRepeat, duration))
+                    publish(PlayerTask(task))
+                    dispatch(Msg.Play)
+                    dispatch(Msg.NextRepeat(currentRepeat, duration))
+                }
             }
-        }
 
         private fun forcePlay() =
             scope.launch {
@@ -259,6 +278,7 @@ internal class PlayerStoreFactory(
     private inner class ReducerImpl : Reducer<PlayerState, Msg> {
         override fun PlayerState.reduce(msg: Msg): PlayerState =
             when (msg) {
+                Msg.StartShlokaConsumed -> copy(startShloka = null)
                 Msg.Play -> copy(playbackState = PLAYING)
                 Msg.Pause -> copy(playbackState = PAUSED)
                 Msg.ForcePause -> copy(playbackState = FORCE_PAUSED)

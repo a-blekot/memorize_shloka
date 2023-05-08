@@ -11,6 +11,7 @@ import com.arkivanov.essenty.parcelable.Parcelize
 data class PlayConfig(
     val repeatMode: RepeatMode,
     val shlokas: List<ShlokaConfig>,
+    val startShloka: ShlokaConfig? = null,
     val repeats: Int,
     val withSanskrit: Boolean,
     val withTranslation: Boolean,
