@@ -5,8 +5,6 @@ import com.a_blekot.shlokas.common.data.RepeatMode
 import com.a_blekot.shlokas.common.data.toListType
 import com.russhwolf.settings.*
 import com.russhwolf.settings.int
-import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KProperty
 
 private const val APP_LAUNCH_COUNT = "APP_LAUNCH_COUNT"
 private const val AUTOPLAY_KEY = "AUTOPLAY_KEY"
@@ -26,7 +24,8 @@ private const val SHOW_CLOSE_PLAYER_DIALOG = "SHOW_CLOSE_PLAYER_DIALOG"
 private const val ALLOW_SWIPE_ON_PLAYER = "ALLOW_SWIPE_ON_PLAYER"
 private const val WITH_SANSKRIT = "WITH_SANSKRIT"
 private const val WITH_TRANSLATION = "WITH_TRANSLATION"
-private const val SPEED = "SPEED"
+private const val AUDIO_SPEED = "AUDIO_SPEED"
+private const val AUDIO_PITCH = "AUDIO_PITCH"
 
 private const val DEFAULT_REPEATS = 10
 private const val MAX_REPEATS = 16_108
@@ -34,6 +33,20 @@ private const val MAX_REPEATS = 16_108
 private const val MIN_PAUSE = 100L
 private const val DEFAULT_PAUSE = 500L
 private const val MAX_PAUSE = 10_000L
+
+object Audio {
+    object Speed {
+        const val DEFAULT = 1.0f
+        const val MIN = 0.25f
+        const val MAX = 2.5f
+    }
+
+    object Pitch {
+        const val DEFAULT = 1.0f
+        const val MIN = 0.25f
+        const val MAX = 2.5f
+    }
+}
 
 private val settings = Settings()
 
@@ -69,7 +82,8 @@ var locale: String by settings.string(LOCALE_KEY, "")
 
 var repeats: Int by settings.int(CURRENT_REPEATS, DEFAULT_REPEATS, 1, MAX_REPEATS)
 var pause: Long by settings.long(PAUSE_AFTER_EACH, DEFAULT_PAUSE, MIN_PAUSE, MAX_PAUSE)
-var speed: Float by settings.float(SPEED, 2.5f, 0.5f, 2.5f)
+var audioSpeed: Float by settings.float(AUDIO_SPEED, Audio.Speed.DEFAULT, Audio.Speed.MIN, Audio.Speed.MAX)
+var audioPitch: Float by settings.float(AUDIO_PITCH, Audio.Pitch.DEFAULT, Audio.Pitch.MIN, Audio.Pitch.MAX)
 
 var withSanskrit: Boolean by settings.boolean(WITH_SANSKRIT, true)
 var withTranslation: Boolean by settings.boolean(WITH_TRANSLATION, true)

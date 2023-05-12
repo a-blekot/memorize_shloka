@@ -19,8 +19,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.a_blekot.shlokas.android_ui.custom.*
+import com.a_blekot.shlokas.android_ui.theme.AppTheme
 import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingM
@@ -32,6 +34,8 @@ import com.a_blekot.shlokas.common.data.Locales.ru
 import com.a_blekot.shlokas.common.data.Locales.uk
 import com.a_blekot.shlokas.common.data.RepeatMode
 import com.a_blekot.shlokas.common.data.RepeatMode.*
+import com.a_blekot.shlokas.common.resources.MR.strings.label_speed
+import com.a_blekot.shlokas.common.resources.MR.strings.label_pitch
 import com.a_blekot.shlokas.common.resources.MR.strings.label_autoplay
 import com.a_blekot.shlokas.common.resources.MR.strings.label_donate
 import com.a_blekot.shlokas.common.resources.MR.strings.label_feedback
@@ -56,7 +60,10 @@ import com.a_blekot.shlokas.common.resources.MR.strings.label_with_sanskrit
 import com.a_blekot.shlokas.common.resources.MR.strings.label_with_translation
 import com.a_blekot.shlokas.common.resources.resolve
 import com.a_blekot.shlokas.common.settings_api.SettingsComponent
+import com.a_blekot.shlokas.common.settings_api.SettingsState
+import com.a_blekot.shlokas.common.utils.*
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
+import com.arkivanov.decompose.value.MutableValue
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -126,6 +133,14 @@ fun SettingsView(component: SettingsComponent) {
                     modifier = Modifier.fillMaxWidth()
                 )
             }
+
+            item {
+                SpeedSlider()
+            }
+
+//            item {
+//                PitchSlider()
+//            }
 
             item {
                 RepeatMode(state.repeatMode) {
@@ -493,5 +508,83 @@ private fun Locale(locale: String, modifier: Modifier = Modifier, onChanged: (St
         }
 
         Divider(color = colorScheme.primary, thickness = Dimens.borderS)
+    }
+}
+
+@Composable
+fun SpeedSlider() {
+    val range = Audio.Speed.MIN..Audio.Speed.MAX
+    val steps = 44
+    val selection = remember { mutableStateOf(audioSpeed) }
+
+    StandartRow(padding = 0.dp) {
+        Slider(
+            value = selection.value,
+            valueRange = range,
+            steps = steps,
+            onValueChange = {
+                selection.value = it
+                audioSpeed = it
+            },
+            modifier = Modifier.weight(1f).padding(end = 8.dp)
+        )
+
+        Text(
+            text = "${label_speed.resolve(LocalContext.current)} ${selection.value.format(2)}",
+            style = typography.titleMedium,
+            color = colorScheme.primary,
+        )
+    }
+}
+
+@Composable
+fun PitchSlider() {
+    val range = Audio.Pitch.MIN..Audio.Pitch.MAX
+    val steps = 44
+    val selection = remember { mutableStateOf(audioPitch) }
+
+    StandartRow(padding = 0.dp) {
+        Slider(
+            value = selection.value,
+            valueRange = range,
+            steps = steps,
+            onValueChange = {
+                selection.value = it
+                audioPitch = it
+            },
+            modifier = Modifier.weight(1f).padding(end = 8.dp)
+        )
+
+        Text(
+            text = "${label_pitch.resolve(LocalContext.current)} ${selection.value.format(2)}",
+            style = typography.titleMedium,
+            color = colorScheme.primary,
+        )
+    }
+}
+
+private fun Float.format(scale: Int) = "%.${scale}f".format(this)
+
+@Preview
+@Composable
+private fun SettingsPreview() {
+
+    val component = object : SettingsComponent {
+        override val flow = MutableValue(
+            SettingsState(
+                repeats = 3,
+                pause = 300L,
+                repeatMode = ONE_LINE,
+                locale = "uk",
+                isAutoplay = true,
+                withSanskrit = true,
+                withTranslation = false,
+                showClosePlayerDialog = false,
+            )
+        )
+    }
+
+    AppTheme {
+        SettingsView(component)
     }
 }

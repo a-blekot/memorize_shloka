@@ -11,9 +11,11 @@ import android.speech.tts.UtteranceProgressListener
 import com.a_blekot.shlokas.common.data.tasks.*
 import com.a_blekot.shlokas.common.player_api.PlayerBus
 import com.a_blekot.shlokas.common.player_api.PlayerFeedback
+import com.a_blekot.shlokas.common.utils.audioPitch
 import com.a_blekot.shlokas.common.utils.locale
+import com.a_blekot.shlokas.common.utils.removeDiacritics
 import com.a_blekot.shlokas.common.utils.resources.getAssetPath
-import com.a_blekot.shlokas.common.utils.speed
+import com.a_blekot.shlokas.common.utils.audioSpeed
 import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
@@ -181,10 +183,11 @@ class Player(
         hideNotification()
         exoPlayer?.release()
         exoPlayer = null
+        shutDownTts()
     }
 
     private fun shutDownTts() {
-        tts?.stop()
+        pauseTts()
         tts?.shutdown()
         tts = null
     }
@@ -215,7 +218,7 @@ class Player(
     private fun setTrack(task: SetTrackTask) {
         pause()
         exoPlayer?.apply {
-            setPlaybackSpeed(speed)
+            playbackParameters = PlaybackParameters(audioSpeed, audioPitch)
             setMediaItem(task.toMediaItem())
             prepare()
         }
@@ -259,10 +262,10 @@ class Player(
             pause()
             tts?.run {
                 language = Locale(locale)
-                setSpeechRate(SPEECH_RATE * speed)
-                setPitch(1.0f)
+                setSpeechRate(SPEECH_RATE * audioSpeed)
+                setPitch(audioPitch)
                 setOnUtteranceProgressListener(ttsListener)
-                speak(text, TextToSpeech.QUEUE_FLUSH, null, id.name)
+                speak(text.removeDiacritics(), TextToSpeech.QUEUE_FLUSH, null, id.name)
             }
         }
 

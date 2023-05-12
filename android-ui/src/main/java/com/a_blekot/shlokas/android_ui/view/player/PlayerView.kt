@@ -253,7 +253,6 @@ fun LazyListScope.addFoldableView(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TitleAndProgress(state: PlayerState, component: PlayerComponent, modifier: Modifier = Modifier) =
     state.run {

@@ -14,7 +14,7 @@ import com.a_blekot.shlokas.common.utils.analytics.playCompleted
 import com.a_blekot.shlokas.common.utils.autoPlay
 import com.a_blekot.shlokas.common.utils.onPlayCompleted
 import com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
-import com.a_blekot.shlokas.common.utils.speed
+import com.a_blekot.shlokas.common.utils.audioSpeed
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
@@ -160,7 +160,7 @@ internal class PlayerStoreFactory(
 
         private fun handlePlaybackStarted(feedback: PlayerFeedback.Started) {
             playJob = scope.launch(deps.dispatchers.default) {
-                delay(feedback.durationMs.speed(speed))
+                delay(feedback.durationMs.speed(audioSpeed))
                 nextTask() // next task is Pause or Stop
             }
         }
@@ -191,7 +191,7 @@ internal class PlayerStoreFactory(
                 currentPlayTask = task
                 publish(PlayerTask(task))
                 dispatch(Msg.Play)
-                dispatch(Msg.NextRepeat(currentRepeat, duration.speed(speed)))
+                dispatch(Msg.NextRepeat(currentRepeat, duration.speed(audioSpeed)))
             }
 
         private fun playTranslation(task: PlayTranslationTask) =
@@ -199,7 +199,7 @@ internal class PlayerStoreFactory(
                 currentPlayTask = task
                 publish(PlayerTask(task))
                 dispatch(Msg.Play)
-                dispatch(Msg.NextRepeat(currentRepeat, duration.speed(speed)))
+                dispatch(Msg.NextRepeat(currentRepeat, duration.speed(audioSpeed)))
             }
 
         private fun forcePlay() =
@@ -219,7 +219,7 @@ internal class PlayerStoreFactory(
             Napier.d("pause $task", tag = "PlayerStore")
             publish(PlayerTask(task))
             dispatch(Msg.Pause)
-            delay(task.duration.speed(speed))
+            delay(task.duration.speed(audioSpeed))
             nextTask()
         }
 
@@ -269,7 +269,7 @@ internal class PlayerStoreFactory(
             }
 
         private fun resetCounter(task: ResetCounterTask) {
-            dispatch(Msg.ResetCounter(task.duration.speed(speed)))
+            dispatch(Msg.ResetCounter(task.duration.speed(audioSpeed)))
             nextTask()
         }
     }

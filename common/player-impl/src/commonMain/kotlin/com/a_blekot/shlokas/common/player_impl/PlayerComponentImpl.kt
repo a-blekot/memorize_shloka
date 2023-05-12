@@ -36,11 +36,7 @@ class PlayerComponentImpl(
             it
         }
     }
-    private val durationMs = run {
-        val result = tasks.sumOf { it.duration }.speed(speed)
-        Napier.d("duration = $result", tag = "DUDUDU")
-        result
-    }
+    private val durationMs = tasks.sumOf { it.duration }.speed(audioSpeed)
     private val startShloka = deps.config.startShloka?.shloka ?: deps.config.shlokas.first().shloka
 
     private val initialState =

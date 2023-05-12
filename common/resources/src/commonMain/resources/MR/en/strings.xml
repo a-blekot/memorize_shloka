@@ -6,6 +6,8 @@
     <string name="label_no_connection">No connection...</string>
     <string name="label_repeats">Repeats</string>
     <string name="label_pause">Pause</string>
+    <string name="label_speed">Speed</string>
+    <string name="label_pitch">Tone</string>
     <string name="label_autoplay">Autoplay</string>
     <string name="label_with_sanskrit">Play sanskrit</string>
     <string name="label_with_translation">Play translation</string>

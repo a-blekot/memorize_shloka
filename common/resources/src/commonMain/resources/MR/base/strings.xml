@@ -7,6 +7,8 @@
     <string name="label_no_connection">Нет интернета...</string>
     <string name="label_repeats">Повторы</string>
     <string name="label_pause">Пауза</string>
+    <string name="label_speed">Скорость</string>
+    <string name="label_pitch">Тон</string>
     <string name="label_autoplay">Проигрывать автоматически</string>
     <string name="label_with_sanskrit">Повторять санскрит</string>
     <string name="label_with_translation">Повторять перевод</string>
@@ -66,7 +68,7 @@
     <string name="tutorial_settings">Настройки</string>
 
     <string name="tutorial_1_1">Первая неделя</string>
-    <string name="tutorial_1_2">Повторять посточно</string>
+    <string name="tutorial_1_2">Повторять построчно</string>
     <string name="tutorial_1_3">10 раз каждую строку</string>
     <string name="tutorial_1_4">выберите пункт [по одной строке] в настройках</string>
 
