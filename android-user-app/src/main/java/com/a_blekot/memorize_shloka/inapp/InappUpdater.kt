@@ -21,7 +21,7 @@ class InappUpdater(private val activity: Activity) {
     private var listener: InstallStateUpdatedListener? = InstallStateUpdatedListener { installState ->
         if (installState.installStatus() == DOWNLOADED) {
             Napier.d("An update has been downloaded", tag = "InappUpdater")
-            showSnackbarForCompleteUpdate()
+            showDialogForCompleteUpdate()
         }
     }
 
@@ -48,7 +48,7 @@ class InappUpdater(private val activity: Activity) {
             }
     }
 
-    fun showSnackbarForCompleteUpdate() {
+    private fun showDialogForCompleteUpdate() {
         AlertDialog.Builder(activity, R.style.AlertDialogStyle)
             .setTitle(strings.label_update_is_ready.resolve(activity))
             .setPositiveButton(strings.label_restart.resolve(activity)) { _, _ ->

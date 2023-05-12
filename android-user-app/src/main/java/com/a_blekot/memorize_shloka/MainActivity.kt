@@ -108,9 +108,10 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
-        Napier.d("ACTIVITY startService", tag = PLAYBACK_SERVICE.name)
+        inappUpdater?.checkUpdate()
 
         try {
+            Napier.d("ACTIVITY startService", tag = PLAYBACK_SERVICE.name)
             startService(playbackServiceIntent)
         } catch (e: IllegalArgumentException) {
             // The process is classed as idle by the platform.
@@ -125,7 +126,6 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         billingHelper?.checkUnconsumedPurchases()
-        inappUpdater?.checkUpdate()
     }
 
     override fun onStop() {
