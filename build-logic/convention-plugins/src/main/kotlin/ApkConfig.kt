@@ -8,8 +8,8 @@ object ApkConfig {
     const val TARGET_SDK_VERSION = 33
     const val COMPILE_SDK_VERSION = 33
 
-    const val VERSION_CODE = 18
-    const val VERSION_NAME = "1.9"
+    const val VERSION_CODE = 19
+    const val VERSION_NAME = "1.9.1"
 
     val JAVA_VERSION = JavaVersion.VERSION_1_8
     val JAVA_VERSION_NAME = JavaVersion.VERSION_1_8.toString()
