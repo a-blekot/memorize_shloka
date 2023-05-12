@@ -147,6 +147,7 @@ fun PlayerView(component: PlayerComponent) {
 
 @Composable
 private fun PlayPauseFAB(
+    hasAudio: Boolean,
     playbackState: PlaybackState,
     isAutoplay: Boolean,
     component: PlayerComponent,
@@ -156,7 +157,7 @@ private fun PlayPauseFAB(
         onClick = {
             when (playbackState) {
                 PLAYING -> component.forcePause()
-                IDLE -> if (!isAutoplay) component.forcePlay()
+                IDLE -> if (!isAutoplay || !hasAudio) component.forcePlay()
                 FORCE_PAUSED, NO_AUDIO -> component.forcePlay()
                 PAUSED -> {
                     /** do nothing **/
@@ -321,6 +322,7 @@ fun TitleAndProgress(state: PlayerState, component: PlayerComponent, modifier: M
                     )
 
                     PlayPauseFAB(
+                        hasAudio = state.hasAudio,
                         playbackState = playbackState,
                         isAutoplay = isAutoplay,
                         component = component,

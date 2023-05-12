@@ -7,6 +7,7 @@ import com.arkivanov.essenty.parcelable.Parcelize
 
 @Parcelize
 data class PlayerState(
+    val hasAudio: Boolean = true,
     val title: String = "",
     val sanskrit: String = "",
     val words: String = "",

@@ -122,7 +122,7 @@ class ListComponentImpl(
                     it
                 }
             }
-            .filter { (it.isSelected && it.shloka.hasAudio) || it.shloka.id == startShloka?.shloka?.id }
+            .filter { it.isSelected || it.shloka.id == startShloka?.shloka?.id }
             .let { shlokas ->
                 PlayConfig(
                     repeatMode = repeatMode,

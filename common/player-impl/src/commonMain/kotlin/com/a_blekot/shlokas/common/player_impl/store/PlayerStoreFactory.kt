@@ -69,6 +69,7 @@ internal class PlayerStoreFactory(
         data class NextRepeat(val currentRepeat: Int, val durationMs: Long) : Msg
         data class Update(
             val index: Int,
+            val hasAudio: Boolean,
             val title: String,
             val sanskrit: String,
             val words: String,
@@ -166,6 +167,7 @@ internal class PlayerStoreFactory(
         }
 
         suspend fun handleTask(task: Task) {
+            Napier.d("handleTask $task", tag = "PlayerStore")
             when (task) {
                 is PlayTask -> play(task)
                 is PlayTranslationTask -> playTranslation(task)
@@ -233,8 +235,12 @@ internal class PlayerStoreFactory(
         }
 
         private fun noAudio(task: NoAudioTask) {
-            publish(PlayerTask(task))
-            dispatch(Msg.NoAudio)
+            if (autoPlay && deps.config.withTranslation) {
+                nextTask()
+            } else {
+                publish(PlayerTask(task))
+                dispatch(Msg.NoAudio)
+            }
         }
 
         private fun stop() {
@@ -247,25 +253,28 @@ internal class PlayerStoreFactory(
                 currentPlayTask = null
                 val title = resolveTitle(id)
 
-                if (hasAudio) {
-                    publish(
-                        PlayerTask(
-                            copy(
-                                title = title,
-                                description = resolveDescription(id),
-                            )
-                        )
+                publish(
+                    PlayerTask(
+                        copy(
+                            title = title,
+                            description = resolveDescription(id),
+                        ),
                     )
-                }
+                )
                 dispatch(
                     Msg.Update(
                         index = index,
+                        hasAudio = hasAudio,
                         title = title,
                         sanskrit = resolveSanskrit(id),
                         words = resolveWords(id),
                         translation = resolveTranslation(id),
                     )
                 )
+
+                if (!hasAudio && deps.config.withTranslation) {
+                    nextTask()
+                }
             }
 
         private fun resetCounter(task: ResetCounterTask) {
@@ -293,6 +302,7 @@ internal class PlayerStoreFactory(
                 )
                 is Msg.Update -> copy(
                     title = msg.title,
+                    hasAudio = msg.hasAudio,
                     sanskrit = msg.sanskrit,
                     words = msg.words,
                     translation = msg.translation,

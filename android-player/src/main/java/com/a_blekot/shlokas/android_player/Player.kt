@@ -11,11 +11,8 @@ import android.speech.tts.UtteranceProgressListener
 import com.a_blekot.shlokas.common.data.tasks.*
 import com.a_blekot.shlokas.common.player_api.PlayerBus
 import com.a_blekot.shlokas.common.player_api.PlayerFeedback
-import com.a_blekot.shlokas.common.utils.audioPitch
-import com.a_blekot.shlokas.common.utils.locale
-import com.a_blekot.shlokas.common.utils.removeDiacritics
+import com.a_blekot.shlokas.common.utils.*
 import com.a_blekot.shlokas.common.utils.resources.getAssetPath
-import com.a_blekot.shlokas.common.utils.audioSpeed
 import com.google.android.exoplayer2.*
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
@@ -82,7 +79,7 @@ class Player(
     private val ttsInitListener = TextToSpeech.OnInitListener {
         when (it) {
             TextToSpeech.SUCCESS -> {
-                tts?.language = Locale.getDefault()
+//                tts?.language = Locale.getDefault()
                 Napier.d("init SUCCESS ${Locale.getDefault()}", tag = "TTS")
             }
             TextToSpeech.ERROR -> {
@@ -217,10 +214,12 @@ class Player(
 
     private fun setTrack(task: SetTrackTask) {
         pause()
-        exoPlayer?.apply {
-            playbackParameters = PlaybackParameters(audioSpeed, audioPitch)
-            setMediaItem(task.toMediaItem())
-            prepare()
+        if (task.hasAudio) {
+            exoPlayer?.apply {
+                playbackParameters = PlaybackParameters(audioSpeed, audioPitch)
+                setMediaItem(task.toMediaItem())
+                prepare()
+            }
         }
     }
 

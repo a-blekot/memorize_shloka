@@ -31,7 +31,7 @@ class PlayerComponentImpl(
 
     private val tasks = deps.config.createTasks().map {
         if (it is PlayTranslationTask) {
-            it.copy(text = resolveTranslation(it.id))
+            it.copy(text = "${it.id.toVerseName(locale)}. " + resolveTranslation(it.id))
         } else {
             it
         }

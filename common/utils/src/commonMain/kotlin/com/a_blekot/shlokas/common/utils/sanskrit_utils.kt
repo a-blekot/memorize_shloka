@@ -1,5 +1,81 @@
 package com.a_blekot.shlokas.common.utils
 
+import com.a_blekot.shlokas.common.data.Locales
+import com.a_blekot.shlokas.common.data.ShlokaId
+
+enum class Shastra(
+    val id: String,
+    val ttsEn: String,
+    val ttsRu: String,
+    val ttsUk: String,
+) {
+    SB(
+        id = "SB",
+        ttsEn = "Shrimad Bhagavatam",
+        ttsRu = "Шримад Бхагаватам",
+        ttsUk = "Шрімад Бхаґаватам",
+    ),
+    NI(
+        id = "NI",
+        ttsEn = "Nectar of Instructions",
+        ttsRu = "Нектар наставлений",
+        ttsUk = "Нектар настанов",
+    ),
+    NK(
+        id = "NK",
+        ttsEn = "Nrisimha kavacha",
+        ttsRu = "Нрисимха кавача",
+        ttsUk = "Нрісімха кавача",
+    ),
+    ISO(
+        id = "ISO",
+        ttsEn = "Shri Ishopanishad",
+        ttsRu = "Шри Ишопанишад",
+        ttsUk = "Шрі Ішопанішад",
+    ),
+    NOD(
+        id = "NOD",
+        ttsEn = "Nectar of devotion",
+        ttsRu = "Нектар преданности",
+        ttsUk = "Нектар відданості",
+    ),
+    BG(
+        id = "BG",
+        ttsEn = "Bhagavad-gita",
+        ttsRu = "Бхагавад-гита",
+        ttsUk = "Бхаґавад-ґіта",
+    );
+
+    fun localizedTts(locale: String) =
+        when (locale) {
+            Locales.ru -> ttsRu
+            Locales.uk -> ttsUk
+            else -> ttsEn
+        }
+
+    companion object {
+        fun byId(id: String) =
+            values().firstOrNull { it.id == id }
+    }
+}
+
+fun ShlokaId.toVerseName(locale: String) =
+    id.replace("_0", " ")
+        .replace("_", " ")
+        .replaceShastraId(locale)
+
+private fun String.replaceShastraId(locale: String): String {
+    var result = this
+
+    Shastra.values().forEach { shastra ->
+        val title = Shastra.byId(shastra.id)?.localizedTts(locale).orEmpty()
+        result = result.replace(shastra.id, title)
+    }
+
+    return result
+}
+
+
 fun String.removeDiacritics() =
     replace("̄а̄", "a")
         .replace("̄ӣ", "и")
