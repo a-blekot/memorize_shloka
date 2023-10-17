@@ -8,7 +8,7 @@ object ApkConfig {
     const val TARGET_SDK_VERSION = 34
     const val COMPILE_SDK_VERSION = 34
 
-    const val VERSION_CODE = 21
+    const val VERSION_CODE = 22
     const val VERSION_NAME = "2023.10.17.01"
 
     val JAVA_VERSION = JavaVersion.VERSION_11
