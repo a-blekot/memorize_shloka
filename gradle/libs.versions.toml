@@ -1,36 +1,36 @@
 [versions]
 accompanist = "0.27.1"
-android-gradlePlgn = "7.4.0-beta05"
-androidx-activity = "1.7.0-alpha02"
-androidx-appcompat = "1.7.0-alpha01"
-androidx-core = "1.8.0"
-androidx-lifecycle-ext = "2.6.0-alpha03"
-androidx-lifecycle-runtime = "2.6.0-alpha03"
-billing = "5.0.0"
+android_gradle_plugin = "8.1.2"
+androidx-activity = "1.8.0"
+androidx-appcompat = "1.7.0-alpha03"
+androidx-core = "1.12.0"
+androidx-lifecycle = "2.6.2"
+billing = "6.0.1"
 canidropjetifier = "0.5"
-compose = "1.3.1"
-compose_compiler="1.4.0-alpha02"
+compose = "1.5.3"
+compose_compiler="1.5.3"
 connectivity-status="1.2.0"
-decompose = "1.0.0-beta-04"
+decompose = "2.1.2"
 detekt = "1.17.0"
-essenty = "0.8.0"
+essenty = "1.2.0"
 exoplayer = "2.18.0"
-firebase-bom = "31.0.1"
-google-services = "4.3.13"
-firebase-crashlytics-gradlePlgn = "2.9.1"
-kotlin = "1.7.21"
-kotlinx_coroutines = "1.6.4"
-kotlinx_serialization = "1.4.1"
+firebase-bom = "32.3.1"
+google-services = "4.4.0"
+firebase-crashlytics-gradlePlgn = "2.9.9"
+kotlin = "1.9.10"
+kotlinx_coroutines = "1.7.3"
+kotlinx_serialization = "1.6.0"
 ktlint = "10.2.1"
 ktor = "2.0.3"
 lottie-compose = "5.2.0"
-material = "1.1.0-alpha02"
+material = "1.1.2"
 material-xml = "1.6.1"
-moko-resources = "0.20.1"
-mvikotlin = "3.0.2"
+moko-resources = "0.23.0"
+mvikotlin = "3.2.1"
 napier = "2.6.1"
 okio = "3.0.0"
-play-core = "1.8.1"
+play-inapp-review = "2.0.1"
+play-inapp-update = "2.1.0"
 random = "0.5.0"
 settings = "1.0.0"
 sql_delight = "1.5.3"
@@ -38,7 +38,7 @@ stately = "1.2.3"
 versions = "0.42.0"
 
 [libraries]
-android-gradlePlgn = { module = "com.android.tools.build:gradle", version.ref = "android-gradlePlgn"}
+android-gradlePlgn = { module = "com.android.tools.build:gradle", version.ref = "android_gradle_plugin"}
 detektPlgn = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 firebase-crashlytics-gradlePlgn = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebase-crashlytics-gradlePlgn" }
 kotlin-serialization-gradlePlgn = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
@@ -60,8 +60,8 @@ androidx-composeUiTooling = { module = "androidx.compose.ui:ui-tooling", version
 
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat"}
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core"}
-androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "androidx-lifecycle-ext"}
-androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle-runtime"}
+androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "androidx-lifecycle"}
+androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle"}
 
 billing = { module = "com.android.billingclient:billing-ktx", version.ref = "billing"}
 
@@ -101,7 +101,8 @@ napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 napier-android-debug = { module = "io.github.aakira:napier-android-debug", version.ref = "napier" }
 napier-android-release = { module = "io.github.aakira:napier-android", version.ref = "napier" }
 
-play-core = { module = "com.google.android.play:core-ktx", version.ref = "play-core" }
+play-inapp-review  = { module = "com.google.android.play:review-ktx", version.ref = "play-inapp-review" }
+play-inapp-update = { module = "com.google.android.play:app-update-ktx", version.ref = "play-inapp-update" }
 
 random = { module = "com.benasher44:uuid", version.ref = "random" }
 settings = { module = "com.russhwolf:multiplatform-settings-no-arg", version.ref = "settings" }

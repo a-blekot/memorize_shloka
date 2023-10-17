@@ -9,8 +9,9 @@ android {
     namespace = "com.a_blekot.shlokas.common.resources"
 
     sourceSets.getByName("main") {
-        res.srcDir(File(buildDir, "generated/moko/androidMain/res"))
-        assets.srcDir(File(buildDir, "generated/moko/androidMain/assets"))
+//        res.srcDir(File(buildDir, "generated/moko/androidMain/res"))
+//        assets.srcDir(File(buildDir, "generated/moko/androidMain/assets"))
+        java.srcDirs("build/generated/moko/androidMain/src")
     }
 }
 

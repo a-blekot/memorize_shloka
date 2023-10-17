@@ -14,8 +14,6 @@ val keystoreProperties = Properties()
 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 android {
-    namespace = "com.a_blekot.memorize_shloka"
-
     signingConfigs {
         maybeCreate( "config").apply {
             keyAlias = keystoreProperties.getProperty("keyAlias")
@@ -36,6 +34,8 @@ android {
     }
 }
 
+//project.rootProject.findProject(":common:root")?.let { project.evaluationDependsOn(it.path) }
+
 dependencies {
     implementation(projects.androidPlayer)
     implementation(projects.androidUi)
@@ -50,6 +50,7 @@ dependencies {
     implementation(projects.common.root)
     implementation(projects.common.utils)
 
+    implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.lifecycle.process)
     implementation(libs.androidx.lifecycle.runtime)
@@ -67,6 +68,7 @@ dependencies {
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.crashlytics.ktx)
 
-    implementation(libs.play.core)
+    implementation(libs.play.inapp.review)
+    implementation(libs.play.inapp.update)
     implementation(libs.billing)
 }

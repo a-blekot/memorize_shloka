@@ -6,7 +6,7 @@ plugins {
 
 android {
     sourceSets.getByName("main") {
-        java.srcDirs("src/androidMain/kotlin")
+        java.srcDirs("src/androidMain/kotlin", "src/androidMain/src")
         manifest.srcFile("src/androidMain/AndroidManifest.xml")
         res.srcDirs("src/androidMain/res")
     }

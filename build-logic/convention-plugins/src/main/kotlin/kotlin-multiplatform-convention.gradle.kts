@@ -4,12 +4,27 @@ plugins {
 }
 
 kotlin {
-    android()
+    android {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "11"
+            }
+        }
+    }
 
     listOf(
         iosX64(),
         iosArm64(),
-        iosSimulatorArm64()
+        iosSimulatorArm64() {
+            // TODO: remove after 1.5 release
+            binaries.forEach {
+                it.freeCompilerArgs += listOf(
+                    "-linker-option", "-framework", "-linker-option", "Metal",
+                    "-linker-option", "-framework", "-linker-option", "CoreText",
+                    "-linker-option", "-framework", "-linker-option", "CoreGraphics",
+                )
+            }
+        }
     )
 
     sourceSets {
@@ -20,7 +35,8 @@ kotlin {
             }
         }
         val androidMain by getting
-        val androidTest by getting
+//        val androidTest by getting
+
         val iosX64Main by getting
         val iosArm64Main by getting
         val iosSimulatorArm64Main by getting
