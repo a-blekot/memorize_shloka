@@ -2,9 +2,11 @@ package com.a_blekot.shlokas.android_ui.view.list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -40,39 +42,32 @@ fun ListView(component: ListComponent) {
             val initialTextStyle = typography.headlineLarge
             val textStyle = remember { mutableStateOf(initialTextStyle) }
             val readyToDraw = remember { mutableStateOf(false) }
-            Text(
-                state.value.config.title,
-                color = colorScheme.primary,
-                style = textStyle.value,
-                softWrap = false,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.drawWithContent {
-                    if (readyToDraw.value) drawContent()
-                },
-                onTextLayout = {
-                    if (it.didOverflowWidth) {
-                        textStyle.value = textStyle.value.copy(fontSize = textStyle.value.fontSize * 0.9)
-                    } else {
-                        readyToDraw.value = true
-                    }
-                }
-            )
 
-            StandartColumn(
-                modifier = Modifier
-                    .padding(horizontal = horizontalScreenPadding)
-                    .verticalScroll(rememberScrollState()),
-            ) {
-                state.value.config.list.forEach { config ->
+            StandartLazyColumn {
+                item {
+                    Text(
+                        state.value.config.title,
+                        color = colorScheme.primary,
+                        style = textStyle.value,
+                        softWrap = false,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.drawWithContent {
+                            if (readyToDraw.value) drawContent()
+                        },
+                        onTextLayout = {
+                            if (it.didOverflowWidth) {
+                                textStyle.value = textStyle.value.copy(fontSize = textStyle.value.fontSize * 0.9)
+                            } else {
+                                readyToDraw.value = true
+                            }
+                        }
+                    )
+                }
+
+                items(state.value.config.list, key = { it.shloka.id.id }) { config ->
                     ListItemView(config, component)
                 }
             }
-//
-//            StandartLazyColumn {
-//                itemsIndexed(state.value.config.list, key = { _, it -> it.shloka.id }) { index, config ->
-//                    ListItemView(index, config, component)
-//                }
-//            }
         }
 
         if (menuIsVisible.value && state.value.availableLists.isNotEmpty()) {

@@ -14,22 +14,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.a_blekot.shlokas.android_ui.BuildConfig
 import com.a_blekot.shlokas.android_ui.custom.SmallColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartCheckBox
-import com.a_blekot.shlokas.android_ui.custom.StandartColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartRow
 import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
-import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingXS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingZero
 import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusM
-import com.a_blekot.shlokas.android_ui.theme.Dimens.radiusS
 import com.a_blekot.shlokas.common.data.ShlokaConfig
 import com.a_blekot.shlokas.common.list_api.ListComponent
 
