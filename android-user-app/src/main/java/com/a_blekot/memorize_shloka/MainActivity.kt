@@ -6,8 +6,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.net.Uri
+import android.nfc.Tag
 import android.os.Bundle
 import android.os.IBinder
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.lifecycle.Lifecycle
@@ -77,6 +79,7 @@ class MainActivity : ComponentActivity() {
         override val hasInappReview = true
 
         override fun onEmail() = this@MainActivity.sendEmail()
+        override fun onLink(link: String) = this@MainActivity.openLink(link)
         override fun onRateUs() = this@MainActivity.rateUs()
         override fun onShareApp() = this@MainActivity.shareApp()
         override fun onInappReview() = this@MainActivity.inappReview()
@@ -192,6 +195,17 @@ class MainActivity : ComponentActivity() {
         if (intent.resolveActivity(packageManager) != null) {
             startActivity(intent)
         } else {
+            Napier.e("No activity for $intent")
+        }
+    }
+
+    private fun openLink(link: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+        val chooser = Intent.createChooser(intent, "Open Url")
+        if (chooser.resolveActivity(packageManager) != null) {
+            startActivity(chooser)
+        } else {
+            Toast.makeText(this, "Can't open $link", Toast.LENGTH_SHORT).show()
             Napier.e("No activity for $intent")
         }
     }

@@ -8,6 +8,7 @@ interface PlatformApi {
         get() = false
 
     fun onEmail()
+    fun onLink(link: String)
     fun onRateUs()
     fun onShareApp()
     fun onInappReview()

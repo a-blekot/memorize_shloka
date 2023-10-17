@@ -133,7 +133,7 @@ class Player(
 
     private val playerNotificationManager by lazy {
         PlayerNotificationManager.Builder(context, NOTIFICATION_ID, CHANNEL_ID)
-            .setSmallIconResourceId(R.drawable.aum)
+            .setSmallIconResourceId(R.drawable.shloka_smaranam)
             .setStopActionIconResourceId(R.drawable.ic_player_close)
             .setPlayActionIconResourceId(R.drawable.ic_player_play)
             .setPauseActionIconResourceId(R.drawable.ic_player_pause)

@@ -15,6 +15,8 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 
 private const val KEY_SETTINGS_STATE = "KEY_SETTINGS_STATE"
 
+private const val YOU_TUBE_SHLOKA_SMARANAM = "https://www.youtube.com/@shloka-smaranam"
+
 class SettingsComponentImpl(
     componentContext: ComponentContext,
     storeFactory: StoreFactory,
@@ -74,4 +76,5 @@ class SettingsComponentImpl(
     }
     override fun donations() = output(SettingsOutput.Donations)
     override fun back() = output(SettingsOutput.Back)
+    override fun openYouTube() = deps.platformApi.onLink(YOU_TUBE_SHLOKA_SMARANAM)
 }

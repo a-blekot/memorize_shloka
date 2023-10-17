@@ -21,4 +21,5 @@ interface SettingsComponent {
     fun selectTtsVoice() {}
     fun donations() {}
     fun back() {}
+    fun openYouTube() {}
 }

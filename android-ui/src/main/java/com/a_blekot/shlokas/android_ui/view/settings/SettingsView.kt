@@ -1,5 +1,6 @@
 package com.a_blekot.shlokas.android_ui.view.settings
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,16 +16,22 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.a_blekot.shlokas.android_ui.custom.*
 import com.a_blekot.shlokas.android_ui.theme.AppTheme
 import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeL
+import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeXL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingM
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingZero
@@ -34,6 +41,7 @@ import com.a_blekot.shlokas.common.data.Locales.ru
 import com.a_blekot.shlokas.common.data.Locales.uk
 import com.a_blekot.shlokas.common.data.RepeatMode
 import com.a_blekot.shlokas.common.data.RepeatMode.*
+import com.a_blekot.shlokas.common.resources.MR
 import com.a_blekot.shlokas.common.resources.MR.strings.label_speed
 import com.a_blekot.shlokas.common.resources.MR.strings.label_pitch
 import com.a_blekot.shlokas.common.resources.MR.strings.label_autoplay
@@ -65,7 +73,6 @@ import com.a_blekot.shlokas.common.utils.*
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import com.arkivanov.decompose.value.MutableValue
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsView(component: SettingsComponent) {
     val state = component.flow.subscribeAsState().value
@@ -82,6 +89,28 @@ fun SettingsView(component: SettingsComponent) {
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth().padding(horizontal = paddingS)
         ) {
+
+            item {
+                StandartRow(
+                    horizontalArrangement = Arrangement.spacedBy(paddingM),
+                    modifier = Modifier.clickable { component.openYouTube() }
+                ) {
+                    Image(
+                        painter = painterResource(MR.images.youtube.drawableResId),
+                        contentScale = ContentScale.FillBounds,
+                        contentDescription = "YouTube",
+                        modifier = Modifier.size(iconSizeXL)
+                    )
+
+                    Text(
+                        text = "Shloka Smaranam",
+                        style = typography.titleLarge.copy(textDecoration = TextDecoration.Underline),
+                        color = Color(0xFF0044CC),
+                        maxLines = 1,
+                    )
+                }
+            }
+
             item {
                 val repeats = remember { mutableStateOf(TextFieldValue(text = state.repeats.toString())) }
 
