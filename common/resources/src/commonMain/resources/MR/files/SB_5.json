@@ -73,25 +73,24 @@
     },
     {
       "shloka": {
-        "id": "SB_5_5_5",
-        "hasAudio": false
+        "id": "SB_5_5_5"
       },
       "chunks": [
         {
-          "startMs": 285,
-          "endMs": 3070
+          "startMs": 50,
+          "endMs": 4700
         },
         {
-          "startMs": 3108,
-          "endMs": 5530
+          "startMs": 4700,
+          "endMs": 9900
         },
         {
-          "startMs": 5910,
-          "endMs": 8700
+          "startMs": 9900,
+          "endMs": 15000
         },
         {
-          "startMs": 8730,
-          "endMs": 11020
+          "startMs": 15000,
+          "endMs": 19980
         }
       ]
     },

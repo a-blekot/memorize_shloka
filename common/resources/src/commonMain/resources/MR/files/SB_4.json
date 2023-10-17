@@ -4,25 +4,24 @@
   "list": [
     {
       "shloka": {
-        "id": "SB_4_3_23",
-        "hasAudio": false
+        "id": "SB_4_3_23"
       },
       "chunks": [
         {
-          "startMs": 4663,
-          "endMs": 10208
+          "startMs": 50,
+          "endMs": 5500
         },
         {
-          "startMs": 10640,
-          "endMs": 16080
+          "startMs": 5500,
+          "endMs": 11500
         },
         {
-          "startMs": 16580,
-          "endMs": 22300
+          "startMs": 13000,
+          "endMs": 18200
         },
         {
-          "startMs": 22615,
-          "endMs": 28250
+          "startMs": 19000,
+          "endMs": 23980
         }
       ]
     },

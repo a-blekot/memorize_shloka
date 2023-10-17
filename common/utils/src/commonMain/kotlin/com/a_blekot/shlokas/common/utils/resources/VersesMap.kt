@@ -378,7 +378,7 @@ val versesMap =
                 words_SB_3_2_23,
                 trans_SB_3_2_23,
                 descr_SB_3_2_23,
-//                SB_3.SB_3_2_23, TODO
+                SB_3.SB_3_2_23,
             ),
             SB_3_5_41 to Verse(
                 title_SB_3_5_41,
@@ -402,7 +402,7 @@ val versesMap =
                 words_SB_3_25_19,
                 trans_SB_3_25_19,
                 descr_SB_3_25_19,
-//                SB_3.SB_3_25_19, TODO
+                SB_3.SB_3_25_19,
             ),
             SB_3_25_20 to Verse(
                 title_SB_3_25_20,
@@ -410,7 +410,7 @@ val versesMap =
                 words_SB_3_25_20,
                 trans_SB_3_25_20,
                 descr_SB_3_25_20,
-//                SB_3.SB_3_25_20, TODO
+                SB_3.SB_3_25_20,
             ),
             SB_3_25_21 to Verse(
                 title_SB_3_25_21,
@@ -418,7 +418,7 @@ val versesMap =
                 words_SB_3_25_21,
                 trans_SB_3_25_21,
                 descr_SB_3_25_21,
-//                SB_3.SB_3_25_21, TODO
+                SB_3.SB_3_25_21,
             ),
             SB_3_25_25 to Verse(
                 title_SB_3_25_25,
@@ -426,7 +426,7 @@ val versesMap =
                 words_SB_3_25_25,
                 trans_SB_3_25_25,
                 descr_SB_3_25_25,
-//                SB_3.SB_3_25_25, TODO
+                SB_3.SB_3_25_25,
             ),
             SB_3_29_11_12 to Verse(
                 title_SB_3_29_11_12,
@@ -434,7 +434,7 @@ val versesMap =
                 words_SB_3_29_11_12,
                 trans_SB_3_29_11_12,
                 descr_SB_3_29_11_12,
-//                SB_3.SB_3_29_11_12, TODO
+                SB_3.SB_3_29_11_12,
             ),
             SB_3_29_13 to Verse(
                 title_SB_3_29_13,
@@ -442,7 +442,7 @@ val versesMap =
                 words_SB_3_29_13,
                 trans_SB_3_29_13,
                 descr_SB_3_29_13,
-//                SB_3.SB_3_29_13, TODO
+                SB_3.SB_3_29_13,
             ),
             SB_3_31_1 to Verse(
                 title_SB_3_31_1,
@@ -450,7 +450,7 @@ val versesMap =
                 words_SB_3_31_1,
                 trans_SB_3_31_1,
                 descr_SB_3_31_1,
-//                SB_3.SB_3_31_1, TODO
+                SB_3.SB_3_31_1,
             ),
             SB_3_33_6 to Verse(
                 title_SB_3_33_6,
@@ -458,7 +458,7 @@ val versesMap =
                 words_SB_3_33_6,
                 trans_SB_3_33_6,
                 descr_SB_3_33_6,
-//                SB_3.SB_3_33_6, TODO
+                SB_3.SB_3_33_6,
             ),
             SB_3_33_7 to Verse(
                 title_SB_3_33_7,
@@ -466,7 +466,7 @@ val versesMap =
                 words_SB_3_33_7,
                 trans_SB_3_33_7,
                 descr_SB_3_33_7,
-//                SB_3.SB_3_33_7, TODO
+                SB_3.SB_3_33_7,
             ),
             SB_4_3_23 to Verse(
                 title_SB_4_3_23,
@@ -474,7 +474,7 @@ val versesMap =
                 words_SB_4_3_23,
                 trans_SB_4_3_23,
                 descr_SB_4_3_23,
-//                SB_4.SB_4_3_23, TODO
+                SB_4.SB_4_3_23,
             ),
             SB_4_30_35 to Verse(
                 title_SB_4_30_35,
@@ -522,7 +522,7 @@ val versesMap =
                 words_SB_5_5_5,
                 trans_SB_5_5_5,
                 descr_SB_5_5_5,
-//                SB_5.SB_5_5_5, TODO
+                SB_5.SB_5_5_5,
             ),
             SB_5_5_8 to Verse(
                 title_SB_5_5_8,
@@ -562,7 +562,7 @@ val versesMap =
                 words_SB_6_1_13_14,
                 trans_SB_6_1_13_14,
                 descr_SB_6_1_13_14,
-//                SB_6.SB_6_1_13_14, TODO
+                SB_6.SB_6_1_13_14,
             ),
             SB_6_1_15 to Verse(
                 title_SB_6_1_15,
@@ -578,7 +578,7 @@ val versesMap =
                 words_SB_6_1_40,
                 trans_SB_6_1_40,
                 descr_SB_6_1_40,
-//                SB_6.SB_6_1_40, TODO
+                SB_6.SB_6_1_40,
             ),
             SB_6_3_19 to Verse(
                 title_SB_6_3_19,
@@ -594,7 +594,7 @@ val versesMap =
                 words_SB_6_3_20_21,
                 trans_SB_6_3_20_21,
                 descr_SB_6_3_20_21,
-//                SB_6.SB_6_3_20_21, TODO
+                SB_6.SB_6_3_20_21,
             ),
             SB_6_3_31 to Verse(
                 title_SB_6_3_31,

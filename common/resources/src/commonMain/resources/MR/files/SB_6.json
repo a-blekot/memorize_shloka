@@ -3,25 +3,42 @@
   "list": [
     {
       "shloka": {
-        "id": "SB_6_1_13_14",
-        "hasAudio": false
+        "id": "SB_6_1_13_14"
       },
       "chunks": [
         {
-          "startMs": 4663,
-          "endMs": 10208
+          "startMs": 500,
+          "endMs": 4000
         },
         {
-          "startMs": 10640,
-          "endMs": 16080
+          "startMs": 4000,
+          "endMs": 7200
         },
         {
-          "startMs": 16580,
-          "endMs": 22300
+          "startMs": 7200,
+          "endMs": 11700
         },
         {
-          "startMs": 22615,
-          "endMs": 28250
+          "startMs": 11700,
+          "endMs": 15000
+        },
+
+
+        {
+          "startMs": 15800,
+          "endMs": 19800
+        },
+        {
+          "startMs": 19800,
+          "endMs": 24200
+        },
+        {
+          "startMs": 24200,
+          "endMs": 27900
+        },
+        {
+          "startMs": 27900,
+          "endMs": 31600
         }
       ]
     },
@@ -50,25 +67,24 @@
     },
     {
       "shloka": {
-        "id": "SB_6_1_40",
-        "hasAudio": false
+        "id": "SB_6_1_40"
       },
       "chunks": [
         {
-          "startMs": 100,
-          "endMs": 2650
+          "startMs": 500,
+          "endMs": 4800
         },
         {
-          "startMs": 2770,
-          "endMs": 5090
+          "startMs": 4800,
+          "endMs": 9500
         },
         {
-          "startMs": 5250,
-          "endMs": 7450
+          "startMs": 9500,
+          "endMs": 14150
         },
         {
-          "startMs": 7450,
-          "endMs": 10050
+          "startMs": 14150,
+          "endMs": 18200
         }
       ]
     },
@@ -97,25 +113,42 @@
     },
     {
       "shloka": {
-        "id": "SB_6_3_20_21",
-        "hasAudio": false
+        "id": "SB_6_3_20_21"
       },
       "chunks": [
         {
-          "startMs": 150,
-          "endMs": 2450
+          "startMs": 600,
+          "endMs": 5500
         },
         {
-          "startMs": 2450,
-          "endMs": 5201
+          "startMs": 5500,
+          "endMs": 9300
         },
         {
-          "startMs": 5400,
-          "endMs": 7650
+          "startMs": 9300,
+          "endMs": 13500
         },
         {
-          "startMs": 7750,
-          "endMs": 9900
+          "startMs": 13500,
+          "endMs": 17600
+        },
+
+
+        {
+          "startMs": 19500,
+          "endMs": 23800
+        },
+        {
+          "startMs": 23800,
+          "endMs": 27500
+        },
+        {
+          "startMs": 27500,
+          "endMs": 32800
+        },
+        {
+          "startMs": 32800,
+          "endMs": 36990
         }
       ]
     },
