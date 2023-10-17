@@ -28,14 +28,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.IntrinsicMeasurable
+import androidx.compose.ui.layout.IntrinsicMeasureScope
+import androidx.compose.ui.layout.LayoutModifier
+import androidx.compose.ui.layout.Measurable
+import androidx.compose.ui.layout.MeasureResult
+import androidx.compose.ui.layout.MeasureScope
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import com.a_blekot.shlokas.android_ui.custom.SmoothProgress
 import com.a_blekot.shlokas.android_ui.custom.StandartColumn
@@ -68,10 +78,13 @@ fun PlayerView(component: PlayerComponent) {
     val state = component.flow.subscribeAsState()
 
     val isClosePlayerDialogVisible = remember { mutableStateOf(false) }
+    val isFullScreen = remember { mutableStateOf(false) }
 
     BackHandler {
         if (showClosePlayerDialog) {
             isClosePlayerDialogVisible.value = true
+        } else if (isFullScreen.value) {
+            isFullScreen.value = false
         } else {
             component.stop()
         }
@@ -111,11 +124,12 @@ fun PlayerView(component: PlayerComponent) {
                             color = colorScheme.primary,
                             style = typography.headlineSmall,
                             textAlign = TextAlign.Center,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier
+                                .fillMaxWidth()
                                 .padding(horizontal = paddingXS)
                                 .combinedClickable(
                                     onLongClick = { copyToClipboard(context, clipboard, sanskrit.noHtmlTags()) },
-                                    onClick = { }
+                                    onClick = { isFullScreen.value = true }
                                 ),
 //                    autoSize = true
                         )
@@ -135,6 +149,10 @@ fun PlayerView(component: PlayerComponent) {
             }
         }
 
+//        if (isFullScreen.value) {
+//            FullScreenSanskrit(state.value.sanskrit)
+//        }
+
         if (isClosePlayerDialogVisible.value) {
             ClosePlayerDialog(
                 modifier = Modifier.fillMaxSize(),
@@ -144,6 +162,119 @@ fun PlayerView(component: PlayerComponent) {
         }
     }
 }
+
+@Composable
+private fun FullScreenSanskrit(sanskrit: String) {
+//    val activity = LocalContext.current as Activity
+//    val orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+//
+//    DisposableEffect(orientation) {
+//        val originalOrientation = activity.requestedOrientation
+//        activity.requestedOrientation = orientation
+//        onDispose {
+//            // restore original orientation when view disappears
+//            activity.requestedOrientation = originalOrientation
+//        }
+//    }
+
+    val config = LocalConfiguration.current
+    val height = config.screenHeightDp.dp
+    val screenWidth = config.screenWidthDp.dp
+    val size = maxOf(config.screenHeightDp,config.screenWidthDp).dp
+
+    StandartColumn(
+//        contentAlignment = Alignment.Center,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxSize()
+//            .rotate(90f)
+            .background(color = Color.Red)
+            .padding(paddingXS)
+    ) {
+        HtmlText(
+            text = sanskrit,
+            color = colorScheme.primary,
+            style = typography.headlineSmall,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .rotateVertically()
+                .fillMaxSize()
+//                .size(size, size)
+                .background(Color.Green)
+                .padding(horizontal = paddingXS)
+        )
+    }
+}
+
+fun Modifier.rotateVertically(clockwise: Boolean = true): Modifier {
+    val rotate = rotate(if (clockwise) 90f else -90f)
+
+    val adjustBounds = layout { measurable, constraints ->
+        val placeable = measurable.measure(constraints)
+        layout(placeable.height, placeable.height) {
+            placeable.place(
+                x = 0, // -(placeable.width / 2 - placeable.height / 2),
+                y = 0 // -(placeable.height / 2 - placeable.width / 2)
+            )
+        }
+    }
+    return rotate then adjustBounds
+}
+
+fun Modifier.vertical() =
+    layout { measurable, constraints ->
+        val placeable = measurable.measure(constraints)
+        layout(placeable.height, placeable.width) {
+            placeable.place(
+                x = -(placeable.width / 2 - placeable.height / 2),
+                y = -(placeable.height / 2 - placeable.width / 2)
+            )
+        }
+    }
+
+fun Modifier.rotateVertically(rotation: VerticalRotation) = then(
+    object : LayoutModifier {
+        override fun MeasureScope.measure(measurable: Measurable, constraints: Constraints): MeasureResult {
+            val placeable = measurable.measure(constraints)
+            return layout(placeable.height, placeable.width) {
+                placeable.place(
+                    x = -(placeable.width / 2 - placeable.height / 2),
+                    y = -(placeable.height / 2 - placeable.width / 2)
+                )
+            }
+        }
+
+        override fun IntrinsicMeasureScope.minIntrinsicHeight(measurable: IntrinsicMeasurable, width: Int): Int {
+            return measurable.maxIntrinsicWidth(width)
+        }
+
+        override fun IntrinsicMeasureScope.maxIntrinsicHeight(measurable: IntrinsicMeasurable, width: Int): Int {
+            return measurable.maxIntrinsicWidth(width)
+        }
+
+        override fun IntrinsicMeasureScope.minIntrinsicWidth(measurable: IntrinsicMeasurable, height: Int): Int {
+            return measurable.minIntrinsicHeight(height)
+        }
+
+        override fun IntrinsicMeasureScope.maxIntrinsicWidth(measurable: IntrinsicMeasurable, height: Int): Int {
+            return measurable.maxIntrinsicHeight(height)
+        }
+    })
+    .then(rotate(rotation.value))
+
+enum class VerticalRotation(val value: Float) {
+    CLOCKWISE(90f), COUNTER_CLOCKWISE(270f)
+}
+
+@Preview
+@Composable
+private fun FullScreenSanskritPreview() {
+    val text = "janmādy asya yato ’nvayād itarataś cārtheṣv abhijñaḥ svarāṭ<br>tene brahma hṛdā ya ādi-kavaye muhyanti yat sūrayaḥ<br>tejo-vāri-mṛdāṁ yathā vinimayo yatra tri-sargo ’mṛṣā<br>dhāmnā svena sadā nirasta-kuhakaṁ satyaṁ paraṁ dhīmahi</i>"
+    AppTheme {
+        FullScreenSanskrit(text)
+    }
+}
+
 
 @Composable
 private fun PlayPauseFAB(
@@ -260,7 +391,9 @@ fun TitleAndProgress(state: PlayerState, component: PlayerComponent, modifier: M
         Row(
             horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start),
             verticalAlignment = Alignment.CenterVertically,
-            modifier = modifier.padding(horizontal = paddingXS).padding(top = paddingXS)
+            modifier = modifier
+                .padding(horizontal = paddingXS)
+                .padding(top = paddingXS)
         ) {
             val context = LocalContext.current
             val clipboard = LocalClipboardManager.current
