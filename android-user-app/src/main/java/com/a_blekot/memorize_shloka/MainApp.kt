@@ -21,6 +21,7 @@ import com.a_blekot.shlokas.common.utils.dispatchers.dispatchers
 import com.a_blekot.shlokas.common.utils.initNapier
 import com.a_blekot.shlokas.common.utils.onAppLaunch
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import io.github.aakira.napier.BuildConfig
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import java.util.*

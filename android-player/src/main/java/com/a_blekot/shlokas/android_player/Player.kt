@@ -101,11 +101,7 @@ class Player(
     private val mediaDescriptionAdapter by lazy {
         object : PlayerNotificationManager.MediaDescriptionAdapter {
             override fun createCurrentContentIntent(player: Player): PendingIntent? {
-//                val intent = Intent(context, MainActivity::class.java)
-//
-//                val flags = PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-//                return PendingIntent.getActivity(context, 0, intent, flags)
-                return null
+                return pendingIntentProvider?.invoke()
             }
 
             override fun getCurrentContentText(player: Player) =
@@ -158,6 +154,8 @@ class Player(
                 setColor(notificationColor)
             }
     }
+
+    var pendingIntentProvider: PendingIntentProvider? = null
 
     val isPlaying: Boolean
         get() {

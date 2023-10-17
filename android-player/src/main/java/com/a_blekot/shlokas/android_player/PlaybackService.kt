@@ -92,6 +92,10 @@ class PlaybackService : Service(), Player.Listener {
         stop()
     }
 
+    fun setPendingIntentProvider(provider: PendingIntentProvider) {
+        player?.pendingIntentProvider = provider
+    }
+
     private fun stop() {
         if (isActivityStarted) {
             return

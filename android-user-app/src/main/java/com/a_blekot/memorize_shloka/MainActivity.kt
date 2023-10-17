@@ -1,5 +1,6 @@
 package com.a_blekot.memorize_shloka
 
+import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -16,6 +17,7 @@ import com.a_blekot.memorize_shloka.MainApp.Companion.app
 import com.a_blekot.memorize_shloka.inapp.BillingHelperAndroid
 import com.a_blekot.memorize_shloka.inapp.InappUpdater
 import com.a_blekot.memorize_shloka.inapp.showInappReview
+import com.a_blekot.shlokas.android_player.PendingIntentProvider
 import com.a_blekot.shlokas.android_player.PlaybackService
 import com.a_blekot.shlokas.android_ui.theme.AppTheme
 import com.a_blekot.shlokas.common.data.PlatformApi
@@ -42,11 +44,21 @@ import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
 
+    private val pendingIntentProvider = object : PendingIntentProvider {
+        override fun invoke(): PendingIntent {
+            val intent = Intent(app, MainActivity::class.java)
+            val flags = PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            return PendingIntent.getActivity(app, 0, intent, flags)
+        }
+    }
+
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, binder: IBinder?) {
             playbackService = (binder as? PlaybackService.PlaybackBinder)?.service
             playbackService?.setPlayerBus(app.playerBus)
             playbackService?.onActivityStarted()
+            playbackService?.setPendingIntentProvider(pendingIntentProvider)
+
             Napier.d("ACTIVITY onServiceConnected", tag = PLAYBACK_SERVICE.name)
             Napier.d("ACTIVITY boundService = $playbackService", tag = PLAYBACK_SERVICE.name)
         }
