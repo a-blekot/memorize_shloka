@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.text.style.TextAlign
 import com.a_blekot.shlokas.android_ui.custom.*
+import com.a_blekot.shlokas.android_ui.custom.icons.BrandYoutube
 import com.a_blekot.shlokas.android_ui.theme.Dimens.horizontalScreenPadding
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeXL
 import com.a_blekot.shlokas.common.list_api.ListComponent
@@ -117,12 +118,12 @@ private fun ButtonsRow(component: ListComponent, onListClick: () -> Unit, modifi
         }
 
         IconButton(
-            onClick = { component.play() },
+            onClick = { component.youtube() },
             modifier = Modifier.size(iconSizeXL),
         ) {
             Icon(
-                Icons.Rounded.PlayCircle,
-                "play",
+                Icons.Rounded.BrandYoutube,
+                "YouTube",
                 tint = colorScheme.primary,
                 modifier = Modifier.fillMaxSize()
             )
@@ -165,3 +166,5 @@ private fun ButtonsRow(component: ListComponent, onListClick: () -> Unit, modifi
         }
     }
 }
+
+

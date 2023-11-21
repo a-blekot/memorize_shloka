@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.a_blekot.shlokas.android_ui.custom.*
+import com.a_blekot.shlokas.android_ui.custom.icons.BrandYoutube
 import com.a_blekot.shlokas.android_ui.theme.AppTheme
 import com.a_blekot.shlokas.android_ui.theme.Dimens
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeL
@@ -93,19 +94,25 @@ fun SettingsView(component: SettingsComponent) {
             item {
                 StandartRow(
                     horizontalArrangement = Arrangement.spacedBy(paddingM),
+                    verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.clickable { component.openYouTube() }
                 ) {
-                    Image(
-                        painter = painterResource(MR.images.youtube.drawableResId),
-                        contentScale = ContentScale.FillBounds,
-                        contentDescription = "YouTube",
-                        modifier = Modifier.size(iconSizeXL)
-                    )
+                    IconButton(
+                        onClick = { component.openYouTube() },
+                        modifier = Modifier.size(iconSizeXL),
+                    ) {
+                        Icon(
+                            Icons.Rounded.BrandYoutube,
+                            "YouTube",
+                            tint = colorScheme.primary,
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    }
 
                     Text(
-                        text = "Shloka Smaranam",
-                        style = typography.titleLarge.copy(textDecoration = TextDecoration.Underline),
-                        color = Color(0xFF0044CC),
+                        text = "YouTube - Shloka Smaranam",
+                        style = typography.bodyLarge.copy(textDecoration = TextDecoration.Underline),
+                        color = colorScheme.primary,
                         maxLines = 1,
                     )
                 }

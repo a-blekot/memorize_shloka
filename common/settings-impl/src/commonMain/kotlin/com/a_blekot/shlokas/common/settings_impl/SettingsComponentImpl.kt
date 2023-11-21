@@ -1,5 +1,6 @@
 package com.a_blekot.shlokas.common.settings_impl
 
+import com.a_blekot.shlokas.common.data.YOU_TUBE_SHLOKA_SMARANAM
 import com.a_blekot.shlokas.common.settings_api.SettingsComponent
 import com.a_blekot.shlokas.common.settings_api.SettingsOutput
 import com.a_blekot.shlokas.common.settings_api.SettingsState
@@ -14,8 +15,6 @@ import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 
 private const val KEY_SETTINGS_STATE = "KEY_SETTINGS_STATE"
-
-private const val YOU_TUBE_SHLOKA_SMARANAM = "https://www.youtube.com/@shloka-smaranam"
 
 class SettingsComponentImpl(
     componentContext: ComponentContext,

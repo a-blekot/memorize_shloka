@@ -80,6 +80,7 @@ class ListComponentImpl(
     override fun play() = onPlay()
     override fun play(config: ShlokaConfig) = onPlay(config)
 
+    override fun youtube() = deps.platformApi.onLink(YOU_TUBE_SHLOKA_SMARANAM)
     override fun settings() = output(ListOutput.Settings)
     override fun donations() = output(ListOutput.Donations)
     override fun shareApp() = deps.platformApi.onShareApp()

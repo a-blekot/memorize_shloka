@@ -120,6 +120,7 @@ class MainActivity : FragmentActivity() {
                 MainContent(root)
             }
         }
+        observeNotificationPermissionDialog()
         startAndBindService()
         app.connectivityObserver.start()
     }

@@ -18,6 +18,7 @@ interface ListComponent {
     fun details(config: ShlokaConfig) {}
     fun play() {}
     fun play(config: ShlokaConfig) {}
+    fun youtube() {}
     fun settings() {}
     fun donations() {}
     fun shareApp() {}

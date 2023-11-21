@@ -1,5 +1,7 @@
 package com.a_blekot.shlokas.common.data
 
+const val YOU_TUBE_SHLOKA_SMARANAM = "https://www.youtube.com/@shloka-smaranam"
+
 interface PlatformApi {
 
     val hasTts: Boolean
