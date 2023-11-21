@@ -132,7 +132,14 @@ class RootComponentImpl internal constructor(
 
     private fun onListOutput(output: ListOutput): Unit =
         when (output) {
-            is ListOutput.Play -> navigation.push(Configuration.Player(output.config))
+            is ListOutput.Play -> {
+                navigation.popWhile(
+                    predicate = { it !is Configuration.List },
+                    onComplete = {
+                        navigation.push(Configuration.Player(output.config))
+                    }
+                )
+            }
             is ListOutput.Details -> navigation.push(Configuration.Details(output.config))
             is ListOutput.Settings -> navigation.push(Configuration.Settings)
             is ListOutput.Donations -> navigation.push(Configuration.Donations)
@@ -140,7 +147,7 @@ class RootComponentImpl internal constructor(
 
     private fun onPlayerOutput(output: PlayerOutput): Unit =
         when (output) {
-            is PlayerOutput.Stop -> navigation.pop()
+            is PlayerOutput.Stop -> navigation.popWhile { it !is Configuration.List }
         }
 
     private fun onDetailsOutput(output: DetailsOutput): Unit =
@@ -168,7 +175,7 @@ class RootComponentImpl internal constructor(
 
     private sealed class Configuration : Parcelable {
         @Parcelize
-        object List : Configuration()
+        data object List : Configuration()
 
         @Parcelize
         data class Player(val config: PlayConfig) : Configuration()
@@ -177,9 +184,9 @@ class RootComponentImpl internal constructor(
         data class Details(val config: ShlokaConfig) : Configuration()
 
         @Parcelize
-        object Settings : Configuration()
+        data object Settings : Configuration()
 
         @Parcelize
-        object Donations : Configuration()
+        data object Donations : Configuration()
     }
 }

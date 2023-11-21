@@ -6,19 +6,22 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.net.Uri
-import android.nfc.Tag
 import android.os.Bundle
 import android.os.IBinder
 import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.lifecycle.Lifecycle
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.a_blekot.memorize_shloka.MainApp.Companion.app
+import com.a_blekot.memorize_shloka.fragments.createScreenResultProvider
 import com.a_blekot.memorize_shloka.inapp.BillingHelperAndroid
 import com.a_blekot.memorize_shloka.inapp.InappUpdater
 import com.a_blekot.memorize_shloka.inapp.showInappReview
+import com.a_blekot.memorize_shloka.notifications.IsNotificationPermissionDeniedUseCase
+import com.a_blekot.memorize_shloka.notifications.NotificationsPermissionDialogFragment
+import com.a_blekot.memorize_shloka.notifications.RequestNotificationPermissionUseCase
+import com.a_blekot.memorize_shloka.notifications.ShouldShowNotificationPermissionDialogUseCase
+import com.a_blekot.memorize_shloka.permissions.PermissionManager
 import com.a_blekot.shlokas.android_player.PendingIntentProvider
 import com.a_blekot.shlokas.android_player.PlaybackService
 import com.a_blekot.shlokas.android_ui.theme.AppTheme
@@ -44,7 +47,11 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
-class MainActivity : ComponentActivity() {
+class MainActivity : FragmentActivity() {
+
+    private val isNotificationPermissionDeniedUseCase = IsNotificationPermissionDeniedUseCase()
+    private val requestNotificationPermission = RequestNotificationPermissionUseCase()
+    private val shouldShowNotificationPermissionDialog = ShouldShowNotificationPermissionDialogUseCase(isNotificationPermissionDeniedUseCase)
 
     private val pendingIntentProvider = object : PendingIntentProvider {
         override fun invoke(): PendingIntent {
@@ -58,7 +65,6 @@ class MainActivity : ComponentActivity() {
         override fun onServiceConnected(name: ComponentName?, binder: IBinder?) {
             playbackService = (binder as? PlaybackService.PlaybackBinder)?.service
             playbackService?.setPlayerBus(app.playerBus)
-            playbackService?.onActivityStarted()
             playbackService?.setPendingIntentProvider(pendingIntentProvider)
 
             Napier.d("ACTIVITY onServiceConnected", tag = PLAYBACK_SERVICE.name)
@@ -86,13 +92,17 @@ class MainActivity : ComponentActivity() {
         override fun onSelectTtsVoice() = this@MainActivity.selectTtsVoice()
     }
 
-    private var isBound = false
+    private val isBound
+        get() = playbackService != null
     private var playbackService: PlaybackService? = null
     private var billingHelper: BillingHelper? = null
     private var inappUpdater: InappUpdater? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        addActivity()
+
         billingHelper = BillingHelperAndroid(
             activity = this,
             scope = this.lifecycleScope,
@@ -110,7 +120,7 @@ class MainActivity : ComponentActivity() {
                 MainContent(root)
             }
         }
-        bindService()
+        startAndBindService()
         app.connectivityObserver.start()
     }
 
@@ -119,22 +129,27 @@ class MainActivity : ComponentActivity() {
         inappUpdater?.clean()
         app.connectivityObserver.stop()
         super.onDestroy()
+        unbindService()
+        removeActivity()
     }
 
     override fun onStart() {
+        if (!isBound) {
+            startAndBindService {
+                playbackService?.onActivityStarted()
+            }
+        } else {
+            playbackService?.onActivityStarted()
+        }
+
         super.onStart()
         inappUpdater?.checkUpdate()
 
-        try {
-            Napier.d("ACTIVITY startService", tag = PLAYBACK_SERVICE.name)
-            startService(playbackServiceIntent)
-        } catch (e: IllegalArgumentException) {
-            // The process is classed as idle by the platform.
-            // Starting a background service is not allowed in this state.
-            Napier.d("Failed to start service (process is idle).", tag = PLAYBACK_SERVICE.name)
-        } catch (e: IllegalStateException) {
-            // The app is in background, starting service is disallow
-            Napier.d("Failed to start service (app is in background)", tag = PLAYBACK_SERVICE.name)
+        if (shouldShowNotificationPermissionDialog()) {
+            NotificationsPermissionDialogFragment().show(
+                supportFragmentManager,
+                "NotificationPermissionNavScreen"
+            )
         }
     }
 
@@ -145,26 +160,44 @@ class MainActivity : ComponentActivity() {
 
     override fun onStop() {
         playbackService?.onActivityStopped()
-        unbindService()
         super.onStop()
     }
 
-    private fun bindService() {
+    private fun startAndBindService(serviceAction: (() -> Unit)? = null) {
+        startService(playbackServiceIntent)
         lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                delay(500L)
-                Napier.d("app.playerBus = ${app.playerBus}", tag = "PlayerBus")
-                isBound = applicationContext.bindService(playbackServiceIntent, serviceConnection, Context.BIND_IMPORTANT)
+            delay(500L)
+            if (applicationContext.bindService(
+                    playbackServiceIntent,
+                    serviceConnection,
+                    Context.BIND_IMPORTANT
+                )
+            ) {
+                serviceAction?.invoke()
             }
         }
     }
 
     private fun unbindService() {
         if (isBound) {
+            Napier.d("ACTIVITY unbindService", tag = PLAYBACK_SERVICE.name)
             applicationContext.unbindService(serviceConnection)
-            isBound = false
         }
     }
+
+    override fun startService(intent: Intent): ComponentName? =
+        try {
+            super.startService(intent)
+        } catch (e: IllegalArgumentException) {
+            // The process is classed as idle by the platform.
+            // Starting a background service is not allowed in this state.
+            Napier.d("Failed to start service (process is idle).", tag = PLAYBACK_SERVICE.name)
+            componentName
+        } catch (e: IllegalStateException) {
+            // The app is in background, starting service is disallow
+            Napier.d("Failed to start service (app is in background)", tag = PLAYBACK_SERVICE.name)
+            componentName
+        }
 
     private fun root(componentContext: ComponentContext): RootComponent =
         RootComponentImpl(
@@ -252,4 +285,24 @@ class MainActivity : ComponentActivity() {
 
     private fun inappReview() =
         showInappReview(this)
+
+    private fun observeNotificationPermissionDialog() {
+        createScreenResultProvider<NotificationsPermissionDialogFragment.ScreenResult>(
+            resultKey = NotificationsPermissionDialogFragment.RESULT_KEY
+        ).observe {
+            if (it.allowed) {
+                lifecycleScope.launch {
+                    requestNotificationPermission()
+                }
+            }
+        }
+    }
+
+    private fun addActivity() {
+        PermissionManager.attachActivity(this)
+    }
+
+    private fun removeActivity() {
+        PermissionManager.detachActivity(this)
+    }
 }

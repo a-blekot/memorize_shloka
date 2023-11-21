@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Memorize Shloka</string>
+
+    <string name="notifications_permission_dialog_title">Receive notifications</string>
+    <string name="notifications_permission_dialog_subtitle">Turn on notifications to be updated. You can always manage notifications in Settings.</string>
+    <string name="notifications_permission_dialog_action">Turn on notifications</string>
+    <string name="notifications_permission_dialog_skip">Skip</string>
 </resources>

@@ -1,9 +1,10 @@
 [versions]
-accompanist = "0.27.1"
+accompanist = "0.30.1"
 android_gradle_plugin = "8.1.2"
 androidx-activity = "1.8.0"
 androidx-appcompat = "1.7.0-alpha03"
 androidx-core = "1.12.0"
+androidx-fragment-ktx = "1.6.2"
 androidx-lifecycle = "2.6.2"
 billing = "6.0.1"
 canidropjetifier = "0.5"
@@ -60,6 +61,7 @@ androidx-composeUiTooling = { module = "androidx.compose.ui:ui-tooling", version
 
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat"}
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core"}
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx-fragment-ktx"}
 androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "androidx-lifecycle"}
 androidx-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle"}
 

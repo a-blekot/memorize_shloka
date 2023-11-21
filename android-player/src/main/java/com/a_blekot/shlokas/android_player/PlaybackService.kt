@@ -5,6 +5,8 @@ import android.app.Notification
 import android.app.Service
 import android.content.Intent
 import android.content.pm.PackageManager.PERMISSION_GRANTED
+import android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
+import android.nfc.Tag
 import android.os.Binder
 import android.os.Build
 import android.os.IBinder
@@ -28,6 +30,7 @@ class PlaybackService : Service(), Player.Listener {
     private var player: Player? = null
     private var wakeLock: PowerManager.WakeLock? = null
     private var isActivityStarted = false
+    private var isForegroundService = false
 
     private val playerScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
@@ -43,8 +46,9 @@ class PlaybackService : Service(), Player.Listener {
             isActivityStarted = false
             Napier.d("onActivityStopped", tag = PLAYBACK_SERVICE.name)
             Napier.d("isPlaying = $isPlaying", tag = PLAYBACK_SERVICE.name)
+            Napier.d("isBuffering = $isBuffering", tag = PLAYBACK_SERVICE.name)
 
-            if (isPlaying) {
+            if (isPlaying || isBuffering) {
                 showNotification()
             } else {
                 playerScope.launch {
@@ -82,9 +86,16 @@ class PlaybackService : Service(), Player.Listener {
         super.onDestroy()
     }
 
-    override fun onNotificationPosted(notification: Notification) {
+    override fun onNotificationPosted(notification: Notification, onGoing: Boolean) {
         Napier.d("startForeground notification = $notification", tag = PLAYBACK_SERVICE.name)
-        startForeground(NOTIFICATION_ID, notification)
+        if (onGoing && !isForegroundService) {
+            try {
+                startForeground(notification)
+                isForegroundService = true
+            } catch (e: Throwable) {
+                Napier.e("Error starting foreground service", tag = PLAYBACK_SERVICE.name, throwable =  e)
+            }
+        }
     }
 
     override fun onNotificationCancelled() {
@@ -94,6 +105,14 @@ class PlaybackService : Service(), Player.Listener {
 
     fun setPendingIntentProvider(provider: PendingIntentProvider) {
         player?.pendingIntentProvider = provider
+    }
+
+    private fun startForeground(notification: Notification) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            startForeground(NOTIFICATION_ID, notification, FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK)
+        } else {
+            startForeground(NOTIFICATION_ID, notification)
+        }
     }
 
     private fun stop() {
@@ -138,5 +157,6 @@ class PlaybackService : Service(), Player.Listener {
             @Suppress("DEPRECATION")
             stopForeground(true)
         }
+        isForegroundService = false
     }
 }

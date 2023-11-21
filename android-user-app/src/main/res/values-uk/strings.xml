@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Запамʼятай Шлоку</string>
+
+    <string name="notifications_permission_dialog_title">Отримувати сповіщення</string>
+    <string name="notifications_permission_dialog_subtitle">Увімкніть сповіщення, щоб бути в курсі. Ви завжди можете керувати повідомленнями в Налаштуваннях.</string>
+    <string name="notifications_permission_dialog_action">Увімкніть сповіщення</string>
+    <string name="notifications_permission_dialog_skip">Пропустити</string>
 </resources>

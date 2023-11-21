@@ -26,6 +26,10 @@ private const val WITH_SANSKRIT = "WITH_SANSKRIT"
 private const val WITH_TRANSLATION = "WITH_TRANSLATION"
 private const val AUDIO_SPEED = "AUDIO_SPEED"
 private const val AUDIO_PITCH = "AUDIO_PITCH"
+private const val NOTIFICATION_PERMISSION_WAS_REQUESTED =
+    "NOTIFICATION_PERMISSION_WAS_REQUESTED"
+private const val NOTIFICATION_PERMISSION_WAS_ASKED =
+    "NOTIFICATION_PERMISSION_WAS_ASKED"
 
 private const val DEFAULT_REPEATS = 10
 private const val MAX_REPEATS = 16_108
@@ -112,3 +116,9 @@ fun onPreRatingClosed() =
 
 var showClosePlayerDialog: Boolean by settings.boolean(SHOW_CLOSE_PLAYER_DIALOG, true)
 var allowSwipeOnPlayer: Boolean by settings.boolean(ALLOW_SWIPE_ON_PLAYER, true)
+
+/** In system dialog */
+var notificationPermissionWasRequested by settings.boolean(NOTIFICATION_PERMISSION_WAS_REQUESTED, false)
+
+/** In app dialog */
+var notificationPermissionWasAsked by settings.boolean(NOTIFICATION_PERMISSION_WAS_ASKED, false)

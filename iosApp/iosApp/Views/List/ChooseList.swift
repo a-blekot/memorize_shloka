@@ -28,27 +28,29 @@ struct ChooseList: View {
     
     var body: some View {
         ZStack {
-            VStack(alignment: .center, spacing: theme.dimens.paddingM) {
-                ForEach(availableLists) { list in
-                    ChooseListButton(list.title, list.isSelected)
-                        .environmentObject(theme)
+            ScrollView {
+                VStack(alignment: .center, spacing: theme.dimens.paddingM) {
+                    Image(systemName: "arrowshape.turn.up.backward.circle")
+                        .font(theme.imageFontMedium)
+                        .foregroundColor(theme.colors.onSecondaryContainer)
+                        .padding(theme.dimens.paddingS)
+                        .background(theme.colors.secondaryContainer)
+                        .cornerRadius(theme.dimens.radiusM)
                         .onTapGesture {
-                            let _ = debugPrint("list.type \(list.type)")
-                            onSelected(list.type)
+                            onSkip()
                         }
-                }
-                
-                Image(systemName: "arrowshape.turn.up.backward.circle")
-                    .font(theme.imageFontMedium)
-                    .foregroundColor(theme.colors.onSecondaryContainer)
-                    .padding(theme.dimens.paddingS)
-                    .background(theme.colors.secondaryContainer)
-                    .cornerRadius(theme.dimens.radiusM)
-                    .onTapGesture {
-                        onSkip()
+                        .padding(theme.dimens.paddingS)
+                        .frame(maxWidth: .infinity)
+                    
+                    ForEach(availableLists) { list in
+                        ChooseListButton(list.title, list.isSelected)
+                            .environmentObject(theme)
+                            .onTapGesture {
+                                let _ = debugPrint("list.type \(list.type)")
+                                onSelected(list.type)
+                            }
                     }
-                    .padding(theme.dimens.paddingS)
-                    .frame(maxWidth: .infinity)
+                }
             }
             .padding(.vertical, theme.dimens.paddingM)
             .padding(.horizontal, theme.dimens.horizontalScreenPadding)

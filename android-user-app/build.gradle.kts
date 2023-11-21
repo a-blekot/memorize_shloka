@@ -52,6 +52,7 @@ dependencies {
 
     implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.lifecycle.process)
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.bundles.androidx.compose)
@@ -60,6 +61,7 @@ dependencies {
     implementation(libs.decompose.extCompose)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.material.xml)
     debugImplementation(libs.napier.android.debug)
     releaseImplementation(libs.napier.android.release)
 

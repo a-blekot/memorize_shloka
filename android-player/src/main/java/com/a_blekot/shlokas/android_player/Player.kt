@@ -33,7 +33,7 @@ class Player(
 ) {
 
     interface Listener {
-        fun onNotificationPosted(notification: Notification) {}
+        fun onNotificationPosted(notification: Notification, onGoing: Boolean) {}
         fun onNotificationCancelled() {}
     }
 
@@ -121,7 +121,7 @@ class Player(
         object : PlayerNotificationManager.NotificationListener {
             override fun onNotificationPosted(notificationId: Int, notification: Notification, onGoing: Boolean) {
                 Napier.d("onNotificationPosted = $notificationId", tag = "AUDIO_PLAYER")
-                listener.onNotificationPosted(notification)
+                listener.onNotificationPosted(notification, onGoing)
             }
 
             override fun onNotificationCancelled(notificationId: Int, dismissedByUser: Boolean) {
@@ -161,6 +161,9 @@ class Player(
         get() {
             return exoPlayer?.isPlaying == true || currentTask !is StopTask
         }
+
+    val isBuffering
+        get() = exoPlayer?.playbackState == Player.STATE_BUFFERING
 
     lateinit var playerBus: PlayerBus
 
