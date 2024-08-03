@@ -44,7 +44,7 @@ struct ClosePlayerDialog: View {
                 HStack(alignment: .center, spacing: theme.dimens.paddingM) {
                     StandartCheckBox(doNotShowAgain, theme.colors.primary) { isSelected in
                         doNotShowAgain = isSelected
-                        SettingsKt.setShowClosePlayerDialog(show: !isSelected)
+                        SettingsKt.showClosePlayerDialog = !isSelected
                     }
                     
                     Text(MR.strings().label_do_not_show_again.resolve())

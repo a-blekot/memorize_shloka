@@ -10,10 +10,12 @@ import Foundation
 import Prabhupada
 
 class StubPlayerComponent: PlayerComponent {
-    func forcePause() {}
     func forcePlay() {}
-    func restart() {}
+    func forcePause() {}
     func stop() {}
+    
+    func prev() {}
+    func next() {}
     
     let flow: Value<PlayerState> =
         valueOf(
@@ -23,6 +25,7 @@ class StubPlayerComponent: PlayerComponent {
 
 func mockPlayerState() -> PlayerState {
     return PlayerState(
+        hasAudio: true,
         title: "ŚB 1.2.16",
         sanskrit: "<i>śuśrūṣoḥ śraddadhānasya<br>vāsudeva-kathā-ruciḥ<br>syān mahat-sevayā viprāḥ<br>puṇya-tīrtha-niṣevaṇāt</i>",
         words: "<i><b>śuśrūṣoḥ</b></i> — one who is engaged in hearing;<br><i><b>śraddadhānasya</b></i> — with care and attention;</br><br><i><b>vāsudeva</b></i> — in respect to Vāsudeva;</br><br><i><b>kathā</b></i> — the message;</br><br><i><b>ruciḥ</b></i> — affinity;</br><br><i><b>syāt</b></i> — is made possible;</br><br><i><b>mahat-sevayā</b></i> — by service rendered to pure devotees;</br><br><i><b>viprāḥ</b></i> — O twice-born;</br><br><i><b>puṇya-tīrtha</b></i> — those who are cleansed of all vice;</br><br><i><b>niṣevaṇāt</b></i> — by service.",
@@ -34,6 +37,7 @@ func mockPlayerState() -> PlayerState {
         currentShlokaIndex: 11,
         totalShlokasCount: 16,
         totalDurationMs: 600000,
-        isAutoplay: true
+        isAutoplay: true,
+        startShloka: nil
     )
 }

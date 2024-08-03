@@ -59,7 +59,7 @@ struct PlayerTitleAndProgress: View {
                         .background(theme.colors.secondaryContainer)
                         .cornerRadius(theme.dimens.radiusM)
                         .onTapGesture {
-                            if (SettingsKt.showClosePlayerDialog()) {
+                            if (SettingsKt.showClosePlayerDialog) {
                                 isClosePlayerDialogVisible = true
                             } else {
                                 component.stop()

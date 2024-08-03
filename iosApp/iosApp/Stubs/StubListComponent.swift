@@ -10,6 +10,7 @@ import Foundation
 import Prabhupada
 
 class StubListComponent: ListComponent {
+    func youtube() {}
     func resolveDescription(id: ShlokaId) -> String {
         return "dharmaḥ svanuṣṭhitaḥ puṁsāṁ"
     }

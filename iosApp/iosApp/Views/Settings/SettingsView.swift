@@ -106,8 +106,8 @@ struct SettingsView: View {
                     }
                     .overlay(RoundedRectangle(cornerRadius: theme.dimens.radiusS).stroke(lineWidth: theme.dimens.borderS))
                     
-                    WeekPicker(current: state.week) { week in
-                        component.setWeek(value: week.ordinal)
+                    WeekPicker(current: state.repeatMode) { repeatMode in
+                        component.setRepeatMode(value: repeatMode.ordinal)
                     }
                     .environmentObject(theme)
                     

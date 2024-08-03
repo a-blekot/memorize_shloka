@@ -12,10 +12,10 @@ import Prabhupada
 struct WeekPicker: View {
     @EnvironmentObject var theme: Theme
 
-    let current: Week
-    let onChanged: (Week) -> ()
+    let current: RepeatMode
+    let onChanged: (RepeatMode) -> ()
     
-    init(current: Week, onChanged: @escaping (Week) -> ()) {
+    init(current: RepeatMode, onChanged: @escaping (RepeatMode) -> ()) {
         self.current = current
         self.onChanged = onChanged
     }
@@ -28,7 +28,7 @@ struct WeekPicker: View {
                 .frame(maxWidth: .infinity)
             
             HStack {
-                Image(systemName: pickImage(for: Week.first))
+                Image(systemName: pickImage(for: RepeatMode.oneLine))
                     .font(theme.imageFontSmall)
                 
                 Text(MR.strings().label_one_line.resolve())
@@ -36,11 +36,11 @@ struct WeekPicker: View {
             }
             .foregroundColor(theme.colors.primary)
             .onTapGesture {
-                onChanged(Week.first)
+                onChanged(RepeatMode.oneLine)
             }
             
             HStack {
-                Image(systemName: pickImage(for: Week.second))
+                Image(systemName: pickImage(for: RepeatMode.twoLines))
                     .font(theme.imageFontSmall)
                 
                 Text(MR.strings().label_two_lines.resolve())
@@ -48,11 +48,11 @@ struct WeekPicker: View {
             }
             .foregroundColor(theme.colors.primary)
             .onTapGesture {
-                onChanged(Week.second)
+                onChanged(RepeatMode.twoLines)
             }
             
             HStack {
-                Image(systemName: pickImage(for: Week.third))
+                Image(systemName: pickImage(for: RepeatMode.fourLines))
                     .font(theme.imageFontSmall)
                 
                 Text(MR.strings().label_four_lines.resolve())
@@ -60,18 +60,18 @@ struct WeekPicker: View {
             }
             .foregroundColor(theme.colors.primary)
             .onTapGesture {
-                onChanged(Week.third)
+                onChanged(RepeatMode.fourLines)
             }
         }
     }
     
-    private func pickImage(for week: Week) -> String {
-        current == week ? "smallcircle.filled.circle" : "circle"
+    private func pickImage(for repeatMode: RepeatMode) -> String {
+        current == repeatMode ? "smallcircle.filled.circle" : "circle"
     }
 }
 
 struct WeekPicker_Previews: PreviewProvider {
     static var previews: some View {
-        WeekPicker(current: Week.second) { week in }
+        WeekPicker(current: RepeatMode.twoLines) { repeatMode in }
     }
 }

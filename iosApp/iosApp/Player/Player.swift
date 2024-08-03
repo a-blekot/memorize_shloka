@@ -202,7 +202,7 @@ class Player: NSObject, ObservableObject {
     }
     
     func playTranslation(_ task: PlayTranslationTask) {
-        if (ttsIsNotAvailable(locale: SettingsKt.getLocale())) {
+        if (ttsIsNotAvailable(locale: SettingsKt.locale)) {
             onTtsComplete(id: task.id.name)
             return
         }
@@ -210,7 +210,7 @@ class Player: NSObject, ObservableObject {
         pause()
         
         let utterance = TtsUtterance(id: task.id.name, text: task.text)
-        utterance.voice = getVoice(for: SettingsKt.getLocale())
+        utterance.voice = getVoice(for: SettingsKt.locale)
         utterance.rate = AVSpeechUtteranceDefaultSpeechRate * PlayTranslationTaskKt.SPEECH_RATE
 
         tts.delegate = self

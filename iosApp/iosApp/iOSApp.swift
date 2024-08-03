@@ -4,13 +4,63 @@ import FirebaseCore
 import FirebaseCrashlytics
 import AVFoundation
 import Prabhupada
+import MessageUI
 
-class IosPlatform: Prabhupada.PlatformApi {
+class IosPlatform: NSObject, Prabhupada.PlatformApi {
     
     let hasTts = true
     let hasInappReview = true
     
-    func onEmail() {}
+    func onEmail() {
+        guard MFMailComposeViewController.canSendMail() else {
+            // Handle the case where email cannot be sent
+            print("Email services are not available.")
+            return
+        }
+        
+        // Create and configure the mail compose view controller
+        let mailComposeVC = MFMailComposeViewController()
+        mailComposeVC.mailComposeDelegate = self
+        mailComposeVC.setToRecipients(["aleksey.blekot@gmail.com"])
+        mailComposeVC.setSubject(MR.strings().email_title.resolve())
+        mailComposeVC.setMessageBody(MR.strings().email_body.resolve(), isHTML: false)
+        
+        // Present the mail compose view controller
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScenes = scenes.first as? UIWindowScene
+        let window = windowScenes?.windows.first
+        
+        window?.rootViewController?.present(mailComposeVC, animated: true, completion: nil)
+    }
+    func onLink(link: String) {
+        guard let url = URL(string: link) else {
+            print("Invalid URL: \(link)")
+            return
+        }
+        
+        // Check if the URL can be opened
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:]) { success in
+                if !success {
+                    print("Failed to open URL: \(link)")
+                    
+                    let scenes = UIApplication.shared.connectedScenes
+                    let windowScenes = scenes.first as? UIWindowScene
+                    let window = windowScenes?.windows.first
+                    
+                    window?.rootViewController?.showToast(message: "Failed to open URL: \(link)")
+                }
+            }
+        } else {
+            print("Cannot open URL: \(link)")
+            
+            let scenes = UIApplication.shared.connectedScenes
+            let windowScenes = scenes.first as? UIWindowScene
+            let window = windowScenes?.windows.first
+            
+            window?.rootViewController?.showToast(message: "Cannot open URL: \(link)")
+        }
+    }
     func onRateUs() {
         guard let urlReview = URL(string: "https://apps.apple.com/app/memorize-shlokas/id6443863948?action=write-review")
             else { return }
@@ -34,12 +84,18 @@ class IosPlatform: Prabhupada.PlatformApi {
         guard let scene = UIApplication.shared.foregroundActiveScene else { return }
         SKStoreReviewController.requestReview(in: scene)
     #endif
-        SettingsKt.onInappReviewShown()
+        SettingsKt.inappReviewShown = true
     }
     func onSelectTtsVoice() {
         guard let urlReview = URL(string: "App-prefs:root=General&path=ACCESSIBILITY/VOICEOVER/Speech")
             else { return }
         UIApplication.shared.open(urlReview, options: [:], completionHandler: nil)
+    }
+}
+
+extension IosPlatform: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -64,7 +120,7 @@ struct iOSApp: App {
             dispatchers: DispatcherProviderImplKt.dispatchers(),
             configReader: IOsConfigReader(),
             billingHelper: BillingHelperIOs(),
-            connectivityObserver: ConnectivityObserverIOS(),
+            connectivityObserver: ConnectivityObserverStub(), //ConnectivityObserverIOS(),
             stringResourceHandler: IOsStringResourceHandler()
         )
         
