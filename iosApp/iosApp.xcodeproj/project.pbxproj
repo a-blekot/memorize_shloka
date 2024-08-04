@@ -10,6 +10,8 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		A06295742C5F78C300B436B0 /* SpeedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06295732C5F78C300B436B0 /* SpeedPicker.swift */; };
+		A06295762C5F828200B436B0 /* PlayerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06295752C5F828200B436B0 /* PlayerButton.swift */; };
 		A0D9B6C82C5E7C720002A630 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D9B6C72C5E7C720002A630 /* Toast.swift */; };
 		C60B317728F96978001AB927 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60B317628F96978001AB927 /* PlayerView.swift */; };
 		C60B317B28F9710F001AB927 /* StubPlayerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60B317A28F9710F001AB927 /* StubPlayerComponent.swift */; };
@@ -156,6 +158,8 @@
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A06295732C5F78C300B436B0 /* SpeedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedPicker.swift; sourceTree = "<group>"; };
+		A06295752C5F828200B436B0 /* PlayerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerButton.swift; sourceTree = "<group>"; };
 		A0D9B6C72C5E7C720002A630 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		C60B317628F96978001AB927 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		C60B317A28F9710F001AB927 /* StubPlayerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubPlayerComponent.swift; sourceTree = "<group>"; };
@@ -436,6 +440,7 @@
 				C67396B328FB32C100F1992B /* WeekPicker.swift */,
 				C67396B528FB3D2400F1992B /* LocalePicker.swift */,
 				C640959228FBFE3E0057A634 /* MailView.swift */,
+				A06295732C5F78C300B436B0 /* SpeedPicker.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -461,6 +466,7 @@
 				C60B318328F98D8D001AB927 /* PlayPauseButton.swift */,
 				C60B318528F990B7001AB927 /* SmoothProgress.swift */,
 				C60B318728F99A83001AB927 /* ClosePlayerDialog.swift */,
+				A06295752C5F828200B436B0 /* PlayerButton.swift */,
 			);
 			path = PlayerView;
 			sourceTree = "<group>";
@@ -1282,9 +1288,11 @@
 				C6DC4ECB28F5516900012D2B /* ComponentHolder.swift in Sources */,
 				C6DC4ECE28F5516900012D2B /* FavoriteButton.swift in Sources */,
 				A0D9B6C82C5E7C720002A630 /* Toast.swift in Sources */,
+				A06295762C5F828200B436B0 /* PlayerButton.swift in Sources */,
 				C6251476293A1A6100C5477A /* IAPManager.swift in Sources */,
 				C625146D2939F77500C5477A /* Purchases.swift in Sources */,
 				C698536628F962D7000CF70A /* ChooseListButton.swift in Sources */,
+				A06295742C5F78C300B436B0 /* SpeedPicker.swift in Sources */,
 				C60B318828F99A83001AB927 /* ClosePlayerDialog.swift in Sources */,
 				C67396B228FAD0A300F1992B /* SettingsView.swift in Sources */,
 				C60B318028F98491001AB927 /* FoldableView.swift in Sources */,

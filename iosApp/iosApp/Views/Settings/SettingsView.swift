@@ -51,18 +51,41 @@ struct SettingsView: View {
         ZStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: theme.dimens.paddingXS) {
-                    Image(systemName: "arrowshape.turn.up.backward.circle")
-                        .font(theme.imageFontMedium)
-                        .foregroundColor(theme.colors.onSecondaryContainer)
-                        .padding(theme.dimens.paddingS)
-                        .background(theme.colors.secondaryContainer)
-                        .cornerRadius(theme.dimens.radiusM)
-                        .onTapGesture {
-                            component.back()
+                    Group {
+                        Image(systemName: "arrowshape.turn.up.backward.circle")
+                            .font(theme.imageFontMedium)
+                            .foregroundColor(theme.colors.onSecondaryContainer)
+                            .padding(theme.dimens.paddingS)
+                            .background(theme.colors.secondaryContainer)
+                            .cornerRadius(theme.dimens.radiusM)
+                            .onTapGesture {
+                                component.back()
+                            }
+                            .padding(theme.dimens.paddingS)
+                            .frame(maxWidth: .infinity)
+                        
+                        HStack(spacing: theme.dimens.paddingM) {
+                            Button(action: {
+                                component.openYouTube()
+                            }) {
+                                Image(systemName: "play.rectangle.fill")
+                                    .font(theme.imageFontMedium)
+                                    .foregroundColor(theme.colors.primary)
+                                    .cornerRadius(theme.dimens.radiusM)
+                            }
+                            
+                            Text("YouTube - Shloka Smaranam")
+                                .font(theme.titleMedium)
+                                .underline()
+                                .foregroundColor(theme.colors.primary)
+                                .lineLimit(1)
                         }
-                        .padding(theme.dimens.paddingS)
-                        .frame(maxWidth: .infinity)
-
+                        .onTapGesture {
+                            component.openYouTube()
+                        }
+                        .padding(.vertical, theme.dimens.paddingS)
+                    }
+                    
                     HStack {
                         Image(systemName: "repeat")
                             .font(theme.imageFontSmall)
@@ -106,6 +129,8 @@ struct SettingsView: View {
                     }
                     .overlay(RoundedRectangle(cornerRadius: theme.dimens.radiusS).stroke(lineWidth: theme.dimens.borderS))
                     
+                    SpeedPicker()
+                    
                     WeekPicker(current: state.repeatMode) { repeatMode in
                         component.setRepeatMode(value: repeatMode.ordinal)
                     }
@@ -131,12 +156,12 @@ struct SettingsView: View {
                             Text(MR.strings().label_show_close_player_dialog.resolve())
                                 .font(theme.titleLarge)
                         }
-
+                        
                         HStack(alignment: .top) {
                             StandartCheckBox(state.withSanskrit, theme.colors.primary) { isSelected in
                                 component.setWithSanskrit(value: isSelected)
                             }
-
+                            
                             Text(MR.strings().label_with_sanskrit.resolve())
                                 .font(theme.titleLarge)
                         }
@@ -153,7 +178,7 @@ struct SettingsView: View {
                         HStack {
                             Image(systemName: "speaker.wave.2.fill")
                                 .font(theme.imageFontSmall)
-//                                .frame(width: 40)
+                            //                                .frame(width: 40)
                             
                             Text(MR.strings().label_select_tts_voice.resolve())
                                 .font(theme.titleLarge)
@@ -225,12 +250,12 @@ struct SettingsView: View {
                         .onTapGesture {
                             component.shareApp()
                         }
-
+                        
                         HStack {
                             Image(systemName: "star.fill")
                                 .font(theme.imageFontMedium)
                                 .frame(width: 40)
-
+                            
                             Text(MR.strings().label_rate_us.resolve())
                                 .font(theme.titleLarge)
                         }

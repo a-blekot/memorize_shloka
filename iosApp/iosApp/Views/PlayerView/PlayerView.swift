@@ -32,6 +32,7 @@ struct PlayerView: View {
             VStack(alignment: .center, spacing: theme.dimens.paddingS) {
                 PlayerTitleAndProgress(state, component, $isClosePlayerDialogVisible)
                     .environmentObject(theme)
+                    .padding(.horizontal, theme.dimens.horizontalScreenPadding)
  
                 ScrollView {
                     VStack {
@@ -69,9 +70,9 @@ struct PlayerView: View {
                         }
                     }
                 }
+                .padding(.horizontal, CGFloat(24))
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding(theme.dimens.paddingXS)
             .background(theme.colors.background)
             
             if (isClosePlayerDialogVisible) {

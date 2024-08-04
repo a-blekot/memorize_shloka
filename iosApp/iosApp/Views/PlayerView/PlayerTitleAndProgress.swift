@@ -52,7 +52,7 @@ struct PlayerTitleAndProgress: View {
                 HStack(alignment: .center, spacing: theme.dimens.paddingM) {
                     
                     Image(systemName: "arrowshape.turn.up.backward.circle")
-                        .frame(width: theme.dimens.iconSizeL, height: theme.dimens.iconSizeL)
+                        .frame(width: theme.dimens.iconSizeM, height: theme.dimens.iconSizeM)
                         .font(theme.imageFontMedium)
                         .foregroundColor(theme.colors.onSecondaryContainer)
                         .padding(theme.dimens.paddingS)
@@ -66,7 +66,11 @@ struct PlayerTitleAndProgress: View {
                             }
                         }
                     
+                    PlayerButton(isNext: false, component: component)
+                    
                     PlayPauseButton(state: state.playbackState, isAutoplay: state.isAutoplay, component: component)
+                    
+                    PlayerButton(isNext: true, component: component)
                 }
                 
             }
