@@ -12,25 +12,18 @@ android {
 //        res.srcDir(File(buildDir, "generated/moko/androidMain/res"))
 //        assets.srcDir(File(buildDir, "generated/moko/androidMain/assets"))
         java.srcDirs("build/generated/moko/androidMain/src")
+        java.srcDirs("build/generated/kotlin/generateMRandroidMain")
+        res.srcDirs("build/generated/moko-resources/androidMain/res")
     }
 }
 
-kotlin {
-    sourceSets {
-        commonMain {
-            dependencies {
-                api(libs.moko.resources)
-            }
-        }
-        androidMain {
-            dependencies {
-                api(libs.moko.resources.compose)
-            }
-        }
-    }
+dependencies {
+    commonMainApi(libs.moko.resources)
+    androidMainApi(libs.moko.resources.compose)
 }
 
 multiplatformResources {
-    iosBaseLocalizationRegion = "ru"
-    multiplatformResourcesPackage = "com.a_blekot.shlokas.common.resources"
+    iosBaseLocalizationRegion.set("ru")
+    resourcesPackage.set("com.a_blekot.shlokas.common.resources")
+//    configureCopyXCFrameworkResources("Prabhupada")
 }

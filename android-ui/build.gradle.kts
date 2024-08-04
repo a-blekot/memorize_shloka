@@ -21,7 +21,7 @@ dependencies {
     implementation(projects.common.donationsApi)
     implementation(projects.common.listApi)
     implementation(projects.common.playerApi)
-    implementation(projects.common.resources)
+    implementation(projects.common.resourcez)
     implementation(projects.common.settingsApi)
     implementation(projects.common.utils)
 

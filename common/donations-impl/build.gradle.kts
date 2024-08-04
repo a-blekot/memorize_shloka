@@ -14,7 +14,7 @@ kotlin {
             dependencies {
                 implementation(projects.common.data)
                 implementation(projects.common.donationsApi)
-                implementation(projects.common.resources)
+                implementation(projects.common.resourcez)
                 implementation(projects.common.utils)
 
                 implementation(libs.decompose.decompose)

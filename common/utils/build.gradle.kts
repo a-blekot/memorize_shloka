@@ -14,7 +14,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(projects.common.data)
-                implementation(projects.common.resources)
+                implementation(projects.common.resourcez)
 
                 implementation(libs.decompose.decompose)
                 implementation(libs.kotlinx.coroutines.core)

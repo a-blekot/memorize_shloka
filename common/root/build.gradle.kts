@@ -24,7 +24,7 @@ kotlin {
                 export(projects.common.listApi)
                 export(projects.common.playerApi)
                 export(projects.common.playerImpl)
-                export(projects.common.resources)
+                export(projects.common.resourcez)
                 export(projects.common.settingsApi)
                 export(projects.common.utils)
 
@@ -65,7 +65,7 @@ kotlin {
                 api(projects.common.listApi)
                 api(projects.common.playerApi)
                 api(projects.common.playerImpl)
-                api(projects.common.resources)
+                api(projects.common.resourcez)
                 api(projects.common.settingsApi)
                 api(projects.common.utils)
 

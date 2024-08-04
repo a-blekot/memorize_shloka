@@ -46,7 +46,7 @@ dependencies {
     implementation(projects.common.playerApi)
     implementation(projects.common.playerImpl)
     implementation(projects.common.settingsApi)
-    implementation(projects.common.resources)
+    implementation(projects.common.resourcez)
     implementation(projects.common.root)
     implementation(projects.common.utils)
 

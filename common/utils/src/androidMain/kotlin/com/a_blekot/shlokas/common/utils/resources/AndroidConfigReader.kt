@@ -2,33 +2,33 @@ package com.a_blekot.shlokas.common.utils.resources
 
 import android.content.Context
 import com.a_blekot.shlokas.common.data.ListId
-import com.a_blekot.shlokas.common.resources.MR.files.BG
-import com.a_blekot.shlokas.common.resources.MR.files.ISO
-import com.a_blekot.shlokas.common.resources.MR.files.NI
-import com.a_blekot.shlokas.common.resources.MR.files.NK
-import com.a_blekot.shlokas.common.resources.MR.files.NOD
-import com.a_blekot.shlokas.common.resources.MR.files.SB_1
-import com.a_blekot.shlokas.common.resources.MR.files.SB_2
-import com.a_blekot.shlokas.common.resources.MR.files.SB_3
-import com.a_blekot.shlokas.common.resources.MR.files.SB_4
-import com.a_blekot.shlokas.common.resources.MR.files.SB_5
-import com.a_blekot.shlokas.common.resources.MR.files.SB_6
+import com.a_blekot.shlokas.common.resources.MR.files.BG_json
+import com.a_blekot.shlokas.common.resources.MR.files.ISO_json
+import com.a_blekot.shlokas.common.resources.MR.files.NI_json
+import com.a_blekot.shlokas.common.resources.MR.files.NK_json
+import com.a_blekot.shlokas.common.resources.MR.files.NOD_json
+import com.a_blekot.shlokas.common.resources.MR.files.SB_1_json
+import com.a_blekot.shlokas.common.resources.MR.files.SB_2_json
+import com.a_blekot.shlokas.common.resources.MR.files.SB_3_json
+import com.a_blekot.shlokas.common.resources.MR.files.SB_4_json
+import com.a_blekot.shlokas.common.resources.MR.files.SB_5_json
+import com.a_blekot.shlokas.common.resources.MR.files.SB_6_json
 import dev.icerock.moko.resources.FileResource
 
 class AndroidConfigReader(private val context: Context): ConfigReader {
     override fun readConfig(type: ListId): String =
         when (type) {
-            ListId.BG -> readFileResource(BG)
-            ListId.ISO -> readFileResource(ISO)
-            ListId.NI -> readFileResource(NI)
-            ListId.NK -> readFileResource(NK)
-            ListId.NOD -> readFileResource(NOD)
-            ListId.SB_1 -> readFileResource(SB_1)
-            ListId.SB_2 -> readFileResource(SB_2)
-            ListId.SB_3 -> readFileResource(SB_3)
-            ListId.SB_4 -> readFileResource(SB_4)
-            ListId.SB_5 -> readFileResource(SB_5)
-            ListId.SB_6 -> readFileResource(SB_6)
+            ListId.BG -> readFileResource(BG_json)
+            ListId.ISO -> readFileResource(ISO_json)
+            ListId.NI -> readFileResource(NI_json)
+            ListId.NK -> readFileResource(NK_json)
+            ListId.NOD -> readFileResource(NOD_json)
+            ListId.SB_1 -> readFileResource(SB_1_json)
+            ListId.SB_2 -> readFileResource(SB_2_json)
+            ListId.SB_3 -> readFileResource(SB_3_json)
+            ListId.SB_4 -> readFileResource(SB_4_json)
+            ListId.SB_5 -> readFileResource(SB_5_json)
+            ListId.SB_6 -> readFileResource(SB_6_json)
             else -> throw IllegalArgumentException("unknown config: $type")
         }
 

@@ -28,7 +28,7 @@ include(
     ":common:list-impl",
     ":common:player-api",
     ":common:player-impl",
-    ":common:resources",
+    ":common:resourcez",
     ":common:root",
     ":common:settings-api",
     ":common:settings-impl",

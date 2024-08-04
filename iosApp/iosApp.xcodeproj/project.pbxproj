@@ -1234,7 +1234,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :common:root:embedAndSignAppleFrameworkForXcode\n\n./gradlew :common:resources:copyResourcesDebugTestIosSimulatorArm64 \\\n    -Pmoko.resources.PLATFORM_NAME=$PLATFORM_NAME \\\n    -Pmoko.resources.CONFIGURATION=$CONFIGURATION \\\n    -Pmoko.resources.BUILT_PRODUCTS_DIR=$BUILT_PRODUCTS_DIR \\\n    -Pmoko.resources.CONTENTS_FOLDER_PATH=$CONTENTS_FOLDER_PATH\n    \n#./gradlew :common:resources:copyResourcesDebugTestIosArm64 \\\n#    -Pmoko.resources.PLATFORM_NAME=$PLATFORM_NAME \\\n#    -Pmoko.resources.CONFIGURATION=$CONFIGURATION \\\n#    -Pmoko.resources.BUILT_PRODUCTS_DIR=$BUILT_PRODUCTS_DIR \\\n#    -Pmoko.resources.CONTENTS_FOLDER_PATH=$CONTENTS_FOLDER_PATH\n    \n#./gradlew :common:root:copyResourcesMPLReleaseXCFrameworkToApp \\\n#    -Pmoko.resources.BUILT_PRODUCTS_DIR=$BUILT_PRODUCTS_DIR \\\n#    -Pmoko.resources.CONTENTS_FOLDER_PATH=$CONTENTS_FOLDER_PATH\n\n#./gradlew :common:root:copyFrameworkResourcesToApp \\\n#    -Pmoko.resources.PLATFORM_NAME=$PLATFORM_NAME \\\n#    -Pmoko.resources.CONFIGURATION=$CONFIGURATION \\\n#    -Pmoko.resources.BUILT_PRODUCTS_DIR=$BUILT_PRODUCTS_DIR \\\n#    -Pmoko.resources.CONTENTS_FOLDER_PATH=$CONTENTS_FOLDER_PATH\n";
+			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :common:root:embedAndSignAppleFrameworkForXcode\n\n./gradlew :common:resourcez:copyResourcesDebugTestIosSimulatorArm64 \\\n    -Pmoko.resources.PLATFORM_NAME=$PLATFORM_NAME \\\n    -Pmoko.resources.CONFIGURATION=$CONFIGURATION \\\n    -Pmoko.resources.BUILT_PRODUCTS_DIR=$BUILT_PRODUCTS_DIR \\\n    -Pmoko.resources.CONTENTS_FOLDER_PATH=$CONTENTS_FOLDER_PATH\n    \n#./gradlew :common:resources:copyResourcesDebugTestIosArm64 \\\n#    -Pmoko.resources.PLATFORM_NAME=$PLATFORM_NAME \\\n#    -Pmoko.resources.CONFIGURATION=$CONFIGURATION \\\n#    -Pmoko.resources.BUILT_PRODUCTS_DIR=$BUILT_PRODUCTS_DIR \\\n#    -Pmoko.resources.CONTENTS_FOLDER_PATH=$CONTENTS_FOLDER_PATH\n    \n#./gradlew :common:root:copyResourcesMPLReleaseXCFrameworkToApp \\\n#    -Pmoko.resources.BUILT_PRODUCTS_DIR=$BUILT_PRODUCTS_DIR \\\n#    -Pmoko.resources.CONTENTS_FOLDER_PATH=$CONTENTS_FOLDER_PATH\n\n#./gradlew :common:root:copyFrameworkResourcesToApp \\\n#    -Pmoko.resources.PLATFORM_NAME=$PLATFORM_NAME \\\n#    -Pmoko.resources.CONFIGURATION=$CONFIGURATION \\\n#    -Pmoko.resources.BUILT_PRODUCTS_DIR=$BUILT_PRODUCTS_DIR \\\n#    -Pmoko.resources.CONTENTS_FOLDER_PATH=$CONTENTS_FOLDER_PATH\n\n#\"$SRCROOT/../gradlew\" -p \"$SRCROOT/../\" :shared:copyFrameworkResourcesToApp \\\n#    -Pmoko.resources.PLATFORM_NAME=\"$PLATFORM_NAME\" \\\n#    -Pmoko.resources.CONFIGURATION=\"$CONFIGURATION\" \\\n#    -Pmoko.resources.ARCHS=\"$ARCHS\" \\\n#    -Pmoko.resources.BUILT_PRODUCTS_DIR=\"$BUILT_PRODUCTS_DIR\" \\\n#    -Pmoko.resources.CONTENTS_FOLDER_PATH=\"$CONTENTS_FOLDER_PATH\" \n\n";
 		};
 		C640959428FC79ED0057A634 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1356,6 +1356,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;

@@ -14,7 +14,7 @@ kotlin {
             dependencies {
                 implementation(projects.common.data)
                 implementation(projects.common.playerApi)
-                implementation(projects.common.resources)
+                implementation(projects.common.resourcez)
                 implementation(projects.common.utils)
 
 //                implementation("com.soywiz.korlibs.korau:korau:3.0.0")
