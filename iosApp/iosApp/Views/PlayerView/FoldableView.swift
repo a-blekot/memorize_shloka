@@ -24,6 +24,7 @@ struct FoldableView<Content: View>: View {
             HStack(alignment: .center, spacing: theme.dimens.paddingXS) {
                 Image(systemName: isExpanded ? "chevron.down.circle" : "chevron.up.circle")
                     .imageScale(.large)
+                    .padding(.horizontal, theme.dimens.paddingS)
                 
                 Text(title)
                     .font(theme.titleSmall)

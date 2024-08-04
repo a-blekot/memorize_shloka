@@ -19,6 +19,8 @@ struct PlayerView: View {
     
     @State var isClosePlayerDialogVisible = false
     
+    @GestureState private var dragOffset = CGSize.zero
+    
     init(_ component: PlayerComponent) {
         self.component = component
         self.state = ObservableValue(component.flow)
@@ -33,7 +35,7 @@ struct PlayerView: View {
                 PlayerTitleAndProgress(state, component, $isClosePlayerDialogVisible)
                     .environmentObject(theme)
                     .padding(.horizontal, theme.dimens.horizontalScreenPadding)
- 
+                
                 ScrollView {
                     VStack {
                         Text(state.sanskrit.toMarkdown())
@@ -44,7 +46,7 @@ struct PlayerView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                             .padding(.horizontal, theme.dimens.paddingXS)
                             .foregroundColor(theme.colors.primary)
-
+                        
                         FoldableView(
                             title: "Synonyms",
                             textColor: theme.colors.onSecondaryContainer,
@@ -74,6 +76,23 @@ struct PlayerView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(theme.colors.background)
+            
+            .offset(x: dragOffset.width)
+            .gesture(
+                DragGesture()
+                    .updating($dragOffset) { value, state, _ in
+                        state = value.translation
+                    }
+                    .onEnded { value in
+                        let velocity = value.predictedEndTranslation.width / abs(value.translation.width)
+                        
+                        if velocity > 4 {
+                            component.next()
+                        } else if velocity < -4 {
+                            component.prev()
+                        }
+                    }
+            )
             
             if (isClosePlayerDialogVisible) {
                 ClosePlayerDialog(
