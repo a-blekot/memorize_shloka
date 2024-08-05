@@ -4,13 +4,7 @@ plugins {
 }
 
 kotlin {
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "11"
-            }
-        }
-    }
+    androidTarget()
 
     iosX64()
     iosArm64()

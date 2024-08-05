@@ -1,8 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import ApkConfig.JAVA_VERSION_NAME
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_0
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = JAVA_VERSION_NAME
+    compilerOptions {
+        apiVersion.set(KOTLIN_2_0)
+        jvmTarget = JvmTarget.JVM_11
     }
 }
