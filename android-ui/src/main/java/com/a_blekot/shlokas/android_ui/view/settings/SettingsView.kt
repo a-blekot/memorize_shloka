@@ -232,7 +232,6 @@ fun SettingsView(component: SettingsComponent) {
                         text = label_with_sanskrit.resolve(context),
                         style = typography.titleLarge,
                         color = colorScheme.primary,
-                        maxLines = 1,
                     )
                 }
             }
@@ -250,7 +249,6 @@ fun SettingsView(component: SettingsComponent) {
                         text = label_with_translation.resolve(context),
                         style = typography.titleLarge,
                         color = colorScheme.primary,
-                        maxLines = 1,
                     )
                 }
             }
@@ -273,7 +271,6 @@ fun SettingsView(component: SettingsComponent) {
                         text = label_select_tts_voice.resolve(context),
                         style = typography.titleLarge,
                         color = colorScheme.primary,
-                        maxLines = 1,
                     )
                 }
             }
@@ -305,7 +302,6 @@ fun SettingsView(component: SettingsComponent) {
                             text = label_donate.resolve(context),
                             style = typography.titleLarge,
                             color = colorScheme.primary,
-                            maxLines = 1,
                         )
                     }
                 }
@@ -327,7 +323,6 @@ fun SettingsView(component: SettingsComponent) {
                             text = label_feedback.resolve(context),
                             style = typography.titleLarge,
                             color = colorScheme.primary,
-                            maxLines = 1,
                         )
                     }
                 }
@@ -349,7 +344,6 @@ fun SettingsView(component: SettingsComponent) {
                             text = label_share_app.resolve(context),
                             style = typography.titleLarge,
                             color = colorScheme.primary,
-                            maxLines = 1,
                         )
                     }
                 }
@@ -371,7 +365,6 @@ fun SettingsView(component: SettingsComponent) {
                             text = label_rate_us.resolve(context),
                             style = typography.titleLarge,
                             color = colorScheme.primary,
-                            maxLines = 1,
                         )
                     }
                 }
@@ -395,7 +388,6 @@ fun SettingsView(component: SettingsComponent) {
                             text = label_show_tutorial.resolve(context),
                             style = typography.titleLarge,
                             color = colorScheme.primary,
-                            maxLines = 1,
                         )
                     }
                 }
