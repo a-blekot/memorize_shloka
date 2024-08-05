@@ -38,7 +38,7 @@ internal class DetailsStoreFactory(
     }
 
     private inner class ExecutorImpl : CoroutineExecutor<DetailsIntent, Nothing, DetailsState, Msg, Nothing>() {
-        override fun executeIntent(intent: DetailsIntent, getState: () -> DetailsState) {
+        override fun executeIntent(intent: DetailsIntent) {
             when (intent) {
                 is Title -> dispatch(Msg.TitleChanged(intent.value))
                 is FilePath -> dispatch(Msg.FilePathChanged(intent.value))

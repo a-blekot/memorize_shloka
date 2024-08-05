@@ -27,7 +27,7 @@ internal class SettingsStoreFactory(
         ) {}
 
     sealed interface Action {
-        object CheckFtue : Action
+        data object CheckFtue : Action
     }
 
     sealed interface Msg {
@@ -50,13 +50,13 @@ internal class SettingsStoreFactory(
     }
 
     private inner class ExecutorImpl : CoroutineExecutor<SettingsIntent, Action, SettingsState, Msg, SettingsLabel>() {
-        override fun executeAction(action: Action, getState: () -> SettingsState) {
+        override fun executeAction(action: Action) {
             when (action) {
                 CheckFtue -> checkFtue()
             }
         }
 
-        override fun executeIntent(intent: SettingsIntent, getState: () -> SettingsState) {
+        override fun executeIntent(intent: SettingsIntent) {
             when (intent) {
                 is Repeats -> setRepeats(intent.value)
                 is Pause -> setPause(intent.value)

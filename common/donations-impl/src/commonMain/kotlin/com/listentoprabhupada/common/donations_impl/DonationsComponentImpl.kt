@@ -1,7 +1,11 @@
 package com.listentoprabhupada.common.donations_impl
 
 import com.a_blekot.shlokas.common.data.Donation
-import com.a_blekot.shlokas.common.utils.*
+import com.a_blekot.shlokas.common.utils.Consumer
+import com.a_blekot.shlokas.common.utils.asValue
+import com.a_blekot.shlokas.common.utils.init
+import com.a_blekot.shlokas.common.utils.lifecycleCoroutineScope
+import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.a_blekot.shlokas.common.utils.billing.BillingEvent
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.Value
@@ -32,7 +36,7 @@ class DonationsComponentImpl(
         instanceKeeper.getStore {
             DonationsStoreFactory(
                 storeFactory = storeFactory,
-                initialState = stateKeeper.consume(KEY_DONNATIONS_STATE) ?: initialState,
+                initialState = stateKeeper.consume(KEY_DONNATIONS_STATE, strategy = DonationsState.serializer()) ?: initialState,
                 deps = deps,
             ).create()
         }
@@ -50,7 +54,7 @@ class DonationsComponentImpl(
             .launchIn(scope)
 
         store.init(instanceKeeper)
-        stateKeeper.register(KEY_DONNATIONS_STATE) { store.state }
+        stateKeeper.register(KEY_DONNATIONS_STATE, strategy = DonationsState.serializer()) { store.state }
 
         observeBillingHelperEvents()
     }
@@ -80,6 +84,7 @@ class DonationsComponentImpl(
                     tag = "BillingError"
                 )
             }
+
             is BillingEvent.PurchaseSuccess -> store.accept(SuccessPurchase)
         }
 

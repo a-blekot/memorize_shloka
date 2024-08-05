@@ -1,13 +1,10 @@
 package com.a_blekot.shlokas.common.data
 
 import com.a_blekot.shlokas.common.data.ListId.SB_1
-import com.arkivanov.essenty.parcelable.Parcelable
-import com.arkivanov.essenty.parcelable.Parcelize
 import kotlinx.serialization.Serializable
 
 @Serializable
-@Parcelize
-enum class ListId(val id: String): Parcelable {
+enum class ListId(val id: String) {
     BG("BG"),
     NI("NI"),
     NK("NK"),
@@ -22,4 +19,4 @@ enum class ListId(val id: String): Parcelable {
 }
 
 fun String.toListType() =
-    ListId.values().firstOrNull { it.id == this } ?: SB_1
+    ListId.entries.firstOrNull { it.id == this } ?: SB_1

@@ -33,7 +33,7 @@ import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingM
 import com.a_blekot.shlokas.android_ui.theme.textFieldColors
 import com.a_blekot.shlokas.common.details_api.DetailsComponent
 import com.a_blekot.shlokas.common.details_api.DetailsState
-import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
+import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.arkivanov.decompose.value.MutableValue
 
 @Composable
@@ -107,7 +107,6 @@ private fun ShlokaTitle(originalTitle: String, component: DetailsComponent, modi
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ShlokaSanskrit(originalSanskrit: String, component: DetailsComponent, modifier: Modifier = Modifier) {
     val sanskrit = remember { mutableStateOf(TextFieldValue(text = originalSanskrit)) }
@@ -134,7 +133,6 @@ private fun ShlokaSanskrit(originalSanskrit: String, component: DetailsComponent
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ShlokaWords(originalWords: String, component: DetailsComponent, modifier: Modifier = Modifier) {
     val words = remember { mutableStateOf(TextFieldValue(text = originalWords)) }

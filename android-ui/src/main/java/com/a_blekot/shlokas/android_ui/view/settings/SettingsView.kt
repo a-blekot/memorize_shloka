@@ -71,7 +71,7 @@ import com.a_blekot.shlokas.common.resources.resolve
 import com.a_blekot.shlokas.common.settings_api.SettingsComponent
 import com.a_blekot.shlokas.common.settings_api.SettingsState
 import com.a_blekot.shlokas.common.utils.*
-import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
+import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.arkivanov.decompose.value.MutableValue
 
 @Composable

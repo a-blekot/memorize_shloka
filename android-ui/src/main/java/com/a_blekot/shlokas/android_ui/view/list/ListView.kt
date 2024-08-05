@@ -27,7 +27,7 @@ import com.a_blekot.shlokas.android_ui.custom.icons.BrandYoutube
 import com.a_blekot.shlokas.android_ui.theme.Dimens.horizontalScreenPadding
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeXL
 import com.a_blekot.shlokas.common.list_api.ListComponent
-import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
+import com.arkivanov.decompose.extensions.compose.subscribeAsState
 
 @Composable
 fun ListView(component: ListComponent) {

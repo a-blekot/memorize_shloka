@@ -69,7 +69,7 @@ import com.a_blekot.shlokas.common.resources.MR.strings.label_verses_counter
 import com.a_blekot.shlokas.common.resources.MR.strings.label_words
 import com.a_blekot.shlokas.common.resources.resolve
 import com.a_blekot.shlokas.common.utils.showClosePlayerDialog
-import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
+import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.arkivanov.decompose.value.MutableValue
 
 @OptIn(ExperimentalFoundationApi::class)

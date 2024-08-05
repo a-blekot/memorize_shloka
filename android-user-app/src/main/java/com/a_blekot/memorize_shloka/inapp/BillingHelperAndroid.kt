@@ -152,7 +152,7 @@ class BillingHelperAndroid(
             .build()
 
     private fun getProducts() =
-        DonationLevel.values().map {
+        DonationLevel.entries.map {
             getProduct(it)
         }
 

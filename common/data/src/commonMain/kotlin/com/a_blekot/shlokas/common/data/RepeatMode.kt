@@ -1,10 +1,10 @@
 package com.a_blekot.shlokas.common.data
 
-import com.arkivanov.essenty.parcelable.Parcelable
-import com.arkivanov.essenty.parcelable.Parcelize
+import kotlinx.serialization.Serializable
 
-@Parcelize
-enum class RepeatMode(val partsCount: Int): Parcelable {
+
+@Serializable
+enum class RepeatMode(val partsCount: Int) {
     ONE_LINE(partsCount = 4),
     TWO_LINES(partsCount = 2),
     FOUR_LINES(partsCount = 1);

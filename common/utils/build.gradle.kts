@@ -1,7 +1,6 @@
 plugins {
     id("android-library-convention")
     id("kotlin-multiplatform-convention")
-    id("kotlin-parcelize")
     kotlin("plugin.serialization")
 }
 
@@ -21,7 +20,6 @@ kotlin {
                 implementation(libs.kotlinx.serialization.json)
                 implementation(libs.mvikotlin.extensions.coroutines)
                 implementation(libs.mvikotlin.mvikotlin)
-                implementation(libs.mvikotlin.rx)
                 implementation(libs.napier)
                 implementation(libs.settings)
             }

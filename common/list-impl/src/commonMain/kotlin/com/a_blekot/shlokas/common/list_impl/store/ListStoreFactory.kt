@@ -70,7 +70,7 @@ internal class ListStoreFactory(
     }
 
     private inner class ExecutorImpl : CoroutineExecutor<ListIntent, Action, ListState, Msg, ListLabel>() {
-        override fun executeAction(action: Action, getState: () -> ListState) {
+        override fun executeAction(action: Action) {
             when (action) {
                 LoadLastConfig -> {
                     scope.launch(deps.dispatchers.io) {
@@ -81,23 +81,23 @@ internal class ListStoreFactory(
             }
         }
 
-        override fun executeIntent(intent: ListIntent, getState: () -> ListState) {
+        override fun executeIntent(intent: ListIntent) {
             when (intent) {
                 Add -> dispatch(Msg.AddShloka)
-                Save -> saveList(getState().config)
-                CheckLocale -> checkLocale(getState().config)
+                Save -> saveList(state().config)
+                CheckLocale -> checkLocale(state().config)
                 CheckPreRating -> InappReviewInteractor.check { showPreRating() }
                 PreRatingAccepted -> preRatingAccepted()
                 PreRatingClosed -> preRatingClosed()
                 TutorialCompleted -> tutorialCompleted()
                 TutorialSkipped -> tutorialSkipped()
                 is SetList -> scope.launch { setList(intent.type) }
-                is Title -> rename(getState().config.title, intent.title)
+                is Title -> rename(state().config.title, intent.title)
                 is Remove -> dispatch(Msg.RemoveShloka(intent.id))
                 is MoveUp -> dispatch(Msg.MoveUp(intent.id))
                 is MoveDown -> dispatch(Msg.MoveDown(intent.id))
                 is Select -> select(intent.id, intent.isSelected)
-                is SaveShloka -> saveShloka(getState().config, intent.config)
+                is SaveShloka -> saveShloka(state().config, intent.config)
             }
         }
 
@@ -275,7 +275,7 @@ internal class ListStoreFactory(
         }
 
     private fun availableLists() =
-        ListId.values().map {
+        ListId.entries.map {
             ListPresentation(
                 type = it,
                 title = resolveListShortTitle(it),

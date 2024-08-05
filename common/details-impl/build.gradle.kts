@@ -1,7 +1,7 @@
 plugins {
     id("android-library-convention")
     id("kotlin-multiplatform-convention")
-    id("kotlin-parcelize")
+    kotlin("plugin.serialization")
 }
 
 android{

@@ -25,13 +25,16 @@ import com.ablekot.shlokas.common.root.RootComponent.Child.*
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
-import com.arkivanov.essenty.parcelable.Parcelable
-import com.arkivanov.essenty.parcelable.Parcelize
+import com.arkivanov.essenty.statekeeper.polymorphicSerializer
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.listentoprabhupada.common.donations_api.DonationsComponent
 import com.listentoprabhupada.common.donations_api.DonationsOutput
 import com.listentoprabhupada.common.donations_impl.DonationsComponentImpl
 import com.listentoprabhupada.common.donations_impl.DonationsDeps
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.polymorphic
 
 class RootComponentImpl internal constructor(
     componentContext: ComponentContext,
@@ -52,15 +55,17 @@ class RootComponentImpl internal constructor(
             ListComponentImpl(
                 componentContext = childContext,
                 storeFactory = storeFactory,
-                deps = deps.run { ListDeps(
-                    filer,
-                    ListConfig(getLastListId()),
-                    analytics,
-                    platformApi,
-                    dispatchers,
-                    configReader,
-                    stringResourceHandler
-                ) },
+                deps = deps.run {
+                    ListDeps(
+                        filer,
+                        ListConfig(getLastListId()),
+                        analytics,
+                        platformApi,
+                        dispatchers,
+                        configReader,
+                        stringResourceHandler
+                    )
+                },
                 output = output
             )
         },
@@ -68,7 +73,15 @@ class RootComponentImpl internal constructor(
             PlayerComponentImpl(
                 componentContext = childContext,
                 storeFactory = storeFactory,
-                deps = deps.run { PlayerDeps(config, playerBus, stringResourceHandler, analytics, dispatchers) },
+                deps = deps.run {
+                    PlayerDeps(
+                        config,
+                        playerBus,
+                        stringResourceHandler,
+                        analytics,
+                        dispatchers
+                    )
+                },
                 output = output
             )
         },
@@ -92,12 +105,14 @@ class RootComponentImpl internal constructor(
             DonationsComponentImpl(
                 componentContext = childContext,
                 storeFactory = storeFactory,
-                deps = deps.run { DonationsDeps(
-                    analytics, billingHelper,
-                    dispatchers,
-                    connectivityObserver,
-                    stringResourceHandler
-                ) },
+                deps = deps.run {
+                    DonationsDeps(
+                        analytics, billingHelper,
+                        dispatchers,
+                        connectivityObserver,
+                        stringResourceHandler
+                    )
+                },
                 output = output
             )
         },
@@ -110,22 +125,36 @@ class RootComponentImpl internal constructor(
             source = navigation,
             initialConfiguration = Configuration.List,
             handleBackButton = true,
-            childFactory = ::createChild
+            childFactory = ::createChild,
+            serializer = Configuration.serializer(),
         )
 
     override val childStack: Value<ChildStack<*, RootComponent.Child>>
         get() = stack
 
-    private fun createChild(configuration: Configuration, componentContext: ComponentContext): RootComponent.Child =
+    private fun createChild(
+        configuration: Configuration,
+        componentContext: ComponentContext
+    ): RootComponent.Child =
         when (configuration) {
             is Configuration.List ->
                 List(list(componentContext, Consumer(::onListOutput)))
+
             is Configuration.Player ->
                 Player(player(componentContext, configuration.config, Consumer(::onPlayerOutput)))
+
             is Configuration.Details ->
-                Details(details(componentContext, configuration.config, Consumer(::onDetailsOutput)))
+                Details(
+                    details(
+                        componentContext,
+                        configuration.config,
+                        Consumer(::onDetailsOutput)
+                    )
+                )
+
             is Configuration.Settings ->
                 Settings(settings(componentContext, Consumer(::onSettingsOutput)))
+
             is Configuration.Donations ->
                 Donations(donations(componentContext, Consumer(::onDonationsOutput)))
         }
@@ -140,6 +169,7 @@ class RootComponentImpl internal constructor(
                     }
                 )
             }
+
             is ListOutput.Details -> navigation.push(Configuration.Details(output.config))
             is ListOutput.Settings -> navigation.push(Configuration.Settings)
             is ListOutput.Donations -> navigation.push(Configuration.Donations)
@@ -155,7 +185,9 @@ class RootComponentImpl internal constructor(
             is DetailsOutput.Play -> navigation.push(Configuration.Player(output.config))
             is DetailsOutput.SaveConfig -> navigation.pop { isSuccess ->
                 if (isSuccess) {
-                    (childStack.value.active.instance as? RootComponent.Child.List)?.component?.saveShloka(output.config)
+                    (childStack.value.active.instance as? RootComponent.Child.List)?.component?.saveShloka(
+                        output.config
+                    )
                 }
             }
         }
@@ -173,20 +205,33 @@ class RootComponentImpl internal constructor(
         }
     }
 
-    private sealed class Configuration : Parcelable {
-        @Parcelize
+    @Serializable
+    private sealed class Configuration {
+        @Serializable
         data object List : Configuration()
 
-        @Parcelize
+        @Serializable
         data class Player(val config: PlayConfig) : Configuration()
 
-        @Parcelize
+        @Serializable
         data class Details(val config: ShlokaConfig) : Configuration()
 
-        @Parcelize
+        @Serializable
         data object Settings : Configuration()
 
-        @Parcelize
+        @Serializable
         data object Donations : Configuration()
     }
+
+    object ConfigurationSerializer : KSerializer<Configuration> by polymorphicSerializer(
+        SerializersModule {
+            polymorphic(Configuration::class) {
+                subclass(Configuration.List::class, Configuration.List.serializer())
+                subclass(Configuration.Player::class, Configuration.Player.serializer())
+                subclass(Configuration.Details::class, Configuration.Details.serializer())
+                subclass(Configuration.Settings::class, Configuration.Settings.serializer())
+                subclass(Configuration.Donations::class, Configuration.Donations.serializer())
+            }
+        }
+    )
 }

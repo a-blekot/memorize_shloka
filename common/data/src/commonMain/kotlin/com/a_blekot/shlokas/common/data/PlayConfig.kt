@@ -3,11 +3,10 @@ package com.a_blekot.shlokas.common.data
 import com.a_blekot.shlokas.common.data.tasks.PauseTask
 import com.a_blekot.shlokas.common.data.tasks.StopTask
 import com.a_blekot.shlokas.common.data.tasks.Task
-import com.arkivanov.essenty.parcelable.Parcelable
-import com.arkivanov.essenty.parcelable.Parcelize
+import kotlinx.serialization.Serializable
 
 
-@Parcelize
+@Serializable
 data class PlayConfig(
     val repeatMode: RepeatMode,
     val shlokas: List<ShlokaConfig>,
@@ -16,7 +15,7 @@ data class PlayConfig(
     val withSanskrit: Boolean,
     val withTranslation: Boolean,
     val pauseAfterEach: Long
-) : Parcelable
+)
 
 fun PlayConfig.createTasks(): List<Task> {
     val tasks = mutableListOf<Task>()

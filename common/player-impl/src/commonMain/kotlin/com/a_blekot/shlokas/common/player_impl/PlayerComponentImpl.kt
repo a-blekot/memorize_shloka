@@ -1,5 +1,10 @@
 package com.a_blekot.shlokas.common.player_impl
 
+import com.a_blekot.shlokas.common.utils.Consumer
+import com.a_blekot.shlokas.common.utils.asValue
+import com.a_blekot.shlokas.common.utils.init
+import com.a_blekot.shlokas.common.utils.lifecycleCoroutineScope
+import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.a_blekot.shlokas.common.data.createTasks
 import com.a_blekot.shlokas.common.data.speed
 import com.a_blekot.shlokas.common.data.tasks.PlayTranslationTask
@@ -9,8 +14,11 @@ import com.a_blekot.shlokas.common.player_api.PlayerState
 import com.a_blekot.shlokas.common.player_impl.store.PlayerIntent.*
 import com.a_blekot.shlokas.common.player_impl.store.PlayerLabel
 import com.a_blekot.shlokas.common.player_impl.store.PlayerStoreFactory
-import com.a_blekot.shlokas.common.utils.*
+import com.a_blekot.shlokas.common.utils.audioSpeed
+import com.a_blekot.shlokas.common.utils.autoPlay
+import com.a_blekot.shlokas.common.utils.locale
 import com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
+import com.a_blekot.shlokas.common.utils.toVerseName
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.store.StoreFactory
@@ -59,7 +67,7 @@ class PlayerComponentImpl(
                 storeFactory = storeFactory,
                 tasks = tasks,
                 durationMs= durationMs,
-                initialState = stateKeeper.consume(KEY_PLAYER_STATE) ?: initialState,
+                initialState = stateKeeper.consume(KEY_PLAYER_STATE, PlayerState.serializer()) ?: initialState,
                 deps = deps,
             ).create()
         }
@@ -75,7 +83,7 @@ class PlayerComponentImpl(
 
         Napier.d("PlayerComponentImpl init", tag = "PlayerStore")
         store.init(instanceKeeper)
-        stateKeeper.register(KEY_PLAYER_STATE) { store.state }
+        stateKeeper.register(KEY_PLAYER_STATE, PlayerState.serializer()) { store.state }
     }
 
     override fun forcePlay() = store.accept(ForcePlay)

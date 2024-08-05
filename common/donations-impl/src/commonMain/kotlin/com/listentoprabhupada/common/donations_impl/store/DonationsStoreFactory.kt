@@ -50,13 +50,13 @@ internal class DonationsStoreFactory(
 
     private inner class ExecutorImpl : CoroutineExecutor<DonationsIntent, Action, DonationsState, Msg, DonationsLabel>() {
 
-        override fun executeAction(action: Action, getState: () -> DonationsState) {
+        override fun executeAction(action: Action) {
             when (action) {
                 is Action.ConnectionChanged -> dispatch(Msg.ConnectionChanged(action.status))
             }
         }
 
-        override fun executeIntent(intent: DonationsIntent, getState: () -> DonationsState) {
+        override fun executeIntent(intent: DonationsIntent) {
 
             when (intent) {
                 is DonationsIntent.Purchase -> deps.billingHelper?.purchase(intent.donation)

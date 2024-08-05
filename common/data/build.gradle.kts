@@ -1,7 +1,6 @@
 plugins {
     id("android-library-convention")
     id("kotlin-multiplatform-convention")
-    id("kotlin-parcelize")
     kotlin("plugin.serialization")
 }
 
@@ -13,8 +12,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation(libs.essenty.parcelable)
-                implementation(libs.kotlinx.serialization.json)
+                api(libs.kotlinx.serialization.json)
             }
         }
     }

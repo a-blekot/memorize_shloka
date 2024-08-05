@@ -1,10 +1,9 @@
 package com.a_blekot.shlokas.common.data
 
-import com.arkivanov.essenty.parcelable.Parcelable
-import com.arkivanov.essenty.parcelable.Parcelize
+import kotlinx.serialization.Serializable
 
-@Parcelize
-enum class DonationLevel(val productId: String): Parcelable {
+@Serializable
+enum class DonationLevel(val productId: String) {
     USD_1("donate_1_usd"),
     USD_2("donate_2_usd"),
     USD_3("donate_3_usd"),
@@ -14,4 +13,4 @@ enum class DonationLevel(val productId: String): Parcelable {
 }
 
 fun getDonationLevel(productId: String) =
-    DonationLevel.values().firstOrNull { it.productId == productId }
+    DonationLevel.entries.firstOrNull { it.productId == productId }

@@ -67,7 +67,7 @@ fun ShlokaId.toVerseName(locale: String) =
 private fun String.replaceShastraId(locale: String): String {
     var result = this
 
-    Shastra.values().forEach { shastra ->
+    Shastra.entries.forEach { shastra ->
         val title = Shastra.byId(shastra.id)?.localizedTts(locale).orEmpty()
         result = result.replace(shastra.id, title)
     }

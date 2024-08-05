@@ -1,19 +1,47 @@
 package com.a_blekot.shlokas.common.list_impl
 
-import com.a_blekot.shlokas.common.data.*
+import com.a_blekot.shlokas.common.data.ListConfig
+import com.a_blekot.shlokas.common.data.ListId
+import com.a_blekot.shlokas.common.data.PlayConfig
+import com.a_blekot.shlokas.common.data.ShlokaConfig
+import com.a_blekot.shlokas.common.data.ShlokaId
+import com.a_blekot.shlokas.common.data.YOU_TUBE_SHLOKA_SMARANAM
 import com.a_blekot.shlokas.common.list_api.ListComponent
 import com.a_blekot.shlokas.common.list_api.ListOutput
 import com.a_blekot.shlokas.common.list_api.ListPresentation
 import com.a_blekot.shlokas.common.list_api.ListState
-import com.a_blekot.shlokas.common.list_impl.store.ListIntent.*
+import com.a_blekot.shlokas.common.list_impl.store.ListIntent.Add
+import com.a_blekot.shlokas.common.list_impl.store.ListIntent.CheckLocale
+import com.a_blekot.shlokas.common.list_impl.store.ListIntent.CheckPreRating
+import com.a_blekot.shlokas.common.list_impl.store.ListIntent.MoveDown
+import com.a_blekot.shlokas.common.list_impl.store.ListIntent.MoveUp
+import com.a_blekot.shlokas.common.list_impl.store.ListIntent.PreRatingAccepted
+import com.a_blekot.shlokas.common.list_impl.store.ListIntent.PreRatingClosed
+import com.a_blekot.shlokas.common.list_impl.store.ListIntent.Remove
+import com.a_blekot.shlokas.common.list_impl.store.ListIntent.Save
+import com.a_blekot.shlokas.common.list_impl.store.ListIntent.SaveShloka
+import com.a_blekot.shlokas.common.list_impl.store.ListIntent.Select
+import com.a_blekot.shlokas.common.list_impl.store.ListIntent.SetList
+import com.a_blekot.shlokas.common.list_impl.store.ListIntent.TutorialCompleted
+import com.a_blekot.shlokas.common.list_impl.store.ListIntent.TutorialSkipped
 import com.a_blekot.shlokas.common.list_impl.store.ListLabel
 import com.a_blekot.shlokas.common.list_impl.store.ListStoreFactory
-import com.a_blekot.shlokas.common.utils.*
+import com.a_blekot.shlokas.common.utils.Consumer
 import com.a_blekot.shlokas.common.utils.analytics.playList
 import com.a_blekot.shlokas.common.utils.analytics.playShloka
+import com.a_blekot.shlokas.common.utils.asValue
+import com.a_blekot.shlokas.common.utils.init
+import com.a_blekot.shlokas.common.utils.lifecycleCoroutineScope
+import com.a_blekot.shlokas.common.utils.locale
+import com.a_blekot.shlokas.common.utils.pause
+import com.a_blekot.shlokas.common.utils.repeatMode
+import com.a_blekot.shlokas.common.utils.repeats
+import com.a_blekot.shlokas.common.utils.withSanskrit
+import com.a_blekot.shlokas.common.utils.withTranslation
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.lifecycle.doOnStart
+import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import io.github.aakira.napier.Napier
@@ -34,7 +62,7 @@ class ListComponentImpl(
         instanceKeeper.getStore {
             ListStoreFactory(
                 storeFactory = storeFactory,
-                initialState = stateKeeper.consume(KEY_LIST_STATE) ?: initialState(),
+                initialState = stateKeeper.consume(KEY_LIST_STATE, strategy = ListState.serializer()) ?: initialState(),
                 deps = deps,
             ).create()
         }
@@ -56,7 +84,7 @@ class ListComponentImpl(
         }
 
         store.init(instanceKeeper)
-        stateKeeper.register(KEY_LIST_STATE) { store.state }
+        stateKeeper.register(KEY_LIST_STATE, strategy = ListState.serializer()) { store.state }
     }
 
     private fun initialState() =
@@ -150,7 +178,7 @@ class ListComponentImpl(
         )
 
     private fun availableLists() =
-        ListId.values().map {
+        ListId.entries.map {
             ListPresentation(
                 type = it,
                 title = deps.stringResourceHandler.resolveListShortTitle(it),

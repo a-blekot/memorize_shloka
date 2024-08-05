@@ -95,19 +95,19 @@ internal class PlayerStoreFactory(
         private var playJob: Job? = null
         private var currentPlayTask: Task? = null
 
-        override fun executeAction(action: Action, getState: () -> PlayerState) {
+        override fun executeAction(action: Action) {
             when (action) {
-                Start -> start(getState())
+                Start -> start(state())
                 is Feedback -> feedback(action.feedback)
             }
         }
 
-        override fun executeIntent(intent: PlayerIntent, getState: () -> PlayerState) {
+        override fun executeIntent(intent: PlayerIntent) {
             when (intent) {
                 ForcePlay -> forcePlay()
                 ForcePause -> forcePause()
                 Stop -> stop()
-                Prev -> prev(getState())
+                Prev -> prev(state())
                 Next -> next()
             }
         }

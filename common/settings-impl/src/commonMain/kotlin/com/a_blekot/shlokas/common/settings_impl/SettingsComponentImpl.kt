@@ -4,14 +4,33 @@ import com.a_blekot.shlokas.common.data.YOU_TUBE_SHLOKA_SMARANAM
 import com.a_blekot.shlokas.common.settings_api.SettingsComponent
 import com.a_blekot.shlokas.common.settings_api.SettingsOutput
 import com.a_blekot.shlokas.common.settings_api.SettingsState
-import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.*
+import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.Autoplay
+import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.Locale
+import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.Pause
+import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.RepeatMode
+import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.Repeats
+import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.ShowClosePlayerDialog
+import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.WithSanskrit
+import com.a_blekot.shlokas.common.settings_impl.store.SettingsIntent.WithTranslation
 import com.a_blekot.shlokas.common.settings_impl.store.SettingsStoreFactory
-import com.a_blekot.shlokas.common.utils.*
+import com.a_blekot.shlokas.common.utils.Consumer
 import com.a_blekot.shlokas.common.utils.analytics.AnalyticsScreen
 import com.a_blekot.shlokas.common.utils.analytics.tutorialComplete
 import com.a_blekot.shlokas.common.utils.analytics.tutorialSettings
+import com.a_blekot.shlokas.common.utils.asValue
+import com.a_blekot.shlokas.common.utils.autoPlay
+import com.a_blekot.shlokas.common.utils.init
+import com.a_blekot.shlokas.common.utils.isTutorialCompleted
+import com.a_blekot.shlokas.common.utils.locale
+import com.a_blekot.shlokas.common.utils.pause
+import com.a_blekot.shlokas.common.utils.repeatMode
+import com.a_blekot.shlokas.common.utils.repeats
+import com.a_blekot.shlokas.common.utils.showClosePlayerDialog
+import com.a_blekot.shlokas.common.utils.withSanskrit
+import com.a_blekot.shlokas.common.utils.withTranslation
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.Value
+import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 
 private const val KEY_SETTINGS_STATE = "KEY_SETTINGS_STATE"
@@ -27,7 +46,7 @@ class SettingsComponentImpl(
         instanceKeeper.getStore {
             SettingsStoreFactory(
                 storeFactory = storeFactory,
-                initialState = stateKeeper.consume(KEY_SETTINGS_STATE) ?: initialState,
+                initialState = stateKeeper.consume(KEY_SETTINGS_STATE, SettingsState.serializer()) ?: initialState,
             ).create()
         }
 
@@ -47,7 +66,7 @@ class SettingsComponentImpl(
 
     init {
         store.init(instanceKeeper)
-        stateKeeper.register(KEY_SETTINGS_STATE) { store.state }
+        stateKeeper.register(KEY_SETTINGS_STATE, SettingsState.serializer()) { store.state }
     }
 
     override fun setRepeats(value: Int) = store.accept(Repeats(value))

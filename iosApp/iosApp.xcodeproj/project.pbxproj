@@ -111,7 +111,6 @@
 		C6F84A71293F39190001BB9D /* ListPresentation.kt in Resources */ = {isa = PBXBuildFile; fileRef = C6F84A6D293F39190001BB9D /* ListPresentation.kt */; };
 		C6F84A72293F39190001BB9D /* ListOutput.kt in Resources */ = {isa = PBXBuildFile; fileRef = C6F84A6E293F39190001BB9D /* ListOutput.kt */; };
 		C6F84AA8293F39250001BB9D /* LogTag.kt in Resources */ = {isa = PBXBuildFile; fileRef = C6F84A7A293F39250001BB9D /* LogTag.kt */; };
-		C6F84AA9293F39250001BB9D /* StateKeeperExt.kt in Resources */ = {isa = PBXBuildFile; fileRef = C6F84A7B293F39250001BB9D /* StateKeeperExt.kt */; };
 		C6F84AAA293F39250001BB9D /* Settings.kt in Resources */ = {isa = PBXBuildFile; fileRef = C6F84A7C293F39250001BB9D /* Settings.kt */; };
 		C6F84AAC293F39250001BB9D /* InappReviewInteractor.kt in Resources */ = {isa = PBXBuildFile; fileRef = C6F84A7E293F39250001BB9D /* InappReviewInteractor.kt */; };
 		C6F84AAD293F39250001BB9D /* Consumer.kt in Resources */ = {isa = PBXBuildFile; fileRef = C6F84A7F293F39250001BB9D /* Consumer.kt */; };
@@ -125,7 +124,6 @@
 		C6F84AB5293F39250001BB9D /* DispatcherProvider.kt in Resources */ = {isa = PBXBuildFile; fileRef = C6F84A8A293F39250001BB9D /* DispatcherProvider.kt */; };
 		C6F84AB6293F39250001BB9D /* DispatcherProviderImpl.kt in Resources */ = {isa = PBXBuildFile; fileRef = C6F84A8B293F39250001BB9D /* DispatcherProviderImpl.kt */; };
 		C6F84AB7293F39250001BB9D /* StoreExt.kt in Resources */ = {isa = PBXBuildFile; fileRef = C6F84A8C293F39250001BB9D /* StoreExt.kt */; };
-		C6F84AB8293F39250001BB9D /* InstanceKeeperExt.kt in Resources */ = {isa = PBXBuildFile; fileRef = C6F84A8D293F39250001BB9D /* InstanceKeeperExt.kt */; };
 		C6F84AB9293F39250001BB9D /* MimeTypes.kt in Resources */ = {isa = PBXBuildFile; fileRef = C6F84A8E293F39250001BB9D /* MimeTypes.kt */; };
 		C6F84ABA293F39250001BB9D /* NapierProxy.kt in Resources */ = {isa = PBXBuildFile; fileRef = C6F84A8F293F39250001BB9D /* NapierProxy.kt */; };
 		C6F84ABB293F39250001BB9D /* BillingEvent.kt in Resources */ = {isa = PBXBuildFile; fileRef = C6F84A91293F39250001BB9D /* BillingEvent.kt */; };
@@ -261,7 +259,6 @@
 		C6F84A6D293F39190001BB9D /* ListPresentation.kt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ListPresentation.kt; sourceTree = "<group>"; };
 		C6F84A6E293F39190001BB9D /* ListOutput.kt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ListOutput.kt; sourceTree = "<group>"; };
 		C6F84A7A293F39250001BB9D /* LogTag.kt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LogTag.kt; sourceTree = "<group>"; };
-		C6F84A7B293F39250001BB9D /* StateKeeperExt.kt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = StateKeeperExt.kt; sourceTree = "<group>"; };
 		C6F84A7C293F39250001BB9D /* Settings.kt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Settings.kt; sourceTree = "<group>"; };
 		C6F84A7D293F39250001BB9D /* Locale.kt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Locale.kt; sourceTree = "<group>"; };
 		C6F84A7E293F39250001BB9D /* InappReviewInteractor.kt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InappReviewInteractor.kt; sourceTree = "<group>"; };
@@ -276,7 +273,6 @@
 		C6F84A8A293F39250001BB9D /* DispatcherProvider.kt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DispatcherProvider.kt; sourceTree = "<group>"; };
 		C6F84A8B293F39250001BB9D /* DispatcherProviderImpl.kt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DispatcherProviderImpl.kt; sourceTree = "<group>"; };
 		C6F84A8C293F39250001BB9D /* StoreExt.kt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = StoreExt.kt; sourceTree = "<group>"; };
-		C6F84A8D293F39250001BB9D /* InstanceKeeperExt.kt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InstanceKeeperExt.kt; sourceTree = "<group>"; };
 		C6F84A8E293F39250001BB9D /* MimeTypes.kt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MimeTypes.kt; sourceTree = "<group>"; };
 		C6F84A8F293F39250001BB9D /* NapierProxy.kt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NapierProxy.kt; sourceTree = "<group>"; };
 		C6F84A91293F39250001BB9D /* BillingEvent.kt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BillingEvent.kt; sourceTree = "<group>"; };
@@ -1005,7 +1001,6 @@
 			isa = PBXGroup;
 			children = (
 				C6F84A7A293F39250001BB9D /* LogTag.kt */,
-				C6F84A7B293F39250001BB9D /* StateKeeperExt.kt */,
 				C6F84A7C293F39250001BB9D /* Settings.kt */,
 				C6F84A7D293F39250001BB9D /* Locale.kt */,
 				C6F84A7E293F39250001BB9D /* InappReviewInteractor.kt */,
@@ -1015,7 +1010,6 @@
 				C6F84A83293F39250001BB9D /* resources */,
 				C6F84A89293F39250001BB9D /* dispatchers */,
 				C6F84A8C293F39250001BB9D /* StoreExt.kt */,
-				C6F84A8D293F39250001BB9D /* InstanceKeeperExt.kt */,
 				C6F84A8E293F39250001BB9D /* MimeTypes.kt */,
 				C6F84A8F293F39250001BB9D /* NapierProxy.kt */,
 				C6F84A90293F39250001BB9D /* billing */,
@@ -1181,7 +1175,6 @@
 				C65D1E8C29A11CF4000965BF /* Locales.kt in Resources */,
 				C6F84A71293F39190001BB9D /* ListPresentation.kt in Resources */,
 				C6F841F2293F38F00001BB9D /* ShlokaId.kt in Resources */,
-				C6F84AA9293F39250001BB9D /* StateKeeperExt.kt in Resources */,
 				C6F841ED293F38F00001BB9D /* NoAudioTask.kt in Resources */,
 				058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */,
 				C6F841F8293F38F00001BB9D /* Shloka.kt in Resources */,
@@ -1200,7 +1193,6 @@
 				C6F84AB7293F39250001BB9D /* StoreExt.kt in Resources */,
 				C6F841F6293F38F00001BB9D /* ListId.kt in Resources */,
 				C6F82EDC293F385C0001BB9D /* DonationsOutput.kt in Resources */,
-				C6F84AB8293F39250001BB9D /* InstanceKeeperExt.kt in Resources */,
 				C6F841F9293F38F00001BB9D /* Chunk.kt in Resources */,
 				C6F841C5293F38D30001BB9D /* PlayerStore.kt in Resources */,
 				C6F841C0293F38D30001BB9D /* PlayerDeps.kt in Resources */,

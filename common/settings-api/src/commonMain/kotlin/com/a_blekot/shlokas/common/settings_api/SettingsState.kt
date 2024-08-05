@@ -1,10 +1,9 @@
 package com.a_blekot.shlokas.common.settings_api
 
 import com.a_blekot.shlokas.common.data.RepeatMode
-import com.arkivanov.essenty.parcelable.Parcelable
-import com.arkivanov.essenty.parcelable.Parcelize
+import kotlinx.serialization.Serializable
 
-@Parcelize
+@Serializable
 data class SettingsState(
     val repeats: Int,
     val pause: Long,
@@ -14,4 +13,4 @@ data class SettingsState(
     val withSanskrit: Boolean,
     val withTranslation: Boolean,
     val showClosePlayerDialog: Boolean,
-): Parcelable
+)

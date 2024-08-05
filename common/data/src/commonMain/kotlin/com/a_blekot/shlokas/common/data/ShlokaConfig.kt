@@ -1,19 +1,16 @@
 package com.a_blekot.shlokas.common.data
 
 import com.a_blekot.shlokas.common.data.tasks.*
-import com.arkivanov.essenty.parcelable.Parcelable
-import com.arkivanov.essenty.parcelable.Parcelize
 import kotlinx.serialization.Serializable
 
 private const val CHUNKS_SIZE = 4 // Could be 8 or even 5
 
-@Parcelize
 @Serializable
 data class ShlokaConfig(
     val shloka: Shloka = Shloka(),
     val chunks: List<Chunk> = defaultChunks,
     val isSelected: Boolean = true
-) : Parcelable
+)
 
 val defaultChunks
     get() = MutableList(CHUNKS_SIZE) { Chunk() }

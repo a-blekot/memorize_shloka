@@ -1,16 +1,30 @@
 package com.a_blekot.shlokas.common.details_impl
 
 import com.a_blekot.shlokas.common.data.PlayConfig
-
 import com.a_blekot.shlokas.common.details_api.DetailsComponent
 import com.a_blekot.shlokas.common.details_api.DetailsOutput
 import com.a_blekot.shlokas.common.details_api.DetailsState
-import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.*
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.ChunkEnd
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.ChunkStart
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.FilePath
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.IsSelected
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.Pause
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.Sanskrit
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.Title
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.Translation
+import com.a_blekot.shlokas.common.details_impl.store.DetailsIntent.Words
+import com.a_blekot.shlokas.common.details_impl.store.DetailsStoreFactory
+import com.a_blekot.shlokas.common.utils.Consumer
+import com.a_blekot.shlokas.common.utils.asValue
+import com.a_blekot.shlokas.common.utils.pause
+import com.a_blekot.shlokas.common.utils.repeatMode
+import com.a_blekot.shlokas.common.utils.repeats
+import com.a_blekot.shlokas.common.utils.withSanskrit
+import com.a_blekot.shlokas.common.utils.withTranslation
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.Value
+import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.a_blekot.shlokas.common.details_impl.store.DetailsStoreFactory
-import com.a_blekot.shlokas.common.utils.*
 
 class DetailsComponentImpl(
     componentContext: ComponentContext,
