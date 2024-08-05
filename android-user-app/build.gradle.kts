@@ -7,6 +7,7 @@ plugins {
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("kotlin-parcelize")
+    alias(libs.plugins.compose.compilerPlgn)
 }
 
 val keystorePropertiesFile = rootProject.file("keystore.properties")
@@ -33,8 +34,6 @@ android {
         }
     }
 }
-
-//project.rootProject.findProject(":common:root")?.let { project.evaluationDependsOn(it.path) }
 
 dependencies {
     implementation(projects.androidPlayer)

@@ -5,6 +5,7 @@ plugins {
     id("dev.icerock.mobile.multiplatform-resources")
     kotlin("android")
     kotlin("plugin.serialization")
+    alias(libs.plugins.compose.compilerPlgn)
 }
 
 android {

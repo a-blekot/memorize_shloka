@@ -13,6 +13,10 @@ buildscript {
     }
 }
 
+plugins {
+    alias(libs.plugins.compose.compilerPlgn) apply false
+}
+
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }
