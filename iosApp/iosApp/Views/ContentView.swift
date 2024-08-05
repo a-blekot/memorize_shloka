@@ -11,9 +11,9 @@ struct ContentView: View {
     private var componentHolder: ComponentHolder<RootComponentImpl>
     
     
-    init(_ deps: RootDeps) {
+    init(_ deps: RootDeps, _ stateKeeper: StateKeeper?) {
         _componentHolder = State(
-            initialValue: ComponentHolder<RootComponentImpl> {
+            initialValue: ComponentHolder<RootComponentImpl>(stateKeeper) {
                 RootComponentImpl(
                     componentContext: $0,
                     storeFactory: DefaultStoreFactory(),

@@ -4,11 +4,10 @@ import com.a_blekot.shlokas.common.data.ListConfig
 import com.a_blekot.shlokas.common.data.ListId
 import com.a_blekot.shlokas.common.utils.resources.ConfigReader
 import io.github.aakira.napier.Napier
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-private val json = Json {
+private val fileJson = Json {
     prettyPrint = true
     encodeDefaults = true
     ignoreUnknownKeys = true
@@ -21,7 +20,7 @@ interface Filer {
 }
 
 fun writeToFile(config: ListConfig, filer: Filer): Boolean {
-    filer.write(config.fileName, json.encodeToString(config))
+    filer.write(config.fileName, fileJson.encodeToString(config))
     return true
 }
 
@@ -31,7 +30,7 @@ fun readConfig(type: ListId, configReader: ConfigReader): ListConfig? =
         if (text.isBlank()) {
             null
         } else {
-            json.decodeFromString<ListConfig>(text)
+            fileJson.decodeFromString<ListConfig>(text)
         }
     } catch (e: Throwable) {
         Napier.e("config not found $type", throwable = e)
@@ -45,7 +44,7 @@ fun readFromFile(filePath: String, filer: Filer): ListConfig? {
     }
 
     return try {
-        json.decodeFromString<ListConfig>(text)
+        fileJson.decodeFromString<ListConfig>(text)
     } catch (e: Throwable) {
         null
     }

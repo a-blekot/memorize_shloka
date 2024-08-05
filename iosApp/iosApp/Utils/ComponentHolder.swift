@@ -13,9 +13,9 @@ class ComponentHolder<T> {
     let lifecycle: LifecycleRegistry
     let component: T
     
-    init(factory: (ComponentContext) -> T) {
+    init(_ stateKeeper: StateKeeper?, factory: (ComponentContext) -> T) {
         let lifecycle = LifecycleRegistryKt.LifecycleRegistry()
-        let component = factory(DefaultComponentContext(lifecycle: lifecycle))
+        let component = factory(DefaultComponentContext(lifecycle: lifecycle, stateKeeper: stateKeeper, instanceKeeper: nil, backHandler: nil))
         self.lifecycle = lifecycle
         self.component = component
         

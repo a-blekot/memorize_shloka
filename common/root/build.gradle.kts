@@ -30,6 +30,7 @@ kotlin {
 
                 export(libs.decompose.decompose)
                 export(libs.essenty.lifecycle)
+                export(libs.essenty.state.keeper)
                 export(libs.moko.resources)
                 export(libs.mvikotlin.main)
                 export(libs.napier)
@@ -71,6 +72,7 @@ kotlin {
 
                 api(libs.decompose.decompose)
                 api(libs.essenty.lifecycle)
+                api(libs.essenty.state.keeper)
                 api(libs.moko.resources)
                 api(libs.mvikotlin.main)
                 api(libs.napier)
