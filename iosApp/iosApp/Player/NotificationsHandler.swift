@@ -21,13 +21,17 @@ class NotificationsHandler: NSObject {
         setupNotifications()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     private func setupNotifications() {
-//        NotificationCenter.default.addObserver(
-//            self,
-//            selector: #selector(songEnded),
-//            name: .AVPlayerItemDidPlayToEndTime,
-//            object: player.currentItem
-//        )
+        //        NotificationCenter.default.addObserver(
+        //            self,
+        //            selector: #selector(songEnded),
+        //            name: .AVPlayerItemDidPlayToEndTime,
+        //            object: player.currentItem
+        //        )
         
         NotificationCenter.default.addObserver(
             self,
@@ -98,21 +102,24 @@ class NotificationsHandler: NSObject {
               let typeValue = userInfo[AVAudioSessionInterruptionTypeKey] as? UInt,
               let type = AVAudioSession.InterruptionType(rawValue: typeValue) else {return}
         
-        if type == .began {
+        switch type {
+        case .began:
             // Interruption began, take appropriate actions (save state, update user interface)
+            print("Audio session interruption began")
             self.player.pause()
-        }
-        else if type == .ended {
-            guard let optionsValue =
-                    userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else {
-                        return
-                    }
-            let options = AVAudioSession.InterruptionOptions(rawValue: optionsValue)
-            if options.contains(.shouldResume) {
+        case .ended:
+            guard let interruptionOptionValue = userInfo[AVAudioSessionInterruptionOptionKey] as? UInt else { return }
+            let interruptionOptions = AVAudioSession.InterruptionOptions(rawValue: interruptionOptionValue)
+            
+            print("Audio session interruption ended")
+            if interruptionOptions.contains(.shouldResume) {
                 // Interruption Ended - playback should resume
                 self.player.play()
             }
+        @unknown default:
+            break
         }
+        
     }
     
     @objc func handleAudioServiceReset(_ notification: Notification) {

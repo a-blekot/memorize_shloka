@@ -41,7 +41,7 @@ class Player: NSObject, ObservableObject {
     deinit {
         UIApplication.shared.endReceivingRemoteControlEvents()
         self.clean()
-//        periodicTimeObserver = nil
+        //periodicTimeObserver = nil
         notificationsHandler = nil
         remoteControlHandler = nil
     }
@@ -73,19 +73,19 @@ class Player: NSObject, ObservableObject {
     
     public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         debugPrint(String(describing: keyPath))
-
+        
         guard let currentItem = self.currentItem else {
             self.status = .none
             return
         }
-
+        
         switch keyPath {
         case "currentItem":
             self.status = .loading
             currentItem.addObserver(self, forKeyPath: "status", options: .new, context: nil)
             self.updateNowPlaying()
             break
-
+            
         case "status":
             if let item = object as? AVPlayerItem {
                 switch (item.status) {
@@ -99,17 +99,20 @@ class Player: NSObject, ObservableObject {
                     }
                 case .failed:
                     self.status = .failed
+                @unknown default:
+                    // Handle any future cases
+                    self.status = .none
                 }
             }
             break
         case "rate":
             self.status = player.rate > 0 ? .playing : .paused
             break
-
+            
         default:
             debugPrint("KeyPath: \(String(describing: keyPath)) not handeled in observer")
         }
-
+        
     }
     
     private func onStatusChanged(_ status: PlayerStatus) {
@@ -139,7 +142,7 @@ class Player: NSObject, ObservableObject {
             guard let currentTask = currentTask as? PlayTask else { break }
             NapierProxyKt.d(message: "PlayerFeedback.Started (duration = \(currentTask.duration))", tag: "IOS_PLAYER")
             playerBus.update(feedback: PlayerFeedbackStarted(durationMs: currentTask.duration))
-
+            
         case .paused:
             break
         }
@@ -147,7 +150,7 @@ class Player: NSObject, ObservableObject {
     
     private func setupAudioSession() {
         do {
-            try audioSession.setCategory(.playback)
+            try audioSession.setCategory(.playback, mode: .default, options: [.allowAirPlay, .defaultToSpeaker])
             let _ = try audioSession.setActive(true)
             UIApplication.shared.beginReceivingRemoteControlEvents()
         } catch let error as NSError {
@@ -206,13 +209,13 @@ class Player: NSObject, ObservableObject {
             onTtsComplete(id: task.id.name)
             return
         }
-
+        
         pause()
         
         let utterance = TtsUtterance(id: task.id.name, text: task.text)
         utterance.voice = getVoice(for: SettingsKt.locale)
-        utterance.rate = AVSpeechUtteranceDefaultSpeechRate * PlayTranslationTaskKt.SPEECH_RATE
-
+        utterance.rate = AVSpeechUtteranceDefaultSpeechRate * PlayTranslationTaskKt.SPEECH_RATE * SettingsKt.audioSpeed
+        
         tts.delegate = self
         tts.speak(utterance)
     }
@@ -235,7 +238,7 @@ class Player: NSObject, ObservableObject {
         NapierProxyKt.d(message: "onTtsComplete", tag: "IOS_PLAYER")
         guard let currentTask = currentTask as? PlayTranslationTask else {return}
         let currentId = currentTask.id
-
+        
         if (currentId.name == id) {
             NapierProxyKt.d(message: "PlayerFeedback.Ready", tag: "IOS_PLAYER")
             playerBus.update(feedback: PlayerFeedbackReady())
@@ -243,8 +246,12 @@ class Player: NSObject, ObservableObject {
     }
     
     func setTrack(_ task: SetTrackTask) {
-        let playerItem = playerItem(task)
-        player.replaceCurrentItem(with: playerItem)
+        pause()
+        if (task.hasAudio) {
+            let playerItem = playerItem(task)
+            player.replaceCurrentItem(with: playerItem)
+            player.rate = SettingsKt.audioSpeed
+        }
     }
     
     private func seekTo(timeMs: Int64) {
@@ -264,6 +271,7 @@ class Player: NSObject, ObservableObject {
                 return image
             }
         }
+        nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = "Memorize Shloka"
         nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = player.currentItem?.currentTime().seconds
         nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = player.currentItem?.asset.duration.seconds
         nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = player.rate
@@ -316,7 +324,7 @@ class TtsUtterance : AVSpeechUtterance {
             id = newValue
         }
     }
-
+    
     init(id: String, text: String) {
         self.id = id
         super.init(string: text)

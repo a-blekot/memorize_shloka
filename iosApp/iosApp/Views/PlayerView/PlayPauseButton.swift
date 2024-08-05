@@ -14,6 +14,7 @@ struct PlayPauseButton: View {
     
     let state: PlaybackState
     let isAutoplay: Bool
+    let hasAudio: Bool
     let component: PlayerComponent
     
     var body: some View {
@@ -29,7 +30,7 @@ struct PlayPauseButton: View {
                 let _ = debugPrint("onTap playbackState = \(state)")
                 switch(state){
                 case .playing: component.forcePause()
-                case .idle: if(!isAutoplay) { component.forcePlay() }
+                case .idle: if(!isAutoplay || !hasAudio) { component.forcePlay() }
                 case .noAudio: component.forcePlay()
                 case .forcePaused: component.forcePlay()
                 case .paused: debugPrint("paused")
@@ -50,6 +51,6 @@ struct PlayPauseButton: View {
 
 struct PlayPauseButton_Previews: PreviewProvider {
     static var previews: some View {
-        PlayPauseButton(state: .playing, isAutoplay: true, component: StubPlayerComponent())
+        PlayPauseButton(state: .playing, isAutoplay: true, hasAudio: true, component: StubPlayerComponent())
     }
 }

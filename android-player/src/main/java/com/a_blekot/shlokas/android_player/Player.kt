@@ -14,7 +14,10 @@ import com.a_blekot.shlokas.common.player_api.PlayerFeedback
 import com.a_blekot.shlokas.common.utils.*
 import com.a_blekot.shlokas.common.utils.resources.getAssetPath
 import com.google.android.exoplayer2.*
+import com.google.android.exoplayer2.C.AUDIO_CONTENT_TYPE_SPEECH
+import com.google.android.exoplayer2.C.USAGE_MEDIA
 import com.google.android.exoplayer2.Player
+import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 import io.github.aakira.napier.Napier
 import java.util.*
@@ -92,7 +95,13 @@ class Player(
 
     private var tts: TextToSpeech? = TextToSpeech(context, ttsInitListener)
 
+    val audioAttributes = AudioAttributes.Builder()
+        .setUsage(USAGE_MEDIA)
+        .setContentType(AUDIO_CONTENT_TYPE_SPEECH)
+        .build()
+
     private var exoPlayer: ExoPlayer? = ExoPlayer.Builder(context)
+        .setAudioAttributes(audioAttributes, true)
         .build().apply {
             repeatMode = Player.REPEAT_MODE_OFF
             addListener(playbackListener)

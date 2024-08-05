@@ -12,6 +12,7 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		A06295742C5F78C300B436B0 /* SpeedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06295732C5F78C300B436B0 /* SpeedPicker.swift */; };
 		A06295762C5F828200B436B0 /* PlayerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06295752C5F828200B436B0 /* PlayerButton.swift */; };
+		A06295782C61496B00B436B0 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06295772C61496B00B436B0 /* ToastView.swift */; };
 		A0D9B6C82C5E7C720002A630 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D9B6C72C5E7C720002A630 /* Toast.swift */; };
 		C60B317728F96978001AB927 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60B317628F96978001AB927 /* PlayerView.swift */; };
 		C60B317B28F9710F001AB927 /* StubPlayerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60B317A28F9710F001AB927 /* StubPlayerComponent.swift */; };
@@ -158,6 +159,7 @@
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A06295732C5F78C300B436B0 /* SpeedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedPicker.swift; sourceTree = "<group>"; };
 		A06295752C5F828200B436B0 /* PlayerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerButton.swift; sourceTree = "<group>"; };
+		A06295772C61496B00B436B0 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		A0D9B6C72C5E7C720002A630 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		C60B317628F96978001AB927 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		C60B317A28F9710F001AB927 /* StubPlayerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubPlayerComponent.swift; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 				C6DC4EB028F5516900012D2B /* CornerRadius.swift */,
 				C698536128F94B3E000CF70A /* StandartCheckBox.swift */,
 				C60B318928F99D2F001AB927 /* DialogButton.swift */,
+				A06295772C61496B00B436B0 /* ToastView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1276,6 +1279,7 @@
 				C698535E28F85209000CF70A /* ListView.swift in Sources */,
 				C6DC4ED928F5516900012D2B /* PlayerStatus.swift in Sources */,
 				C6DC4EDD28F5516900012D2B /* TimeUtils.swift in Sources */,
+				A06295782C61496B00B436B0 /* ToastView.swift in Sources */,
 				C6DC4ED428F5516900012D2B /* RemoteControlMode.swift in Sources */,
 				C6DC4ECB28F5516900012D2B /* ComponentHolder.swift in Sources */,
 				C6DC4ECE28F5516900012D2B /* FavoriteButton.swift in Sources */,

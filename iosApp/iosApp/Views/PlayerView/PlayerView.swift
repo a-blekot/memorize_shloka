@@ -18,6 +18,7 @@ struct PlayerView: View {
     private let component: PlayerComponent
     
     @State var isClosePlayerDialogVisible = false
+    @State private var isToastShowing = false
     
     @GestureState private var dragOffset = CGSize.zero
     
@@ -32,7 +33,9 @@ struct PlayerView: View {
         
         ZStack {
             VStack(alignment: .center, spacing: theme.dimens.paddingS) {
-                PlayerTitleAndProgress(state, component, $isClosePlayerDialogVisible)
+                PlayerTitleAndProgress(state, component, $isClosePlayerDialogVisible) {
+                    copyAllText(state)
+                }
                     .environmentObject(theme)
                     .padding(.horizontal, theme.dimens.horizontalScreenPadding)
                 
@@ -46,6 +49,8 @@ struct PlayerView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                             .padding(.horizontal, theme.dimens.paddingXS)
                             .foregroundColor(theme.colors.primary)
+                        
+                        ToastView(message: MR.strings().label_text_copied.resolve(), isShowing: $isToastShowing)
                         
                         FoldableView(
                             title: "Synonyms",
@@ -104,6 +109,13 @@ struct PlayerView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+    
+    private func copyAllText(_ state: PlayerState) {
+        isToastShowing = true
+        
+        let pasteboard = UIPasteboard.general
+        pasteboard.string = state.copyAll()
     }
 }
 
