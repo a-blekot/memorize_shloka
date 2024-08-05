@@ -14,6 +14,7 @@ local.properties
 keystore.properties
 
 *.cinteropLibraries
+*.klib
 
 iosApp/iosApp/GoogleService-Info.plist
 android-user-app/google-services.json
