@@ -129,7 +129,7 @@ struct SettingsView: View {
                     }
                     .overlay(RoundedRectangle(cornerRadius: theme.dimens.radiusS).stroke(lineWidth: theme.dimens.borderS))
                     
-                    SpeedPicker()
+                    // SpeedPicker()
                     
                     WeekPicker(current: state.repeatMode) { repeatMode in
                         component.setRepeatMode(value: repeatMode.ordinal)

@@ -53,7 +53,7 @@ struct PlayerView: View {
                         ToastView(message: MR.strings().label_text_copied.resolve(), isShowing: $isToastShowing)
                         
                         FoldableView(
-                            title: "Synonyms",
+                            title: MR.strings().label_words.resolve(),
                             textColor: theme.colors.onSecondaryContainer,
                             bgColor: theme.colors.secondaryContainer
                         ) {
@@ -65,7 +65,7 @@ struct PlayerView: View {
                         }
                         
                         FoldableView(
-                            title: "Translation",
+                            title: MR.strings().label_translation.resolve(),
                             textColor: theme.colors.onSecondaryContainer,
                             bgColor: theme.colors.secondaryContainer
                         ) {
@@ -77,7 +77,7 @@ struct PlayerView: View {
                         }
                     }
                 }
-                .padding(.horizontal, CGFloat(24))
+                .padding(.horizontal, CGFloat(16))
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(theme.colors.background)

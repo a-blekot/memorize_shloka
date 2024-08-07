@@ -36,6 +36,8 @@ class Player: NSObject, ObservableObject {
         initPlayer()
         initHandlers()
         observePlayerBus()
+        
+        SettingsKt.audioSpeed = 1.0
     }
     
     deinit {
@@ -150,7 +152,7 @@ class Player: NSObject, ObservableObject {
     
     private func setupAudioSession() {
         do {
-            try audioSession.setCategory(.playback, mode: .default, options: [.allowAirPlay, .defaultToSpeaker])
+            try audioSession.setCategory(.playback, mode: .default)
             let _ = try audioSession.setActive(true)
             UIApplication.shared.beginReceivingRemoteControlEvents()
         } catch let error as NSError {
@@ -202,6 +204,7 @@ class Player: NSObject, ObservableObject {
         player.pause()
         seekTo(timeMs: task.startMs)
         player.play()
+//        player.playImmediately(atRate: SettingsKt.audioSpeed)
     }
     
     func playTranslation(_ task: PlayTranslationTask) {
@@ -214,7 +217,7 @@ class Player: NSObject, ObservableObject {
         
         let utterance = TtsUtterance(id: task.id.name, text: task.text)
         utterance.voice = getVoice(for: SettingsKt.locale)
-        utterance.rate = AVSpeechUtteranceDefaultSpeechRate * PlayTranslationTaskKt.SPEECH_RATE * SettingsKt.audioSpeed
+        utterance.rate = AVSpeechUtteranceDefaultSpeechRate * PlayTranslationTaskKt.SPEECH_RATE // * SettingsKt.audioSpeed
         
         tts.delegate = self
         tts.speak(utterance)
@@ -250,7 +253,6 @@ class Player: NSObject, ObservableObject {
         if (task.hasAudio) {
             let playerItem = playerItem(task)
             player.replaceCurrentItem(with: playerItem)
-            player.rate = SettingsKt.audioSpeed
         }
     }
     

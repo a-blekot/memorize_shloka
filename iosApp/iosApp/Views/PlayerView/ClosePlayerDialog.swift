@@ -50,8 +50,8 @@ struct ClosePlayerDialog: View {
                     Text(MR.strings().label_do_not_show_again.resolve())
                         .font(theme.titleMedium)
                         .lineLimit(1)
-                        .foregroundColor(theme.colors.primary)
                 }
+                .foregroundColor(theme.colors.primary)
                 
                 HStack(alignment: .center, spacing: theme.dimens.paddingM) {
                     DialogButton(title: MR.strings().label_close_player_stop.resolve(), isSelected: false, onStop)

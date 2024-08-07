@@ -35,28 +35,28 @@ class NotificationsHandler: NSObject {
         
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(NotificationsHandler.handleRouteChange),
+            selector: #selector(handleRouteChange(_:)),
             name: AVAudioSession.routeChangeNotification,
             object: audioSession
         )
         
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(NotificationsHandler.handleInterruption),
+            selector: #selector(handleInterruption(_:)),
             name: AVAudioSession.interruptionNotification,
             object: nil
         )
         
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(NotificationsHandler.handleAudioServiceReset),
+            selector: #selector(handleAudioServiceReset(_:)),
             name: AVAudioSession.mediaServicesWereResetNotification,
             object: audioSession
         )
         
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(NotificationsHandler.handleSecondaryAudio),
+            selector: #selector(handleSecondaryAudio(_:)),
             name: AVAudioSession.silenceSecondaryAudioHintNotification,
             object: audioSession
         )
@@ -67,7 +67,7 @@ class NotificationsHandler: NSObject {
         print("song ended: \(notification)")
     }
     
-    @objc class func handleRouteChange(_ notification: Notification) {
+    @objc func handleRouteChange(_ notification: Notification) {
         print("handleRouteChange: \(notification)")
         
         guard let userInfo = notification.userInfo,
@@ -129,7 +129,7 @@ class NotificationsHandler: NSObject {
         //        * When appropriate, reactivate the AVAudioSession instance using the setActive:error: method
     }
     
-    @objc class func handleSecondaryAudio(_ notification: Notification) {
+    @objc func handleSecondaryAudio(_ notification: Notification) {
         // Determine hint type
         guard let userInfo = notification.userInfo,
               let typeValue = userInfo[AVAudioSessionSilenceSecondaryAudioHintTypeKey] as? UInt,
