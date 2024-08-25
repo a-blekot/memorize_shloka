@@ -44,6 +44,7 @@
      <string name="label_one_line">по одному рядку</string>
      <string name="label_two_lines">по два рядки</string>
      <string name="label_four_lines">весь вірш</string>
+     <string name="label_quick_learn">1, 2, 4 рядки</string>
 
      <string name="label_select_locale">Вибір мови</string>
      <string name="label_locale_en">англійська</string>

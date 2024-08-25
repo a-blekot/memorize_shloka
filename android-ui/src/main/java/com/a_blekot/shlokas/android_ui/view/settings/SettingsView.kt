@@ -49,6 +49,7 @@ import com.a_blekot.shlokas.common.resources.MR.strings.label_autoplay
 import com.a_blekot.shlokas.common.resources.MR.strings.label_donate
 import com.a_blekot.shlokas.common.resources.MR.strings.label_feedback
 import com.a_blekot.shlokas.common.resources.MR.strings.label_four_lines
+import com.a_blekot.shlokas.common.resources.MR.strings.label_quick_learn
 import com.a_blekot.shlokas.common.resources.MR.strings.label_locale_en
 import com.a_blekot.shlokas.common.resources.MR.strings.label_locale_ru
 import com.a_blekot.shlokas.common.resources.MR.strings.label_locale_uk
@@ -113,7 +114,6 @@ fun SettingsView(component: SettingsComponent) {
                         text = "YouTube - Shloka Smaranam",
                         style = typography.bodyLarge.copy(textDecoration = TextDecoration.Underline),
                         color = colorScheme.primary,
-                        maxLines = 1,
                     )
                 }
             }
@@ -197,7 +197,6 @@ fun SettingsView(component: SettingsComponent) {
                         text = label_autoplay.resolve(context),
                         style = typography.titleLarge,
                         color = colorScheme.primary,
-                        maxLines = 1,
                     )
                 }
             }
@@ -467,6 +466,22 @@ private fun RepeatMode(repeatMode: RepeatMode, modifier: Modifier = Modifier, on
                 style = typography.titleLarge,
                 color = colorScheme.primary,
                 modifier = Modifier.clickable { onChanged(FOUR_LINES) }
+            )
+        }
+
+        StandartRow(
+            padding = paddingZero,
+            horizontalArrangement = Arrangement.spacedBy(paddingS, alignment = Alignment.Start)
+        ) {
+            RadioButton(
+                selected = repeatMode == QUICK_LEARN,
+                onClick = { onChanged(QUICK_LEARN) }
+            )
+            Text(
+                text = label_quick_learn.resolve(context),
+                style = typography.titleLarge,
+                color = colorScheme.primary,
+                modifier = Modifier.clickable { onChanged(QUICK_LEARN) }
             )
         }
     }

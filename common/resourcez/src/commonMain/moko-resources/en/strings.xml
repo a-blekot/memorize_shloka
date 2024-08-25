@@ -87,6 +87,7 @@
     <string name="label_one_line">one line</string>
     <string name="label_two_lines">two lines</string>
     <string name="label_four_lines">whole verse</string>
+    <string name="label_quick_learn">1, 2, 4 lines</string>
 
     <string name="label_select_locale">Select locale</string>
     <string name="label_locale_en">english</string>

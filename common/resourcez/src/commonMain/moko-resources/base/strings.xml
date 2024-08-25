@@ -45,6 +45,7 @@
     <string name="label_one_line">по одной строке</string>
     <string name="label_two_lines">по две строки</string>
     <string name="label_four_lines">весь стих</string>
+    <string name="label_quick_learn">1, 2, 4 строки</string>
 
     <string name="label_select_locale">Выбор языка</string>
     <string name="label_locale_en">английский</string>
