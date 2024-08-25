@@ -19,8 +19,8 @@ firebase-bom = "32.3.1"
 google-services = "4.4.0"
 firebase-crashlytics-gradlePlgn = "2.9.9"
 kotlin = "2.0.0"
-kotlinx_coroutines = "1.8.1"
-kotlinx_serialization = "1.6.3"
+kotlinx_coroutines = "1.9.0-RC"
+kotlinx_serialization = "1.7.0"
 ktlint = "10.2.1"
 ktor = "2.0.3"
 lottie-compose = "5.2.0"
@@ -74,7 +74,7 @@ decompose-extCompose = { module = "com.arkivanov.decompose:extensions-compose", 
 essenty-lifecycle = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
 essenty-state-keeper = { module = "com.arkivanov.essenty:state-keeper", version.ref = "essenty" }
 
-exoplayer-core = { module = "com.google.android.exoplayer:exoplayer-core", version.ref = "exoplayer" }
+exoplayer-core = { module = "com.google.android.exoplayer:exoplayer-core", version.ref = "exoplayer" } #// androidx.media3:media3-exoplayer
 exoplayer-ui = { module = "com.google.android.exoplayer:exoplayer-ui", version.ref = "exoplayer" }
 
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
@@ -97,6 +97,7 @@ mvikotlin-mvikotlin = { module = "com.arkivanov.mvikotlin:mvikotlin", version.re
 mvikotlin-extensions-coroutines = { module = "com.arkivanov.mvikotlin:mvikotlin-extensions-coroutines", version.ref = "mvikotlin" }
 mvikotlin-logging = { module = "com.arkivanov.mvikotlin:mvikotlin-logging", version.ref = "mvikotlin" }
 mvikotlin-main = { module = "com.arkivanov.mvikotlin:mvikotlin-main", version.ref = "mvikotlin" }
+mvikotlin_rx = { module = "com.arkivanov.mvikotlin:rx", version.ref = "mvikotlin" }
 
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
 napier-android-debug = { module = "io.github.aakira:napier-android-debug", version.ref = "napier" }
