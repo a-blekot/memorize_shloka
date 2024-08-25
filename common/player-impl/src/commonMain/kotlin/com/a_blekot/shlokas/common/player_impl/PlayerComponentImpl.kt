@@ -1,5 +1,6 @@
 package com.a_blekot.shlokas.common.player_impl
 
+import com.a_blekot.shlokas.common.data.RepeatMode
 import com.a_blekot.shlokas.common.utils.Consumer
 import com.a_blekot.shlokas.common.utils.asValue
 import com.a_blekot.shlokas.common.utils.init
@@ -17,6 +18,7 @@ import com.a_blekot.shlokas.common.player_impl.store.PlayerStoreFactory
 import com.a_blekot.shlokas.common.utils.audioSpeed
 import com.a_blekot.shlokas.common.utils.autoPlay
 import com.a_blekot.shlokas.common.utils.locale
+import com.a_blekot.shlokas.common.utils.repeatMode
 import com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
 import com.a_blekot.shlokas.common.utils.toVerseName
 import com.arkivanov.decompose.ComponentContext
@@ -49,6 +51,7 @@ class PlayerComponentImpl(
 
     private val initialState =
         PlayerState(
+            repeatMode = repeatMode,
             title = resolveTitle(startShloka.id),
             sanskrit = resolveSanskrit(startShloka.id),
             words = resolveWords(startShloka.id),
@@ -66,7 +69,6 @@ class PlayerComponentImpl(
             PlayerStoreFactory(
                 storeFactory = storeFactory,
                 tasks = tasks,
-                durationMs= durationMs,
                 initialState = stateKeeper.consume(KEY_PLAYER_STATE, PlayerState.serializer()) ?: initialState,
                 deps = deps,
             ).create()
@@ -92,6 +94,7 @@ class PlayerComponentImpl(
 
     override fun prev() = store.accept(Prev)
     override fun next() = store.accept(Next)
+    override fun repeatModeChanged(newMode: RepeatMode) = store.accept(RepeatModeChanged(newMode))
 
     private fun handleLabel(label: PlayerLabel) {
         when (label) {

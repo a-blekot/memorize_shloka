@@ -1,9 +1,12 @@
 package com.a_blekot.shlokas.common.player_impl.store
 
+import com.a_blekot.shlokas.common.data.RepeatMode
+
 sealed interface PlayerIntent {
-    object ForcePlay : PlayerIntent
-    object ForcePause : PlayerIntent
-    object Stop : PlayerIntent
-    object Prev : PlayerIntent
-    object Next : PlayerIntent
+    data object ForcePlay : PlayerIntent
+    data object ForcePause : PlayerIntent
+    data object Stop : PlayerIntent
+    data object Prev : PlayerIntent
+    data object Next : PlayerIntent
+    data class RepeatModeChanged(val newMode: RepeatMode) : PlayerIntent
 }

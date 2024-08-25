@@ -1,5 +1,6 @@
 package com.a_blekot.shlokas.common.player_api
 
+import com.a_blekot.shlokas.common.data.RepeatMode
 import com.arkivanov.decompose.value.Value
 
 interface PlayerComponent {
@@ -11,4 +12,6 @@ interface PlayerComponent {
 
     fun prev() {}
     fun next() {}
+
+    fun repeatModeChanged(newMode: RepeatMode) {}
 }

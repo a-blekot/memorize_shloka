@@ -1,11 +1,13 @@
 package com.a_blekot.shlokas.common.player_api
 
+import com.a_blekot.shlokas.common.data.RepeatMode
 import com.a_blekot.shlokas.common.data.ShlokaConfig
 import com.a_blekot.shlokas.common.player_api.PlaybackState.IDLE
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class PlayerState(
+    val repeatMode: RepeatMode = RepeatMode.ONE_LINE,
     val hasAudio: Boolean = true,
     val title: String = "",
     val sanskrit: String = "",
