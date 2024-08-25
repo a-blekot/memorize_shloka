@@ -52,6 +52,7 @@ import com.a_blekot.shlokas.android_ui.custom.StandartColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartLazyColumn
 import com.a_blekot.shlokas.android_ui.custom.StandartRow
 import com.a_blekot.shlokas.android_ui.theme.AppTheme
+import com.a_blekot.shlokas.android_ui.theme.Dimens.horizontalScreenPadding
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.iconSizeXL
 import com.a_blekot.shlokas.android_ui.theme.Dimens.paddingS
@@ -90,7 +91,7 @@ fun PlayerView(component: PlayerComponent) {
         }
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxSize().padding(bottom = paddingXS)) {
         StandartColumn(
             verticalArrangement = Arrangement.spacedBy(paddingS),
             modifier = Modifier
@@ -128,7 +129,13 @@ fun PlayerView(component: PlayerComponent) {
                                 .fillMaxWidth()
                                 .padding(horizontal = paddingXS)
                                 .combinedClickable(
-                                    onLongClick = { copyToClipboard(context, clipboard, sanskrit.noHtmlTags()) },
+                                    onLongClick = {
+                                        copyToClipboard(
+                                            context,
+                                            clipboard,
+                                            sanskrit.noHtmlTags()
+                                        )
+                                    },
                                     onClick = { isFullScreen.value = true }
                                 ),
 //                    autoSize = true
@@ -143,6 +150,10 @@ fun PlayerView(component: PlayerComponent) {
                         translationStyle,
                         TextAlign.Justify
                     )
+
+                    item {
+                        Spacer(Modifier.height(40.dp))
+                    }
                 }
 
                 Spacer(Modifier.weight(1.0f))
@@ -152,6 +163,15 @@ fun PlayerView(component: PlayerComponent) {
 //        if (isFullScreen.value) {
 //            FullScreenSanskrit(state.value.sanskrit)
 //        }
+
+        RepeatModeDropDown(
+            currentMode = state.value.repeatMode,
+            modifier = Modifier
+                .padding(horizontal = horizontalScreenPadding + paddingXS)
+                .align(Alignment.BottomEnd)
+        ) {
+            component.repeatModeChanged(it)
+        }
 
         if (isClosePlayerDialogVisible.value) {
             ClosePlayerDialog(
@@ -266,15 +286,6 @@ enum class VerticalRotation(val value: Float) {
     CLOCKWISE(90f), COUNTER_CLOCKWISE(270f)
 }
 
-@Preview
-@Composable
-private fun FullScreenSanskritPreview() {
-    val text = "janmādy asya yato ’nvayād itarataś cārtheṣv abhijñaḥ svarāṭ<br>tene brahma hṛdā ya ādi-kavaye muhyanti yat sūrayaḥ<br>tejo-vāri-mṛdāṁ yathā vinimayo yatra tri-sargo ’mṛṣā<br>dhāmnā svena sadā nirasta-kuhakaṁ satyaṁ paraṁ dhīmahi</i>"
-    AppTheme {
-        FullScreenSanskrit(text)
-    }
-}
-
 
 @Composable
 private fun PlayPauseFAB(
@@ -376,7 +387,13 @@ fun LazyListScope.addFoldableView(
                         .padding(horizontal = paddingS)
                         .padding(bottom = paddingS)
                         .combinedClickable(
-                            onLongClick = { copyToClipboard(context, clipboard, text.noHtmlTags()) },
+                            onLongClick = {
+                                copyToClipboard(
+                                    context,
+                                    clipboard,
+                                    text.noHtmlTags()
+                                )
+                            },
                             onClick = {}
                         )
                 )
