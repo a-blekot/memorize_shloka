@@ -36,45 +36,52 @@ fun ShlokaConfig.createTasks(
     }
 
     when (repeatMode) {
-        RepeatMode.ONE_LINE -> {
-            chunks.forEach { chunk ->
-                repeat(repeats) {
-                    tasks.add(PlayTask(chunk, it + 1))
-                    if (it == repeats - 1) tasks.add(ResetCounterTask(pauseMs))
-                    tasks.add(PauseTask(pauseMs))
-                }
-            }
-        }
+        RepeatMode.ONE_LINE -> tasks.addOneLines(chunks, repeats, pauseMs)
+        RepeatMode.TWO_LINES -> tasks.addTwoLines(chunks, repeats, pauseMs)
+        RepeatMode.FOUR_LINES -> tasks.addFourLines(chunks, repeats, pauseMs)
 
-        RepeatMode.TWO_LINES -> {
-            chunks
-                .windowed(2, 2, partialWindows = true)
-                .forEach { window ->
-                    repeat(repeats) {
-                        val chunk = window.first() + window.last()
-                        tasks.add(PlayTask(chunk, it + 1))
-                        if (it == repeats - 1) tasks.add(ResetCounterTask(pauseMs))
-                        tasks.add(PauseTask(pauseMs))
-                    }
-                }
-        }
-
-        RepeatMode.FOUR_LINES -> {
-            chunks
-                .windowed(4, 4, partialWindows = true)
-                .forEach { window ->
-                    repeat(repeats) {
-                        val chunk = window.first() + window.last()
-                        tasks.add(PlayTask(chunk, it + 1))
-                        if (it == repeats - 1) tasks.add(ResetCounterTask(pauseMs))
-                        tasks.add(PauseTask(pauseMs))
-                    }
-                }
+        RepeatMode.QUICK_LEARN -> {
+            tasks.addOneLines(chunks, repeats, pauseMs)
+            tasks.addTwoLines(chunks, repeats, pauseMs)
+            tasks.addFourLines(chunks, repeats, pauseMs)
         }
     }
 
     return tasks
 }
+
+private fun MutableList<Task>.addOneLines(chunks: List<Chunk>, repeats: Int, pauseMs: Long) =
+    chunks.forEach { chunk ->
+        repeat(repeats) {
+            add(PlayTask(chunk, it + 1))
+            if (it == repeats - 1) add(ResetCounterTask(pauseMs))
+            add(PauseTask(pauseMs))
+        }
+    }
+
+private fun MutableList<Task>.addTwoLines(chunks: List<Chunk>, repeats: Int, pauseMs: Long) =
+    chunks
+        .windowed(2, 2, partialWindows = true)
+        .forEach { window ->
+            repeat(repeats) {
+                val chunk = window.first() + window.last()
+                add(PlayTask(chunk, it + 1))
+                if (it == repeats - 1) add(ResetCounterTask(pauseMs))
+                add(PauseTask(pauseMs))
+            }
+        }
+
+private fun MutableList<Task>.addFourLines(chunks: List<Chunk>, repeats: Int, pauseMs: Long) =
+    chunks
+        .windowed(4, 4, partialWindows = true)
+        .forEach { window ->
+            repeat(repeats) {
+                val chunk = window.first() + window.last()
+                add(PlayTask(chunk, it + 1))
+                if (it == repeats - 1) add(ResetCounterTask(pauseMs))
+                add(PauseTask(pauseMs))
+            }
+        }
 
 fun ShlokaConfig.createTranslationTasks(repeats: Int, pauseMs: Long): List<Task> {
     val tasks = mutableListOf<Task>()
