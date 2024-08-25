@@ -1,5 +1,7 @@
 package com.a_blekot.shlokas.common.player_impl.store
 
+import com.a_blekot.shlokas.common.data.RepeatMode
+import com.a_blekot.shlokas.common.data.createTasks
 import com.a_blekot.shlokas.common.data.speed
 import com.a_blekot.shlokas.common.data.tasks.*
 import com.a_blekot.shlokas.common.player_api.PlaybackState.*
@@ -15,6 +17,9 @@ import com.a_blekot.shlokas.common.utils.autoPlay
 import com.a_blekot.shlokas.common.utils.onPlayCompleted
 import com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
 import com.a_blekot.shlokas.common.utils.audioSpeed
+import com.a_blekot.shlokas.common.utils.locale
+import com.a_blekot.shlokas.common.utils.repeatMode
+import com.a_blekot.shlokas.common.utils.toVerseName
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
@@ -27,8 +32,7 @@ import kotlinx.coroutines.launch
 
 internal class PlayerStoreFactory(
     private val storeFactory: StoreFactory,
-    private val tasks: List<Task>,
-    private val durationMs: Long,
+    private var tasks: List<Task>,
     private val initialState: PlayerState,
     private val deps: PlayerDeps
 ) : StringResourceHandler by deps.stringResourceHandler {
@@ -54,17 +58,17 @@ internal class PlayerStoreFactory(
     }
 
     sealed interface Action {
-        object Start : Action
+        data object Start : Action
         data class Feedback(val feedback: PlayerFeedback) : Action
     }
 
     sealed interface Msg {
-        object StartShlokaConsumed : Msg
-        object Play : Msg
-        object Pause : Msg
-        object ForcePause : Msg
-        object Idle : Msg
-        object NoAudio : Msg
+        data object StartShlokaConsumed : Msg
+        data object Play : Msg
+        data object Pause : Msg
+        data object ForcePause : Msg
+        data object Idle : Msg
+        data object NoAudio : Msg
         data class ResetCounter(val durationMs: Long) : Msg
         data class NextRepeat(val currentRepeat: Int, val durationMs: Long) : Msg
         data class Update(
@@ -75,6 +79,7 @@ internal class PlayerStoreFactory(
             val words: String,
             val translation: String,
         ) : Msg
+        data class RepeatModeChanged(val repeatMode: RepeatMode) : Msg
     }
 
     private inner class BootstrapperImpl : CoroutineBootstrapper<Action>() {
@@ -104,11 +109,12 @@ internal class PlayerStoreFactory(
 
         override fun executeIntent(intent: PlayerIntent) {
             when (intent) {
-                ForcePlay -> forcePlay()
-                ForcePause -> forcePause()
-                Stop -> stop()
-                Prev -> prev(state())
-                Next -> next()
+                is ForcePlay -> forcePlay()
+                is ForcePause -> forcePause()
+                is Stop -> stop()
+                is Prev -> prev(state())
+                is Next -> next()
+                is RepeatModeChanged -> onRepeatModeChanged(intent.newMode)
             }
         }
 
@@ -124,6 +130,30 @@ internal class PlayerStoreFactory(
         private fun next() {
             Napier.d("next", tag = "PlayerStore")
             val index = tasks.firstAfter(taskIndex) { it is SetTrackTask }
+            if (index != -1) {
+                taskIndex = index
+                nextTask()
+            }
+        }
+
+        private fun onRepeatModeChanged(newMode: RepeatMode) {
+            repeatMode = newMode
+            dispatch(Msg.RepeatModeChanged(newMode))
+
+            tasks = deps.config.copy(repeatMode = newMode).createTasks().map {
+                if (it is PlayTranslationTask) {
+                    it.copy(text = "${it.id.toVerseName(locale)}. " + resolveTranslation(it.id))
+                } else {
+                    it
+                }
+            }
+
+            val currentShlokaIndex = state().currentShlokaIndex
+            var index = tasks.indexOfFirst { it is SetTrackTask && it.index == currentShlokaIndex }
+            if (index == -1) {
+                index = tasks.indexOfFirst { it is SetTrackTask }
+            }
+
             if (index != -1) {
                 taskIndex = index
                 nextTask()
@@ -180,7 +210,7 @@ internal class PlayerStoreFactory(
                     deps.analytics.playCompleted(
                         count = deps.config.shlokas.size,
                         repeats = deps.config.repeats,
-                        durationSec = durationMs / 1000
+                        durationSec = state().totalDurationMs / 1000
                     )
                     stop()
                 }
@@ -309,6 +339,8 @@ internal class PlayerStoreFactory(
                     currentShlokaIndex = msg.index,
                     playbackState = IDLE,
                 )
+
+                is Msg.RepeatModeChanged -> copy(repeatMode = msg.repeatMode)
             }
     }
 }
