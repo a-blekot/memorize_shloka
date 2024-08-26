@@ -10,6 +10,8 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		A00F53B12C7C5FFB000E4B00 /* RepeatModeDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00F53B02C7C5FFB000E4B00 /* RepeatModeDropDown.swift */; };
+		A00F53B32C7C8FC3000E4B00 /* DropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00F53B22C7C8FC3000E4B00 /* DropDownMenu.swift */; };
 		A06295742C5F78C300B436B0 /* SpeedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06295732C5F78C300B436B0 /* SpeedPicker.swift */; };
 		A06295762C5F828200B436B0 /* PlayerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06295752C5F828200B436B0 /* PlayerButton.swift */; };
 		A06295782C61496B00B436B0 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06295772C61496B00B436B0 /* ToastView.swift */; };
@@ -157,6 +159,8 @@
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A00F53B02C7C5FFB000E4B00 /* RepeatModeDropDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatModeDropDown.swift; sourceTree = "<group>"; };
+		A00F53B22C7C8FC3000E4B00 /* DropDownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownMenu.swift; sourceTree = "<group>"; };
 		A06295732C5F78C300B436B0 /* SpeedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedPicker.swift; sourceTree = "<group>"; };
 		A06295752C5F828200B436B0 /* PlayerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerButton.swift; sourceTree = "<group>"; };
 		A06295772C61496B00B436B0 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
@@ -465,6 +469,7 @@
 				C60B318528F990B7001AB927 /* SmoothProgress.swift */,
 				C60B318728F99A83001AB927 /* ClosePlayerDialog.swift */,
 				A06295752C5F828200B436B0 /* PlayerButton.swift */,
+				A00F53B02C7C5FFB000E4B00 /* RepeatModeDropDown.swift */,
 			);
 			path = PlayerView;
 			sourceTree = "<group>";
@@ -502,6 +507,7 @@
 				C698536128F94B3E000CF70A /* StandartCheckBox.swift */,
 				C60B318928F99D2F001AB927 /* DialogButton.swift */,
 				A06295772C61496B00B436B0 /* ToastView.swift */,
+				A00F53B22C7C8FC3000E4B00 /* DropDownMenu.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1273,6 +1279,7 @@
 				C698535B28F84F40000CF70A /* StubPlayerBus.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				C640959328FBFE3E0057A634 /* MailView.swift in Sources */,
+				A00F53B12C7C5FFB000E4B00 /* RepeatModeDropDown.swift in Sources */,
 				C6DC4ECD28F5516900012D2B /* PlayButton.swift in Sources */,
 				C60B318428F98D8D001AB927 /* PlayPauseButton.swift in Sources */,
 				C6DC4EDE28F5516900012D2B /* Sizes.swift in Sources */,
@@ -1301,6 +1308,7 @@
 				C698536428F9527D000CF70A /* ChooseList.swift in Sources */,
 				C6DC4ED828F5516900012D2B /* Defaults.swift in Sources */,
 				C6DC4EA228F54A1D00012D2B /* StubListComponent.swift in Sources */,
+				A00F53B32C7C8FC3000E4B00 /* DropDownMenu.swift in Sources */,
 				C6A9CA6228F40DD200222DBB /* SimpleRouterState.swift in Sources */,
 				C6A88901292E57030009DF1F /* MarkdownText.swift in Sources */,
 				C6DC4EA028F549D900012D2B /* StubRootComponent.swift in Sources */,
@@ -1461,7 +1469,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1472,6 +1480,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 17.5;
 			};
 			name = Debug;
 		};
@@ -1495,7 +1504,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -1505,6 +1514,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 17.5;
 			};
 			name = Release;
 		};

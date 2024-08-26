@@ -67,6 +67,7 @@ struct ClosePlayerDialog: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(theme.colors.dialogBackground)
+        .zIndex(2)
     }
 }
 

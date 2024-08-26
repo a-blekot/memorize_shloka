@@ -62,6 +62,18 @@ struct WeekPicker: View {
             .onTapGesture {
                 onChanged(RepeatMode.fourLines)
             }
+            
+            HStack {
+                Image(systemName: pickImage(for: RepeatMode.quickLearn))
+                    .font(theme.imageFontSmall)
+                
+                Text(MR.strings().label_quick_learn.resolve())
+                    .font(theme.titleLarge)
+            }
+            .foregroundColor(theme.colors.primary)
+            .onTapGesture {
+                onChanged(RepeatMode.quickLearn)
+            }
         }
     }
     

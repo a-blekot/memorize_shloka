@@ -78,7 +78,9 @@ internal fun RepeatModeDropDown(
                     trailingIcon = selectedIcon(repeatMode == currentMode),
                     onClick = {
                         expanded = false
-                        onRepeatModeChanged(repeatMode)
+                        if (repeatMode != currentMode) {
+                            onRepeatModeChanged(repeatMode)
+                        }
                     }
                 )
 

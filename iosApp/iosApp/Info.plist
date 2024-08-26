@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-<!--    <key>NSPhotoLibraryAddUsageDescription</key> needed for payments? -->
-<!--    <string>Save Photos To Camera Roll</string>-->
-<!--    <key>NSCameraUsageDescription</key>-->
-<!--    <string>This app can use the camera to scan payment cards if you choose to use this feature.</string>-->
-<!--    <key>CADisableMinimumFrameDurationOnPhone</key>-->
-<!--    <true/>-->
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -31,14 +25,9 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>1.3.1</string>
-<!--    https://developer.apple.com/documentation/bundleresources/information_property_list/minimumosversion-->
-<!--	<key>LSMinimumSystemVersion</key>-->
-<!--	<string>10.0.0</string> - is default value -->
+	<string>1.4</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-<!--	<key>MinimumOSVersion</key> don't need to specify it -->
-<!--	<string>15.0</string>-->
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

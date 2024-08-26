@@ -15,12 +15,16 @@ struct PlayerView: View {
     @ObservedObject
     private var state: ObservableValue<PlayerState>
     
+    @State  private var showRepeatModeDropdown =  false
+    
     private let component: PlayerComponent
     
     @State var isClosePlayerDialogVisible = false
     @State private var isToastShowing = false
     
     @GestureState private var dragOffset = CGSize.zero
+    
+    static let SWIPE_VELOCITY: CGFloat = 2.5
     
     init(_ component: PlayerComponent) {
         self.component = component
@@ -31,13 +35,13 @@ struct PlayerView: View {
         let state = state.value
         let _ = debugPrint("PlayerView ## \(state.playbackState) \(state.currentRepeat)")
         
-        ZStack {
+        ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
             VStack(alignment: .center, spacing: theme.dimens.paddingS) {
                 PlayerTitleAndProgress(state, component, $isClosePlayerDialogVisible) {
                     copyAllText(state)
                 }
-                    .environmentObject(theme)
-                    .padding(.horizontal, theme.dimens.horizontalScreenPadding)
+                .environmentObject(theme)
+                //                 .padding(.horizontal, theme.dimens.horizontalScreenPadding)
                 
                 ScrollView {
                     VStack {
@@ -75,14 +79,17 @@ struct PlayerView: View {
                                 .padding(.horizontal, theme.dimens.paddingS)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
+                        
+                        Spacer()
+                            .frame(height: 44)
                     }
                 }
-                .padding(.horizontal, CGFloat(16))
+                //                 .padding(.horizontal, CGFloat(16))
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(.horizontal, theme.dimens.horizontalScreenPadding)
+            .padding(.vertical, theme.dimens.paddingXS)
             .background(theme.colors.background)
-            
-            .offset(x: dragOffset.width)
             .gesture(
                 DragGesture()
                     .updating($dragOffset) { value, state, _ in
@@ -91,13 +98,20 @@ struct PlayerView: View {
                     .onEnded { value in
                         let velocity = value.predictedEndTranslation.width / abs(value.translation.width)
                         
-                        if velocity > 4 {
+                        if velocity > PlayerView.SWIPE_VELOCITY {
                             component.next()
-                        } else if velocity < -4 {
+                        } else if velocity < -PlayerView.SWIPE_VELOCITY {
                             component.prev()
                         }
                     }
             )
+            
+            RepeatModeDropDown2(currentMode: state.repeatMode, showDropdown: $showRepeatModeDropdown) { repeatMode in
+                component.repeatModeChanged(newMode: repeatMode)
+            }
+            .environmentObject(theme)
+            .padding(.trailing, theme.dimens.horizontalScreenPadding)
+            .padding(.bottom, theme.dimens.paddingXS)
             
             if (isClosePlayerDialogVisible) {
                 ClosePlayerDialog(
@@ -106,6 +120,11 @@ struct PlayerView: View {
                         isClosePlayerDialogVisible = false
                     }
                 )
+            }
+        }
+        .onTapGesture {
+            withAnimation {
+                showRepeatModeDropdown =  false
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -16,6 +16,7 @@ class StubPlayerComponent: PlayerComponent {
     
     func prev() {}
     func next() {}
+    func repeatModeChanged(newMode: RepeatMode) {}
     
     let flow: Value<PlayerState> =
         valueOf(
@@ -25,6 +26,7 @@ class StubPlayerComponent: PlayerComponent {
 
 func mockPlayerState() -> PlayerState {
     return PlayerState(
+        repeatMode: RepeatMode.oneLine,
         hasAudio: true,
         title: "ŚB 1.2.16",
         sanskrit: "<i>śuśrūṣoḥ śraddadhānasya<br>vāsudeva-kathā-ruciḥ<br>syān mahat-sevayā viprāḥ<br>puṇya-tīrtha-niṣevaṇāt</i>",
