@@ -29,19 +29,41 @@
 # Keep Parcelable model
 #-keep class * implements android.os.Parcelable { *; }
 
-# Kotlin serialization looks up the generated serializer classes through a function on companion
-# objects. The companions are looked up reflectively so we need to explicitly keep these functions.
--keepclasseswithmembers class **.*$Companion {
+# Keep `Companion` object fields of serializable classes.
+# This avoids serializer lookup through `getDeclaredClasses` as done for named companion objects.
+-if @kotlinx.serialization.Serializable class **
+-keepclassmembers class <1> {
+    static <1>$Companion Companion;
+}
+
+# Keep `serializer()` on companion objects (both default and named) of serializable classes.
+-if @kotlinx.serialization.Serializable class ** {
+    static **$* *;
+}
+-keepclassmembers class <2>$<3> {
     kotlinx.serialization.KSerializer serializer(...);
 }
-# If a companion has the serializer function, keep the companion field on the original type so that
-# the reflective lookup succeeds.
--if class **.*$Companion {
-  kotlinx.serialization.KSerializer serializer(...);
+
+# Keep `INSTANCE.serializer()` of serializable objects.
+-if @kotlinx.serialization.Serializable class ** {
+    public static ** INSTANCE;
 }
--keepclassmembers class <1>.<2> {
-  <1>.<2>$Companion Companion;
+-keepclassmembers class <1> {
+    public static <1> INSTANCE;
+    kotlinx.serialization.KSerializer serializer(...);
 }
+
+# @Serializable and @Polymorphic are used at runtime for polymorphic serialization.
+-keepattributes RuntimeVisibleAnnotations,AnnotationDefault
+
+# Don't print notes about potential mistakes or omissions in the configuration for kotlinx-serialization classes
+# See also https://github.com/Kotlin/kotlinx.serialization/issues/1900
+-dontnote kotlinx.serialization.**
+
+# Serialization core uses `java.lang.ClassValue` for caching inside these specified classes.
+# If there is no `java.lang.ClassValue` (for example, in Android), then R8/ProGuard will print a warning.
+# However, since in this case they will not be used, we can disable these warnings
+-dontwarn kotlinx.serialization.internal.ClassValueReferences
 
 #Crashlytics
 -keep class com.crashlytics.** { *; }
@@ -51,58 +73,76 @@
 -keepattributes SourceFile,LineNumberTable
 -keep public class * extends java.lang.Exception
 
-
 # Please add these rules to your existing keep rules in order to suppress warnings.
 # This is generated automatically by the Android Gradle plugin.
--dontwarn com.a_blekot.shlokas.android_player.PendingIntentProvider
--dontwarn com.a_blekot.shlokas.android_player.PlaybackService$PlaybackBinder
--dontwarn com.a_blekot.shlokas.android_player.PlaybackService
--dontwarn com.a_blekot.shlokas.android_ui.ResourcesAndroidKt
--dontwarn com.a_blekot.shlokas.android_ui.SpacerKt
--dontwarn com.a_blekot.shlokas.android_ui.custom.BottomSheetCardKt
--dontwarn com.a_blekot.shlokas.android_ui.custom.ButtonKt
--dontwarn com.a_blekot.shlokas.android_ui.theme.ThemeKt
--dontwarn com.a_blekot.shlokas.android_ui.view.donations.DonationsViewKt
--dontwarn com.a_blekot.shlokas.android_ui.view.list.ListViewKt
--dontwarn com.a_blekot.shlokas.android_ui.view.player.PlayerViewKt
--dontwarn com.a_blekot.shlokas.android_ui.view.settings.SettingsViewKt
--dontwarn com.a_blekot.shlokas.common.data.Donation
--dontwarn com.a_blekot.shlokas.common.data.DonationLevel
--dontwarn com.a_blekot.shlokas.common.data.DonationLevelKt
--dontwarn com.a_blekot.shlokas.common.data.PlatformApi
--dontwarn com.a_blekot.shlokas.common.list_api.ListComponent
--dontwarn com.a_blekot.shlokas.common.player_api.PlayerBus
--dontwarn com.a_blekot.shlokas.common.player_api.PlayerComponent
--dontwarn com.a_blekot.shlokas.common.player_impl.PlayerBusImpl
--dontwarn com.a_blekot.shlokas.common.resources.MR$strings
--dontwarn com.a_blekot.shlokas.common.resources.StringsKt
--dontwarn com.a_blekot.shlokas.common.settings_api.SettingsComponent
--dontwarn com.a_blekot.shlokas.common.utils.AndroidFiler
--dontwarn com.a_blekot.shlokas.common.utils.Filer
--dontwarn com.a_blekot.shlokas.common.utils.LocaleKt
--dontwarn com.a_blekot.shlokas.common.utils.NapierProxyKt
--dontwarn com.a_blekot.shlokas.common.utils.SettingsKt
--dontwarn com.a_blekot.shlokas.common.utils.analytics.Analytics
--dontwarn com.a_blekot.shlokas.common.utils.billing.BillingEvent$Error
--dontwarn com.a_blekot.shlokas.common.utils.billing.BillingEvent$PurchaseSuccess
--dontwarn com.a_blekot.shlokas.common.utils.billing.BillingEvent
--dontwarn com.a_blekot.shlokas.common.utils.billing.BillingHelper
--dontwarn com.a_blekot.shlokas.common.utils.billing.BillingHelperDefault
--dontwarn com.a_blekot.shlokas.common.utils.billing.BillingOperation
--dontwarn com.a_blekot.shlokas.common.utils.connectivity.ConnectivityObserver
--dontwarn com.a_blekot.shlokas.common.utils.connectivity.ConnectivityObserverAndroid
--dontwarn com.a_blekot.shlokas.common.utils.dispatchers.DispatcherProvider
--dontwarn com.a_blekot.shlokas.common.utils.dispatchers.DispatcherProviderImplKt
--dontwarn com.a_blekot.shlokas.common.utils.resources.AndroidConfigReader
--dontwarn com.a_blekot.shlokas.common.utils.resources.AndroidStringResourceHandler
--dontwarn com.a_blekot.shlokas.common.utils.resources.ConfigReader
--dontwarn com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
--dontwarn com.ablekot.shlokas.common.root.RootComponent$Child$Donations
--dontwarn com.ablekot.shlokas.common.root.RootComponent$Child$List
--dontwarn com.ablekot.shlokas.common.root.RootComponent$Child$Player
--dontwarn com.ablekot.shlokas.common.root.RootComponent$Child$Settings
--dontwarn com.ablekot.shlokas.common.root.RootComponent$Child
--dontwarn com.ablekot.shlokas.common.root.RootComponent
--dontwarn com.ablekot.shlokas.common.root.RootComponentImpl
--dontwarn com.ablekot.shlokas.common.root.RootDeps
--dontwarn com.listentoprabhupada.common.donations_api.DonationsComponent
+#-keep class com.a_blekot.shlokas.android_player.PendingIntentProvider
+#-keep class com.a_blekot.shlokas.android_player.PlaybackService$PlaybackBinder
+#-keep class com.a_blekot.shlokas.android_player.PlaybackService
+#-keep class com.a_blekot.shlokas.android_ui.ResourcesAndroidKt
+#-keep class com.a_blekot.shlokas.android_ui.SpacerKt
+#-keep class com.a_blekot.shlokas.android_ui.custom.BottomSheetCardKt
+#-keep class com.a_blekot.shlokas.android_ui.custom.ButtonKt
+#-keep class com.a_blekot.shlokas.android_ui.theme.ThemeKt
+#-keep class com.a_blekot.shlokas.android_ui.view.donations.DonationsViewKt
+#-keep class com.a_blekot.shlokas.android_ui.view.list.ListViewKt
+#-keep class com.a_blekot.shlokas.android_ui.view.player.PlayerViewKt
+#-keep class com.a_blekot.shlokas.android_ui.view.settings.SettingsViewKt
+#-keep class com.a_blekot.shlokas.common.data.Donation
+#-keep class com.a_blekot.shlokas.common.data.DonationLevel
+#-keep class com.a_blekot.shlokas.common.data.DonationLevelKt
+#-keep class com.a_blekot.shlokas.common.data.PlatformApi
+#-keep class com.a_blekot.shlokas.common.list_api.ListComponent
+#-keep class com.a_blekot.shlokas.common.player_api.PlayerBus
+#-keep class com.a_blekot.shlokas.common.player_api.PlayerComponent
+#-keep class com.a_blekot.shlokas.common.player_impl.PlayerBusImpl
+#-keep class com.a_blekot.shlokas.common.resources.MR$strings
+#-keep class com.a_blekot.shlokas.common.resources.StringsKt
+#-keep class com.a_blekot.shlokas.common.settings_api.SettingsComponent
+#-keep class com.a_blekot.shlokas.common.utils.AndroidFiler
+#-keep class com.a_blekot.shlokas.common.utils.Filer
+#-keep class com.a_blekot.shlokas.common.utils.LocaleKt
+#-keep class com.a_blekot.shlokas.common.utils.NapierProxyKt
+#-keep class com.a_blekot.shlokas.common.utils.SettingsKt
+#-keep class com.a_blekot.shlokas.common.utils.analytics.Analytics
+#-keep class com.a_blekot.shlokas.common.utils.billing.BillingEvent$Error
+#-keep class com.a_blekot.shlokas.common.utils.billing.BillingEvent$PurchaseSuccess
+#-keep class com.a_blekot.shlokas.common.utils.billing.BillingEvent
+#-keep class com.a_blekot.shlokas.common.utils.billing.BillingHelper
+#-keep class com.a_blekot.shlokas.common.utils.billing.BillingHelperDefault
+#-keep class com.a_blekot.shlokas.common.utils.billing.BillingOperation
+#-keep class com.a_blekot.shlokas.common.utils.connectivity.ConnectivityObserver
+#-keep class com.a_blekot.shlokas.common.utils.connectivity.ConnectivityObserverAndroid
+#-keep class com.a_blekot.shlokas.common.utils.dispatchers.DispatcherProvider
+#-keep class com.a_blekot.shlokas.common.utils.dispatchers.DispatcherProviderImplKt
+#-keep class com.a_blekot.shlokas.common.utils.resources.AndroidConfigReader
+#-keep class com.a_blekot.shlokas.common.utils.resources.AndroidStringResourceHandler
+#-keep class com.a_blekot.shlokas.common.utils.resources.ConfigReader
+#-keep class com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
+#-keep class com.ablekot.shlokas.common.root.RootComponent$Child$Donations
+#-keep class com.ablekot.shlokas.common.root.RootComponent$Child$List
+#-keep class com.ablekot.shlokas.common.root.RootComponent$Child$Player
+#-keep class com.ablekot.shlokas.common.root.RootComponent$Child$Settings
+#-keep class com.ablekot.shlokas.common.root.RootComponent$Child
+#-keep class com.ablekot.shlokas.common.root.RootComponent
+#-keep class com.ablekot.shlokas.common.root.RootComponentImpl
+#-keep class com.ablekot.shlokas.common.root.RootDeps
+#-keep class com.listentoprabhupada.common.donations_api.DonationsComponent
+
+#-keep class com.a_blekot.shlokas.common.data.ShlokaId
+#-keep class com.a_blekot.shlokas.common.data.tasks.IdleTask
+#-keep class com.a_blekot.shlokas.common.data.tasks.NoAudioTask
+#-keep class com.a_blekot.shlokas.common.data.tasks.PauseTask
+#-keep class com.a_blekot.shlokas.common.data.tasks.PlayTask
+#-keep class com.a_blekot.shlokas.common.data.tasks.PlayTranslationTask
+#-keep class com.a_blekot.shlokas.common.data.tasks.ResetCounterTask
+#-keep class com.a_blekot.shlokas.common.data.tasks.SetTrackTask
+#-keep class com.a_blekot.shlokas.common.data.tasks.StopTask
+#-keep class com.a_blekot.shlokas.common.data.tasks.Task
+#-keep class com.a_blekot.shlokas.common.player_api.PlayerBus
+#-keep class com.a_blekot.shlokas.common.player_api.PlayerFeedback$Ready
+#-keep class com.a_blekot.shlokas.common.player_api.PlayerFeedback$Started
+#-keep class com.a_blekot.shlokas.common.player_api.PlayerFeedback
+#-keep class com.a_blekot.shlokas.common.utils.CoroutinesExtKt
+#-keep class com.a_blekot.shlokas.common.utils.Sanskrit_utilsKt
+#-keep class com.a_blekot.shlokas.common.utils.SettingsKt
+#-keep class com.a_blekot.shlokas.common.utils.resources.ConfigReaderKt

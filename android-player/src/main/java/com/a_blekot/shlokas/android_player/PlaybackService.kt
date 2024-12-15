@@ -11,6 +11,7 @@ import android.os.Binder
 import android.os.Build
 import android.os.IBinder
 import android.os.PowerManager
+//import androidx.annotation.Keep
 import com.a_blekot.shlokas.common.utils.cancelSafely
 import com.a_blekot.shlokas.common.player_api.PlayerBus
 import com.a_blekot.shlokas.common.utils.LogTag.PLAYBACK_SERVICE
@@ -19,8 +20,10 @@ import kotlinx.coroutines.*
 
 private const val STOP_PLAYER_DELAY_MS = 10_000L
 
+//@Keep
 class PlaybackService : Service(), Player.Listener {
 
+    //@Keep
     inner class PlaybackBinder : Binder() {
         val service: PlaybackService
             get() = this@PlaybackService

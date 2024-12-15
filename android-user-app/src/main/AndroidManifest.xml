@@ -26,6 +26,8 @@
         </intent>
     </queries>
 
+    <!--            android:enableOnBackInvokedCallback="true" API from 33 -->
+
     <application
         android:name=".MainApp"
         android:allowBackup="false"
