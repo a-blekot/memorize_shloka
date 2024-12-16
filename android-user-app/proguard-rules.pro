@@ -23,11 +23,29 @@
 -optimizationpasses 5
 -printmapping mapping.txt
 
+#-dontshrink
+#-dontobfuscate
+#-dontoptimize
+
 # Keep data models (for json parsing)
 #-keep class com.a_blekot.shlokas.common.data.** { *; }
 
 # Keep Parcelable model
 #-keep class * implements android.os.Parcelable { *; }
+
+# Kotlin serialization looks up the generated serializer classes through a function on companion
+# objects. The companions are looked up reflectively so we need to explicitly keep these functions.
+-keepclasseswithmembers class **.*$Companion {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+# If a companion has the serializer function, keep the companion field on the original type so that
+# the reflective lookup succeeds.
+-if class **.*$Companion {
+  kotlinx.serialization.KSerializer serializer(...);
+}
+-keepclassmembers class <1>.<2> {
+  <1>.<2>$Companion Companion;
+}
 
 # Keep `Companion` object fields of serializable classes.
 # This avoids serializer lookup through `getDeclaredClasses` as done for named companion objects.
@@ -73,76 +91,18 @@
 -keepattributes SourceFile,LineNumberTable
 -keep public class * extends java.lang.Exception
 
-# Please add these rules to your existing keep rules in order to suppress warnings.
-# This is generated automatically by the Android Gradle plugin.
-#-keep class com.a_blekot.shlokas.android_player.PendingIntentProvider
-#-keep class com.a_blekot.shlokas.android_player.PlaybackService$PlaybackBinder
-#-keep class com.a_blekot.shlokas.android_player.PlaybackService
-#-keep class com.a_blekot.shlokas.android_ui.ResourcesAndroidKt
-#-keep class com.a_blekot.shlokas.android_ui.SpacerKt
-#-keep class com.a_blekot.shlokas.android_ui.custom.BottomSheetCardKt
-#-keep class com.a_blekot.shlokas.android_ui.custom.ButtonKt
-#-keep class com.a_blekot.shlokas.android_ui.theme.ThemeKt
-#-keep class com.a_blekot.shlokas.android_ui.view.donations.DonationsViewKt
-#-keep class com.a_blekot.shlokas.android_ui.view.list.ListViewKt
-#-keep class com.a_blekot.shlokas.android_ui.view.player.PlayerViewKt
-#-keep class com.a_blekot.shlokas.android_ui.view.settings.SettingsViewKt
-#-keep class com.a_blekot.shlokas.common.data.Donation
-#-keep class com.a_blekot.shlokas.common.data.DonationLevel
-#-keep class com.a_blekot.shlokas.common.data.DonationLevelKt
-#-keep class com.a_blekot.shlokas.common.data.PlatformApi
-#-keep class com.a_blekot.shlokas.common.list_api.ListComponent
-#-keep class com.a_blekot.shlokas.common.player_api.PlayerBus
-#-keep class com.a_blekot.shlokas.common.player_api.PlayerComponent
-#-keep class com.a_blekot.shlokas.common.player_impl.PlayerBusImpl
-#-keep class com.a_blekot.shlokas.common.resources.MR$strings
-#-keep class com.a_blekot.shlokas.common.resources.StringsKt
-#-keep class com.a_blekot.shlokas.common.settings_api.SettingsComponent
-#-keep class com.a_blekot.shlokas.common.utils.AndroidFiler
-#-keep class com.a_blekot.shlokas.common.utils.Filer
-#-keep class com.a_blekot.shlokas.common.utils.LocaleKt
-#-keep class com.a_blekot.shlokas.common.utils.NapierProxyKt
-#-keep class com.a_blekot.shlokas.common.utils.SettingsKt
-#-keep class com.a_blekot.shlokas.common.utils.analytics.Analytics
-#-keep class com.a_blekot.shlokas.common.utils.billing.BillingEvent$Error
-#-keep class com.a_blekot.shlokas.common.utils.billing.BillingEvent$PurchaseSuccess
-#-keep class com.a_blekot.shlokas.common.utils.billing.BillingEvent
-#-keep class com.a_blekot.shlokas.common.utils.billing.BillingHelper
-#-keep class com.a_blekot.shlokas.common.utils.billing.BillingHelperDefault
-#-keep class com.a_blekot.shlokas.common.utils.billing.BillingOperation
-#-keep class com.a_blekot.shlokas.common.utils.connectivity.ConnectivityObserver
-#-keep class com.a_blekot.shlokas.common.utils.connectivity.ConnectivityObserverAndroid
-#-keep class com.a_blekot.shlokas.common.utils.dispatchers.DispatcherProvider
-#-keep class com.a_blekot.shlokas.common.utils.dispatchers.DispatcherProviderImplKt
-#-keep class com.a_blekot.shlokas.common.utils.resources.AndroidConfigReader
-#-keep class com.a_blekot.shlokas.common.utils.resources.AndroidStringResourceHandler
-#-keep class com.a_blekot.shlokas.common.utils.resources.ConfigReader
-#-keep class com.a_blekot.shlokas.common.utils.resources.StringResourceHandler
-#-keep class com.ablekot.shlokas.common.root.RootComponent$Child$Donations
-#-keep class com.ablekot.shlokas.common.root.RootComponent$Child$List
-#-keep class com.ablekot.shlokas.common.root.RootComponent$Child$Player
-#-keep class com.ablekot.shlokas.common.root.RootComponent$Child$Settings
-#-keep class com.ablekot.shlokas.common.root.RootComponent$Child
-#-keep class com.ablekot.shlokas.common.root.RootComponent
-#-keep class com.ablekot.shlokas.common.root.RootComponentImpl
-#-keep class com.ablekot.shlokas.common.root.RootDeps
-#-keep class com.listentoprabhupada.common.donations_api.DonationsComponent
+# TODO: Remove after transitive dependency on okhttp is updated
+# https://stackoverflow.com/questions/73748946/proguard-r8-warnings
+#-dontwarn okhttp3.internal.platform.**
+#-dontwarn org.conscrypt.**
+#-dontwarn org.bouncycastle.**
+#-dontwarn org.openjsse.**
+#-dontwarn org.slf4j.**
 
-#-keep class com.a_blekot.shlokas.common.data.ShlokaId
-#-keep class com.a_blekot.shlokas.common.data.tasks.IdleTask
-#-keep class com.a_blekot.shlokas.common.data.tasks.NoAudioTask
-#-keep class com.a_blekot.shlokas.common.data.tasks.PauseTask
-#-keep class com.a_blekot.shlokas.common.data.tasks.PlayTask
-#-keep class com.a_blekot.shlokas.common.data.tasks.PlayTranslationTask
-#-keep class com.a_blekot.shlokas.common.data.tasks.ResetCounterTask
-#-keep class com.a_blekot.shlokas.common.data.tasks.SetTrackTask
-#-keep class com.a_blekot.shlokas.common.data.tasks.StopTask
-#-keep class com.a_blekot.shlokas.common.data.tasks.Task
-#-keep class com.a_blekot.shlokas.common.player_api.PlayerBus
-#-keep class com.a_blekot.shlokas.common.player_api.PlayerFeedback$Ready
-#-keep class com.a_blekot.shlokas.common.player_api.PlayerFeedback$Started
-#-keep class com.a_blekot.shlokas.common.player_api.PlayerFeedback
-#-keep class com.a_blekot.shlokas.common.utils.CoroutinesExtKt
-#-keep class com.a_blekot.shlokas.common.utils.Sanskrit_utilsKt
-#-keep class com.a_blekot.shlokas.common.utils.SettingsKt
-#-keep class com.a_blekot.shlokas.common.utils.resources.ConfigReaderKt
+# TODO: https://youtrack.jetbrains.com/issue/KTOR-5564/Request-parameters-encodes-to-empty-string-with-Android-R8-for-release-build-after-update-kotlin-language-version-up-to-1.8.10
+#-keepclassmembers class io.ktor.http.** { *; }
+#
+## Ktor 3.0.0-rc.1
+#-dontwarn io.ktor.client.network.sockets.SocketTimeoutException
+#
+#-keep class com.google.firebase.** { *; }

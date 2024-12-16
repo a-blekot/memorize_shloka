@@ -6,10 +6,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
 import android.widget.Toast
 import androidx.activity.compose.setContent
+import androidx.core.content.pm.PackageInfoCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.lifecycleScope
 import com.a_blekot.memorize_shloka.MainApp.Companion.app
@@ -51,7 +53,8 @@ class MainActivity : FragmentActivity() {
 
     private val isNotificationPermissionDeniedUseCase = IsNotificationPermissionDeniedUseCase()
     private val requestNotificationPermission = RequestNotificationPermissionUseCase()
-    private val shouldShowNotificationPermissionDialog = ShouldShowNotificationPermissionDialogUseCase(isNotificationPermissionDeniedUseCase)
+    private val shouldShowNotificationPermissionDialog =
+        ShouldShowNotificationPermissionDialogUseCase(isNotificationPermissionDeniedUseCase)
 
     private val pendingIntentProvider = object : PendingIntentProvider {
         override fun invoke(): PendingIntent {
@@ -80,7 +83,7 @@ class MainActivity : FragmentActivity() {
     private val playbackServiceIntent
         get() = Intent(this, PlaybackService::class.java)
 
-    private val platformApi = object: PlatformApi {
+    private val platformApi = object : PlatformApi {
         override val hasTts = true
         override val hasInappReview = true
 
@@ -220,10 +223,15 @@ class MainActivity : FragmentActivity() {
     private fun sendEmail() {
         val intent = Intent(Intent.ACTION_SENDTO).apply {
             val title = email_title.resolve(this@MainActivity)
-            val body = email_body.resolve(this@MainActivity)
+            val body = """${email_body.resolve(this@MainActivity)} 😇
 
-            val uriText =
-                "mailto:aleksey.blekot@gmail.com?subject=$title&body=$body \uD83D\uDE07"
+   == Device Info ==
+ Android SDK: ${Build.VERSION.SDK_INT}
+ Model: ${Build.MANUFACTURER} ${Build.MODEL}
+ App Version: ($appVersionName) $appVersionCode
+""".trimIndent()
+
+            val uriText = "mailto:aleksey.blekot@gmail.com?subject=$title&body=$body"
             data = Uri.parse(uriText)
         }
         if (intent.resolveActivity(packageManager) != null) {
@@ -231,6 +239,19 @@ class MainActivity : FragmentActivity() {
         } else {
             Napier.e("No activity for $intent")
         }
+    }
+
+    val appVersionCode: Long get() = try {
+        val packageInfo = packageManager.getPackageInfo(packageName, 0)
+        PackageInfoCompat.getLongVersionCode(packageInfo)
+    } catch (e: Throwable) {
+        0
+    }
+
+    val appVersionName: String get() = try {
+        packageManager.getPackageInfo(packageName, 0).versionName.orEmpty()
+    } catch (e: Throwable) {
+        ""
     }
 
     private fun openLink(link: String) {
@@ -251,8 +272,8 @@ class MainActivity : FragmentActivity() {
         // to taken back to our application, we need to add following flags to intent.
         goToMarket.addFlags(
             Intent.FLAG_ACTIVITY_NO_HISTORY or
-                Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
-                Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK
         )
 
         if (goToMarket.resolveActivity(packageManager) != null) {
@@ -263,9 +284,12 @@ class MainActivity : FragmentActivity() {
     }
 
     private fun shareApp() {
+        val body = """Android: https://play.google.com/store/apps/details?id=$packageName
+
+iOS: https://apps.apple.com/app/memorize-shlokas/id6443863948""".trimIndent()
         val intent = Intent(Intent.ACTION_SEND).apply {
             type = "text/plain"
-            putExtra(Intent.EXTRA_TEXT, "http://play.google.com/store/apps/details?id=$packageName")
+            putExtra(Intent.EXTRA_TEXT, body)
         }
         Intent.createChooser(intent, "Share via")
         if (intent.resolveActivity(packageManager) != null) {
