@@ -23,7 +23,6 @@ configure<BaseExtension> {
 
         maybeCreate("release").apply {
             isDebuggable = false
-            isMinifyEnabled = true
         }
     }
 
