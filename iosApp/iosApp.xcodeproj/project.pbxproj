@@ -10,6 +10,8 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		A00B5CA12D106E9800100CD3 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = A00B5CA02D106E9800100CD3 /* FirebaseCore */; };
+		A00B5CA32D106EDA00100CD3 /* FirebaseInstallations in Frameworks */ = {isa = PBXBuildFile; productRef = A00B5CA22D106EDA00100CD3 /* FirebaseInstallations */; };
 		A00F53B12C7C5FFB000E4B00 /* RepeatModeDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00F53B02C7C5FFB000E4B00 /* RepeatModeDropDown.swift */; };
 		A00F53B32C7C8FC3000E4B00 /* DropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00F53B22C7C8FC3000E4B00 /* DropDownMenu.swift */; };
 		A06295742C5F78C300B436B0 /* SpeedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06295732C5F78C300B436B0 /* SpeedPicker.swift */; };
@@ -298,7 +300,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C640958F28FBFC4E0057A634 /* FirebaseAnalytics in Frameworks */,
+				A00B5CA12D106E9800100CD3 /* FirebaseCore in Frameworks */,
 				C640959128FBFC4E0057A634 /* FirebaseCrashlytics in Frameworks */,
+				A00B5CA32D106EDA00100CD3 /* FirebaseInstallations in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1101,6 +1105,8 @@
 			packageProductDependencies = (
 				C640958E28FBFC4E0057A634 /* FirebaseAnalytics */,
 				C640959028FBFC4E0057A634 /* FirebaseCrashlytics */,
+				A00B5CA02D106E9800100CD3 /* FirebaseCore */,
+				A00B5CA22D106EDA00100CD3 /* FirebaseInstallations */,
 			);
 			productName = iosApp;
 			productReference = 7555FF7B242A565900829871 /* iosApp.app */;
@@ -1241,7 +1247,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :common:root:embedAndSignAppleFrameworkForXcode\n\n./gradlew :common:resourcez:copyResourcesDebugTestIosSimulatorArm64 \\\n    -Pmoko.resources.PLATFORM_NAME=$PLATFORM_NAME \\\n    -Pmoko.resources.CONFIGURATION=$CONFIGURATION \\\n    -Pmoko.resources.BUILT_PRODUCTS_DIR=$BUILT_PRODUCTS_DIR \\\n    -Pmoko.resources.CONTENTS_FOLDER_PATH=$CONTENTS_FOLDER_PATH\n    \n#./gradlew :common:resources:copyResourcesDebugTestIosArm64 \\\n#    -Pmoko.resources.PLATFORM_NAME=$PLATFORM_NAME \\\n#    -Pmoko.resources.CONFIGURATION=$CONFIGURATION \\\n#    -Pmoko.resources.BUILT_PRODUCTS_DIR=$BUILT_PRODUCTS_DIR \\\n#    -Pmoko.resources.CONTENTS_FOLDER_PATH=$CONTENTS_FOLDER_PATH\n    \n#./gradlew :common:root:copyResourcesMPLReleaseXCFrameworkToApp \\\n#    -Pmoko.resources.BUILT_PRODUCTS_DIR=$BUILT_PRODUCTS_DIR \\\n#    -Pmoko.resources.CONTENTS_FOLDER_PATH=$CONTENTS_FOLDER_PATH\n\n#./gradlew :common:root:copyFrameworkResourcesToApp \\\n#    -Pmoko.resources.PLATFORM_NAME=$PLATFORM_NAME \\\n#    -Pmoko.resources.CONFIGURATION=$CONFIGURATION \\\n#    -Pmoko.resources.BUILT_PRODUCTS_DIR=$BUILT_PRODUCTS_DIR \\\n#    -Pmoko.resources.CONTENTS_FOLDER_PATH=$CONTENTS_FOLDER_PATH\n\n#\"$SRCROOT/../gradlew\" -p \"$SRCROOT/../\" :shared:copyFrameworkResourcesToApp \\\n#    -Pmoko.resources.PLATFORM_NAME=\"$PLATFORM_NAME\" \\\n#    -Pmoko.resources.CONFIGURATION=\"$CONFIGURATION\" \\\n#    -Pmoko.resources.ARCHS=\"$ARCHS\" \\\n#    -Pmoko.resources.BUILT_PRODUCTS_DIR=\"$BUILT_PRODUCTS_DIR\" \\\n#    -Pmoko.resources.CONTENTS_FOLDER_PATH=\"$CONTENTS_FOLDER_PATH\" \n\n";
+			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :common:root:embedAndSignAppleFrameworkForXcode\n\necho \"PLATFORM_NAME $PLATFORM_NAME\"\necho \"CONFIGURATION $CONFIGURATION\"\necho \"BUILT_PRODUCTS_DIR $BUILT_PRODUCTS_DIR\"\necho \"CONTENTS_FOLDER_PATH $CONTENTS_FOLDER_PATH\"\n\n./gradlew :common:resourcez:copyResourcesDebugTestIosSimulatorArm64 \\\n    -Pmoko.resources.PLATFORM_NAME=$PLATFORM_NAME \\\n    -Pmoko.resources.CONFIGURATION=$CONFIGURATION \\\n    -Pmoko.resources.BUILT_PRODUCTS_DIR=$BUILT_PRODUCTS_DIR \\\n    -Pmoko.resources.CONTENTS_FOLDER_PATH=$CONTENTS_FOLDER_PATH\n    \n#./gradlew :common:resourcez:copyResourcesDebugTestIosArm64 \\\n#    -Pmoko.resources.PLATFORM_NAME=$PLATFORM_NAME \\\n#    -Pmoko.resources.CONFIGURATION=$CONFIGURATION \\\n#    -Pmoko.resources.BUILT_PRODUCTS_DIR=$BUILT_PRODUCTS_DIR \\\n#    -Pmoko.resources.CONTENTS_FOLDER_PATH=$CONTENTS_FOLDER_PATH\n    \n#./gradlew :common:root:copyResourcesMPLReleaseXCFrameworkToApp \\\n#    -Pmoko.resources.BUILT_PRODUCTS_DIR=$BUILT_PRODUCTS_DIR \\\n#    -Pmoko.resources.CONTENTS_FOLDER_PATH=$CONTENTS_FOLDER_PATH\n\n#./gradlew :common:root:copyFrameworkResourcesToApp \\\n#    -Pmoko.resources.PLATFORM_NAME=$PLATFORM_NAME \\\n#    -Pmoko.resources.CONFIGURATION=$CONFIGURATION \\\n#    -Pmoko.resources.BUILT_PRODUCTS_DIR=$BUILT_PRODUCTS_DIR \\\n#    -Pmoko.resources.CONTENTS_FOLDER_PATH=$CONTENTS_FOLDER_PATH\n\n#\"$SRCROOT/../gradlew\" -p \"$SRCROOT/../\" :shared:copyFrameworkResourcesToApp \\\n#    -Pmoko.resources.PLATFORM_NAME=\"$PLATFORM_NAME\" \\\n#    -Pmoko.resources.CONFIGURATION=\"$CONFIGURATION\" \\\n#    -Pmoko.resources.ARCHS=\"$ARCHS\" \\\n#    -Pmoko.resources.BUILT_PRODUCTS_DIR=\"$BUILT_PRODUCTS_DIR\" \\\n#    -Pmoko.resources.CONTENTS_FOLDER_PATH=\"$CONTENTS_FOLDER_PATH\" \n\n";
 		};
 		C640959428FC79ED0057A634 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1474,6 +1480,7 @@
 					"$(inherited)",
 					"-framework",
 					Prabhupada,
+					"-ObjC",
 				);
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D SHLOKA_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "memorize-shlokas.iosApp";
@@ -1509,6 +1516,7 @@
 					"$(inherited)",
 					"-framework",
 					Prabhupada,
+					"-ObjC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "memorize-shlokas.iosApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1553,6 +1561,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A00B5CA02D106E9800100CD3 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C640958D28FBFC4E0057A634 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		A00B5CA22D106EDA00100CD3 /* FirebaseInstallations */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C640958D28FBFC4E0057A634 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseInstallations;
+		};
 		C640958E28FBFC4E0057A634 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C640958D28FBFC4E0057A634 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
