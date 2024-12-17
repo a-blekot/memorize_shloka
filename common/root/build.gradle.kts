@@ -10,13 +10,14 @@ android {
 
 kotlin {
     listOf(
-        iosX64(),
+//        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach {
         it.binaries{
             framework {
                 baseName = "Prabhupada"
+                isStatic = true
 
                 export(projects.common.data)
                 export(projects.common.detailsApi)
