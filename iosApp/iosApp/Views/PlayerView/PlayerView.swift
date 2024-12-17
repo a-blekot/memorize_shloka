@@ -35,22 +35,20 @@ struct PlayerView: View {
         let state = state.value
         let _ = debugPrint("PlayerView ## \(state.playbackState) \(state.currentRepeat)")
         
-        ZStack(alignment: Alignment(horizontal: .trailing, vertical: .bottom)) {
+        ZStack(alignment: .bottomTrailing) {
             VStack(alignment: .center, spacing: theme.dimens.paddingS) {
+                // Top Title and Progress
                 PlayerTitleAndProgress(state, component, $isClosePlayerDialogVisible) {
                     copyAllText(state)
                 }
                 .environmentObject(theme)
-                //                 .padding(.horizontal, theme.dimens.horizontalScreenPadding)
                 
                 ScrollView {
-                    VStack {
+                    VStack(spacing: theme.dimens.paddingM) { // Adjust spacing as needed
                         Text(state.sanskrit.toMarkdown())
                             .font(theme.headlineSmall)
-                            .allowsTightening(true)
                             .multilineTextAlignment(.center)
                             .minimumScaleFactor(0.8)
-                            .frame(maxWidth: .infinity, alignment: .center)
                             .padding(.horizontal, theme.dimens.paddingXS)
                             .foregroundColor(theme.colors.primary)
                         
@@ -64,7 +62,6 @@ struct PlayerView: View {
                             Text(state.words.toMarkdown())
                                 .font(theme.titleLarge)
                                 .padding(theme.dimens.paddingS)
-                                .frame(maxWidth: .infinity, alignment: .leading)
                                 .foregroundColor(theme.colors.onSecondaryContainer)
                         }
                         
@@ -75,18 +72,16 @@ struct PlayerView: View {
                         ) {
                             Text(state.translation)
                                 .font(theme.titleLarge)
-                                .foregroundColor(theme.colors.onSecondaryContainer)
                                 .padding(.horizontal, theme.dimens.paddingS)
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .foregroundColor(theme.colors.onSecondaryContainer)
                         }
                         
                         Spacer()
-                            .frame(height: 44)
+                            .frame(height: 44) // To provide bottom spacing
                     }
                 }
-                //                 .padding(.horizontal, CGFloat(16))
+                .frame(maxWidth: .infinity)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding(.horizontal, theme.dimens.horizontalScreenPadding)
             .padding(.vertical, theme.dimens.paddingXS)
             .background(theme.colors.background)
@@ -124,7 +119,7 @@ struct PlayerView: View {
         }
         .onTapGesture {
             withAnimation {
-                showRepeatModeDropdown =  false
+                showRepeatModeDropdown = false
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
